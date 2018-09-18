@@ -1,0 +1,74 @@
+A:link {color: #0000A0; text-decoration: none; FONT-FAMILY: Verdana;}
+A:visited {color: green; text-decoration: none; FONT-FAMILY: Verdana;}
+A:hover {color: #CD4000; text-decoration: underline; FONT-FAMILY: Verdana;} 
+TH {FONT-SIZE: small; COLOR: white; FONT-FAMILY: Verdana; TEXT-ALIGN: center;}
+TABLE {padding:0px; margin:0px; border:0px; border-color:#EFEFEF;}
+TR {padding:0px; margin:0px; border:0px; border-color:#EFEFEF;}
+TD {padding:0px; margin:0px; border:0px; border-color:#EFEFEF;}
+TEXTAREA {FONT-SIZE:small; COLOR: #000000; FONT-FAMILY: Verdana;}
+SPAN {FONT-SIZE:small; COLOR: #000000; FONT-FAMILY: Verdana;}
+DIV {FONT-SIZE:small; COLOR: #000000; FONT-FAMILY: Verdana;}
+INPUT {FONT-SIZE: small; COLOR: #000000; FONT-FAMILY: Verdana;}
+P {FONT-SIZE: small; COLOR: #000090; FONT-FAMILY: Verdana;}
+FIELDSET {margin:4px;padding-bottom:8px;padding-left:12px;background-color:#EFEFEF;border-width:2px;border-style:inset;}
+FORM {margin:0px; padding:0px; vertical-align:middle;}
+IMG {border:0px;}
+.Block {FONT-SIZE:small; COLOR: black; FONT-FAMILY: Verdana; PADDING:16px;}
+.PL {FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #000080; FONT-FAMILY: Verdana;}
+
+.ColR {TEXT-ALIGN: right; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #DEE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColL {TEXT-ALIGN: left; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #DEE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: normal;}
+.ColC {TEXT-ALIGN: center; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #DEE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColCT {TEXT-ALIGN: center; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #DEE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColRs{TEXT-ALIGN: right; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #DEE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColLs{TEXT-ALIGN: left; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #DEE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: normal;}
+.ColCs{TEXT-ALIGN: center; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #DEE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColCTs{TEXT-ALIGN: center; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #DEE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: normal;}
+
+.ColR2 {TEXT-ALIGN: right; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CFAD; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColL2 {TEXT-ALIGN: left; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CFAD; FONT-FAMILY: Verdana; WHITE-SPACE: normal;}
+.ColC2 {TEXT-ALIGN: center; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CFAD; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColCT2 {TEXT-ALIGN: center; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CFAD; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColR2s {TEXT-ALIGN: right; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CFAD; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColL2s {TEXT-ALIGN: left; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CFAD; FONT-FAMILY: Verdana; WHITE-SPACE: normal;}
+.ColC2s {TEXT-ALIGN: center; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CFAD; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColCT2s {TEXT-ALIGN: center; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CFAD; FONT-FAMILY: Verdana; WHITE-SPACE: normal;}
+
+.ColR3 {TEXT-ALIGN: right; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #CAE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColL3 {TEXT-ALIGN: left; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #CAE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: normal;}
+.ColC3 {TEXT-ALIGN: center; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #CAE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColCT3 {TEXT-ALIGN: center; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #CAE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColR3s {TEXT-ALIGN: right; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #CAE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColL3s {TEXT-ALIGN: left; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #CAE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: normal;}
+.ColC3s {TEXT-ALIGN: center; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #CAE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColCT3s {TEXT-ALIGN: center; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #CAE7FE; FONT-FAMILY: Verdana; WHITE-SPACE: normal;}
+
+.ColR4 {TEXT-ALIGN: right; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CF85; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColL4 {TEXT-ALIGN: left; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CF85; FONT-FAMILY: Verdana; WHITE-SPACE: normal;}
+.ColC4 {TEXT-ALIGN: center; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CF85; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColCT4 {TEXT-ALIGN: center; FONT-SIZE: small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CF85; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColR4s {TEXT-ALIGN: right; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CF85; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColL4s {TEXT-ALIGN: left; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CF85; FONT-FAMILY: Verdana; WHITE-SPACE: normal;}
+.ColC4s {TEXT-ALIGN: center; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CF85; FONT-FAMILY: Verdana; WHITE-SPACE: nowrap;}
+.ColCT4s {TEXT-ALIGN: center; FONT-SIZE: x-small; FONT-WEIGHT: bold; COLOR: #0000A0; BACKGROUND-COLOR: #B1CF85; FONT-FAMILY: Verdana; WHITE-SPACE: normal;}
+
+.Fix {TEXT-ALIGN: center; vertical-align: middle; FONT-SIZE: small; FONT-FAMILY: Verdana; COLOR: #EFEFEF;}
+.Fix2 {TEXT-ALIGN: center; FONT-SIZE: small; FONT-FAMILY: Verdana; COLOR: #0000A0;}
+.Fix3 {TEXT-ALIGN: center; FONT-SIZE: x-small; FONT-FAMILY: Verdana; COLOR: #0000A0;}
+
+.TxtRs {TEXT-ALIGN: right; FONT-SIZE: x-small; FONT-FAMILY: Verdana;}
+.TxtRm {TEXT-ALIGN: right; FONT-SIZE: small; FONT-FAMILY: Verdana;}
+.TxtRl {TEXT-ALIGN: right; FONT-SIZE: medium; FONT-FAMILY: Verdana;}
+.TxtRxl {TEXT-ALIGN: right; FONT-SIZE: large; FONT-FAMILY: Verdana;}
+.TxtLs {TEXT-ALIGN: left; FONT-SIZE: x-small; FONT-FAMILY: Verdana;}
+.TxtLm {TEXT-ALIGN: left; FONT-SIZE: small; FONT-FAMILY: Verdana;}
+.TxtLl {TEXT-ALIGN: left; FONT-SIZE: medium; FONT-FAMILY: Verdana;}
+.TxtLxl {TEXT-ALIGN: left; FONT-SIZE: large; FONT-FAMILY: Verdana;}
+.TxtJs {TEXT-ALIGN: justify; FONT-SIZE: x-small; FONT-FAMILY: Verdana;}
+.TxtJm {TEXT-ALIGN: justify; FONT-SIZE: small; FONT-FAMILY: Verdana;}
+.TxtJl {TEXT-ALIGN: justify; FONT-SIZE: medium; FONT-FAMILY: Verdana;}
+.TxtJxl {TEXT-ALIGN: justify; FONT-SIZE: large; FONT-FAMILY: Verdana;}
+.TxtCm {TEXT-ALIGN: center; FONT-SIZE: small; FONT-FAMILY: Verdana;}
+.TxtCs {TEXT-ALIGN: center; FONT-SIZE: x-small; FONT-FAMILY: Verdana;}
+.TxtCl {TEXT-ALIGN: center; FONT-SIZE: medium; FONT-FAMILY: Verdana;}
+.TxtCxl {TEXT-ALIGN: center; FONT-SIZE: large; FONT-FAMILY: Verdana;}

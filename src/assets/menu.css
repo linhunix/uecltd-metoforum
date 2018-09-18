@@ -1,0 +1,24 @@
+ul {list-style-type:none; padding:0; margin:0; background:#339966;}
+ul li {display:block; position:relative; float:left; background:#339966;}
+/* This hides the dropdowns */
+li ul {display:none;}
+
+ul li a {display:block; padding:6px 12px 6px 6px; text-decoration:none; white-space:nowrap; color:#FFFFFF; FONT-SIZE:small;}
+ul li a:hover {background: #006666; text-decoration:none;}
+ul li a:link {color:#EFEFEF; text-decoration:none;}
+ul li a:visited {color:#EFEFEF; text-decoration:none;}
+
+/* Display the dropdown */
+li:hover > ul {display:block; position:absolute; z-index:999;}
+li:hover li {float:none;}
+li:hover a {background:#339966; text-decoration:none;}
+li:hover li a:hover {background:#006666; text-decoration:none;}
+
+.main-navigation li ul li {border-top:0;}
+
+/* Displays second level dropdowns to the right of the first level dropdown */
+ul ul ul {left:100%; top:0;}
+
+/* Simple clearfix */
+ul:before, ul:after {content:" "; /* 1 */ display:table; /* 2 */}
+ul:after {clear:both;}

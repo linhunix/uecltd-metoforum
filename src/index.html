@@ -1,14 +1,968 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Meteoforum</title>
-  <base href="/">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head>
+        <meta charset="utf-8">
+            <title>Meteoforum</title>
+            <base href="/">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
-</html>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+                <meta name="robots" content="index,follow"/>
+                <meta http-equiv="Expires" content="0"/>
+                <meta http-equiv="Pragma" content="no-cache"/>
+                <meta http-equiv="Cache-Control" content="no-cache"/>
+                <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"/>
+                <meta name="title" content="METEOFORUM - Il forum di chi ama la meteo!"/>
+                <meta name="description" content="Forum di discussione in lingua italiana per gli appassionati di meteorologia di tutto il mondo"/>
+                <meta http-equiv="content-language" content="Italiano"/>
+                <meta name="KEYWORDS" content="previsioni, meteo, lombardia, tempo, weather, webcam, satelliti, meteosat, radar, cartina,
+                      nowcasting, grandine, fulmini, ghiaccio, neve, sole, pioggia, nebbia, temporali, tornado, uragano, ciclone, clima, climatologia,
+                      microclima, primavera, estate, inverno, autunno, italia, italy, mediterraneo, pianura padana, piemonte, liguria, veneto, friuli,
+                      trentino, alto adige, emilia, romagna, toscana, alpi, appennini, montagna, vacanze, viaggi, ambiente, energia, strumenti, 
+                      fotografia, immagini, messaggi, ipad, android, smartphone, mobile, EXPO2015"/>
+                <link rel="stylesheet" type="text/css" href="assets/main.css"/>
+                <link rel="stylesheet" type="text/css" href="assets/menu.css"/>	
+                <link rel="stylesheet" type="text/css" href="assets/lytebox.css" media="screen"/>
+                <script async="" src="assets/lytebox.js"></script>
+                <script language="JavaScript">
+                    //Imposta i cookies per consentire al codice ASP di accedere alle dimensioni dello schermo
+                    var cw = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                    document.cookie = 'ThisPageWidth=' + cw;
+                    var ch = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+                    document.cookie = 'ThisPageHeight=' + ch;
+
+                    document.getElementsByClassName = function (cl) {
+                        var retnode = [];
+                        var elem = this.getElementsByTagName('*');
+                        for (var i = 0; i < elem.length; i++) {
+                            if ((' ' + elem[i].className + ' ').indexOf(' ' + cl + ' ') > -1)
+                                retnode.push(elem[i]);
+                        }
+                        return retnode;
+                    };
+
+                    function Toggle_iFrame(ObjectID, URL, State)	// State: 1=visible, 0=hidden
+                    {
+                        if (document.getElementById)					//gecko(NN6) & IE 5+
+                        {
+                            var obj = document.getElementById(ObjectID);
+                            obj.style.visibility = State ? "visible" : "hidden";
+                            obj.src = URL;
+                        } else if (document.all) // IE 4
+                        {
+                            document.all[ObjectID].style.visibility = State ? "visible" : "hidden";
+                            document.all[ObjectID].src = URL;
+                        }
+                    }
+
+                    function toggleMe(a)
+                    {
+                        var e = document.getElementById(a);
+                        if (!e)
+                            return true;
+                        if (e.style.display == "none")
+                        {
+                            e.style.display = "block"
+                        } else
+                        {
+                            e.style.display = "none"
+                        }
+                        return true;
+                    }
+
+                    function scrollElmVert(el, num)  // to scroll up use a negative number
+                    {
+                        var re = /html$/i;
+                        while (!re.test(el.tagName) && (1 > el.scrollTop))
+                            el = el.parentNode;
+                        if (0 < el.scrollTop)
+                            el.scrollTop += num;
+                    }
+
+                    function ReverseDisplay(d)
+                    {
+                        var e = document.getElementById(d);
+                        var divs = document.getElementsByClassName('msgdiv');
+                        //for(var i = 0; i < divs.length; i++){divs[i].style.display = "none";}
+                        for (var i = 0; i < divs.length; i++)
+                        {
+                            if (divs[i].id != e.id)
+                            {
+                                divs[i].style.display = "none";
+                            }
+                        }
+                        if (e.style.display == "none")
+                        {
+                            e.style.display = "block";
+                            e.scrollIntoView();
+                            scrollElmVert(e, -40);
+                        } else
+                        {
+                            e.style.display = "none";
+                        }
+                    }
+
+                    /***********************************************
+                     * IFrame SSI script II- © Dynamic Drive DHTML code library (http://www.dynamicdrive.com)
+                     * Visit DynamicDrive.com for hundreds of original DHTML scripts
+                     * This notice must stay intact for legal use
+                     ***********************************************/
+                    //Input the IDs of the IFRAMES you wish to dynamically resize to match its content height:
+                    //Separate each ID with a comma. Examples: ["myframe1", "myframe2"] or ["myframe"] or [] for none:
+                    var iframeids = ["myframe", "smilies"]
+                    //Should script hide iframe from browsers that don't support this script (non IE5+/NS6+ browsers. Recommended):
+                    var iframehide = "yes"
+                    var getFFVersion = navigator.userAgent.substring(navigator.userAgent.indexOf("Firefox")).split("/")[1]
+                    var FFextraHeight = parseFloat(getFFVersion) >= 0.1 ? 16 : 0 //extra height in px to add to iframe in FireFox 1.0+ browsers
+
+                    function resizeCaller()
+                    {
+                        var dyniframe = new Array()
+                        for (i = 0; i < iframeids.length; i++) {
+                            if (document.getElementById)
+                                resizeIframe(iframeids[i])
+                            //reveal iframe for lower end browsers? (see var above):
+                            if ((document.all || document.getElementById) && iframehide == "no") {
+                                var tempobj = document.all ? document.all[iframeids[i]] : document.getElementById(iframeids[i])
+                                tempobj.style.display = "block"
+                            }
+                        }
+                    }
+
+                    function resizeIframe(frameid)
+                    {
+                        var currentfr = document.getElementById(frameid)
+                        if (currentfr) {
+                            currentfr.style.display = "block"
+                            if (currentfr.contentDocument && currentfr.contentDocument.body.offsetHeight) //ns6 syntax
+                                currentfr.height = currentfr.contentDocument.body.offsetHeight + FFextraHeight;
+                            else if (currentfr.Document && currentfr.Document.body.scrollHeight) //ie5+ syntax
+                                currentfr.height = currentfr.Document.body.scrollHeight;
+                            if (currentfr.addEventListener)
+                                currentfr.addEventListener("load", readjustIframe, false)
+                            else if (currentfr.attachEvent) {
+                                currentfr.detachEvent("onload", readjustIframe) // Bug fix line
+                                currentfr.attachEvent("onload", readjustIframe)
+                            }
+                        }
+                    }
+
+                    function readjustIframe(loadevt)
+                    {
+                        var crossevt = (window.event) ? event : loadevt
+                        var iframeroot = (crossevt.currentTarget) ? crossevt.currentTarget : crossevt.srcElement
+                        if (iframeroot)
+                            resizeIframe(iframeroot.id);
+                    }
+
+                    function loadintoIframe(iframeid, url)
+                    {
+                        if (document.getElementById)
+                            document.getElementById(iframeid).src = url
+                    }
+
+                    if (window.addEventListener)
+                        window.addEventListener("load", resizeCaller, false)
+                    else if (window.attachEvent)
+                        window.attachEvent("onload", resizeCaller)
+                    else
+                        window.onload = resizeCaller
+
+                </script>
+
+
+                </head>
+                <body topmargin="40px" background="assets/S_Sfondo.jpg"><script language="JavaScript">
+                                /*
+                                 Copyright 2014 Google Inc. All rights reserved.
+                                 
+                                 Licensed under the Apache License, Version 2.0 (the "License");
+                                 you may not use this file except in compliance with the License.
+                                 You may obtain a copy of the License at
+                                 
+                                 http://www.apache.org/licenses/LICENSE-2.0
+                                 
+                                 Unless required by applicable law or agreed to in writing, software
+                                 distributed under the License is distributed on an "AS IS" BASIS,
+                                 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+                                 See the License for the specific language governing permissions and
+                                 limitations under the License.
+                                 */
+
+                                        (function (window) {
+
+                                            if (!!window.cookieChoices) {
+                                                return window.cookieChoices;
+                                            }
+
+                                            var document = window.document;
+                                            // IE8 does not support textContent, so we should fallback to innerText.
+                                            var supportsTextContent = 'textContent' in document.body;
+
+                                            var cookieChoices = (function () {
+
+                                                var cookieName = 'displayCookieConsent';
+                                                var cookieConsentId = 'cookieChoiceInfo';
+                                                var dismissLinkId = 'cookieChoiceDismiss';
+
+                                                function _createHeaderElement(cookieText, dismissText, linkText, linkHref) {
+                                                    var butterBarStyles = 'position:fixed;width:100%;background-color:#eee;' +
+                                                            'margin:0; left:0; top:0;padding:4px;z-index:1000;text-align:center;';
+
+                                                    var cookieConsentElement = document.createElement('div');
+                                                    cookieConsentElement.id = cookieConsentId;
+                                                    cookieConsentElement.style.cssText = butterBarStyles;
+                                                    cookieConsentElement.appendChild(_createConsentText(cookieText));
+
+                                                    if (!!linkText && !!linkHref) {
+                                                        cookieConsentElement.appendChild(_createInformationLink(linkText, linkHref));
+                                                    }
+                                                    cookieConsentElement.appendChild(_createDismissLink(dismissText));
+                                                    return cookieConsentElement;
+                                                }
+
+                                                function _createDialogElement(cookieText, dismissText, linkText, linkHref) {
+                                                    var glassStyle = 'position:fixed;width:100%;height:100%;z-index:999;' +
+                                                            'top:0;left:0;opacity:0.66;filter:alpha(opacity=66);' +
+                                                            'background-color:#ccc;';
+                                                    var dialogStyle = 'z-index:1000;position:fixed;left:50%;top:5%';
+                                                    var contentStyle = 'position:relative;left:-50%;margin-top:5%;' +
+                                                            'background-color:#fff;padding:20px;box-shadow:4px 4px 25px #888;';
+
+                                                    var cookieConsentElement = document.createElement('div');
+                                                    cookieConsentElement.id = cookieConsentId;
+
+                                                    var glassPanel = document.createElement('div');
+                                                    glassPanel.style.cssText = glassStyle;
+
+                                                    var content = document.createElement('div');
+                                                    content.style.cssText = contentStyle;
+
+                                                    var dialog = document.createElement('div');
+                                                    dialog.style.cssText = dialogStyle;
+
+                                                    var dismissLink = _createDismissLink(dismissText);
+                                                    dismissLink.style.display = 'block';
+                                                    dismissLink.style.textAlign = 'right';
+                                                    dismissLink.style.marginTop = '8px';
+
+                                                    content.appendChild(_createConsentText(cookieText));
+                                                    if (!!linkText && !!linkHref) {
+                                                        content.appendChild(_createInformationLink(linkText, linkHref));
+                                                    }
+                                                    content.appendChild(dismissLink);
+                                                    dialog.appendChild(content);
+                                                    cookieConsentElement.appendChild(glassPanel);
+                                                    cookieConsentElement.appendChild(dialog);
+                                                    return cookieConsentElement;
+                                                }
+
+                                                function _setElementText(element, text) {
+                                                    if (supportsTextContent) {
+                                                        element.textContent = text;
+                                                    } else {
+                                                        element.innerText = text;
+                                                    }
+                                                }
+
+                                                function _createConsentText(cookieText) {
+                                                    var consentText = document.createElement('span');
+                                                    _setElementText(consentText, cookieText);
+                                                    return consentText;
+                                                }
+
+                                                function _createDismissLink(dismissText) {
+                                                    var dismissLink = document.createElement('a');
+                                                    _setElementText(dismissLink, dismissText);
+                                                    dismissLink.id = dismissLinkId;
+                                                    dismissLink.href = '#';
+                                                    dismissLink.style.marginLeft = '24px';
+                                                    return dismissLink;
+                                                }
+
+                                                function _createInformationLink(linkText, linkHref) {
+                                                    var infoLink = document.createElement('a');
+                                                    _setElementText(infoLink, linkText);
+                                                    infoLink.href = linkHref;
+                                                    infoLink.target = '_blank';
+                                                    infoLink.style.marginLeft = '8px';
+                                                    return infoLink;
+                                                }
+
+                                                function _dismissLinkClick() {
+                                                    _saveUserPreference();
+                                                    _removeCookieConsent();
+                                                    return false;
+                                                }
+
+                                                function _showCookieConsent(cookieText, dismissText, linkText, linkHref, isDialog) {
+                                                    if (_shouldDisplayConsent()) {
+                                                        _removeCookieConsent();
+                                                        var consentElement = (isDialog) ?
+                                                                _createDialogElement(cookieText, dismissText, linkText, linkHref) :
+                                                                _createHeaderElement(cookieText, dismissText, linkText, linkHref);
+                                                        var fragment = document.createDocumentFragment();
+                                                        fragment.appendChild(consentElement);
+                                                        document.body.appendChild(fragment.cloneNode(true));
+                                                        document.getElementById(dismissLinkId).onclick = _dismissLinkClick;
+                                                    }
+                                                }
+
+                                                function showCookieConsentBar(cookieText, dismissText, linkText, linkHref) {
+                                                    _showCookieConsent(cookieText, dismissText, linkText, linkHref, false);
+                                                }
+
+                                                function showCookieConsentDialog(cookieText, dismissText, linkText, linkHref) {
+                                                    _showCookieConsent(cookieText, dismissText, linkText, linkHref, true);
+                                                }
+
+                                                function _removeCookieConsent() {
+                                                    var cookieChoiceElement = document.getElementById(cookieConsentId);
+                                                    if (cookieChoiceElement != null) {
+                                                        cookieChoiceElement.parentNode.removeChild(cookieChoiceElement);
+                                                    }
+                                                }
+
+                                                function _saveUserPreference() {
+                                                    // Set the cookie expiry to one year after today.
+                                                    var expiryDate = new Date();
+                                                    expiryDate.setFullYear(expiryDate.getFullYear() + 1);
+                                                    document.cookie = cookieName + '=y; expires=' + expiryDate.toGMTString();
+                                                }
+
+                                                function _shouldDisplayConsent() {
+                                                    // Display the header only if the cookie has not been set.
+                                                    return !document.cookie.match(new RegExp(cookieName + '=([^;]+)'));
+                                                }
+
+                                                var exports = {};
+                                                exports.showCookieConsentBar = showCookieConsentBar;
+                                                exports.showCookieConsentDialog = showCookieConsentDialog;
+                                                return exports;
+                                            })();
+
+                                            window.cookieChoices = cookieChoices;
+                                            return cookieChoices;
+                                        })(this);
+
+                            document.addEventListener('DOMContentLoaded', function (event)
+                            {
+                                cookieChoices.showCookieConsentDialog('METEOFORUM.COM fa uso esclusivamente di cookies tecnici per consentire la migliore navigabilità del sito. Tuttavia in Meteoforum sono presenti annunci pubblicitari che fanno uso di cookies di terze parti e sono soggetti ad obbligo di informativa. Se desideri acconsentire alla navigazione su meteoforum.com ed accettare l\'uso dei cookies, inclusi quelli di terze parti, chiudi questo popup. Se invece desideri visualizzare l\'informativa estesa e saperne di più, clicca sul link qui a fianco. Grazie.',
+                                        'Accetta e chiudi il popup', 'Accedi all\'informativa estesa', '/pagine/varie/privacy.asp');
+                            });
+
+                    </script>
+
+
+                    <div style="margin-bottom:3px;" align="center">
+                        <table style="max-height:120px; min-width:540px; min-height:100px; background-image: url('/images/ForumTesta/S_testasfondo.jpg'); overflow:hidden;" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tbody><tr>
+                                    <td style="text-align:left; width:20%; max-height:120px; min-width:180px; max-width:240px; min-height:100px;">
+                                        <a href="http://www.meteoforum.com/main.asp" title="Meteoforum - Il forum di chi ama la meteo"><img src="assets/MF_HeadSmall.png" style="position: relative; left: 0px; top:0px;" border="0"></a>
+                                    </td>
+                                    <td style="text-align:left; width:60%; max-width:728px; max-height:120px; min-width:320px; min-height:100px;">
+
+                                    </td>
+                                    <td style="text-align:right; width:20%;">&nbsp;</td>
+                                </tr>
+                                <tr><td></td></tr>
+                            </tbody></table>
+                    </div>
+                    <app-root></app-root>
+                    <div align="center">
+                        <table style="min-width:540px;" width="100%" cellspacing="1" cellpadding="0" border="0">
+                            <tbody>
+                                <tr>
+                                    <td align="center">
+                                        <font class="TxtCs">
+                                            In questo forum ognuno può esprimere liberamente la propria opinione nei limiti stabiliti 
+                                            dal <a href="http://www.meteoforum.com/Pagine/Varie/Regolamento.asp"><b>regolamento</b></a>. La qualità del forum
+                                            dipende da quella dei vostri interventi. Fatene buon uso!
+                                        </font>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+
+
+                        <table style="width:100%; min-width:540px; position:absolute; top:0px; left:0px; padding-left:5px; padding-right:5px; text-align:center;"><tbody><tr><td style="text-align:left;">
+
+                                        <ul class="main-navigation">
+
+                                            <li><a href="#"><b>METEOFORUM</b></a>
+                                                <ul>
+                                                    <li><a href="http://www.meteoforum.com/main.asp?FS=N" title="Segnalazioni relative al tempo in atto, osservazione dei fenomeni e loro evoluzione, previsioni a medio-breve termine (12-72h), anche supportate da carte di analisi e contributi multimediali"><font color="#00ccff"><b>Nowcasting</b></font></a></li>
+                                                    <li><a href="http://www.meteoforum.com/main.asp?FS=D" title="Discussioni su argomenti a tema meteorologico e/o climatico sui quali si desideri aprire un dibattito il cui orizzonte temporale vada oltre quello previsto per il nowcasting"><font color="#ffcc00"><b>Discussioni</b></font></a></li>
+                                                    <li><a href="http://www.meteoforum.com/main.asp?FS=S" title="Discussioni sulla strumentazione meteo e dispositivi annessi, loro efficacia ed opportuno posizionamento, problemi incorsi durante l'utilizzo, consigli di acquisto e racconto delle proprie esperienze"><font color="#00ff33"><b>Strumentazione</b></font></a></li>
+                                                    <li><a href="http://www.meteoforum.com/main.asp?FS=X" title="Monitoraggio di tutte le stanze del forum, con interfaccia a frame ed aggiornamenti automatici temporizzati"><font color="#ff0033"><b>Mix Mode</b></font></a></li>
+                                                    <li>
+                                                        <form style="display:block; padding:6px 12px 6px 6px; text-decoration:none; white-space:nowrap; color:#FFFFFF; FONT-SIZE:small;" method="GET" action="main.asp" id="form1" name="form1">Cerca:
+                                                            <input name="FT" size="15" maxlength="30" title="Cerca il testo nei messaggi" type="text">
+                                                                <input name="Pg" value="1" type="hidden">
+                                                                    <input name="FS" value="S" type="hidden">										
+                                                                        <input name="FN" value="" type="hidden">
+                                                                            <input name="FD" value="" type="hidden"> 
+                                                                                <input name="FK" value="" type="hidden"> 					
+                                                                                    </form>
+                                                                                    </li>
+                                                                                    <li><a href="#">Opzioni...</a>
+                                                                                        <ul>
+                                                                                            <li><a href="http://www.meteoforum.com/pagine/Varie/UserProfile.asp" title="Modifica il tuo profilo utente">Profilo Utente</a></li>
+
+                                                                                            <li><a href="#" title="Attiva/Disattiva il riquadro relativo alle immagini dei satelliti nella pagina del forum">Sat On/Off...</a>
+                                                                                                <ul>
+                                                                                                    <li><a href="http://www.meteoforum.com/main.asp?SatVar=Off">Off</a></li>
+                                                                                                    <li><a href="http://www.meteoforum.com/main.asp?SatVar=On">On</a></li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                            <li><a href="#" title="Imposta il numero di messaggi presentati in una pagina del forum">Mess. x pagina...</a>
+                                                                                                <ul>
+                                                                                                    <li><a href="http://www.meteoforum.com/main.asp?NMxP=15">15</a></li>
+                                                                                                    <li><a href="http://www.meteoforum.com/main.asp?NMxP=30">30</a></li>
+                                                                                                    <li><a href="http://www.meteoforum.com/main.asp?NMxP=50">50</a></li>
+                                                                                                    <li><a href="http://www.meteoforum.com/main.asp?NMxP=99">99</a></li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                            <li><a href="#" title="Imposta il numero di minuti per evidenziare un messaggio come nuovo">Minuti per "nuovo"...</a>
+                                                                                                <ul>
+                                                                                                    <li><a href="http://www.meteoforum.com/main.asp?UpdMain=3">3</a></li>
+                                                                                                    <li><a href="http://www.meteoforum.com/main.asp?UpdMain=10">10</a></li>
+                                                                                                    <li><a href="http://www.meteoforum.com/main.asp?UpdMain=30">30</a></li>
+                                                                                                    <li><a href="http://www.meteoforum.com/main.asp?UpdMain=60">60</a></li>
+                                                                                                    <li><a href="http://www.meteoforum.com/main.asp?UpdMain=240">240</a></li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </li>
+                                                                                    <li><a href="#">Contatti...</a>
+                                                                                        <ul>
+                                                                                            <li><script language="javascript">line = '<a href="mailto:';
+                                                                                                        line += 'tieffesoft@';
+                                                                                                        line += 'meteoforum.com';
+                                                                                                        line += '">';
+                                                                                                        line += '<img border="0" src="/images/email.gif"> Supporto Tecnico';
+                                                                                                        line += '</a>';
+                                                                                                        document.write(line);</script><a href="mailto:tieffesoft@meteoforum.com"><img src="assets/email.gif" border="0"> Supporto Tecnico</a></li>
+                                                                                            <li><script language="javascript">line = '<a href="mailto:';
+                                                                                                        line += 'admin@';
+                                                                                                        line += 'meteoforum.com';
+                                                                                                        line += '">';
+                                                                                                        line += '<img border="0" src="/images/email.gif"> Admin';
+                                                                                                        line += '</a>';
+                                                                                                        document.write(line);</script><a href="mailto:admin@meteoforum.com"><img src="assets/email.gif" border="0"> Admin</a></li>
+                                                                                        </ul>
+                                                                                    </li>
+                                                                                    <li><a href="#">Info...</a>
+                                                                                        <ul>
+                                                                                            <li><a href="http://www.meteoforum.com/pagine/Varie/FAQ.asp" target="_blank" title="Le cose da leggere prima di fare domande">F.A.Q.</a></li>
+                                                                                            <li><a href="http://www.meteoforum.com/pagine/Varie/Regolamento.asp?FS=S" target="_blank" title="Regolamento Meteoforum">Regolamento</a></li>
+                                                                                            <li><a href="http://www.meteoforum.com/pagine/Varie/Registrazione.asp?FS=S" target="_blank" title="Come registrarsi per poter partecipare attivamente alle discussioni del forum">Registrati</a></li>
+                                                                                            <li><a href="http://www.meteoforum.com/pagine/Varie/Privacy.asp" target="_blank" title="Informativa Privacy">Informativa Privacy</a></li>	
+                                                                                        </ul>
+                                                                                    </li>
+                                                                                    </ul>
+                                                                                    </li>
+
+                                                                                    <li><a href="#" title="Strumenti di Nowcasting"><b>Tempo in Atto</b></a>
+                                                                                        <ul>
+
+                                                                                            <li><a href="#" title="Reti di Stazioni Meteo">Stazioni Meteo...</a>
+                                                                                                <ul>
+                                                                                                    <li><a href="http://www2.arpalombardia.it/siti/arpalombardia/meteo/osservazioniedati/datitemporeale/rilevazioni-in-tempo-reale/Pagine/Rilevazioni-in-tempo-reale.aspx" target="_blank" title="rete ARPA Lombardia">ARPA Lombardia</a></li>
+                                                                                                    <li><a href="http://webgis.arpa.piemonte.it/meteoidro_webapp/" target="_blank" title="rete ARPA Piemonte">ARPA Piemonte</a></li>
+                                                                                                    <li><a href="http://www.arpa.emr.it/sim/?osservazioni_e_dati/dati_stazioni_regionali" target="_blank" title="rete ARPA Piemonte">ARPA Emilia Romagna</a></li>
+                                                                                                    <li><a href="http://www.arpa.veneto.it/temi-ambientali/meteo/monitoraggio/rete-di-telemisura-1" target="_blank" title="rete ARPA Veneto">ARPA Veneto</a></li>
+                                                                                                    <li><a href="http://93.62.155.214/~omirl/WEB/mappa_sensori.html?para=idr" target="_blank" title="rete ARPA Piemonte">ARPA Liguria</a></li>
+                                                                                                    <li><a href="http://www.centrometeolombardo.com/temporeale.php" target="_blank" title="rete Centro Meteo Lombardo">Rete CML</a></li>
+                                                                                                    <li><a href="http://www.meteoam.it/?q=tempo_in_atto/italia" target="_blank" title="Aeronautica Militare Italiana">ITALIA (MeteoAM)</a></li>
+                                                                                                    <li><a href="http://www.wetterzentrale.de/pics/Reurmett.gif" target="_blank">Europa (WZ)</a></li>
+                                                                                                </ul>
+                                                                                            </li>
+
+                                                                                            <li><a href="#" title="Radar Meteorologici">Radar...</a>
+                                                                                                <ul>
+                                                                                                    <li><a href="#">Nord Ovest...</a>
+                                                                                                        <ul>
+                                                                                                            <li><a href="http://www.landi.ch/meteo/deu/niederschlagsradar-profi_478802.aspx" target="_blank" title="Il radar svizzero (Albis,Lema,Dole), aggiornato ogni 10 minuti dal sito http://www.landi.ch">Landi</a></li>
+                                                                                                            <li><a href="http://www.arpal.gov.it/homepage/meteo/radar/riflettivita-movie.html" target="_blank" title="Radar ARPA Liguria, aggiornato ogni ora.">ARPA Liguria</a></li>
+                                                                                                            <li><a href="http://www.centrometeolombardo.com/radar" target="_blank" title="Radar rielaborazione CML su dati MeteoSwiss">Rielaborazione CML</a></li>
+                                                                                                            <li><a href="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" target="_blank" title="Radar ARPA Piemonte, aggiornato ogni ora.">ARPA Piemonte</a></li>		
+                                                                                                            <li><a href="http://www.metradar.ch/2009_test/pc/index.php" target="_blank" title="Il radar svizzero (Albis,Lema,Dole), aggiornato ogni 5 minuti dal sito www.metradar.ch">MetRadar</a></li>
+                                                                                                        </ul>
+                                                                                                    </li>
+                                                                                                    <li><a href="#">Nord Est...</a>
+                                                                                                        <ul>
+                                                                                                            <li><a href="http://www.arpa.veneto.it/arpavinforma/bollettini/meteo-e-neve-1/immagini-radar" target="_blank" title="Pagina Radar ARPA Veneto">ARPA Veneto</a></li>
+                                                                                                            <li><a href="http://www.meteotrentino.it/dati-meteo/radar/last_PRECIPITATION.aspx?ID=178" target="_blank" title="Pagina Radar Meteotrentino">MeteoTrentino</a></li>
+                                                                                                            <li><a href="http://www.arpa.emr.it/sim/?osservazioni_e_dati/radar" target="_blank" title="Radar ARPA Emilia Romagna">ARPA-EMR</a></li>
+                                                                                                            <li><a href="http://www.osmer.fvg.it/radar.php" target="_blank" title="Pagina Radar OSMER ARPA FVG">ARPA-FVG</a></li>
+                                                                                                        </ul>
+                                                                                                    </li>
+                                                                                                    <li><a href="http://www.protezionecivile.gov.it/jcms/it/mappa_radar.wp" target="_blank" title="Radar composito italiano, dal sito della Protezione Civile">Italia (Prot.Civile)</a></li>
+                                                                                                    <li><a href="http://www.meteoradar.co.uk/lightning-europe" target="_blank" title="Radar composito europeo">Europa</a></li>
+                                                                                                </ul>
+                                                                                            </li>
+
+                                                                                            <li><a href="#">Radiosondaggi...</a>
+                                                                                                <ul>
+                                                                                                    <li><a href="http://weather.uwyo.edu/upperair/europe.html" target="_blank" title="I valori rilevati dal radiosondaggio per l'analisi dello stato della colonna atmosferica">Università Wyoming</a></li>
+                                                                                                    <li><a href="http://meteocentre.com/upperair/get_sounding.php?lang=fr&amp;region=eur" target="_blank" title="Radiosondaggi e odometria in formato grafico">MeteoCentre UQAM</a></li>
+                                                                                                </ul>
+                                                                                            </li>
+
+                                                                                            <li><a href="#">Temporali...</a>
+                                                                                                <ul>
+                                                                                                    <li><a href="http://www.lightningmaps.org/blitzortung/europe/index.php?bo_page=map&amp;lang=it" target="_blank" title="Fulminazioni Realtime dalla rete Blitzortung">Mappa Fulmini Realtime</a></li>
+                                                                                                    <li><a href="http://www.strikestareu.com/" target="_blank" title="Mappa Fulminazioni rilevate dalla rete Strikestar">Strikestar.eu</a></li>
+                                                                                                    <li><a href="http://www.meteoam.it/?q=nefodina/it" target="_blank" title="Top Nubi e attività temporalesca">Nefodina MeteoAM</a></li>
+                                                                                                </ul>
+                                                                                            </li>
+
+                                                                                            <li><a href="#">Sinottiche...</a>
+                                                                                                <ul>
+                                                                                                    <li><a href="http://meteocentre.com/analyses/map.php?map=Europe&amp;size=standard&amp;lang=fr&amp;area=eur" target="_blank" title="Analisi sinottica al suolo in Europa aggiornata ogni ora">Europa</a></li>
+                                                                                                    <li><a href="http://meteocentre.com/analyses/map.php?map=FrancePNM&amp;size=standard&amp;lang=fr&amp;area=fr" target="_blank" title="Analisi sinottica centrata sulla Francia, aggiornata ogni ora">Francia 1hPa</a></li>
+                                                                                                    <li><a href="http://meteocentre.com/analyses/map.php?map=SEFrance&amp;size=standard&amp;lang=fr&amp;area=fr" target="_blank" title="Analisi sinottica centrata sul Sud Est della Francia, aggiornata ogni ora">Francia Sud-Est</a></li>
+                                                                                                    <li><a href="http://meteocentre.com/analyses/map.php?map=Alpes&amp;size=standard&amp;lang=fr&amp;area=eur" target="_blank" title="Analisi sinottica centrata sulla Alpi Occidentali, aggiornata ogni ora">Area Alpina</a></li>
+                                                                                                </ul>
+                                                                                            </li>
+
+                                                                                            <li><a href="#">Immagini Sat...</a>
+                                                                                                <ul>
+                                                                                                    <li><a href="#">EUMETSAT...</a>
+                                                                                                        <ul>			
+                                                                                                            <li><a href="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_MPE-westernEurope.jpg" target="_blank" title="Elaborazione Multisensor Preciptation Estimate dell'immagine satellitare IR dal sito EUMETSAT">MPE Europa</a></li>
+                                                                                                            <li><a href="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_AMV-westernEurope.png" target="_blank" title="Elaborazione Atmosferic Motion Vectors dell'immagine satellitare IR dal sito EUMETSAT">AMV Europa</a></li>
+                                                                                                            <li><a href="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGB-airmass-westernEurope.jpg" target="_blank" title="Elaborazione dell'immagine satellitare IR dal sito EUMETSAT per l'individuazione delle masse d'aria">Air Mass Europa (IR)</a></li>
+                                                                                                            <li><a href="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGB-12-12-9i-segment14.jpg" target="_blank" title="Elaborazione trispettrale dell'immagine satellitare IR dal sito EUMETSAT">Trispettrale Italia</a></li>
+                                                                                                        </ul>
+                                                                                                    </li>
+                                                                                                    <li><a href="#">Università di Berlino...</a>
+                                                                                                        <ul>
+                                                                                                            <li><a href="http://wind.met.fu-berlin.de/wind_work/satellit/meteosat_loop.php" target="_blank" title="Animazione Sat IR dal sito dell'Istituto Meteorologico di Berlino">Animazione IR Europa</a></li>
+                                                                                                            <li><a href="http://wind.met.fu-berlin.de/wind_work/satellit/meteosat_loop_vi.php" target="_blank" title="Animazione Sat Vis dal sito dell'Istituto Meteorologico di Berlino">Animazione Vis Europa</a></li>
+                                                                                                        </ul>
+                                                                                                    </li>
+                                                                                                    <li><a href="#">www.sat24.com...</a>
+                                                                                                        <ul>
+                                                                                                            <li><a href="http://www.meteo-mc.fr/satellite-ir-anime-eu.php" target="_blank" title="Animazione IR con elaborazione top nubi su dati sat24.com">Animazione IR con top nubi</a></li>
+                                                                                                            <li><a href="http://www.sat24.com/image2.ashx?region=eu&amp;time=201809180921&amp;ir=true" target="_blank">Nord Atlantico</a></li>
+                                                                                                            <li><a href="http://www.sat24.com/image2.ashx?region=fr&amp;time=201809180921&amp;ir=true" target="_blank">IR Europa Centrale</a></li>
+                                                                                                            <li><a href="http://www.sat24.com/image2.ashx?region=alps&amp;time=201809180921&amp;ir=true" target="_blank">IR Zona Alpina</a></li>
+                                                                                                        </ul>
+                                                                                                    </li>
+                                                                                                    <li><a href="http://www.centrometeolombardo.com/sat/" target="_blank" title="Elaborazione immagini satellitari CML su base dati pubblici Sat24.com">Rielaborazione CML</a></li>
+                                                                                                    <li><a href="http://myweb.tiscali.co.uk/wxsatellite/recent.htm" target="_blank" title="Immagini ad alta definizione aggiornate più volte al giorno dai satelliti NOAA">Sat Polari NOAA</a></li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </li>
+
+                                                                                    <li><a href="#"><b>Previsioni</b></a>
+                                                                                        <ul>
+                                                                                            <li><a href="#">Bollettini...</a>
+                                                                                                <ul>
+                                                                                                    <li><a href="http://www2.arpalombardia.it/siti/arpalombardia/meteo/previsionimeteo/meteolombardia/Pagine/default.aspx" target="_blank">ARPA Lombardia</a></li>
+                                                                                                    <li><a href="http://www.centrometeolombardo.com/content.asp?contentid=1150&amp;ContentType=Previsioni" target="_blank" title="Le previsioni del Forecast Team CML">Centro Meteorologico Lombardo</a></li>
+                                                                                                    <li><a href="http://www.astrogeo.va.it/meteo.htm" target="_blank">Centro Geofisico Prealpino</a></li>
+                                                                                                    <li><a href="http://www.meteoam.it/?regione=nord&amp;timespread=prev" target="_blank">Aeronautica Militare Italiana</a></li>
+                                                                                                    <li><a href="http://www.meteosvizzera.admin.ch/home.html#home.html?tab=report" target="_blank">Meteosvizzera</a></li>
+                                                                                                    <li><a href="http://www.centrometeoligure.com/meteo-liguria/" target="_blank">Centro Meteo Ligure</a></li>
+                                                                                                    <li><a href="http://www.meteoalarm.eu/?areaname=&amp;area=&amp;ShowDate=&amp;Country=&amp;lang=IT#" target="_blank">Meteoalarm.eu</a></li>
+                                                                                                    <li><a href="http://www.estofex.org/cgi-bin/polygon/showforecast.cgi?listvalid=yes" target="_blank">Estofex</a></li>
+                                                                                                </ul>
+                                                                                            </li>	
+                                                                                            <li><a href="#">Modelli...</a>
+                                                                                                <ul>
+                                                                                                    <li><a href="#">Wetterzentrale...</a>
+                                                                                                        <ul>
+                                                                                                            <li><a href="http://www.wetterzentrale.de/topkarten/fsavneur.html" target="_blank" title="Pannello GFS globali">GFS Global</a></li>
+                                                                                                            <li><a href="http://www.wetterzentrale.de/topkarten/fsenseur.html" target="_blank" title="Pannello GFS Ensemble">GFS Ensemble</a></li>			
+                                                                                                            <li><a href="http://www.wetterzentrale.de/topkarten/fsgfs025meur.html" target="_blank" title="Pannello GFS focus Europa Centrale">GFS 0.25°(Europa)</a></li>
+                                                                                                            <li><a href="http://www.wetterzentrale.de/topkarten/fsicoeur.html" target="_blank" title="Pannello ICON DWD">ICON (DWD)</a></li>
+                                                                                                            <li><a href="http://www.wetterzentrale.de/topkarten/fsecmeur.html" target="_blank" title="Pannello ECMWF globali">ECMWF</a></li>
+                                                                                                            <li><a href="http://www.wetterzentrale.de/topkarten/fsukmeur.html" target="_blank" title="Pannello UKMO Europa">UKMO</a></li>	
+                                                                                                            <li><a href="http://www.wetterzentrale.de/topkarten/fsreaeur.html" target="_blank" title="Archivio Reanalisi GFS">Reanalisi GFS</a></li>	
+                                                                                                            <li><a href="http://www.wetterzentrale.de/topkarten/fscfsreaeur.html" target="_blank" title="Archivio Reanalisi CFS">Reanalisi C.F.S.</a></li>
+                                                                                                        </ul>
+                                                                                                    </li>
+                                                                                                    <li><a href="#">Meteociel...</a>
+                                                                                                        <ul>
+                                                                                                            <li><a href="http://www.meteociel.fr/modeles/gfse_cartes.php" target="_blank" title="Pannello GFS Europa">GFS Europa</a></li>
+                                                                                                            <li><a href="http://www.meteociel.fr/modeles/gfs/italie/precipitations/3h.htm" target="_blank" title="Pannello GFS Focus Italia">GFS 0.25° Italia</a></li>			
+                                                                                                            <li><a href="http://www.meteociel.fr/modeles/ecmwf.php" target="_blank" title="Pannello ECMWF Europa">ECMWF Europa</a></li>
+                                                                                                            <li><a href="http://www.meteociel.fr/modeles/ecmwf.php?ech=72&amp;mode=1&amp;map=5&amp;type=0&amp;archive=0" target="_blank" title="Pannello ECMWF focus Italia">ECMWF Italia</a></li>
+                                                                                                            <li><a href="http://www.meteociel.fr/modeles/ukmo2.php?ech=6&amp;carte=1021&amp;archive=0" target="_blank" title="Pannello UKMO Europa">UKMO Europa</a></li>	
+                                                                                                            <li><a href="http://www.meteociel.fr/modeles/ukmo2.php?carte=21&amp;ech=6&amp;archive=0&amp;pays=italie" target="_blank" title="Pannello UKMO Italia">UKMO Italia</a></li>
+                                                                                                            <li><a href="http://www.meteociel.fr/modeles/wrfnmm.php?map=20" target="_blank" title="Pannello WRF-NMM Europa">WRF-NMM 10km Europa</a></li>	
+                                                                                                            <li><a href="http://www.meteociel.fr/modeles/wrfnmm.php?ech=3&amp;mode=0&amp;map=320" target="_blank" title="Pannello WRF-NMM Italia">WRF-NMM 2km Ita</a></li>
+                                                                                                        </ul>
+                                                                                                    </li>
+                                                                                                    <li><a href="http://www.weatheronline.co.uk/cgi-bin/expertcharts?LANG=en" target="_blank" title="Raccolta di modelli meteo elaborati da WeatherOnline.co.uk">WeatherOnline</a></li>
+                                                                                                    <li><a href="http://www.lamma.rete.toscana.it/meteo/modelli" target="_blank" title="">LAMMA (WRF-ARW)</a></li>
+                                                                                                    <li><a href="http://servizi-meteoliguria.arpal.gov.it/MAPPE/mappe.php" target="_blank" title="">ARPAL (Bolam/Moloch)</a></li>
+                                                                                                    <li><a href="http://www.isac.cnr.it/dinamica/projects/forecasts/" target="_blank" title="">ISAC (Bolam/Moloch)</a></li>
+                                                                                                    <li><a href="http://www.meteotreviglio.com/modelli/wrf-nord-italia.html" target="_blank" title="">Meteotreviglio (WRF)</a></li>
+                                                                                                    <li><a href="http://www.youmeteo.com/" target="_blank" title="">YouMeteo (HRRR)</a></li>
+                                                                                                    <li><a href="http://www.centrometeo.com/modelli-numerici/modello-wrf-nmm" target="_blank" title="">CentroMeteo (WRF-NMM)</a></li>
+                                                                                                </ul>
+                                                                                            </li>
+
+                                                                                            <li><a href="http://www.meteoforum.com/pagine/varie/carte.asp?map=EUROPE_500HPA" target="_blank">GFS "Veloci"</a></li>
+                                                                                            <li><a href="http://www.meteociel.fr/cartes_obs/gens_display.php?lat=45,28&amp;lon=9,11&amp;ext=1" target="_blank">Spaghi.MI (MC)</a></li>
+                                                                                            <li><a href="http://www.wetterzentrale.de/pics/MS_945_ens.png" target="_blank">Spaghi.MI (WZ)</a></li>
+
+                                                                                        </ul>
+                                                                                    </li>
+
+                                                                                    <li><a href="#"><b>Varie</b></a>
+                                                                                        <ul>
+                                                                                            <li><a href="http://lance2.modaps.eosdis.nasa.gov/imagery/subsets/?subset=AERONET_Ispra" target="_blank" title="Le stupende e dettagliate immagini dei satelliti Aqua e Terra">Immagini Sat Modis</a></li>
+                                                                                            <li><a href="http://myweb.tiscali.co.uk/wxsatellite/recent.htm" target="_blank" title="Immagini ad alta definizione aggiornate più volte al giorno dai satelliti NOAA">Immagini Sat polari</a></li>
+                                                                                            <li><a href="http://www.tutiempo.net/clima/Italia/IT.html" target="_blank" title="Storico delle stazioni meteo ufficiali AM">Storico dati Italia</a></li>
+                                                                                            <li><a href="http://www.meteoservice.net/dati-storici-giornalieri-di-milano-brera-massime-e-minime-inseriti-in-tabelle-dal-1776-al-2000/" target="_blank" title="Storico dati Milano Brera">Storico dati MI Brera</a></li>
+                                                                                        </ul>
+                                                                                    </li>
+
+                                                                                    </ul>
+
+                                                                                    </td></tr></tbody></table>
+                                                                                    <table style="width:100%; min-width:540px; border:0px; padding:0px; padding-top:8px; padding-bottom:3px;">
+                                                                                        <tbody><tr>
+                                                                                                <form method="GET" action="main.asp"></form>
+                                                                                                <td style="vertical-align:baseline; text-align:left; height:20px;" nowrap="nowrap">
+                                                                                                    <input onclick="this.form.submit();" name="FS" value="N" type="radio">
+                                                                                                        <a href="http://www.meteoforum.com/main.asp?FS=N"><font class="TxtLm" color="Blue"><strong>Nowcasting</strong></font></a>
+                                                                                                        <input onclick="this.form.submit();" name="FS" value="D" type="radio">
+                                                                                                            <a href="http://www.meteoforum.com/main.asp?FS=D"><font class="TxtLm" color="#7E5530"><strong>Discussioni</strong></font></a>
+                                                                                                            <input onclick="this.form.submit();" name="FS" value="S" checked="checked" type="radio">
+                                                                                                                <a href="http://www.meteoforum.com/main.asp?FS=S"><font class="TxtLxl" color="Green"><strong>Strumentazione</strong></font></a>
+                                                                                                                <input onclick="this.form.submit();" name="FS" value="X" type="radio">
+                                                                                                                    <a href="http://www.meteoforum.com/main_frame.asp?FS=X"><font class="TxtLm" color="Red"><strong>Mix</strong></font></a>
+                                                                                                                    </td>
+
+                                                                                                                    </tr>
+                                                                                                                    <tr>
+                                                                                                                        <td style="vertical-align:baseline; text-align:justify;">
+                                                                                                                            <font class="TxtLs">
+
+                                                                                                                                Discussioni sulla strumentazione meteo e dispositivi annessi, loro 
+                                                                                                                                efficacia ed opportuno posizionamento, problemi incorsi durante 
+                                                                                                                                l'utilizzo, consigli di acquisto e racconto delle proprie esperienze. 
+                                                                                                                                Come per l'area "Discussioni", i thread verranno riportati in evidenza 
+                                                                                                                                dagli aggiornamenti. Titoli adeguati favoriranno una migliore 
+                                                                                                                                ricercabilità delle informazioni.
+
+                                                                                                                            </font>
+                                                                                                                        </td>
+                                                                                                                    </tr>
+                                                                                                                    </tbody></table>
+
+
+
+                                                                                                                    <div align="center">
+                                                                                                                        <table style="min-width:540px; background-color:#215a94; border-color:#EFEFEF;" valign="absmiddle" width="100%" height="20" cellspacing="1" cellpadding="1" border="0">
+                                                                                                                            <tbody><tr>
+                                                                                                                                    <td>
+
+                                                                                                                                        <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MP=main.asp"><img src="assets/Blu_NewMsg.gif" title="Inserisce un nuovo messaggio" border="0"></a>
+
+                                                                                                                                    </td>
+                                                                                                                                    <form method="POST" action="main.asp"></form>
+                                                                                                                                    <td class="Fix" nowrap="nowrap"><b>&nbsp;Pag.N°&nbsp;</b></td>
+                                                                                                                                    <td><input name="Pg" style="width:16px;" maxlength="3" value="1" title="Pagina Corrente" type="text"></td>
+                                                                                                                                    <td class="Fix" nowrap="nowrap"><b>&nbsp;Nick&nbsp;</b></td>
+                                                                                                                                    <td><input name="FN" style="width:60px;" maxlength="12" title="Ricerca messaggi per Nickname" type="text"></td>
+                                                                                                                                    <td class="Fix" nowrap="nowrap"><b>&nbsp;Data&nbsp;</b></td>
+                                                                                                                                    <td><input name="FD" style="width:60px;" maxlength="8" title="Ricerca messaggi per data" type="text"></td>
+                                                                                                                                    <input name="FS" value="S" type="hidden">
+                                                                                                                                        <input name="FK" value="" type="hidden">
+                                                                                                                                            <td><input src="assets/Blu_Refresh.gif" title="Aggiorna la pagina e applica i parametri" type="image"></td>
+
+                                                                                                                                            <td width="99%">&nbsp;</td>
+                                                                                                                                            <form method="POST" action="main.asp"></form>
+                                                                                                                                            <td align="left">
+                                                                                                                                                <input src="assets/Blu_Prev.gif" title="Pagina precedente" type="image">
+
+                                                                                                                                                    <input name="Pg" value="1" type="hidden">
+
+                                                                                                                                                        <input name="FS" value="S" type="hidden">					
+                                                                                                                                                            <input name="FN" value="" type="hidden">
+                                                                                                                                                                <input name="FD" value="" type="hidden"> 
+                                                                                                                                                                    <input name="FK" value="" type="hidden"> 
+                                                                                                                                                                        <input name="FT" value="" type="hidden"> 				 
+                                                                                                                                                                            </td>
+
+                                                                                                                                                                            <form method="POST" action="main.asp"></form>
+                                                                                                                                                                            <td align="right">
+                                                                                                                                                                                <input src="assets/Blu_Next.gif" title="Pagina successiva" type="image">
+                                                                                                                                                                                    <input name="Pg" value="2" type="hidden">
+                                                                                                                                                                                        <input name="FS" value="S" type="hidden">										
+                                                                                                                                                                                            <input name="FN" value="" type="hidden">
+                                                                                                                                                                                                <input name="FD" value="" type="hidden"> 
+                                                                                                                                                                                                    <input name="FK" value="" type="hidden"> 					
+                                                                                                                                                                                                        <input name="FT" value="" type="hidden"> 				 
+                                                                                                                                                                                                        </td>
+
+                                                                                                                                                                                                        </tr>
+                                                                                                                                                                                                        </tbody></table>
+                                                                                                                                                                                                        </div>
+
+
+                                                                                                                                                                                                        <table style="min-width:540px; background-color:#EFEFEF;" width="100%" cellspacing="1" cellpadding="0" border="0" align="center">
+                                                                                                                                                                                                        <tbody><tr height="18" bgcolor="#000080">
+                                                                                                                                                                                                        <th>Titolo</th>
+
+                                                                                                                                                                                                        <th width="2%">Risp.</th>
+
+                                                                                                                                                                                                        <th width="12%">Autore e Località</th>
+                                                                                                                                                                                                        <th width="12%">Ultimo Aggiorn.</th>
+                                                                                                                                                                                                        </tr>
+                                                                                                                                                                                                        <tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3157684&amp;Pg=1&amp;FK=1000604361">Cerco sensore Oregon per esterno modello thgn800 ...</a></td><td class="ColC3">2</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Resegone">Resegone</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>S.&nbsp;Omobono&nbsp;T.&nbsp;(BG)&nbsp;-&nbsp;450&nbsp;slm</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Resegone">Resegone</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>31/08/2018 - 18.23</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3157684" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Qualcuno sa dove posso recuperarlo?<br>Grazie Manuel</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3157684&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3157684&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3071140&amp;Pg=1&amp;FK=1000579308">Consiglio Modello Web-cam con invio immagini via FTP ...</a></td><td class="ColC3">18</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=neveapalate">neveapalate</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Suzzara&nbsp;(MN)&nbsp;-&nbsp;18&nbsp;m</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=TrangaWK">TrangaWK</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>30/08/2018 - 09.59</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3071140" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Ciao a tutti<br><br>Qualcuno
+                                                                                                                                                                                                        mi sa consigliare un modello di web-cam che riesca ad inviare via Ftp 
+                                                                                                                                                                                                        in una cartella del mio dominio (esempio: ftp.miodominio.it/webcam) le 
+                                                                                                                                                                                                        immagini riprese ad un intervallo di tempo prestabilito?<br><br></td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3071140&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3071140&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3151561&amp;Pg=1&amp;FK=1000602608">Come si puo’ trasformare un datalogger seriale a ethernet a ”basso costo” ...</a></td><td class="ColC3">1</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Davide%20LC">Davide LC</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Valmadrera&nbsp;(LC)</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=fabioar58">fabioar58</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>05/08/2018 - 14.03</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3151561" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">per
+                                                                                                                                                                                                        l’invio dei dati senza pc acceso? E’ possibile? Ho visto adattatori di 
+                                                                                                                                                                                                        prezzi vari, anche economici..ma serviranno allo scopo?<br>Grazie!<br></td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3151561&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3151561&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3149207&amp;Pg=1&amp;FK=1000601803">stazioni con datalogger di una settimana, quali? ...</a></td><td class="ColC3">4</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=fabioar58">fabioar58</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Castellanza&nbsp;(VA)&nbsp;216&nbsp;slm</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Buros">Buros</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>27/07/2018 - 19.58</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3149207" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">davis, ok.<br>lacrosse, pure ma dipende dal modello.<br>oregon? attendo info da chi le conosce.<br><br>in pratica ne voglio comprare un’altra,<br>la davis l’ho già,<br>la lacrosse pure, ma la demolirò.<br><br>cosa suggerite?<br>(unico requisito è il datalogger)<br><br>grazie.<br></td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3149207&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3149207&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3148553&amp;Pg=1&amp;FK=1000601616">Da ieri la consolle della Davis VP2 non riceve più il segnale ...</a></td><td class="ColC3">14</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=camel">camel</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Cassano&nbsp;d’Adda&nbsp;(MI)</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=camel">camel</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>23/07/2018 - 23.17</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3148553" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">...provato
+                                                                                                                                                                                                        a cambiare le batterie sia dell’ISS che della console, nulla da fare, 
+                                                                                                                                                                                                        la console mostra "receiving from station n.1" ma i quadri con i vari 
+                                                                                                                                                                                                        dati restano vuoti. Potrebbe essere solo un disturbo elettromagnetico o 
+                                                                                                                                                                                                        l’ISS è andato (è del 2009)?<br>Non mi pare esista un tasto reset per l’ISS come sulle Oregon, o la possibilità di cambiare frequenza di trasmissione. Sbaglio?</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3148553&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3148553&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3143863&amp;Pg=1&amp;FK=1000600101">Buongiorno, Qualcuno ha una consolle Oregon wmr 968 da vendere o da buttare? (vt)</a></td><td class="ColC3">1</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=BJT_Dimo">BJT_Dimo</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Santa&nbsp;Maria&nbsp;Hoè&nbsp;(LC)&nbsp;-&nbsp;&nbsp;390&nbsp;mt</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=TrangaWK">TrangaWK</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>05/07/2018 - 16.24</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3143863" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;"></td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3143863&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3143863&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3145029&amp;Pg=1&amp;FK=1000600501">pluviometro otturato ed è piovuto come fare? ...</a></td><td class="ColC3">4</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=neveapalate">neveapalate</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Suzzara&nbsp;(MN)&nbsp;-&nbsp;18&nbsp;m</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=watson">watson</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>05/07/2018 - 15.03</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3145029" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Ciao
+                                                                                                                                                                                                        ragazzi, ieri sera abbiamo avuto diversi temporali, "fortuna" vuole che
+                                                                                                                                                                                                        proprio ieri mi si è otturato il pluviometro (pulito 2 mesi fa si e 
+                                                                                                                                                                                                        no), stamattina era pieno d’acqua ho riaperto il foro inferiore per far 
+                                                                                                                                                                                                        uscire l’acqua ma in pochi secondi è scesa tutta e sicuramente non me 
+                                                                                                                                                                                                        l’ha misurata correttamente, come sarebbe da fare in questa situazione 
+                                                                                                                                                                                                        nel caso mi capitasse ancora? grazie.</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3145029&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3145029&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3116149&amp;Pg=1&amp;FK=1000590196">Info connessione Tim per trasmissione dati CML con baracchino Asus ...</a></td><td class="ColC3">2</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=matteo-cr">matteo-cr</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>casalmaggiore&nbsp;(CR)</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=matteo-cr">matteo-cr</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>02/07/2018 - 20.38</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3116149" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Mi hanno proposto connessione telecom in fibra. A cosa devo stare attento per evitare rogne con la trasmissione dati? Grazie, M.</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3116149&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3116149&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3087537&amp;Pg=1&amp;FK=1000583236">Mettere online webcam Foscam su mio sito meteo altervista ...</a></td><td class="ColC3">18</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=simo91">simo91</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Castano&nbsp;Primo&nbsp;(MI)&nbsp;182&nbsp;m</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=TrangaWK">TrangaWK</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>08/06/2018 - 09.53</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3087537" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Ciao a tutti,<br>ho appena acquistato una webcam Foscam FI9800P e vorrei mettere online l’immagine che si auto-aggiorna sul mio sito altervista (<br><a target="_blank" href="http://www.meteocastano.altervista.org/index.html"><b>Clicca Qui</b></a>&nbsp;).<br>Ho provato a dare un occhio in rete e ho scoperto che un metodo è quello della trasmissione dell’immagine via FTP.<br>Sono
+                                                                                                                                                                                                        riuscito a configurarlo ed a far inviare le immagini sul sito ma le 
+                                                                                                                                                                                                        stesse immagini vengono salvati con nomi diversi e mi è quindi 
+                                                                                                                                                                                                        impossibile avere un unica immagine aggiornata.<br>Qualcuno potrebbe 
+                                                                                                                                                                                                        gentilmente aiutarmi? Vi premetto che informaticamente parlando sono 
+                                                                                                                                                                                                        proprio a livello base (forse anche meno :) )<br>Grazie!<br><br>Simone<br></td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3087537&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3087537&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3137920&amp;Pg=1&amp;FK=1000598311">Termoigrometro stazione David Vantage Vue ...</a></td><td class="ColC3"> </td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Michele73">Michele73</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Arcore&nbsp;(MB)</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Michele73">Michele73</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>20/05/2018 - 18.15</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3137920" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Ciao
+                                                                                                                                                                                                        a tutti, avrei bisogno un aiuto. Lo scorso ottobre ho acquistato una 
+                                                                                                                                                                                                        stazione Davis Vantage Vue, ho acquistato anche il datalloger ip.<br>Fino
+                                                                                                                                                                                                        a circa un paio di mesi fa nessun problema, poi la console ha 
+                                                                                                                                                                                                        cominciato a non ricevere più i dati di umidità e temperatura. <br>Riceve tutti i dati tranne quelli, o meglio saltuariamente li riceve ma il più delle volte no.<br>Ho
+                                                                                                                                                                                                        scritto alla mail di supporto della Davis e mi hanno risposto che 
+                                                                                                                                                                                                        potrebbe essere un problema di sbalzi di energia offrendosi di chiamarmi
+                                                                                                                                                                                                        per dirmi come fare a risolvere il problema. Io ho risposto se per 
+                                                                                                                                                                                                        piacere me lo avessero potuto scrivere per maggior chiarezza ma poi non 
+                                                                                                                                                                                                        mi hanno più risposto.<br>Qualcuno di voi conosce la soluzione?<br>Grazie <br>Michele<br></td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3137920&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3137920&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3130583&amp;Pg=1&amp;FK=1000595622">Discrepanza di valori tra consolle e weatherLink ...</a></td><td class="ColC3"> </td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=fabryVC">fabryVC</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Asigliano&nbsp;(VC)</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=fabryVC">fabryVC</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>17/03/2018 - 10.05</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3130583" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">stamattina,forse
+                                                                                                                                                                                                        a causa della mancata corrente di stanotte dovuta a un temporale,valori
+                                                                                                                                                                                                        non uguali tra consolle DAVIS e software<br>11.2 mm consolle-------19.6 WeatherLink.<br><br>Da cosa può essere dovuto secondo voi?<br><br>Grazie.</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3130583&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3130583&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3095922&amp;Pg=1&amp;FK=1000585987">Problema al pluviometro Davis: rileva/non rileva le piogge ...</a></td><td class="ColC3">2</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Buros">Buros</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Copreno&nbsp;di&nbsp;Lentate&nbsp;(MB)&nbsp;-&nbsp;273m</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Buros">Buros</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>14/03/2018 - 22.01</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3095922" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Ieri
+                                                                                                                                                                                                        mattina era tutto ok (o almeno pensavo lo fosse), aveva piovuto di 
+                                                                                                                                                                                                        notte ed il pluviometro mi indicava 3mm (in realtà in zona si stava già 
+                                                                                                                                                                                                        sui 6mm, ma io credevo plausibili quei 3mm).<br>Nel pomeriggio ha 
+                                                                                                                                                                                                        ripreso a piovigginare ed il pluviometro mi rimaneva fermo a 3mm; per un
+                                                                                                                                                                                                        pò non ho dato peso alla cosa, supponendo dipendesse dalla debolissima 
+                                                                                                                                                                                                        precipitazione, ma col passare delle ore vedendo che rimaneva sempre 
+                                                                                                                                                                                                        fermo a 3mm la cosa mi è cominciata a puzzare, e naturalmente ho capito 
+                                                                                                                                                                                                        ci fosse un problema allorquando ha cominciato a piovere con più 
+                                                                                                                                                                                                        decisione ed il pluviometro rimaneva fermo a 3mm.<br>Mi sono limitato ad
+                                                                                                                                                                                                        andare a controllare che non ci fosse un corpo estraneo che facesse da 
+                                                                                                                                                                                                        tappo nell’imbuto del pluviometro, ma questi era bello pulito. La 
+                                                                                                                                                                                                        bascula, pur non avendola fatta rimbalzare, non era bloccata (l’ho 
+                                                                                                                                                                                                        smossa un pò con le dita e si muoveva senza difficoltà meccaniche)...<br>Stamattina
+                                                                                                                                                                                                        quando mi sono alzato vedo che il pluviometro ha lavorato, indicandomi 
+                                                                                                                                                                                                        però solo 1.6mm quando in zona siamo tutti over 10mm.<br>Non capisco 
+                                                                                                                                                                                                        quindi di cosa possa trattarsi: in console i numeri sono presenti 
+                                                                                                                                                                                                        (nessun trattino ad indicare assenza di segnale), il fatto che abbia 
+                                                                                                                                                                                                        indicato qualche precipitazione significa che le bascule hanno giocato, e
+                                                                                                                                                                                                        che quindi elettronicamente non dovrebbero esserci danni...<br>Da che cosa può dipendere?<br>Mi
+                                                                                                                                                                                                        viene il dubbio (unicamente perchè quando ieri ho aperto l’imbuto era 
+                                                                                                                                                                                                        sera, pioveva ed ho fatto un controllo molto veloce senza pensare a 
+                                                                                                                                                                                                        questa eventualità) che possa esserci magari una cimice o cmq qualcosa 
+                                                                                                                                                                                                        che si è posizionata davanti alla fotocellula che conteggia gli scatti 
+                                                                                                                                                                                                        della bascula, potrebbe essere? In alternativa qualcuno sa darmi qualche
+                                                                                                                                                                                                        altra motivazione?<br>Sicuramente appena finirà di piovere controllerò 
+                                                                                                                                                                                                        più attentamente, se però nel frattempo qualcuno ha avuto un problema 
+                                                                                                                                                                                                        simile e sappia già dirmi di cosa possa trattarsi...<br>Grazie, buona giornata</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3095922&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3095922&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3106053&amp;Pg=1&amp;FK=1000588442">Estensione rete wifi per ipcam           ...</a></td><td class="ColC3">1</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=mury">mury</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Peia&nbsp;(BG)&nbsp;-&nbsp;642&nbsp;s.l.m.</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=alex7">alex7</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>29/01/2018 - 10.47</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3106053" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Ciao ragazzi mi serve un aiuto perchè ci capisco poco in queste cose:<br><br>Ho
+                                                                                                                                                                                                        un normale router wifi in casa, a circa 300 metri di distanza ho un 
+                                                                                                                                                                                                        terreno dove vorrei posizionarci in futuro una ipcam (adibita anche a 
+                                                                                                                                                                                                        osservazioni meteo tipo webcam).<br>Vorrei poter portare il segnale wifi
+                                                                                                                                                                                                        da casa mia sino là.. premetto che non ho ostacoli in muratura ma bensì
+                                                                                                                                                                                                        solo alcuni alberi. Esternamente alla casa a  circa 4 metri di altezza 
+                                                                                                                                                                                                        ho una presa elettrica. Ho attaccato un normalissimo extender wifi da 20
+                                                                                                                                                                                                        euro e mi ha portato il segnale sino a circa 100 metri fuori casa ( ma a
+                                                                                                                                                                                                        me servirebbero altri 200 metri circa). Conoscete qualcosa di piu 
+                                                                                                                                                                                                        potente? o qualche altro consiglio su come fare?</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3106053&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3106053&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3099156&amp;Pg=1&amp;FK=1000586962">Info temperatura                         ...</a></td><td class="ColC3">4</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Gallo1">Gallo1</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Maddalena&nbsp;Somma&nbsp;L.&nbsp;VA</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Gallo1">Gallo1</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>22/01/2018 - 16.18</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3099156" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Ciao
+                                                                                                                                                                                                        secondo voi avere l iss a 50 cm da un muro divisorio dei giardini in 
+                                                                                                                                                                                                        calcestruzzo... Può influire sui rilevamenti di temperatura? Se si mi 
+                                                                                                                                                                                                        dovrei alzare un po di altezza? <br><br>Grazie</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3099156&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3099156&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3104488&amp;Pg=1&amp;FK=1000588134">consiglio termoigro x casa               ...</a></td><td class="ColC3"> </td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=enricobs">enricobs</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Frontignano&nbsp;(BS)</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=enricobs">enricobs</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>21/01/2018 - 16.50</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3104488" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">mi serve un sensore termoigrometro comune x casa, che mi dica max e min della giornata<br><br>non mi importa registrare i dati<br>chiedo consiglio grazie</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3104488&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3104488&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3102799&amp;Pg=1&amp;FK=1000587683">pluviometro particolare                  ...</a></td><td class="ColC3">1</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=enricobs">enricobs</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Frontignano&nbsp;(BS)</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=zione">zione</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>16/01/2018 - 16.09</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3102799" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">che ne pensate di questo pluvio  TFA Elettrico?<br><br><a target="_blank" href="https://www.amazon.it/TFA-47-3003-MONSUN-Pluviometro-elettronico/dp/B0015CAV7Y/ref=sr_1_5?ie=UTF8&amp;qid=1516027631&amp;sr=8-5&amp;keywords=tfa+pluviometro"><b>Link</b></a></td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3102799&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3102799&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3093804&amp;Pg=1&amp;FK=1000585398">Per chi fosse interessato ecco modo per mettere online Weatherlink e Weather34.. ...</a></td><td class="ColC3">3</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=BJT_Dimo">BJT_Dimo</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Santa&nbsp;Maria&nbsp;Hoè&nbsp;(LC)&nbsp;-&nbsp;&nbsp;390&nbsp;mt</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=BJT_Dimo">BJT_Dimo</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>10/01/2018 - 10.33</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3093804" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;"><u></u>... sito dalla grafica molto accattivante personalizzabile e soprattutto <b>TOTALMENTE GRATUITO </b>. I dati sono in real-time.<br><br>Questo è il mio sito(provvisorio)  Altervista con Weahter34:<br><br><br>www.meteoroby.altervista.org/pws/index.php<br><br><br>Questo è il link della guida molto semplice da seguire. Ho messo il link con il traduttore:<br><br><br>translate.googleusercontent.com/translate_c?depth=2&amp;nv=1&amp;rurl=translate.google.com&amp;sp=nmt4&amp;tl=it&amp;u=http://pysselilivet.blogspot.it/2017/01/install-weather34-with-weatherlink.html%3Fm%3D1&amp;usg=ALkJrhgl6mQqxeJLZgYRxtyCXYhaRUQhBw<br><br><br>Spero di essere stato d’aiuto..<br><br>Buone feste a tutti..Roby</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3093804&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3093804&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3091792&amp;Pg=1&amp;FK=1000584823">Info datalogger vp2                      ...</a></td><td class="ColC3">2</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Gallo1">Gallo1</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Maddalena&nbsp;Somma&nbsp;L.&nbsp;VA</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Gallo1">Gallo1</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>04/01/2018 - 12.52</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3091792" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Ciao un datalogger di una stazione comprata in us va bene su una comprata qua da noi? <br><br>Grazie <br><br>Jacopo</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3091792&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3091792&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3095557&amp;Pg=1&amp;FK=1000585866">Incongruenze dati tra console e weatherlink ...</a></td><td class="ColC3"> </td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Buros">Buros</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Copreno&nbsp;di&nbsp;Lentate&nbsp;(MB)&nbsp;-&nbsp;273m</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Buros">Buros</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>26/12/2017 - 13.26</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3095557" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Ho
+                                                                                                                                                                                                        lasciato in parte incompleto il mio database personale in excel perchè 
+                                                                                                                                                                                                        alcuni valori di temperatura ed umidità stavano per registrare il nuovo 
+                                                                                                                                                                                                        picco min o max in prossimità della mezzanotte ed essendo andato a letto
+                                                                                                                                                                                                        prima ho, per l’appunto, lasciato vuote certe caselle.<br>Mi sto 
+                                                                                                                                                                                                        accorgendo però che tra il valore che posso reperire in console (la 
+                                                                                                                                                                                                        console arriva a 25gg indietro a partire da oggi compreso) e quello 
+                                                                                                                                                                                                        registrato sul weatherlink ci sono diverse incongruenze.<br>Per la 
+                                                                                                                                                                                                        temperatura mi era stato spiegato che la differenza di 1-2 decimi tra 
+                                                                                                                                                                                                        console e WL era determinato dalla conversione celsius-fahrenheit, ma 
+                                                                                                                                                                                                        vedo che certi dati sono diversi anche nel campo igrometrico.<br>Non 
+                                                                                                                                                                                                        essendo presenti nei reports gli estremi min-max dell’umidità, devo 
+                                                                                                                                                                                                        andarmeli a ricercare nel browse e mi sono accorto che alcuni valori non
+                                                                                                                                                                                                        coincidono, alcune volte in eccesso ed altre volte in difetto.<br>Come mai anche l’umidità presenta incongruenze tra console e WL ?</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3095557&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3095557&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3031930&amp;Pg=1&amp;FK=1000567035">Vendo console VP1                        ...</a></td><td class="ColC3">1</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=mory">mory</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Binago&nbsp;(CO)&nbsp;420m</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Davide%20LC">Davide LC</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>08/12/2017 - 21.22</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3031930" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Non so se posso scriverlo qui, in ogni caso vendo console per davis vantage pro 1 6150EU, 100€ trattabili, consegna a mano<br><br><img style="max-width:1200px;" src="assets/consolevp1.jpg">&nbsp;</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3031930&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3031930&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3085889&amp;Pg=1&amp;FK=1000583015">Davis vp2, problemi scaricamento dei dati ...</a></td><td class="ColC3">1</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Simone82">Simone82</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Corteolona&nbsp;(PV)</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Scheva(Va)">Scheva(Va)</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>05/12/2017 - 14.50</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3085889" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">mentre
+                                                                                                                                                                                                        scaricavo sul pc i dati settimanali il pc si è spento per mancanza di 
+                                                                                                                                                                                                        alimentazione. risultato: è andato a pallino weatherlink 6.0.0. che 
+                                                                                                                                                                                                        segna ottobre 2058 invece che dic 2018. oltretutto non mi scarica più 
+                                                                                                                                                                                                        nemmeno i dati. help! non só che fare...</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3085889&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3085889&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3084954&amp;Pg=1&amp;FK=1000582720">Nuova piattaforma Davis Weatherlink      ...</a></td><td class="ColC3">2</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=dbFui">dbFui</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Burligo&nbsp;(BG)&nbsp;-&nbsp;550&nbsp;m&nbsp;s.l.m</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=dbFui">dbFui</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>01/12/2017 - 20.32</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3084954" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Online
+                                                                                                                                                                                                        la nuova piattaforma Weatherlink Davis. Tutte le nuove stazioni con 
+                                                                                                                                                                                                        Datalogger Davis da oggi utilizzeranno questa nuova e funzionale 
+                                                                                                                                                                                                        piattaforma da cui e’ possibile vedere gratuitamente la schermata in 
+                                                                                                                                                                                                        tempo reale, mentre per i grafici, i dati tabellari e per scaricare 
+                                                                                                                                                                                                        direttamente i dati meteo dal sito pare sia previsto un piccolo canone 
+                                                                                                                                                                                                        annuale dopo un periodo freeware mensile.<br><br><a target="_blank" href="http://www.weatherlink.com/"><b>weatherlink.com</b></a>&nbsp;<br><br>La migrazione sarà automatica e gratuita entro il secondo quadrimestre 2018.</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3084954&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3084954&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=2979849&amp;Pg=1&amp;FK=1000554381">cadute di segnale (stazioni oregon) e altri problemi d’interferenze ...</a></td><td class="ColC3">29</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=luka">luka</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Caleppio&nbsp;di&nbsp;Settala(MI)101m</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Fra">Fra</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>27/11/2017 - 22.53</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="2979849" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Non sono esperto in materia, mi limito a segnalare e a chiedere a chi ne sa più di me.<br>Ogni
+                                                                                                                                                                                                        tanto, la sera, il segnale dei tre sensori oregon (i classici economici
+                                                                                                                                                                                                        ma dal funzionamento impeccabile senza questi problemi), sparisce, di 
+                                                                                                                                                                                                        colpo. E altrettanto di colpo, ritorna.<br>In concomitanza, come verificato ieri sera, l’auto fatica ad aprirsi con il telecomando se non a meno di un metro da essa.<br><br>Inoltre
+                                                                                                                                                                                                        ogni tanto sparisce il segnale wifi e sono obbligato a spegnere e 
+                                                                                                                                                                                                        riaccendere il modem: lo smartphone tenta senza successo di connettersi e
+                                                                                                                                                                                                        lo fa solo dopo il riavvio.<br>Ho un amplificatore di segnale che ho 
+                                                                                                                                                                                                        spostato lontano ma che in precedenza (due anni) non aveva mai dato 
+                                                                                                                                                                                                        problemi. In ogni caso l’ho allontanato visto che serve al piano di 
+                                                                                                                                                                                                        sotto.<br><br>Non ho introdotto alcun nuovo apparato generatore di onde radio.<br>Non inserisco mai l’allarme di casa visto che c’è sempre qualcuno.<br><br>Il sospetto, lo dico da inseperto, potrebbe essere:<br>1-
+                                                                                                                                                                                                        il radioamatore a meno di 600 metri da casa, ad es. quando lavora su 
+                                                                                                                                                                                                        determinate frequenze. Ma per anni non era più accaduto nulla e 
+                                                                                                                                                                                                        quell’antenna esiste da oltre un decennio<br>2- un impianto di allarme del vicinato schermato male. Ma il segnale torna, di notte.<br>3- ho visto qualche volta il vicino con un drone, ma dati gli orari...<br>4- qualche cinesata presa dal vicino, in questo caso QUANTO deve essere vicino?<br><br>Ps.
+                                                                                                                                                                                                        la stazione di caleppio non dà alcun problema, ma da come ho letto ha 
+                                                                                                                                                                                                        una modalità di trasmissione dati molto più sofisticata.</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=2979849&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=2979849&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3065349&amp;Pg=1&amp;FK=1000577483">Oregon WMR500                            ...</a></td><td class="ColC3">3</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Paolo71">Paolo71</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Trecate&nbsp;(NO)&nbsp;-&nbsp;136&nbsp;m</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=zione">zione</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>16/11/2017 - 16.08</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3065349" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Buongiorno,<br>qualcuno di voi ne sa di più?<br><br><a target="_blank" href="http://store.oregonscientific.com/it/all-in-one-stazione-meteo-professionale.html"><b>Clicca Qui</b></a>&nbsp;<br><br>Viste le caratteristiche e la marca non mi sembra così male per una stazione professionale di fascia media.<br><br>Su
+                                                                                                                                                                                                        altri siti ho letto di critiche al posizionamento del pluvio, un po’ 
+                                                                                                                                                                                                        troppo sotto l’anemometro e che potrebbe risentire di gocce che 
+                                                                                                                                                                                                        rimbalzano dalla superficie dello stesso, ma non mi sembra poi 
+                                                                                                                                                                                                        strutturalmente così diversa dalla disposizione dei sensori della Davis 
+                                                                                                                                                                                                        Vantage Vue.</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3065349&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3065349&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3078280&amp;Pg=1&amp;FK=1000581087">Perchè le vecchie WMR avevano una cella solare dedicata per l’anemometro? ...</a></td><td class="ColC3"> </td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Buros">Buros</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Copreno&nbsp;di&nbsp;Lentate&nbsp;(MB)&nbsp;-&nbsp;273m</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Buros">Buros</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>08/11/2017 - 19.39</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3078280" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Le
+                                                                                                                                                                                                        vecchie WMR della Oregon (WMR918/928/968) avevano le celle solari 
+                                                                                                                                                                                                        STR918 per termoigrometro e pluviometro, con tanto di disegnino 
+                                                                                                                                                                                                        rappresentanti il funghetto ed il pluvio, e la cella solare STR938 per 
+                                                                                                                                                                                                        l’anemometro (anche qui col disegnino).<br>Avendo una vecchia WMR918 che
+                                                                                                                                                                                                        utilizzo in ditta (solo per la temperatura) ed essendo rimasto senza 
+                                                                                                                                                                                                        celle solari mod. STR918, ho voluto provare la cella dedicata per 
+                                                                                                                                                                                                        l’anemometro col funghetto e... funziona!<br>Perchè mai allora è stata creata una cella solare solo per l’anemometro se poi in realtà funziona anche con gli altri sensori?</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3078280&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3078280&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=2976330&amp;Pg=1&amp;FK=1000553278">Termoigrometro Portatile                 ...</a></td><td class="ColC3">18</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=alex7">alex7</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Levate&nbsp;(BG)</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=alex7">alex7</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>30/10/2017 - 13.54</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="2976330" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">qualcuno saprebbe indicarmi in buon termoigrometro di precisione ma portatile ?<br>budget sui 50-60€<br><br>ho visto questo della TFA ma non conosco l’azienda<br><br><br><a target="_blank" href="http://tfa-dostmann.de/fileadmin/-----Anleitungen-----/30.5036_multi.pdf"><b>Clicca Qui</b></a>&nbsp;</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=2976330&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=2976330&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3076236&amp;Pg=1&amp;FK=1000580400">Stazione meteo solo termoigro collegabile al pc: si trova qualcosa? ...</a></td><td class="ColC3"> </td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Buros">Buros</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Copreno&nbsp;di&nbsp;Lentate&nbsp;(MB)&nbsp;-&nbsp;273m</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Buros">Buros</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>25/10/2017 - 21.46</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3076236" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Esiste
+                                                                                                                                                                                                        una stazioncina meteo con solo termoigrometro che possa essere 
+                                                                                                                                                                                                        collegata al pc in modo da tenere sott’occhio il dato live?</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3076236&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3076236&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3075395&amp;Pg=1&amp;FK=1000580194">Ciao vendo mini PC perfettamente funzionante a 50€ per info lasciate un commento (vt)</a></td><td class="ColC3"> </td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=dbFui">dbFui</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Palazzago&nbsp;(BG)&nbsp;-&nbsp;340&nbsp;m&nbsp;s.l.m</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=dbFui">dbFui</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>21/10/2017 - 13.28</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3075395" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;"></td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3075395&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3075395&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3070809&amp;Pg=1&amp;FK=1000579174">finalmente sturato il mio pluvio         ...</a></td><td class="ColC3"> </td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=silvios">silvios</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Niviano&nbsp;(PC)</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=silvios">silvios</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>17/09/2017 - 12.50</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3070809" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Ciao ragazzi,<br><br>Cosa non si fa per la propria passione!<br>erano
+                                                                                                                                                                                                        due settimane che aspettavo un mio amico che mi andasse sul tetto per 
+                                                                                                                                                                                                        controllare il pluviometro della Davis che non segnava più la pioggia.<br>Oggi,
+                                                                                                                                                                                                        stufo di aspettare, mi sono armato di.buona volontà e sono riuscito ad 
+                                                                                                                                                                                                        andare fin sul colmo del tetto per raggiungere la Davis nonostante le 
+                                                                                                                                                                                                        vertigini.<br>La passione supera pure le vertigini!<br>non sopportavo proprio più di vedere ogni giorno la mia stazione online a 0 mm nonostante le piogge.<br>Sono arrivato su e ho trovato il vaso contenitore nero completamente colmo di acqua.<br>In fondo dentro l’ugello c’era una vespa completamente conficcata dentro che faceva da tappo.<br>Ma secondo voi a spanne, considerando il contenitore nero completamente pieno, quanti mm almeno potevano essere stati persi?</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3070809&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3070809&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr><tr><td class="ColL" style="padding-left:0px;"><img src="assets/S_ThrNew.gif" border="0">&nbsp;<a href="http://www.meteoforum.com/main.asp?FS=S&amp;MN=3065003&amp;Pg=1&amp;FK=1000577444">Portata segnale wireless sensori Davis Vantage Vue / WMR300 ...</a></td><td class="ColC3">2</td><td class="ColC"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Paolo71">Paolo71</a><span class="ColCs" style="font-family:sans-serif;font-weight:bold;"><br>Trecate&nbsp;(NO)&nbsp;-&nbsp;136&nbsp;m</span></td><td class="ColCT"><a href="http://www.meteoforum.com/main.asp?FS=S&amp;FN=Buros">Buros</a><span class="ColCTs" style="font-family:sans-serif;font-weight:bold;"><br>14/09/2017 - 20.24</span></td></tr><tr><td colspan="5" style="background-color:#dee7fe;"><div class="msgdiv" id="3065003" style="background-color:#dee7fe; display:none; padding:4px; margin-left:0px; border:0px;"><table style="width:100%; border:5px; border-color:#dee7fe; border-style:inset;"><tbody><tr><td style="background-color:#EFEFEF; padding:4px; text-align:left;">Buongiorno a tutti,<br>dopo l’ennesimo guasto della mia Lacrosse WS2801IT ho deciso di passare ad una Davis Vantage Vue o ad una Oregon WMR300.<br>Qualcuno
+                                                                                                                                                                                                        sa dirmi se posso avere dei problemi di trasmissione del segnale 
+                                                                                                                                                                                                        posizionando la consolle a 10 metri dal gruppo di sensori ma in un piano
+                                                                                                                                                                                                        interrato?<br>Il vantaggio della Lacrosse e che poteva trasmettere i 
+                                                                                                                                                                                                        dati del datalogger al pc tramite trasmissione wireless, avendo il pc 
+                                                                                                                                                                                                        nel piano interrato e la consolle al piano superiore.<br>Con la Davis invece devo collegare la consolle direttamente al pc e quindi posizionare la stessa al piano interrato.<br><br>Grazie mille.</td></tr><tr><td style="background-color:#CDCDCD; padding:4px; text-align:left;"><a href="http://www.meteoforum.com/main_msgmod.asp?FS=S&amp;MN=3065003&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp">Modifica</a>  |  <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MN=3065003&amp;Pg=1&amp;FK=&amp;FN=&amp;MP=main.asp&amp;Titolo=&amp;Testo=&amp;Risp=1&amp;QT=No">Rispondi</a> | </td></tr></tbody></table></div></td></tr>
+                                                                                                                                                                                                        </tbody></table>
+
+                                                                                                                                                                                                        <table style="min-width:540px; background-color:#EFEFEF;" width="100%" cellspacing="1" cellpadding="0" border="0" align="center">
+                                                                                                                                                                                                        <tbody><tr bgcolor="#000080">
+                                                                                                                                                                                                        <th title="Indirizzi IP Univoci negli ultimi 15 minuti, aggiornamento ogni 3 minuti">185 utenti online su meteoforum.com</th>
+                                                                                                                                                                                                        </tr>
+                                                                                                                                                                                                        </tbody></table>
+
+                                                                                                                                                                                                        <div align="center">
+                                                                                                                                                                                                        <table style="min-width:540px; background-color:#215a94; border-color:#EFEFEF;" valign="absmiddle" width="100%" height="20" cellspacing="1" cellpadding="1" border="0">
+                                                                                                                                                                                                        <tbody><tr>
+                                                                                                                                                                                                        <td>
+
+                                                                                                                                                                                                        <a href="http://www.meteoforum.com/main_msgnew.asp?FS=S&amp;MP=main.asp"><img src="assets/Blu_NewMsg.gif" title="Inserisce un nuovo messaggio" border="0"></a>
+
+                                                                                                                                                                                                        </td>
+                                                                                                                                                                                                        <form method="POST" action="main.asp"></form>
+                                                                                                                                                                                                        <td class="Fix" nowrap="nowrap"><b>&nbsp;Pag.N°&nbsp;</b></td>
+                                                                                                                                                                                                        <td><input name="Pg" style="width:16px;" maxlength="3" value="1" title="Pagina Corrente" type="text"></td>
+                                                                                                                                                                                                        <td class="Fix" nowrap="nowrap"><b>&nbsp;Nick&nbsp;</b></td>
+                                                                                                                                                                                                        <td><input name="FN" style="width:60px;" maxlength="12" title="Ricerca messaggi per Nickname" type="text"></td>
+                                                                                                                                                                                                        <td class="Fix" nowrap="nowrap"><b>&nbsp;Data&nbsp;</b></td>
+                                                                                                                                                                                                        <td><input name="FD" style="width:60px;" maxlength="8" title="Ricerca messaggi per data" type="text"></td>
+                                                                                                                                                                                                        <input name="FS" value="S" type="hidden">
+                                                                                                                                                                                                        <input name="FK" value="" type="hidden">
+                                                                                                                                                                                                        <td><input src="assets/Blu_Refresh.gif" title="Aggiorna la pagina e applica i parametri" type="image"></td>
+
+                                                                                                                                                                                                        <td width="99%">&nbsp;</td>
+                                                                                                                                                                                                        <form method="POST" action="main.asp"></form>
+                                                                                                                                                                                                        <td align="left">
+                                                                                                                                                                                                        <input src="assets/Blu_Prev.gif" title="Pagina precedente" type="image">
+
+                                                                                                                                                                                                        <input name="Pg" value="1" type="hidden">
+
+                                                                                                                                                                                                        <input name="FS" value="S" type="hidden">					
+                                                                                                                                                                                                        <input name="FN" value="" type="hidden">
+                                                                                                                                                                                                        <input name="FD" value="" type="hidden"> 
+                                                                                                                                                                                                        <input name="FK" value="" type="hidden"> 
+                                                                                                                                                                                                        <input name="FT" value="" type="hidden"> 				 
+                                                                                                                                                                                                        </td>
+
+                                                                                                                                                                                                        <form method="POST" action="main.asp"></form>
+                                                                                                                                                                                                        <td align="right">
+                                                                                                                                                                                                        <input src="assets/Blu_Next.gif" title="Pagina successiva" type="image">
+                                                                                                                                                                                                        <input name="Pg" value="2" type="hidden">
+                                                                                                                                                                                                        <input name="FS" value="S" type="hidden">										
+                                                                                                                                                                                                        <input name="FN" value="" type="hidden">
+                                                                                                                                                                                                        <input name="FD" value="" type="hidden"> 
+                                                                                                                                                                                                        <input name="FK" value="" type="hidden"> 					
+                                                                                                                                                                                                        <input name="FT" value="" type="hidden"> 				 
+                                                                                                                                                                                                        </td>
+
+                                                                                                                                                                                                        </tr>
+                                                                                                                                                                                                        </tbody></table>
+                                                                                                                                                                                                        </div>
+
+                                                                                                                                                                                                        <div style="padding:14px;" align="center">
+                                                                                                                                                                                                        <table width="640" cellspacing="1" cellpadding="1" bordercolor="#000080" border="1">
+                                                                                                                                                                                                        <tbody><tr class="Fix" style="font-weight:bold;" bgcolor="#000080">
+                                                                                                                                                                                                        <td width="53%">Immagini dai satelliti ( © Eumetsat 2018 )</td>
+                                                                                                                                                                                                        <form method="POST" action="main.asp" target="_top"></form>
+
+                                                                                                                                                                                                        <input name="Pg" value="1" type="hidden">
+
+                                                                                                                                                                                                        <input name="FN" value="" type="hidden">
+                                                                                                                                                                                                        <input name="FD" value="" type="hidden">
+                                                                                                                                                                                                        <td width="15%">
+                                                                                                                                                                                                        <input onclick="this.form.submit();" name="SatPos" value="Up" type="radio">Su
+                                                                                                                                                                                                        <input onclick="this.form.submit();" name="SatPos" value="Down" checked="checked" type="radio">Giù
+                                                                                                                                                                                                        </td>
+
+                                                                                                                                                                                                        <form method="POST" action="main.asp"></form>
+
+                                                                                                                                                                                                        <input name="Pg" value="1" type="hidden">
+
+                                                                                                                                                                                                        <input name="FN" value="" type="hidden">
+                                                                                                                                                                                                        <input name="FD" value="" type="hidden">
+                                                                                                                                                                                                        <td width="32%">
+                                                                                                                                                                                                        <input onclick="this.form.submit();" name="SatVar" value="On1" checked="checked" type="radio">1
+                                                                                                                                                                                                        <input onclick="this.form.submit();" name="SatVar" value="On2" type="radio">2
+                                                                                                                                                                                                        <input onclick="this.form.submit();" name="SatVar" value="On3" type="radio">3
+                                                                                                                                                                                                        <input onclick="this.form.submit();" name="SatVar" value="On4" type="radio">4
+                                                                                                                                                                                                        <input onclick="this.form.submit();" name="SatVar" value="Off" type="radio">Off
+                                                                                                                                                                                                        </td>
+
+                                                                                                                                                                                                        </tr>
+                                                                                                                                                                                                        <tr>
+                                                                                                                                                                                                        <td colspan="3" bordercolorlight="#FFFFFF" bordercolordark="#000000" bgcolor="#F1F1F7" align="center">
+                                                                                                                                                                                                        <p style="word-spacing: 0; margin: 0" align="center"><font size="1">
+                                                                                                                                                                                                        <font color="red"><b>L'ora indicata sulle immagini satellitari è in formato UTC:<font color="black"> occorre aggiungere 1 ora con<font color="green"><i> l'ora solare (invernale)</i> e<font color="black"> 2 ore con<font color="green"><i> l'ora legale (estiva).</i> <font color="black"></font></font></font></font></font></b><font color="black"><font color="green"><font color="black"><font color="green"><font color="black">
+                                                                                                                                                                                                        </font></font></font></font></font></font></font></p><font size="1"><font color="red"><font color="black"><font color="green"><font color="black"><font color="green"><font color="black">
+                                                                                                                                                                                                        </font></font></font></font></font></font></font></td>
+                                                                                                                                                                                                        </tr>
+
+                                                                                                                                                                                                        <tr>
+
+                                                                                                                                                                                                        <td colspan="3" bordercolorlight="#FFFFFF" bordercolordark="#000000" bgcolor="#F1F1F7">
+                                                                                                                                                                                                        <div style="position: relative; width:845; height:615; overflow:hidden; border:0px solid black">
+                                                                                                                                                                                                        <a href="http://www.sat24.com/" target="_blank"><img src="assets/image2.gif" title="http://www.sat24.com" style="position:relative; top:0; left:0;" border="0"></a>
+                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                        </td>
+
+                                                                                                                                                                                                        </tr>
+                                                                                                                                                                                                        </tbody></table>
+                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                        <table width="100%" cellspacing="1" cellpadding="0" border="0">
+                                                                                                                                                                                                        <tbody><tr><td align="center"><font class="TxtCs">
+                                                                                                                                                                                                        <b>MeteoForum © 2000-2018 è in Internet da giovedì 09 novembre 2000</b> - <a href="http://www.meteoforum.com/pagine/Varie/Privacy.asp" target="_blank" title="Informativa Privacy">Informativa Privacy</a>	
+                                                                                                                                                                                                        </font></td></tr>
+                                                                                                                                                                                                        </tbody></table>
+                                                                                                                                                                                                        </div>
+
+
+
+                                                                                                                                                                                                        <div id="lbOverlay" class="grey" style="display: none;"></div><div id="lbMain" style="display: none;"><div id="lbOuterContainer" class="grey"><div id="lbIframeContainer" style="display: none;"><iframe id="lbIframe" name="lbIframe" style="display: none;"></iframe></div><div id="lbImageContainer"><img id="lbImage"><div id="lbHoverNav"><a id="lbPrev" class="grey" href="#"></a><a id="lbNext" class="grey" href="#"></a></div></div><div id="lbLoading"></div></div><div id="lbDetailsContainer" class="grey"><div id="lbDetailsData" class="grey"><div id="lbDetails"><span id="lbCaption"></span><span id="lbNumberDisplay"></span><span id="lbNavDisplay" style="display: none;"></span></div><div id="lbBottomNav"><a id="lbClose" class="grey" href="#"></a><a id="lbPause" class="grey" href="#" style="display: none;"></a><a id="lbPlay" class="grey" href="#" style="display: none;"></a></div></div></div></div></body></html>
