@@ -1,0 +1,20 @@
+.forum-main-title {
+    width: 70%;
+    vertical-align: middle;
+    align-content: left;
+}
+.forum-main-title span,
+.forum-main-title img{
+    margin:10px;
+    vertical-align: middle;
+    align-content: left;
+}
+.forum-main-tab0 {
+    width: 6%;   
+}
+.forum-main-tab1 {
+    width: 17%;   
+}
+.forum-main-tab2 {
+    width: 17%;
+}

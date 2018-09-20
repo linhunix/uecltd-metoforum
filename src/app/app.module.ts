@@ -5,10 +5,11 @@ import { HttpClientModule }    from '@angular/common/http';
 import { ln4Manager } from '../ln4/ln4.module';
 import { MenuComponent } from './menu/menu.component';
 import { TabComponent } from './tabs/tab.component';
-import { ForumComponent } from './forum.component';
+import { ForumComponent } from './forum/forum.component';
 import { NewsComponent } from './news.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatExpansionModule} from '@angular/material/expansion';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatExpansionModule
     ],
   providers: [],
   bootstrap: [

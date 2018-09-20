@@ -6,5 +6,27 @@ import { Component } from '@angular/core';
   styleUrls: ['./tab.component.css']
 })
 export class TabComponent {
-  title = 'meteoforum';
+  public scope:any;
+  constructor(){
+    this.scope={
+      "tabs":[
+        {
+          "label":"Now Casting",
+          "filtro":"filtro Now casting"
+        },
+        {
+          "label":"Discussioni",
+          "filtro":"filtro_discussioni"
+        },
+        {
+          "label":"Strumentazione",
+          "filtro":"filtro_Strumentazione"
+        },
+        {
+          "label":"Mix",
+          "filtro":"filtro_Mix"
+        }
+      ]
+    };
+  }
 }
