@@ -1,2 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+#menuforum {
+    width:100%;
+    min-width:540px;
+    position:absolute;
+    top:0px; left:0px; 
+    padding:5px; 
+    text-align:left;
+    height: 30px;
+    background-color: #339966;
+    color:#EFEFEF;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 13px;
+    FONT-FAMILY: Verdana;
+}
+#menuforum button {
+    border:0px;
+    background-color: #339966;
+    color:#EFEFEF;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 13px;
+    FONT-FAMILY: Verdana;
+}
+.mat-menu-panel{
+    background-color: #339966;
+    color:#EFEFEF;
+    margin-top:20px;
+}
+xbutton[ng-reflect-menu=it1] {
+}

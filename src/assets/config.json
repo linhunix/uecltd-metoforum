@@ -1,0 +1,20 @@
+{
+    "app":"V1",
+    "title":"STATUS METEO",
+    "menu": {
+       "menuforum1":{
+        "label": "menu title 1",
+        "src": "#",
+        "value":{
+          "sit2":{
+            "label": "sub menu title 1",
+            "src": "#"
+          }
+        }
+      },
+      "it2":{
+        "label": "menu title 2",
+        "src": "#"
+      }
+    }
+}

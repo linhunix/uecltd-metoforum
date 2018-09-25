@@ -3,8 +3,7 @@
         <tr>
             <td style="text-align:left;">
                 <ul class="main-navigation">
-                    <!-- {{scope}} !-->
-                    <li *ngFor="let item of scope.menu">
+                    <li *ngFor="let item of menu">
                         <!-- {{item}} !-->
                         <a href="{{item.src}}">{{item.label}}</a>
                         <ul *ngIf="item.value != null">
