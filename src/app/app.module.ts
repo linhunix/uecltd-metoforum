@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ln4Manager, ln4Manager_evtConfig, ln4Manager_evtLanguage, ln4Manager_evtUpdate } from '../ln4/ln4.Manager';
@@ -28,8 +28,10 @@ import { HttpModule } from '@angular/http';
     MatMenuModule,
     MatTabsModule,
     MatExpansionModule
+
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [
     AppComponent,
     MenuComponent,

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ln4Manager, ln4Manager_evtConfig } from '../ln4/ln4.Manager';
 import { ln4A2SimpleComp } from '../ln4/ln4.A2SimpleComp';
+//import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-ln4',
@@ -20,5 +21,6 @@ export class AppComponent extends ln4A2SimpleComp{
     super.reload(type);
     console.log(type);
     console.log(this.scope);
+   // this.titleService.setTitle(this.scope.title);
   }
 }
