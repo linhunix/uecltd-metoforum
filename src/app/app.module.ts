@@ -1,6 +1,6 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
+import { HeadComponent } from './head/head.component';
 import { ln4Manager, ln4Manager_evtConfig, ln4Manager_evtLanguage, ln4Manager_evtUpdate } from '../ln4/ln4.Manager';
 import { MenuComponent } from './menu/menu.component';
 import { TabComponent } from './tabs/tab.component';
@@ -13,9 +13,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ln4Angular2 } from '../ln4/ln4.Angular2';
 import { Http } from '@angular/http';
 import { HttpModule } from '@angular/http';
+import { FootComponent } from './foot/foot.component';
 @NgModule({
   declarations: [
-    AppComponent,
+    HeadComponent,
+    FootComponent,
     MenuComponent,
     TabComponent,
     ForumComponent,
@@ -33,7 +35,8 @@ import { HttpModule } from '@angular/http';
   providers: [
   ],
   bootstrap: [
-    AppComponent,
+    HeadComponent,
+    FootComponent,
     MenuComponent,
     TabComponent,
     ForumComponent,

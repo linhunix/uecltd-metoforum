@@ -1,0 +1,22 @@
+import { Component } from '@angular/core';
+import { ln4Manager, ln4Manager_evtConfig } from '../../ln4/ln4.Manager';
+import { ln4A2SimpleComp } from '../../ln4/ln4.A2SimpleComp';
+//import { Title } from '@angular/platform-browser';
+
+@Component({
+  selector: 'foot-ln4',
+  templateUrl: './foot.component.html',
+  styleUrls: ['./foot.component.css']
+})
+export class FootComponent extends ln4A2SimpleComp{
+  constructor(){
+    super();
+    this.myId="App"
+    this.myPrms=new Map();
+    let cfgmap:Map<string,string>=new Map();
+    cfgmap.set("copyright","copyright");
+    cfgmap.set("privacyurl","privacyurl");
+    this.myPrms.set(ln4Manager_evtConfig,cfgmap);
+  }
+
+}

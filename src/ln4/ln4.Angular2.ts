@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { resolveForwardRef } from "@angular/compiler/src/util";
 
 export class ln4Angular2 {
-    public static event: Map<string, EventEmitter<any>>;
+    public static event: Map<string, EventEmitter<String>>;
     public static debug: EventEmitter<String>;
     public static level: number;
     /**
@@ -25,14 +25,41 @@ export class ln4Angular2 {
      * @param make true se in caso non ci sia debba crearlo 
      * @returns evento
      */
-    public static eventGet(name: string, make: boolean = false): EventEmitter<any> {
+    public static eventGet(name: string, make: boolean = false): EventEmitter<String> {
         ln4Angular2.check();
         if (ln4Angular2.event.has(name)) {
             return ln4Angular2.event.get(name);
         }
         if (make == true) {
-            ln4Angular2.event.set(name, new EventEmitter<any>(true));
+            let myevt: EventEmitter<String> = new EventEmitter<String>(true);
+            myevt.subscribe(
+                (data: string) => {
+                    ln4Angular2.msgInfo(name + ">emit>" + data);
+                },
+                (data: string) => {
+                    ln4Angular2.msgError(name + ">error>" + data);
+                },
+                (data: string) => {
+                    ln4Angular2.msgInfo(name + ">complete>" + data);
+                }
+            );
+            ln4Angular2.event.set(name, myevt);
             return ln4Angular2.event.get(name);
+        }
+        return null;
+    }
+    /**
+ * passa l'evento 
+ * @param name nome evento
+ * @param make true se in caso non ci sia debba crearlo 
+ * @returns evento
+ */
+    public static eventSubscribe(name: string, mycall: any, make: boolean = false): boolean {
+        let myevt: EventEmitter<String> = ln4Angular2.eventGet(name, make);
+        if (myevt != null) {
+            (data: string) => {
+                mycall(data);
+            }
         }
         return null;
     }
@@ -45,7 +72,7 @@ export class ln4Angular2 {
         if (!ln4Angular2.event.has(name)) {
             return;
         }
-        let myevt: EventEmitter<any> = ln4Angular2.event.get(name);
+        let myevt: EventEmitter<String> = ln4Angular2.event.get(name);
         myevt.complete();
         ln4Angular2.event.delete(name);
         ln4Manager.GetInstance().dataClean(name);
@@ -53,26 +80,30 @@ export class ln4Angular2 {
     //////////////////////////////////////////////////////////////////
     // DEBUGGER
     //////////////////////////////////////////////////////////////////
+    private static debugPrint(data: string) {
+        let ln4 = ln4Manager.GetInstance();
+        let cfglbl: any = ln4.cfgGet("title");
+        let cfgtime: string = new Date().toISOString();
+        let cfgmsg: string[] = data.split(":", 2);
+        let thislvl: string = "" + ln4.translate("DEBUG-LVL-" + cfgmsg[0]);
+        let thismsg: string = "" + ln4.translate("DEBUG-MSG-" + cfgmsg[1]);
+        console.log("[" + cfglbl + "]-[" + cfgtime + "]-[" + thislvl + "]-[" + thismsg + "]");
+    }
     private static debugMessage(reqlevel: number, message: string) {
         let ln4 = ln4Manager.GetInstance();
         if (ln4Angular2.debug == null) {
             ln4Angular2.debug = new EventEmitter<string>(true);
             ln4Angular2.debug.subscribe((data: string) => {
-                let cfglbl: any = ln4.cfgGet("title");
-                let cfgtime: string = new Date().toISOString();
-                let cfgmsg: string[] = data.split(":", 2);
-                let thislvl: string = "" + ln4.translate("DEBUG-LVL-" + cfgmsg[0]);
-                let thismsg: string = "" + ln4.translate("DEBUG-MSG-" + cfgmsg[1]);
-                console.log("[" + cfglbl + "]-[" + cfgtime + "]-[" + thislvl + "]-[" + thismsg + "]");
+                ln4Angular2.debugPrint(data);
             });
             let cfglvl: any = ln4.cfgGet("level");
             if (cfglvl != null) {
                 ln4Angular2.level = Number.parseInt("" + cfglvl);
-            } 
-            if ((Number.isNaN(ln4Angular2.level)||ln4Angular2.level==null)) {
+            }
+            if ((Number.isNaN(ln4Angular2.level) || ln4Angular2.level == null)) {
                 ln4Angular2.level = 0;
             }
-            ln4Angular2.debug.emit( ln4Angular2.level + ":InitDebug");
+            ln4Angular2.debug.emit(ln4Angular2.level + ":InitDebug");
         }
         if (reqlevel >= ln4Angular2.level) {
             ln4Angular2.debug.emit(reqlevel + ":" + message);
@@ -128,16 +159,16 @@ export class ln4Angular2 {
         //headers.append('Access-Control-Allow-Headers' , 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
         return new RequestOptions({ headers: headers });
     }
-    public static callUrl( ApiEvent: string,ApiUrl: string, Data: any,rebuild:boolean=false): boolean {
-        let ln4:ln4Manager= ln4Manager.GetInstance();
+    public static callUrl(ApiEvent: string, ApiUrl: string, Data: any, rebuild: boolean = false): boolean {
+        let ln4: ln4Manager = ln4Manager.GetInstance();
         let httpsrv: any = ln4.serviceGet("http");
-        if (httpsrv == null){
+        if (httpsrv == null) {
             ln4Angular2.msgWarning("noHttp");
             return false;
         }
-        if  (httpsrv instanceof Http){
+        if (httpsrv instanceof Http) {
             ln4Angular2.msgInfo("HttpLoaded");
-        }else{
+        } else {
             ln4Angular2.msgWarning("badHttp");
             return false;
         }
@@ -154,43 +185,43 @@ export class ln4Angular2 {
         if (Data == null) {
             res = ln4Angular2.callGet(ApiUrl, httpsrv, options);
         } else {
-            if (Data instanceof Map){
+            if (Data instanceof Map) {
                 Data = ln4Manager.MaptoJsonObj(Data);
             }
             res = ln4Angular2.callPost(ApiUrl, Data, httpsrv, options);
         }
-        if (res==null){
+        if (res == null) {
             ln4Angular2.msgWarning("noPromise");
             return false;
         }
         let httpevt: EventEmitter<String> = ln4Angular2.eventGet(ApiEvent);
-        if (httpevt!=null){
-            if (rebuild==true){
+        if (httpevt != null) {
+            if (rebuild == true) {
                 ln4Angular2.eventKill(ApiEvent);
-                httpevt=ln4Angular2.eventGet(ApiEvent,true);
+                httpevt = ln4Angular2.eventGet(ApiEvent, true);
             }
         }
         res.toPromise().then((res) => {
-            ln4Angular2.msgInfo("EVT-"+ApiEvent);
-            let data:any;
-            let status:number;
-            if ("_body" in res){
-                data=JSON.parse(res._body);
-            }else{
-                data=JSON.parse(res);
+            ln4Angular2.msgInfo("EVT-" + ApiEvent);
+            let data: any;
+            let status: number;
+            if ("_body" in res) {
+                data = JSON.parse(res._body);
+            } else {
+                data = JSON.parse(res);
             }
-            if ("status" in res){
-                status=res.status;
-            }else{
-                status=0;
+            if ("status" in res) {
+                status = res.status;
+            } else {
+                status = 0;
             }
-            ln4Angular2.msgDebug("STS="+status);
+            ln4Angular2.msgDebug("STS=" + status);
             ln4Angular2.msgDebug(data);
-            ln4.dataImport(ApiEvent,ln4Manager.JsonObjToMap(data));
+            ln4.dataImport(ApiEvent, ln4Manager.JsonObjToMap(data));
             httpevt.emit(ApiEvent);
-        }).catch((error:any)=>{
+        }).catch((error: any) => {
             ln4Angular2.msgError(error);
-            httpevt.emit("E:"+error);
+            httpevt.emit("E:" + error);
         });
         return true;
     }

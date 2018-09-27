@@ -4,7 +4,8 @@ import { ln4Manager_evtUpdate, ln4Manager, ln4Manager_evtConfig, ln4Manager_evtP
 
 export class ln4A2SimpleComp {
     @Input("in") myPrms: Map<string, any> = new Map();
-    @Input("id") myId: string = "";
+    @Input("id") tagid: string = "";
+    @Input("ln4id") myId: string = "";
     public scope: any = {};
     public mycfg: any = null;
     public myusr: any = null;

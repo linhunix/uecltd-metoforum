@@ -12,18 +12,22 @@ export class TabComponent {
       "tabs":[
         {
           "label":"Now Casting",
+          "forum":"Casting",
           "filtro":"filtro Now casting"
         },
         {
           "label":"Discussioni",
+          "forum":"talk",
           "filtro":"filtro_discussioni"
         },
         {
-          "label":"Strumentazione",
+          "label":"Varie & Strumentazione",
+          "forum":"ot",
           "filtro":"filtro_Strumentazione"
         },
         {
-          "label":"Mix",
+          "label":"Funghi",
+          "forum":"funghi",
           "filtro":"filtro_Mix"
         }
       ]
