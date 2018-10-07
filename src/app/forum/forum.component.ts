@@ -28,7 +28,7 @@ export class ForumComponent extends ln4A2SimpleComp {
       this.frm= new ln4Map();
       this.frm.set(this.myId,true);    
     }
-    return source.returnKO();
+    return source.returnOK();
   }
   public postReload(source: ln4Map, type: string): ln4Map {
     if (this.frm.has(type)){
@@ -44,7 +44,7 @@ export class ForumComponent extends ln4A2SimpleComp {
           if (ln4Angular2.isDebug()) {
             console.log(formn);
           }
-          ln4Angular2.callUrl(formn, "/form." + element + ".json", null, true);
+          ln4Angular2.callUrl(formn, "/assets/forum." + element + ".json", null, true);
           ln4Angular2.eventGet(ln4Manager_evtUpdate, true).subscribe(
             (ltype: string) => {
               this.reload(type);

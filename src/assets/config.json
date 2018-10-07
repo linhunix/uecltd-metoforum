@@ -39,42 +39,42 @@
       {
         "label": "Now Casting",
         "desc": "filtro Now casting",
-        "forum":"f1"
+        "forum":"forumCasting"
       },
       {
         "label": "Discussioni",
         "desc": "filtro_discussioni",
-        "forum":"f2"
+        "forum":"forumTalk"
       },
       {
         "label": "Varie & Strumentazione",
         "desc": "filtro_Strumentazione",
-        "forum":"f3"
+        "forum":"forumOT"
       },
       {
         "label": "Funghi",
         "desc": "filtro_Mix",
-        "forum":"f4"
+        "forum":"forumFunghi"
       }
     ]
   },
-  "f3": {
+  "forumOT": {
     "forums": [
       "OT",
       "Strumentazione"
     ]
   },
-  "f4": {
+  "forumFunghi": {
     "forums": [
       "Funghi"
     ]
   },
-  "f2": {
+  "forumTalk": {
     "forums": [
       "Talk"
     ]
   },
-  "f1": {
+  "forumCasting": {
     "forums": [
       "Casting"
     ]

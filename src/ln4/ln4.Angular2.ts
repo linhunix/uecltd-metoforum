@@ -228,6 +228,8 @@ export class ln4Angular2 {
                 ln4Angular2.eventKill(ApiEvent);
                 httpevt = ln4Angular2.eventGet(ApiEvent, true);
             }
+        }else{
+            httpevt = ln4Angular2.eventGet(ApiEvent,true);
         }
         res.toPromise().then((res) => {
             ln4Angular2.msgInfo("EVT-" + ApiEvent);

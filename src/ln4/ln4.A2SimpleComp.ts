@@ -171,6 +171,9 @@ export class ln4A2SimpleComp {
                 console.log(this.myPrms);
             }
             let source: ln4Map = new ln4Map();
+            if (this.scope['remote']!=null){
+                source.fromAny(this.scope['remote']);
+            }
             if (this.tagId == null) {
                 this.tagId = this.constructor.name;
             }
