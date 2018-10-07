@@ -3,6 +3,7 @@ import { RequestMethod, Http, Headers, RequestOptions } from '@angular/http';
 import { ln4Manager } from "./ln4.Manager";
 import { Observable } from "rxjs";
 import { resolveForwardRef } from "@angular/compiler/src/util";
+import { ln4Map } from "./ln4.Map";
 
 export class ln4Angular2 {
     public static event: Map<string, EventEmitter<String>>;
@@ -27,6 +28,7 @@ export class ln4Angular2 {
      */
     public static eventGet(name: string, make: boolean = false): EventEmitter<String> {
         ln4Angular2.check();
+        ln4Angular2.msgDebug("eventGet:"+name);
         if (ln4Angular2.event.has(name)) {
             return ln4Angular2.event.get(name);
         }
@@ -55,13 +57,28 @@ export class ln4Angular2 {
  * @returns evento
  */
     public static eventSubscribe(name: string, mycall: any, make: boolean = false): boolean {
+        ln4Angular2.msgDebug("eventSubscribe:"+name);
         let myevt: EventEmitter<String> = ln4Angular2.eventGet(name, make);
         if (myevt != null) {
-            (data: string) => {
-                mycall(data);
-            }
+            myevt.subscribe(
+                (data: string) => {
+                    ln4Angular2.msgDebug("eventSubscribeRun:"+name+">>"+data);
+                    mycall(data);
+                }
+            );
+            return true;
         }
-        return null;
+        return false;
+    }
+
+    public static eventEmit(name: string, action: string, make: boolean = false) {
+        ln4Angular2.msgDebug("eventEmit:"+name+"="+action);
+        let myevt: EventEmitter<String> = ln4Angular2.eventGet(name, make);
+        if (myevt != null) {
+            myevt.emit(action);
+            return true;
+        }
+        return false;
     }
     /**
      * killa un evento assicurandosi che completi il ciclo vita 
@@ -69,6 +86,7 @@ export class ln4Angular2 {
      */
     public static eventKill(name: string): void {
         ln4Angular2.check();
+        ln4Angular2.msgDebug("eventKill:"+name);
         if (!ln4Angular2.event.has(name)) {
             return;
         }
@@ -108,6 +126,12 @@ export class ln4Angular2 {
         if (reqlevel >= ln4Angular2.level) {
             ln4Angular2.debug.emit(reqlevel + ":" + message);
         }
+    }
+    public static isDebug():boolean{
+        if (1 >= ln4Angular2.level) {
+            return true;
+        }
+        return false;
     }
     public static msgDebug(message: string) {
         ln4Angular2.debugMessage(1, message);
@@ -160,6 +184,10 @@ export class ln4Angular2 {
         return new RequestOptions({ headers: headers });
     }
     public static callUrl(ApiEvent: string, ApiUrl: string, Data: any, rebuild: boolean = false): boolean {
+        ln4Angular2.msgDebug('callUrl:'+ApiUrl+"/"+ApiEvent );
+        if (ln4Angular2.isDebug()){
+            console.log(Data);
+        }
         let ln4: ln4Manager = ln4Manager.GetInstance();
         let httpsrv: any = ln4.serviceGet("http");
         if (httpsrv == null) {
@@ -185,8 +213,8 @@ export class ln4Angular2 {
         if (Data == null) {
             res = ln4Angular2.callGet(ApiUrl, httpsrv, options);
         } else {
-            if (Data instanceof Map) {
-                Data = ln4Manager.MaptoJsonObj(Data);
+            if (Data instanceof ln4Map) {
+                Data = Data.toJson();
             }
             res = ln4Angular2.callPost(ApiUrl, Data, httpsrv, options);
         }
@@ -203,12 +231,12 @@ export class ln4Angular2 {
         }
         res.toPromise().then((res) => {
             ln4Angular2.msgInfo("EVT-" + ApiEvent);
-            let data: any;
             let status: number;
+            let mln4:ln4Map = new ln4Map();
             if ("_body" in res) {
-                data = JSON.parse(res._body);
+                mln4.fromJsonString(res._body);
             } else {
-                data = JSON.parse(res);
+                mln4.fromJsonString(res);
             }
             if ("status" in res) {
                 status = res.status;
@@ -216,8 +244,10 @@ export class ln4Angular2 {
                 status = 0;
             }
             ln4Angular2.msgDebug("STS=" + status);
-            ln4Angular2.msgDebug(data);
-            ln4.dataImport(ApiEvent, ln4Manager.JsonObjToMap(data));
+            if (this.isDebug){
+                console.log(mln4);
+            }
+            ln4.dataImport(ApiEvent, mln4);
             httpevt.emit(ApiEvent);
         }).catch((error: any) => {
             ln4Angular2.msgError(error);

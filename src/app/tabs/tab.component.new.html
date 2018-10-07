@@ -3,21 +3,17 @@
         <tr>
             <td style="vertical-align:baseline; text-align:justify;">
                 <font class="TxtLs">
-
-                    Discussioni sulla strumentazione meteo e dispositivi annessi, loro efficacia ed opportuno posizionamento, problemi incorsi
-                    durante l'utilizzo, consigli di acquisto e racconto delle proprie esperienze. Come per l'area "Discussioni",
-                    i thread verranno riportati in evidenza dagli aggiornamenti. Titoli adeguati favoriranno una migliore
-                    ricercabilità delle informazioni.
-
+                {{scope.remote.desc}}
                 </font>
             </td>
         </tr>
         <tr>
             <td style="vertical-align:baseline; text-align:justify;">
                 <mat-tab-group>
-                    <mat-tab *ngFor="let item of scope.tabs" label={{item.label}}>
-                            {{item.filter}}
-                            <forum-ln4  ln4id="item.forum"></forum-ln4>
+                    <mat-tab *ngFor="let item of scope.remote.list" label={{item.label}}>
+                           <span>{{item.forum}}:{{item.desc}}</span>
+                            <forum-ln4  ln4id="{{item.forum}}"  >
+                            </forum-ln4>
                     </mat-tab>
                 </mat-tab-group>
             </td>

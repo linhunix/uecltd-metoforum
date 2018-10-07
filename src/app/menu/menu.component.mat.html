@@ -1,31 +1,5 @@
 <div id="menuforum">
-    <button mat-button [matMenuTriggerFor]="MatMainMenu">
-        {{scope.title}}
-    </button>
-    <button *ngFor="let item of scope.menun" mat-button [matMenuTriggerFor]="item">
-        {{getValueStr(scope.menu,item,'label')}}
-    </button>
-    <mat-menu #MatMainMenu="matMenu">
-        <button mat-menu-item *ngFor="let subitem of scope.menum" mat-button [matMenuTriggerFor]=subitem >
-            {{getValueStr(scope.MainMenu,subitem,'label')}}
-        </button>
-    </mat-menu>
-    <mat-menu #menuforum1="matMenu">
-        <button mat-menu-item *ngFor="let subitem of getSubArray(scope.menu,'menuforum1','value')" mat-button
-            [matMenuTriggerFor]="subitem.label">
-            {{getValueStr(scope.menu.get(item),subitem,'label')}}
-        </button>
-    </mat-menu>
-    <mat-menu #menuforum2="matMenu">
-        <button mat-menu-item *ngFor="let subitem of getSubArray(scope.menu,'menuforum2','value')" mat-button
-            [matMenuTriggerFor]="subitem.label">
-            {{getValueStr(scope.menu.get(item),subitem,'label')}}
-        </button>
-    </mat-menu>
-    <mat-menu #menuforum3="matMenu">
-        <button mat-menu-item *ngFor="let subitem of getSubArray(scope.menu,'menuforum3','value')" mat-button
-            [matMenuTriggerFor]="subitem.label">
-            {{getValueStr(scope.menu.get(item),subitem,'label')}}
-        </button>
-    </mat-menu>
+            <ln4-mat-menu-model 
+            *ngFor="let item of scope.remote.menu"
+            ln4id="{{item}}" ></ln4-mat-menu-model>
 </div>

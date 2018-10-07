@@ -1,3 +1,4 @@
+import { ln4Map } from "./ln4.Map";
 
 /**
  * @author Andrea Morello - <andrea.morello@linhunix.com>
@@ -23,20 +24,20 @@ export const ln4Manager_evtProfile: string = "Profile";
 export const ln4Manager_evtUpdate: string = "Update";
 export class ln4Manager {
     private static instance: ln4Manager;
-    private config: Map<string, any>;
-    private language: Map<string, any>;
-    private profile: Map<string, any>;
-    private service: Map<string, any>;
-    private data: Map<string, any>;
+    private config: ln4Map;
+    private language: ln4Map;
+    private profile: ln4Map;
+    private service: ln4Map;
+    private data: ln4Map;
     /**
      * initializze the class
      */
     private constructor() {
-        this.config = new Map<string, any>();
-        this.profile = new Map<string, any>();
-        this.language = new Map<string, any>();
-        this.service = new Map<string, any>();
-        this.data = new Map<string, any>();
+        this.config = new ln4Map();
+        this.profile = new ln4Map();
+        this.language = new ln4Map();
+        this.service = new ln4Map();
+        this.data = new ln4Map();
     }
     /**
      * 
@@ -47,57 +48,25 @@ export class ln4Manager {
         }
         return this.instance;
     }
+
     //////////////////////////////////////////////////////////////////
-    // Mapping 
-    //////////////////////////////////////////////////////////////////
-    private static JsonObjToMapLSub(myInput: object): Map<string, any> {
-        let output: Map<string, any>;
-        output = new Map<string, any>();
-        for (let s of Object.keys(myInput)) {
-            if (myInput[s] instanceof Object) {
-                output.set(s, ln4Manager.JsonObjToMapLSub(myInput[s]));
-            } else {
-                output.set(s, myInput[s]);
-            }
-        }
-        return output;
-    }
-    public static JsonObjToMap(myJson: object): Map<string, any> {
-        let output: Map<string, any>;
-        output = new Map<string, any>();
-        for (let k of Object.keys(myJson)) {
-            if (myJson[k] instanceof Object) {
-                output.set(k, ln4Manager.JsonObjToMapLSub(myJson[k]));
-            } else {
-                output.set(k, myJson[k]);
-            }
-        }
-        return output;
-    }
-    private static MaptoJsonSub(MyIn: Map<string, any>) {
-        let res: any = Object.create(null);
-        MyIn.forEach((Value: any, key: string) => {
-            if (Value instanceof Map) {
-                res[key] = ln4Manager.MaptoJsonSub(Value);
-            } else {
-                res[key] = Value;
-            }
-        });
-        return res;
-    }
-    public static MaptoJsonObj(myInput: Map<string, any>): object {
-        if (myInput == null) { return null; }
-        if (myInput instanceof Map) {
-            return ln4Manager.MaptoJsonSub(myInput);
-        }
-        return null;
-    }
-    //////////////////////////////////////////////////////////////////
-    // config
+    // CONFIG
     //////////////////////////////////////////////////////////////////
     public cfgGet(name: string): any {
         if (this.config.has(name)) {
-           return this.config.get(name);
+            return this.config.get(name);
+        }
+        return null;
+    }
+    public cfgGetTag(name: string): any {
+        try {
+            if (this.config.has("tag")) {
+                if (this.config.get("tag").has(name)) {
+                    return this.config.get("tag").get(name);
+                }
+            }
+        } catch (e) {
+
         }
         return null;
     }
@@ -120,7 +89,6 @@ export class ln4Manager {
         }
         return false;
     }
-
     //////////////////////////////////////////////////////////////////
     // profile
     //////////////////////////////////////////////////////////////////
@@ -153,13 +121,16 @@ export class ln4Manager {
     // LANGUAGE
     //////////////////////////////////////////////////////////////////
     public translate(word: string): string {
+        if (this.language == null) {
+            return word;
+        }
         if (this.language.has(word)) {
             return this.language.get(word);
         }
         return word;
     }
     //////////////////////////////////////////////////////////////////
-    // service
+    // SERVICE
     //////////////////////////////////////////////////////////////////   
     public serviceSet(name: string, serviceclass: any) {
         this.service.set(name, serviceclass);
@@ -170,9 +141,8 @@ export class ln4Manager {
         }
         return null;
     }
-
     //////////////////////////////////////////////////////////////////
-    // data
+    // DATA
     //////////////////////////////////////////////////////////////////
     public dataExport(name: string): any {
         if (this.data.has(name)) {

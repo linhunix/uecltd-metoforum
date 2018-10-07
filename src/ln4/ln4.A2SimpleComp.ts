@@ -1,153 +1,324 @@
 import { Input, ViewChild, Output } from "@angular/core";
 import { ln4Angular2 } from "./ln4.Angular2";
 import { ln4Manager_evtUpdate, ln4Manager, ln4Manager_evtConfig, ln4Manager_evtProfile, ln4Manager_evtLanguage } from "./ln4.Manager";
+import { ln4Map } from "./ln4.Map";
 
 export class ln4A2SimpleComp {
-    @Input("in") myPrms: Map<string, any> = new Map();
-    @Input("id") tagid: string = "";
-    @Input("ln4id") myId: string = "";
-    public scope: any = {};
-    public mycfg: any = null;
-    public myusr: any = null;
-    public mydat: any = null;
-    private reloadCfgById() {
-        this.mycfg = ln4Manager.GetInstance().cfgGet(this.myId);
+    /**
+     * input parametres 
+     * as the calling on the config 
+     */
+    public myPrms: ln4Map = new ln4Map();
+    @Input("ln4in") set ln4in(myprms: any) {
+        this.myPrms = new ln4Map();
+        if (myprms instanceof ln4Map) {
+            this.myPrms = myprms;
+        } else if (myprms instanceof Map) {
+            this.myPrms.fromMap(myprms);
+        } else if (myprms instanceof String) {
+            this.myPrms.fromJsonString("" + myprms);
+        } else {
+            this.myPrms.fromJson(myprms);
+        }
+        this.reload(ln4Manager_evtUpdate);
     }
-    private reloadUsrById() {
-        this.mycfg = ln4Manager.GetInstance().profileGet(this.myId);
+    /**
+     *  In on ln4 mode 
+     */
+    public myId: string;
+    @Input("ln4id") set ln4id(name: string) {
+        this.myId = name;
+        this.reload(ln4Manager_evtUpdate);
     }
-    private reloadDatById() {
-        this.mycfg = ln4Manager.GetInstance().dataExport(this.myId);
+    /**
+     * this is the standard id of the tag 
+     */
+    @Input("id") public tagId: string = null;
+    /**
+     * this is the standard output 
+     * scope.remote is the data collected from system
+     */
+    @Output("scope") public scope: any = {};
+    /**
+     * this is the parametres used on method do action 
+     */
+    public myaction: any = null;
+    /**
+     * the previous action used on this element 
+     */
+    public lastaction: string = "";
+    /**
+     * the current action used on this element
+     */
+    public currentaction: string = "";
+    //////////////////////////////////////////////////////////////////
+    // Translate
+    //////////////////////////////////////////////////////////////////
+    public Translate(name: string): string {
+        return ln4Manager.GetInstance().translate(name);
     }
-    private reloadCfgByPrms() {
+    //////////////////////////////////////////////////////////////////
+    // Trace is a test suite 
+    //////////////////////////////////////////////////////////////////
+    public trace(src: any): any {
+        if (ln4Angular2.isDebug()) {
+            console.log("trace:" + this.myId);
+            console.log(src);
+        }
+        return src;
+    }
+    public traceToString(src:any):string {
+        src=this.trace(src);
+        if (typeof src.toString == 'function'){
+        return src.toString();
+        }
+        return ""+src
+    }
+    /**
+     * Convert a object to a json string value 
+     * if is debug mode dump on console the values 
+     * @param src object 
+     * @returns string jsn covertente
+     */
+    public traceJsonString(src: any): any {
+        src=this.trace(src);
+        let dst: ln4Map = new ln4Map();
+        dst.fromAny(src);
+        return dst.toJsonString();
+    }    
+    //////////////////////////////////////////////////////////////////
+    // RELOAD CONFIG
+    //////////////////////////////////////////////////////////////////
+    /**
+     * get form manager config info about ln4id
+     * @param mysrc 
+     */
+    private reloadCfgById(mysrc: ln4Map): ln4Map {
+        let res = ln4Manager.GetInstance().cfgGet(this.myId);
+        if ((res instanceof Map) || (res instanceof ln4Map)) {
+            res.forEach((value: string, key: string) => {
+                mysrc.set(key, value);
+            });
+        } else {
+            mysrc.set(ln4Manager_evtConfig, res);
+        }
+        let tag = ln4Manager.GetInstance().cfgGetTag(this.myId);
+        if ((tag instanceof Map) || (tag instanceof ln4Map)) {
+            tag.forEach((value: string, key: string) => {
+                mysrc.set(key, value);
+            });
+        } else {
+            mysrc.set(ln4Manager_evtConfig, tag);
+        }
+        return mysrc;
+    }
+    /**
+     * get form manager data getting info about ln4id
+     * @param mysrc 
+     */
+    private reloadDatById(mysrc: ln4Map): ln4Map {
+        let res = ln4Manager.GetInstance().dataExport(this.myId);
+        if ((res instanceof Map) || (res instanceof ln4Map)) {
+            res.forEach((value: string, key: string) => {
+                mysrc.set(key, value);
+            });
+        } else {
+            mysrc.set(ln4Manager_evtConfig, res);
+        }
+        return mysrc;
+    }
+    /**
+     * get form manager config info about Params
+     * @param mysrc 
+     */
+
+    private reloadCfgByPrms(mysrc: ln4Map): ln4Map {
         if (this.myPrms.has(ln4Manager_evtConfig)) {
             let cfglst: any = this.myPrms.get(ln4Manager_evtConfig);
             if (cfglst instanceof Map) {
                 cfglst.forEach((value: string, key: string) => {
-                    this.scope[key] = ln4Manager.GetInstance().cfgGet(value);
+                    mysrc.set(key, ln4Manager.GetInstance().cfgGet(value));
                 });
             }
         }
+        return mysrc;
     }
-    private reloadUsrByPrms() {
+    /**
+     * get form manager user info about Params
+     * @param mysrc 
+     */
+    private reloadUsrByPrms(mysrc: ln4Map): ln4Map {
         if (this.myPrms.has(ln4Manager_evtProfile)) {
             let cfglst: any = this.myPrms.get(ln4Manager_evtProfile);
             if (cfglst instanceof Map) {
                 cfglst.forEach((value: string, key: string) => {
-                    this.scope[key] = ln4Manager.GetInstance().profileGet(value);
+                    mysrc.set(key, ln4Manager.GetInstance().profileGet(value));
                 });
             }
         }
+        return mysrc;
     }
-    private reloadLngByPrms() {
-        if (this.myPrms.has(ln4Manager_evtLanguage)) {
-            let cfglst: any = this.myPrms.get(ln4Manager_evtLanguage);
-            if (cfglst instanceof Map) {
-                cfglst.forEach((value: string, key: string) => {
-                    this.scope[key] = ln4Manager.GetInstance().translate(value);
-                });
-            }
-        }
-    }
+
+    //////////////////////////////////////////////////////////////////
+    // RELOAD 
+    //////////////////////////////////////////////////////////////////
     public reload(type: string) {
-        if (this.myId != "") {
-            switch (type) {
-                case ln4Manager_evtConfig:
-                    this.reloadCfgById();
-                    break;
-                case ln4Manager_evtProfile:
-                    this.reloadUsrById();
-                    break;
-                case this.myId:
-                    this.reloadDatById();
-                    break;
-                case ln4Manager_evtUpdate:
-                    this.reloadCfgById();
-                    this.reloadUsrById();
-                    this.reloadDatById();
-                    break;
+        this.lastaction = this.lastaction;
+        this.currentaction = "reload:" + type;
+        try {
+            if (ln4Angular2.isDebug()) {
+                console.log("ReloadRun:Start>>" + this.myId + ">>" + type);
+                console.log(this.myPrms);
             }
-        }
-        if (this.myPrms != null) {
-            switch (type) {
-                case ln4Manager_evtConfig:
-                    this.reloadCfgByPrms();
-                    break;
-                case ln4Manager_evtProfile:
-                    this.reloadUsrByPrms();
-                    break;
-                case ln4Manager_evtLanguage:
-                    this.reloadLngByPrms();
-                    break;
-                case ln4Manager_evtUpdate:
-                    this.reloadCfgByPrms();
-                    this.reloadUsrByPrms();
-                    this.reloadLngByPrms();
-                    break;
-
+            let source: ln4Map = new ln4Map();
+            if (this.tagId == null) {
+                this.tagId = this.constructor.name;
             }
-        }
-
-    }
-
-    public getKeyArray(mymap: Map<string, any>): Array<String> {
-        if (mymap == null) {
-            ln4Angular2.msgWarning("getKeyArray=nullstr");
-            return [];
-        }
-        return Array.from(mymap.keys());
-    }
-    public getItmArray(mymap: Map<string, any>, item: string, sub): Array<String> {
-        if (mymap == null) {
-            ln4Angular2.msgWarning("getKeyArray=nullstr");
-            return [];
-        }
-        if (mymap.has(name)) {
-            let submap = mymap.get(name);
-            if (submap instanceof Map) {
-                return Array.from(submap.keys());
-            }
-        }
-        return [];
-    }
-    public getSubArray(mymap: Map<string, any>, name: string, sub: string = "value"): Array<String> {
-        if (mymap == null) {
-            ln4Angular2.msgWarning("getKeyArray=nullstr");
-            return [];
-        }
-        if (mymap.has(name)) {
-            let submap = mymap.get(name);
-            if (submap instanceof Map) {
-                if (submap.has(sub)) {
-                    let resmap = submap.get(sub);
-                    if (resmap instanceof Map) {
-                        return Array.from(resmap.keys());
+            /// Use the prereload to define if need use the normal 
+            /// sequence of reloading 
+            source = this.preReload(source, type);
+            if (source.getStatus()) {
+                if (this.myId != null) {
+                    switch (type) {
+                        case ln4Manager_evtConfig:
+                            source = this.reloadCfgById(source);
+                            break;
+                        case this.myId:
+                            source = this.reloadDatById(source);
+                            break;
+                        case ln4Manager_evtUpdate:
+                            source = this.reloadCfgById(source);
+                            source = this.reloadDatById(source);
+                            break;
                     }
                 }
-            }
-        }
-        return [];
-    }
-    public getValueStr(mymap: Map<string, any>, name: string, sub: string = ""): String {
-        if (mymap == null) {
-            ln4Angular2.msgWarning("getValueStr=nullstr");
-            return "";
-        }
-        if (mymap.has(name)) {
-            let submap = mymap.get(name);
-            if (sub == "") {
-                return "" + submap;
-            }
-            if (submap instanceof Map) {
-                if (submap.has(sub)) {
-                    return "" + submap.get(sub);
+                if (this.myPrms != null) {
+                    switch (type) {
+                        case ln4Manager_evtConfig:
+                            source = this.reloadCfgByPrms(source);
+                            break;
+                        case ln4Manager_evtProfile:
+                            source = this.reloadUsrByPrms(source);
+                            break;
+                        case ln4Manager_evtUpdate:
+                            source = this.reloadCfgByPrms(source);
+                            source = this.reloadUsrByPrms(source);
+                            break;
+                    }
                 }
+            } else {
+                ln4Angular2.msgDebug("preReload:block loading config on source");
             }
+            if (this.scope == null) {
+                this.scope = {};
+            }
+            // use the post load to define if is need to convert the map on scope 
+            source = this.postReload(source, type);
+            if (source.getStatus()) {
+                this.scope.remote = source.toJson();
+            } else {
+                ln4Angular2.msgDebug("postReload:block converison source to scope");
+            }
+            if (ln4Angular2.isDebug()) {
+                console.log("ReloadRun:Stop>>" + this.myId + ">>" + type);
+                console.log(source);
+                console.log(this.scope);
+            }
+        } catch (e) {
+            ln4Angular2.msgError(e);
         }
-        return "";
     }
-    constructor() {
-        this.reload(ln4Manager_evtUpdate);
-        ln4Angular2.eventGet(ln4Manager_evtUpdate, true).subscribe((type: string) => { this.reload(type); });
+    //////////////////////////////////////////////////////////////////
+    // ACTION MANAGER 
+    //////////////////////////////////////////////////////////////////
+    /**
+     * Event based action programmable 
+     * manage an global event with myid as name 
+     * and the the acttype is the definiction of the event 
+     * you can add a parametres and they remain live since 
+     * the new event.
+     * @param acttype type of action defined 
+     * @param parm temporaney parametres used to manage this action 
+     */
+    public doaction(acttype: string, parm: any = null): void {
+        this.myaction = parm;
+        this.lastaction = this.currentaction;
+        this.currentaction = acttype;
+        ln4Angular2.eventEmit(this.myId, acttype, true);
     }
+    /**
+     * this function called at end of the action return the value 
+     * of this.myaction as a scope.action 
+     */
+    public postaction() {
+        if (this.myaction != null) {
+            if (this.myaction instanceof Map) {
+                let myact: ln4Map = new ln4Map();
+                myact.fromMap(this.myaction);
+                this.scope.action = myact.toJson();
+            } else if (this.myaction instanceof ln4Map) {
+                // on this case remove reference 
+                this.scope.action = this.myaction.toJson();
+            } else {
+                this.scope.action = this.myaction;
+            }
+            this.myaction = null;
+        }
+    }
+    //////////////////////////////////////////////////////////////////
+    // SUPER / CONSTRUCTOR 
+    //////////////////////////////////////////////////////////////////
+    /**
+     * empty method to make config parametres 
+     * need to called before the reload and subscribe
+    */
+    public initcfg() {
+        // use to make config 
+    }
+    /**
+     * empty method to make config parametres 
+     * need to called during  the reload 
+     * but first to make all other activites
+     * @param source 
+     * @param type 
+     * @returns ln4map block to continue or not the reload
+     */
+    public preReload(source: ln4Map, type: string): ln4Map {
+        // use to make config 
+        return source.returnOK();
+    }
+    /**
+     * empty method to make config parametres 
+     * need to called during  the reload 
+     * but at end of make all other activites
+     * @param type 
+     * @returns ln4Map (getStatus():boolean) block to continue or not the maptojson convert
+     */
+    public postReload(source: ln4Map, type: string): ln4Map {
+        // use to make config 
+        return source.returnOK();
+    }
+    /**
+     * Default super metod use initcfg to preload config
+     * run reaload (if flag true)
+     * run subscribe (if flag true)
+     * default (true,true)
+     * @param boot_reload true if need to run reload 
+     * @param boot_subscribe true if need to add subcribe config 
+     */
+    constructor(boot_reload: boolean = true, boot_subscribe: boolean = true) {
+        this.scope = {};
+        this.initcfg();
+        if (boot_reload) {
+            this.reload(ln4Manager_evtUpdate);
+        }
+        if (boot_subscribe) {
+            ln4Angular2.eventGet(ln4Manager_evtUpdate, true).subscribe(
+                (ltype: string) => {
+                    this.reload(ltype);
+                }
+            );
+        }
+    }
+
 }

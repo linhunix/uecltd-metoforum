@@ -4,6 +4,7 @@ import { ln4Manager, ln4Manager_evtConfig, ln4Manager_evtUpdate } from '../../ln
 import { ln4A2SimpleComp } from '../../ln4/ln4.A2SimpleComp';
 import { supportsPassiveEventListeners } from '@angular/cdk/platform';
 import { MatMenu } from '@angular/material/menu';
+import { ln4Map } from '../../ln4/ln4.Map';
 
 @Component({
   selector: 'menu-ln4',
@@ -11,23 +12,17 @@ import { MatMenu } from '@angular/material/menu';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent extends ln4A2SimpleComp {
-  public menu: any[] = [];
-  constructor() {
-    super();
+  public initcfg(){
     this.myId = "menu";
-    this.myPrms = new Map();
     let cfgmap: Map<string, string> = new Map();
-    cfgmap.set("menu", "menu");
     cfgmap.set("title", "title");
-    cfgmap.set("MainMenu", "menu");
     this.myPrms.set(ln4Manager_evtConfig, cfgmap);
   }
-  public getMenu():void {
-    this.scope.menun=this.getKeyArray(this.scope.menu);
-    this.scope.menum=this.getKeyArray(this.scope.MainMenu);
-    }
-  public reload(type: string) {
-    super.reload(type);
-    this.getMenu();
+  public  preReload(source: ln4Map, type: string): ln4Map {
+    // use to make config 
+    return source.returnOK();
+}
+  constructor() {
+    super();
   }
 }
