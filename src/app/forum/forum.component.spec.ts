@@ -13,15 +13,15 @@ describe('ForumComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-  it(`should have as title 'meteoforum'`, async(() => {
+  it(`should have as title 'statusmeteo'`, async(() => {
     const fixture = TestBed.createComponent(ForumComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('meteoforum');
+    expect(app.title).toEqual('statusmeteo');
   }));
   it('should render title in a h1 tag', async(() => {
     const fixture = TestBed.createComponent(ForumComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to meteoforum!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to statusmeteo!');
   }));
 });

@@ -15,47 +15,55 @@ export class ForumComponent extends ln4A2SimpleComp {
     this.frm = new ln4Map();
   }
   public preReload(source: ln4Map, type: string): ln4Map {
-    console.log("IM HERE");
-    if ((this.myId!=null)&&(this.frm.has(this.myId)==false)){
+    if ((this.myId != null) && (this.frm.has(this.myId) == false)) {
+      ln4Angular2.msgDebug("subscibe=" + this.myId);
       ln4Angular2.eventGet(this.myId, true).subscribe(
         (ltype: string) => {
-          this.reload(type);          
-        });  
-        this.frm.set(this.myId,true);    
+          this.reload(ltype);
+        });
+      this.frm.set(this.myId, true);
     }
-    if (type=="reload"){
+    if (type == "reload") {
       ln4Angular2.msgInfo("force Reload");
-      this.frm= new ln4Map();
-      this.frm.set(this.myId,true);    
+      this.frm = new ln4Map();
+      this.frm.set(this.myId, true);
     }
     return source.returnOK();
   }
   public postReload(source: ln4Map, type: string): ln4Map {
-    if (this.frm.has(type)){
-      source.set(type,ln4Manager.GetInstance().dataExport(type));
+    if (this.frm.has(type)) {
+      let obj:ln4Map= new ln4Map();
+      obj.fromAny(source.get("forumVals"));
+      obj.set(type, ln4Manager.GetInstance().dataExport(type));
+      source.set("forumVals",obj.toJson());
     }
-    console.log("Check Forum:"+this.myId+"/"+type);
+    console.log("Check Forum:" + this.myId + "/" + type);
     console.log(source);
     console.log(ln4Manager.GetInstance());
     if (source.has("forums")) {
-      source.get("forums").forEach((element:string) => {
-        let formn="form:"+element;
+      source.get("forums").forEach((element: string) => {
+        let formn = "form-" + element;
+        let formu = "/assets/forum." + element + ".json";
         if (this.frm.has(formn) == false) {
           if (ln4Angular2.isDebug()) {
             console.log(formn);
+            console.log(formu);
           }
-          ln4Angular2.callUrl(formn, "/assets/forum." + element + ".json", null, true);
-          ln4Angular2.eventGet(ln4Manager_evtUpdate, true).subscribe(
+          ln4Angular2.msgDebug("subscibe=" + formn);
+          ln4Angular2.eventKill(formn);
+          ln4Angular2.eventGet(formn, true).subscribe(
             (ltype: string) => {
-              this.reload(type);
+              ln4Angular2.msgDebug("eventGet=" +this.myId+"/"+ ltype);
+              this.reload(ltype);
             });
-          this.frm.set(formn,true);
+          ln4Angular2.callUrl(formn,formu, null, false);
+          this.frm.set(formn, true);
         }
       });
     }
     // use to make config 
     return source.returnOK();
-}
+  }
   constructor() {
     super();
   }

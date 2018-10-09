@@ -1,9 +1,9 @@
-export class ln4Map implements Map<string, any> {
+export class ln4Map {
     public size: number;
-    private prototype: Map<string, any>;
+    private prototype: any;
     private status: boolean;
     private message: string;
-    constructor(source: Map<string, any> = new Map<string, any>()) {
+    constructor(source: any = {}) {
         this.prototype = source;
         this.status = true;
         this.message = "Done";
@@ -13,42 +13,56 @@ export class ln4Map implements Map<string, any> {
         return this.prototype[Symbol.iterator]();
     }
     public clear(): void {
-        this.prototype.clear();
-    }
-    public delete(key: string): boolean {
-        return this.prototype.delete(key);
-    }
-    public forEach(callbackfn: (value: any, key: string, map: Map<string, any>) => void, thisArg?: any): void {
-        this.prototype.forEach(callbackfn, thisArg);
-    }
-    public get(key: string): any {
-        return this.prototype.get(key);
+        this.prototype = {};
     }
     public has(key: string): boolean {
-        return this.prototype.has(key);
+        if (key in this.prototype) {
+            return true;
+        }
+        return false;
+    }
+    public delete(key: string): boolean {
+        if (this.has(key) == false) {
+            return false;
+        }
+        if (delete this.prototype[key]) {
+            return true;
+        }
+        return false;
+    }
+    public get(key: string): any {
+        if (this.has(key) == false) {
+            return null;
+        }
+        return this.prototype[key];
     }
     public set(key: string, value: any): this {
-        this.prototype.set(key, value);
+        this.prototype[key] = value;
         return this;
     }
-    public entries(): IterableIterator<[string, any]> {
-        return this.prototype.entries();
+    public keys(): string[] {
+        return Object.keys(this.prototype);
     }
-    public keys(): IterableIterator<string> {
-        return this.prototype.keys();
+    public values(): any[] {
+        return Object.values(this.prototype);
     }
-    public values(): IterableIterator<any> {
-        return this.prototype.values();
+    public forEach(callback) {
+        for (let k in this.prototype) {
+            let v = this.prototype[k];
+            callback(k, v);
+        }
     }
 
     private MapToObj(strMap: Map<string, any>) {
         let obj = new Array();
         //for (let k of Array.from(strMap.keys())) {
         strMap.forEach((v: any, k: string) => {
-            if (k != '__proto__') {
+            if ((k != '__proto__')&&(k != "prototype")) {
                 let v = strMap.get(k);
-                if (v instanceof Map) {
-                    obj[k] = this.MapToObj(v);
+                if (typeof obj[k].toJson == "function") {
+                    strMap.set(k, obj[k].toJson());
+                } else if (typeof obj[k].toString == "function") {
+                    strMap.set(k, obj[k].toString());
                 } else {
                     obj[k] = v;
                 }
@@ -59,10 +73,18 @@ export class ln4Map implements Map<string, any> {
     private ObjToMap(obj) {
         let strMap = new Map();
         for (let k of Object.keys(obj)) {
-            if (obj[k] instanceof Object) {
-                strMap.set(k, this.ObjToMap(obj[k]));
-            } else {
-                strMap.set(k, obj[k]);
+            if ((k != '__proto__')&&(k != "prototype")) {
+                if (obj[k] instanceof Object) {
+                    if (typeof obj[k].toJson == "function") {
+                        strMap.set(k, obj[k].toJson());
+                    } else if (typeof obj[k].toString == "function") {
+                        strMap.set(k, obj[k].toString());
+                    } else {
+                        strMap.set(k, this.ObjToMap(obj[k]));
+                    }
+                }else {
+                    strMap.set(k, obj[k]);
+                }
             }
         }
         return strMap;
@@ -75,11 +97,7 @@ export class ln4Map implements Map<string, any> {
         }
     }
     public fromJson(myJson: object): void {
-        try {
-            this.fromMap(this.ObjToMap(myJson));
-        } catch (e) {
-            console.log("ln4Map.fromJsonString:" + e);
-        }
+        this.prototype = myJson;
     }
     public toJsonString(): string {
         try {
@@ -90,17 +108,17 @@ export class ln4Map implements Map<string, any> {
         }
     }
     public toJson(): any {
-        try {
-            return this.MapToObj(this.prototype);
-        } catch (e) {
-            console.log("ln4Map.fromJsonString:" + e);
-        }
+        return this.prototype;
     }
     public fromMap(myMap: Map<string, any>) {
-        this.prototype = new Map(myMap);
+        try {
+            this.prototype = this.MapToObj(myMap);
+        } catch (e) {
+            console.log("ln4Map.fromMap:" + e);
+        }
     }
 
-    public fromAny(src:any):void {
+    public fromAny(src: any): void {
         if (src instanceof ln4Map) {
             this.prototype = src.prototype;
         } else if (src instanceof Map) {
@@ -112,7 +130,11 @@ export class ln4Map implements Map<string, any> {
         }
     }
     public toMap(): Map<string, any> {
-        return this.prototype;
+        try {
+            return this.ObjToMap(this.prototype);
+        } catch (e) {
+            console.log("ln4Map.toMap:" + e);
+        }
     }
     public returnOK(message: string = "OK"): this {
         this.message = message;

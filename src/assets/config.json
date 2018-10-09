@@ -2,82 +2,82 @@
   "app": "V1",
   "title": "STATUS METEO",
   "desc": "Descrizione sito amatoriale",
-  "tag":{
-  "menu": {
-    "menu": [
-      "menu1",
-      "menu2"
-    ]
-  },
-  "menu1": {
-    "label": "Menu 1",
-    "menu": [
-      {
-        "label": "menu title 1",
-        "src": "#",
-        "value": {
-          "sit2": {
-            "label": "sub menu title 1",
-            "src": "#"
+  "tags": {
+    "menu": {
+      "menu": [
+        "menu1",
+        "menu2"
+      ]
+    },
+    "menu1": {
+      "label": "Menu 1",
+      "menu": [
+        {
+          "label": "menu title 1",
+          "src": "#",
+          "value": {
+            "sit2": {
+              "label": "sub menu title 1",
+              "src": "#"
+            }
           }
         }
-      }
-    ]
-  },
-  "menu2": {
-    "label": "menu 2",
-    "menu": [
-      {
-        "label": "menu title 2",
-        "src": "#"
-      }
-    ]
-  },
-  "tabs": {
-    "desc": "Descrizione sito amatoriale durante l utilizzo, consigli di acquisto e racconto delle proprie esperienze. Come per l area Discussioni, i thread verranno riportati in evidenza dagli aggiornamenti",
-    "list": [
-      {
-        "label": "Now Casting",
-        "desc": "filtro Now casting",
-        "forum":"forumCasting"
-      },
-      {
-        "label": "Discussioni",
-        "desc": "filtro_discussioni",
-        "forum":"forumTalk"
-      },
-      {
-        "label": "Varie & Strumentazione",
-        "desc": "filtro_Strumentazione",
-        "forum":"forumOT"
-      },
-      {
-        "label": "Funghi",
-        "desc": "filtro_Mix",
-        "forum":"forumFunghi"
-      }
-    ]
-  },
-  "forumOT": {
-    "forums": [
-      "OT",
-      "Strumentazione"
-    ]
-  },
-  "forumFunghi": {
-    "forums": [
-      "Funghi"
-    ]
-  },
-  "forumTalk": {
-    "forums": [
-      "Talk"
-    ]
-  },
-  "forumCasting": {
-    "forums": [
-      "Casting"
-    ]
+      ]
+    },
+    "menu2": {
+      "label": "menu 2",
+      "menu": [
+        {
+          "label": "menu title 2",
+          "src": "#"
+        }
+      ]
+    },
+    "tabs": {
+      "desc": "Descrizione sito amatoriale durante l utilizzo, consigli di acquisto e racconto delle proprie esperienze. Come per l area Discussioni, i thread verranno riportati in evidenza dagli aggiornamenti",
+      "list": [
+        {
+          "label": "Now Casting",
+          "desc": "filtro Now casting",
+          "forum": "forumCasting"
+        },
+        {
+          "label": "Discussioni",
+          "desc": "filtro_discussioni",
+          "forum": "forumTalk"
+        },
+        {
+          "label": "Varie & Strumentazione",
+          "desc": "filtro_Strumentazione",
+          "forum": "forumOT"
+        },
+        {
+          "label": "Funghi",
+          "desc": "filtro_Mix",
+          "forum": "forumFunghi"
+        }
+      ]
+    },
+    "forumOT": {
+      "forums": [
+        "OT",
+        "Strumentazione"
+      ]
+    },
+    "forumFunghi": {
+      "forums": [
+        "Funghi"
+      ]
+    },
+    "forumTalk": {
+      "forums": [
+        "Talk"
+      ]
+    },
+    "forumCasting": {
+      "forums": [
+        "Casting"
+      ]
+    }
   }
-}
 }

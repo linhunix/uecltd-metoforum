@@ -9,17 +9,9 @@ export class ln4A2SimpleComp {
      * as the calling on the config 
      */
     public myPrms: ln4Map = new ln4Map();
-    @Input("ln4in") set ln4in(myprms: any) {
+    @Input("ln4in") set ln4in(ln4in: any) {
         this.myPrms = new ln4Map();
-        if (myprms instanceof ln4Map) {
-            this.myPrms = myprms;
-        } else if (myprms instanceof Map) {
-            this.myPrms.fromMap(myprms);
-        } else if (myprms instanceof String) {
-            this.myPrms.fromJsonString("" + myprms);
-        } else {
-            this.myPrms.fromJson(myprms);
-        }
+        this.myPrms.fromAny(ln4in)
         this.reload(ln4Manager_evtUpdate);
     }
     /**
@@ -63,16 +55,18 @@ export class ln4A2SimpleComp {
     public trace(src: any): any {
         if (ln4Angular2.isDebug()) {
             console.log("trace:" + this.myId);
+            console.log("-->StartVal:");
             console.log(src);
+            console.log("-->EndVal");
         }
         return src;
     }
-    public traceToString(src:any):string {
-        src=this.trace(src);
-        if (typeof src.toString == 'function'){
-        return src.toString();
+    public traceToString(src: any): string {
+        src = this.trace(src);
+        if (typeof src.toString == 'function') {
+            return src.toString();
         }
-        return ""+src
+        return "" + src
     }
     /**
      * Convert a object to a json string value 
@@ -81,11 +75,11 @@ export class ln4A2SimpleComp {
      * @returns string jsn covertente
      */
     public traceJsonString(src: any): any {
-        src=this.trace(src);
+        src = this.trace(src);
         let dst: ln4Map = new ln4Map();
         dst.fromAny(src);
         return dst.toJsonString();
-    }    
+    }
     //////////////////////////////////////////////////////////////////
     // RELOAD CONFIG
     //////////////////////////////////////////////////////////////////
@@ -94,22 +88,15 @@ export class ln4A2SimpleComp {
      * @param mysrc 
      */
     private reloadCfgById(mysrc: ln4Map): ln4Map {
-        let res = ln4Manager.GetInstance().cfgGet(this.myId);
-        if ((res instanceof Map) || (res instanceof ln4Map)) {
-            res.forEach((value: string, key: string) => {
-                mysrc.set(key, value);
-            });
-        } else {
-            mysrc.set(ln4Manager_evtConfig, res);
-        }
-        let tag = ln4Manager.GetInstance().cfgGetTag(this.myId);
-        if ((tag instanceof Map) || (tag instanceof ln4Map)) {
-            tag.forEach((value: string, key: string) => {
-                mysrc.set(key, value);
-            });
-        } else {
-            mysrc.set(ln4Manager_evtConfig, tag);
-        }
+        let res: ln4Map = new ln4Map();
+        res.fromAny(ln4Manager.GetInstance().cfgGet(this.myId));
+        res.forEach(function (key: string, value: string) {
+            mysrc.set(key, value);
+        });
+        res.fromAny(ln4Manager.GetInstance().cfgGetTag(this.myId));
+        res.forEach(function (key: string, value: string) {
+            mysrc.set(key, value);
+        });
         return mysrc;
     }
     /**
@@ -117,14 +104,11 @@ export class ln4A2SimpleComp {
      * @param mysrc 
      */
     private reloadDatById(mysrc: ln4Map): ln4Map {
-        let res = ln4Manager.GetInstance().dataExport(this.myId);
-        if ((res instanceof Map) || (res instanceof ln4Map)) {
-            res.forEach((value: string, key: string) => {
-                mysrc.set(key, value);
-            });
-        } else {
-            mysrc.set(ln4Manager_evtConfig, res);
-        }
+        let res: ln4Map = new ln4Map();
+        res.fromAny(ln4Manager.GetInstance().dataExport(this.myId));
+        res.forEach(function (key: string, value: string) {
+            mysrc.set(key, value);
+        });
         return mysrc;
     }
     /**
@@ -134,12 +118,11 @@ export class ln4A2SimpleComp {
 
     private reloadCfgByPrms(mysrc: ln4Map): ln4Map {
         if (this.myPrms.has(ln4Manager_evtConfig)) {
-            let cfglst: any = this.myPrms.get(ln4Manager_evtConfig);
-            if (cfglst instanceof Map) {
-                cfglst.forEach((value: string, key: string) => {
-                    mysrc.set(key, ln4Manager.GetInstance().cfgGet(value));
-                });
-            }
+            let res: ln4Map = new ln4Map();
+            res.fromAny(this.myPrms.get(ln4Manager_evtConfig));
+            res.forEach(function (key: string, value: string) {
+                mysrc.set(key, ln4Manager.GetInstance().cfgGet(value));
+            });
         }
         return mysrc;
     }
@@ -149,12 +132,11 @@ export class ln4A2SimpleComp {
      */
     private reloadUsrByPrms(mysrc: ln4Map): ln4Map {
         if (this.myPrms.has(ln4Manager_evtProfile)) {
-            let cfglst: any = this.myPrms.get(ln4Manager_evtProfile);
-            if (cfglst instanceof Map) {
-                cfglst.forEach((value: string, key: string) => {
-                    mysrc.set(key, ln4Manager.GetInstance().profileGet(value));
-                });
-            }
+            let res: ln4Map = new ln4Map();
+            res.fromAny(this.myPrms.get(ln4Manager_evtConfig));
+            res.forEach(function (key: string, value: string) {
+                mysrc.set(key, ln4Manager.GetInstance().profileGet(value));
+            });
         }
         return mysrc;
     }
@@ -171,7 +153,7 @@ export class ln4A2SimpleComp {
                 console.log(this.myPrms);
             }
             let source: ln4Map = new ln4Map();
-            if (this.scope['remote']!=null){
+            if (this.scope['remote'] != null) {
                 source.fromAny(this.scope['remote']);
             }
             if (this.tagId == null) {
@@ -255,16 +237,9 @@ export class ln4A2SimpleComp {
      */
     public postaction() {
         if (this.myaction != null) {
-            if (this.myaction instanceof Map) {
-                let myact: ln4Map = new ln4Map();
-                myact.fromMap(this.myaction);
-                this.scope.action = myact.toJson();
-            } else if (this.myaction instanceof ln4Map) {
-                // on this case remove reference 
-                this.scope.action = this.myaction.toJson();
-            } else {
-                this.scope.action = this.myaction;
-            }
+            let actin: ln4Map = new ln4Map();
+            actin.fromAny(this.myaction);
+            this.scope["action"] = actin.toJson();
             this.myaction = null;
         }
     }

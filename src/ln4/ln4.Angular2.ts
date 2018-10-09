@@ -246,7 +246,7 @@ export class ln4Angular2 {
                 status = 0;
             }
             ln4Angular2.msgDebug("STS=" + status);
-            if (this.isDebug){
+            if (this.isDebug()){
                 console.log(mln4);
             }
             ln4.dataImport(ApiEvent, mln4);

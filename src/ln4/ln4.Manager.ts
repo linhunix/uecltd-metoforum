@@ -25,6 +25,7 @@ export const ln4Manager_evtUpdate: string = "Update";
 export class ln4Manager {
     private static instance: ln4Manager;
     private config: ln4Map;
+    private tag: ln4Map;
     private language: ln4Map;
     private profile: ln4Map;
     private service: ln4Map;
@@ -34,6 +35,7 @@ export class ln4Manager {
      */
     private constructor() {
         this.config = new ln4Map();
+        this.tag = new ln4Map();
         this.profile = new ln4Map();
         this.language = new ln4Map();
         this.service = new ln4Map();
@@ -60,10 +62,8 @@ export class ln4Manager {
     }
     public cfgGetTag(name: string): any {
         try {
-            if (this.config.has("tag")) {
-                if (this.config.get("tag").has(name)) {
-                    return this.config.get("tag").get(name);
-                }
+            if (this.tag.has(name)) {
+                return this.tag.get(name);
             }
         } catch (e) {
 
@@ -163,18 +163,19 @@ export class ln4Manager {
         switch (type) {
             case ln4Manager_evtConfig:
                 if (this.cfgIsWrite()) {
-                    this.config = this.dataExport(type);
+                    this.config.fromAny(this.dataExport(type));
+                    this.tag.fromAny(this.config.get("tags"));
                     return true;
                 }
                 break;
             case ln4Manager_evtProfile:
                 if (this.profileIsWrite()) {
-                    this.profile = this.dataExport(type);
+                    this.profile.fromAny(this.dataExport(type));
                     return true;
                 }
                 break;
             case ln4Manager_evtLanguage:
-                this.language = this.dataExport(type);
+                this.language.fromAny(this.dataExport(type));
                 return true;
             default:
                 return false;

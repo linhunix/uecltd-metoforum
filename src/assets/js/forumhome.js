@@ -171,6 +171,6 @@ limitations under the License.
 })(this);
 
 document.addEventListener('DOMContentLoaded', function (event) {
-    cookieChoices.showCookieConsentDialog('LN4.APP fa uso esclusivamente di cookies tecnici per consentire la migliore navigabilità del sito. Tuttavia in Meteoforum sono presenti annunci pubblicitari che fanno uso di cookies di terze parti e sono soggetti ad obbligo di informativa. Se desideri acconsentire alla navigazione su meteoforum.com ed accettare l\'uso dei cookies, inclusi quelli di terze parti, chiudi questo popup. Se invece desideri visualizzare l\'informativa estesa e saperne di più, clicca sul link qui a fianco. Grazie.',
+    cookieChoices.showCookieConsentDialog('LN4.APP fa uso esclusivamente di cookies tecnici per consentire la migliore navigabilità del sito. Tuttavia in statusmeteo sono presenti annunci pubblicitari che fanno uso di cookies di terze parti e sono soggetti ad obbligo di informativa. Se desideri acconsentire alla navigazione su statusmeteo.com ed accettare l\'uso dei cookies, inclusi quelli di terze parti, chiudi questo popup. Se invece desideri visualizzare l\'informativa estesa e saperne di più, clicca sul link qui a fianco. Grazie.',
         'Accetta e chiudi il popup', 'Accedi all\'informativa estesa', '/pagine/varie/privacy.asp');
 });

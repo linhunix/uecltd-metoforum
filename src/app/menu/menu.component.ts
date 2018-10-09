@@ -14,7 +14,7 @@ import { ln4Map } from '../../ln4/ln4.Map';
 export class MenuComponent extends ln4A2SimpleComp {
   public initcfg(){
     this.myId = "menu";
-    let cfgmap: Map<string, string> = new Map();
+    let cfgmap:ln4Map=new ln4Map();
     cfgmap.set("title", "title");
     this.myPrms.set(ln4Manager_evtConfig, cfgmap);
   }
