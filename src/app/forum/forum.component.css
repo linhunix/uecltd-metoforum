@@ -6,7 +6,7 @@
 .forum-main-tab0 img,
 .forum-main-title span,
 .forum-main-title img{
-    margin:10px;
+    margin:5px;
     vertical-align: middle;
     align-content: left;
 }
@@ -23,5 +23,9 @@
 .f-tree-l1,
 .f-tree-l2,
 .f-tree-l3{
-    widows: 10px !important;
+    width: 10px !important;
+    min-width: 10px !important;
+}
+.f-title{
+    padding-left: 15px;
 }

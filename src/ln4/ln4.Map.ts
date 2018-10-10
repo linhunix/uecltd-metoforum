@@ -40,6 +40,12 @@ export class ln4Map {
         this.prototype[key] = value;
         return this;
     }
+    public setFromAny(key: string, value: any): this {
+        let src:ln4Map= new ln4Map();
+        src.fromAny(value)
+        this.prototype[key] = src.toJson();
+        return this;
+    }
     public keys(): string[] {
         return Object.keys(this.prototype);
     }
@@ -119,6 +125,10 @@ export class ln4Map {
     }
 
     public fromAny(src: any): void {
+        if (src==null){
+            this.clear();
+            return;
+        }
         if (src instanceof ln4Map) {
             this.prototype = src.prototype;
         } else if (src instanceof Map) {

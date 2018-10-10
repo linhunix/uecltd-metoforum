@@ -16,6 +16,7 @@ import { HttpModule } from '@angular/http';
 import { FootComponent } from './foot/foot.component';
 import { AppComponent } from './app.componet';
 import { ln4MatMenuModelComponent } from '../ln4/mat/ln4.menu.component';
+import { ln4ValuesPipe } from 'src/ln4/ln4.ValuesPipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { ln4MatMenuModelComponent } from '../ln4/mat/ln4.menu.component';
     TabComponent,
     ForumComponent,
     NewsComponent,
-    ln4MatMenuModelComponent
+    ln4MatMenuModelComponent,
+    ln4ValuesPipe
   ],
   imports: [
     BrowserModule,

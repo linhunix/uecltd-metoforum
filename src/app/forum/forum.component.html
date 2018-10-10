@@ -74,9 +74,7 @@
     </tbody>
 </table>
 <mat-accordion class="forum-headers-align">
-    {{trace(scope.remote.forumVals)}}
-    <ng-container *ngFor="let cvar of scope.remote.forumVals">
-        {{trace(cvar)}}
+    <ng-container *ngFor="let cvar of scope.remote.forumVals|ln4Values">
         <ng-container  *ngFor="let itm of cvar.topics">
             <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
                 <mat-expansion-panel-header>
@@ -93,13 +91,15 @@
                         <div class="f-tree-l3">
                             <img *ngIf="itm.lvl==3" src="assets/S_ThrNew.gif">
                         </div>
-                        <span>{{itm.lbl}}</span>
+                        <span class="f-title">{{itm.lbl}}</span>
                     </mat-panel-title>
                     <mat-panel-description class='forum-main-tab0'>
                         {{itm.cnt}}
                     </mat-panel-description>
                     <mat-panel-description class='forum-main-tab1'>
-                        {{cat}}
+                        {{itm.cat}}<br>
+                        {{itm.lun}}<br>
+                        {{itm.lps}}
                     </mat-panel-description>
                     <mat-panel-description class='forum-main-tab2'>
                         {{itm.lst}}

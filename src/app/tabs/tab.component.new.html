@@ -11,7 +11,6 @@
             <td style="vertical-align:baseline; text-align:justify;">
                 <mat-tab-group>
                     <mat-tab *ngFor="let item of scope.remote.list" label={{item.label}}>
-                           <span>{{item.forum}}:{{item.desc}}</span>
                             <forum-ln4  ln4id="{{item.forum}}"  >
                             </forum-ln4>
                     </mat-tab>

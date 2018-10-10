@@ -2,9 +2,9 @@
     "topics":[
         {
             "lvl":"1",
-            "lbl":"OT",
+            "lbl":"Test Talk",
             "cnt":"10",
-            "cat":"OT",
+            "cat":"TalkTalk",
             "lst":"10/10/2018",
             "lun":"LinHUniX",
             "lps":"NorthAmpton",
@@ -12,19 +12,9 @@
         },
         {
             "lvl":"2",
-            "lbl":"Test2",
+            "lbl":"Test Talk2",
             "cnt":"10",
-            "cat":"OT",
-            "lst":"10/10/2018",
-            "lun":"LinHUniX",
-            "lps":"NorthAmpton",
-            "dsc":"opera"
-        },
-        {
-            "lvl":"3",
-            "lbl":"Test3",
-            "cnt":"10",
-            "cat":"OT",
+            "cat":"Talk Strumenti",
             "lst":"10/10/2018",
             "lun":"LinHUniX",
             "lps":"NorthAmpton",

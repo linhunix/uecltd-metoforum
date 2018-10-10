@@ -2,9 +2,9 @@
     "topics":[
         {
             "lvl":"1",
-            "lbl":"OT",
+            "lbl":"Casting Esempio1",
             "cnt":"10",
-            "cat":"OT",
+            "cat":"Casting",
             "lst":"10/10/2018",
             "lun":"LinHUniX",
             "lps":"NorthAmpton",
@@ -12,9 +12,9 @@
         },
         {
             "lvl":"2",
-            "lbl":"Test2",
+            "lbl":"Casting esempio2",
             "cnt":"10",
-            "cat":"OT",
+            "cat":"Casting",
             "lst":"10/10/2018",
             "lun":"LinHUniX",
             "lps":"NorthAmpton",
@@ -22,9 +22,9 @@
         },
         {
             "lvl":"3",
-            "lbl":"Test3",
+            "lbl":"Casting Es3",
             "cnt":"10",
-            "cat":"OT",
+            "cat":"Casting",
             "lst":"10/10/2018",
             "lun":"LinHUniX",
             "lps":"NorthAmpton",

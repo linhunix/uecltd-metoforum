@@ -32,17 +32,18 @@ export class ForumComponent extends ln4A2SimpleComp {
   }
   public postReload(source: ln4Map, type: string): ln4Map {
     if (this.frm.has(type)) {
-      let obj:ln4Map= new ln4Map();
+      let obj: ln4Map = new ln4Map();
       obj.fromAny(source.get("forumVals"));
-      obj.set(type, ln4Manager.GetInstance().dataExport(type));
-      source.set("forumVals",obj.toJson());
+      let vals = ln4Manager.GetInstance().dataExport(type);
+      if (vals != null) {
+        obj.setFromAny(type, vals);
+      }
+      source.set("forumVals", obj.toJson());
     }
     console.log("Check Forum:" + this.myId + "/" + type);
-    console.log(source);
-    console.log(ln4Manager.GetInstance());
     if (source.has("forums")) {
       source.get("forums").forEach((element: string) => {
-        let formn = "form-" + element;
+        let formn = this.myId + "-" + element;
         let formu = "/assets/forum." + element + ".json";
         if (this.frm.has(formn) == false) {
           if (ln4Angular2.isDebug()) {
@@ -53,10 +54,11 @@ export class ForumComponent extends ln4A2SimpleComp {
           ln4Angular2.eventKill(formn);
           ln4Angular2.eventGet(formn, true).subscribe(
             (ltype: string) => {
-              ln4Angular2.msgDebug("eventGet=" +this.myId+"/"+ ltype);
+              ln4Angular2.msgDebug("eventGet=" + this.myId + "/" + ltype);
               this.reload(ltype);
-            });
-          ln4Angular2.callUrl(formn,formu, null, false);
+            }
+          );
+          ln4Angular2.callUrl(formn, formu, null, false);
           this.frm.set(formn, true);
         }
       });

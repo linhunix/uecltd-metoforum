@@ -102,7 +102,7 @@ export class ln4Angular2 {
         let ln4 = ln4Manager.GetInstance();
         let cfglbl: any = ln4.cfgGet("title");
         let cfgtime: string = new Date().toISOString();
-        let cfgmsg: string[] = data.split(":", 2);
+        let cfgmsg: string[] = data.split("|", 2);
         let thislvl: string = "" + ln4.translate("DEBUG-LVL-" + cfgmsg[0]);
         let thismsg: string = "" + ln4.translate("DEBUG-MSG-" + cfgmsg[1]);
         console.log("[" + cfglbl + "]-[" + cfgtime + "]-[" + thislvl + "]-[" + thismsg + "]");
@@ -121,10 +121,10 @@ export class ln4Angular2 {
             if ((Number.isNaN(ln4Angular2.level) || ln4Angular2.level == null)) {
                 ln4Angular2.level = 0;
             }
-            ln4Angular2.debug.emit(ln4Angular2.level + ":InitDebug");
+            ln4Angular2.debug.emit(ln4Angular2.level + "|InitDebug");
         }
         if (reqlevel >= ln4Angular2.level) {
-            ln4Angular2.debug.emit(reqlevel + ":" + message);
+            ln4Angular2.debug.emit(reqlevel + "|" + message);
         }
     }
     public static isDebug():boolean{
@@ -228,8 +228,6 @@ export class ln4Angular2 {
                 ln4Angular2.eventKill(ApiEvent);
                 httpevt = ln4Angular2.eventGet(ApiEvent, true);
             }
-        }else{
-            httpevt = ln4Angular2.eventGet(ApiEvent,true);
         }
         res.toPromise().then((res) => {
             ln4Angular2.msgInfo("EVT-" + ApiEvent);
@@ -246,14 +244,15 @@ export class ln4Angular2 {
                 status = 0;
             }
             ln4Angular2.msgDebug("STS=" + status);
-            if (this.isDebug()){
+            if (ln4Angular2.isDebug()){
                 console.log(mln4);
             }
             ln4.dataImport(ApiEvent, mln4);
-            httpevt.emit(ApiEvent);
+            ln4Angular2.msgInfo("EVT-" + ApiEvent+"="+ApiEvent);
+            ln4Angular2.eventEmit(ApiEvent,ApiEvent,true);
         }).catch((error: any) => {
             ln4Angular2.msgError(error);
-            httpevt.emit("E:" + error);
+            ln4Angular2.eventEmit(ApiEvent,"E=" + error,true);
         });
         return true;
     }
