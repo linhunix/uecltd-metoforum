@@ -1,4 +1,4 @@
-import { Input, ViewChild, Output } from "@angular/core";
+import { Input, ViewChild, Output, EventEmitter } from "@angular/core";
 import { ln4Angular2 } from "./ln4.Angular2";
 import { ln4Manager_evtUpdate, ln4Manager, ln4Manager_evtConfig, ln4Manager_evtProfile, ln4Manager_evtLanguage } from "./ln4.Manager";
 import { ln4Map } from "./ln4.Map";
@@ -20,9 +20,9 @@ export class ln4A2SimpleComp {
      */
     public myId: string;
     @Input("ln4id") set ln4id(name: string) {
-        name=name.trim();
-        name=name.replace(/\s/g, "");
-        name=name.replace(/\|&;\$%@"<>\(\)\+,/g, "");
+        name = name.trim();
+        name = name.replace(/\s/g, "");
+        name = name.replace(/\|&;\$%@"<>\(\)\+,/g, "");
         this.myId = name;
         this.reload(ln4Manager_evtUpdate);
     }
@@ -214,12 +214,19 @@ export class ln4A2SimpleComp {
                 console.log(this.scope);
             }
         } catch (e) {
-            ln4Angular2.msgError("Reload Error on "+this.myId+":"+e);
+            ln4Angular2.msgError("Reload Error on " + this.myId + ":" + e);
         }
     }
     //////////////////////////////////////////////////////////////////
     // ACTION MANAGER 
     //////////////////////////////////////////////////////////////////
+    /**
+     * allow to subscribe on the local event
+     * @returns Event my event
+     */
+    public onaction(): EventEmitter<String> {
+        return ln4Angular2.eventGet(this.myId, true);
+    }
     /**
      * Event based action programmable 
      * manage an global event with myid as name 

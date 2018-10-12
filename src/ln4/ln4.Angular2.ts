@@ -1,13 +1,13 @@
-import { Output, EventEmitter } from "@angular/core";
-import { RequestMethod, Http, Headers, RequestOptions } from '@angular/http';
+import { EventEmitter } from "@angular/core";
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { ln4Manager } from "./ln4.Manager";
 import { Observable } from "rxjs";
-import { resolveForwardRef } from "@angular/compiler/src/util";
 import { ln4Map } from "./ln4.Map";
 
 export class ln4Angular2 {
     public static event: Map<string, EventEmitter<String>>;
     public static debug: EventEmitter<String>;
+    public static ComponentLib:ln4Map
     public static level: number;
     /**
      * verifica che sia inizializzata come classe statica 
@@ -256,4 +256,21 @@ export class ln4Angular2 {
         });
         return true;
     }
+    //////////////////////////////////////////////////////////////////
+    // SERVER CALL
+    //////////////////////////////////////////////////////////////////
+    private static checkLib(){
+        if (ln4Angular2.ComponentLib==null){
+            ln4Angular2.ComponentLib=new ln4Map();
+        }
+    }
+    public static setCompLib(cname:string,cobj:any){
+        ln4Angular2.checkLib();
+        ln4Angular2.ComponentLib.set(cname,cobj);
+    }
+    public static getCompLib(cname:string):any{
+        ln4Angular2.checkLib();
+        return ln4Angular2.ComponentLib.get(cname);
+    }
+
 }

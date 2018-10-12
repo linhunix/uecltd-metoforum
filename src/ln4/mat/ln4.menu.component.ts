@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
-import { ln4A2SimpleComp } from '../ln4.A2SimpleComp';
+import { ln4A2MatComponent } from './ln4.A2Mat.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
     selector: 'ln4-mat-menu-model',
@@ -9,6 +10,7 @@ import { ln4A2SimpleComp } from '../ln4.A2SimpleComp';
             *ngFor="let bitem of scope.remote.menu" 
             mat-button 
             href="{{bitem.src}}"
+            (click)="calldialog(bitem.act,bitem)"
             >
             {{bitem.label}}                
         </a>
@@ -18,8 +20,16 @@ import { ln4A2SimpleComp } from '../ln4.A2SimpleComp';
     </button>
     `
 })
-export class ln4MatMenuModelComponent extends ln4A2SimpleComp {
-    constructor(){
-        super();
+export class ln4MatMenuModelComponent extends ln4A2MatComponent {
+    constructor(dialog: MatDialog) { 
+        super(true,true,dialog);
+    }
+    calldialog(dlgname:string,dlgvar:any):boolean{
+        if (this.isDialog()){
+            this.closeDialog();
+        }
+        this.setDialogClassName(dlgname);
+        this.myaction=dlgvar;
+        return this.openDialogEasy();
     }
 }

@@ -17,6 +17,10 @@ import { FootComponent } from './foot/foot.component';
 import { AppComponent } from './app.componet';
 import { ln4MatMenuModelComponent } from '../ln4/mat/ln4.menu.component';
 import { ln4ValuesPipe } from 'src/ln4/ln4.ValuesPipe';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ln4MatLoginComponent } from 'src/ln4/mat/ln4.login.component';
+import { MatFormFieldModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,15 +31,20 @@ import { ln4ValuesPipe } from 'src/ln4/ln4.ValuesPipe';
     ForumComponent,
     NewsComponent,
     ln4MatMenuModelComponent,
-    ln4ValuesPipe
+    ln4ValuesPipe,
+    ln4MatLoginComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatMenuModule,
     MatTabsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule,
+    MatFormFieldModule
 
   ],
   providers: [
@@ -53,7 +62,7 @@ export class AppModule {
   public constructor(private http: Http) {
     // INIT HTTP
     ln4Angular2.msgDebug("loadingHttpServ");
-    this.getLn4Manager().serviceSet("http", http);
+    this.getLn4Manager().serviceSet("http", http);    
     // LANGUAGE
     ln4Angular2.msgDebug("loadingLang");
     ln4Angular2.eventGet(ln4Manager_evtLanguage, true).subscribe(
@@ -74,6 +83,8 @@ export class AppModule {
       }
     );
     ln4Angular2.callUrl(ln4Manager_evtConfig, "/assets/config.json", null);
+    // init component 
+    ln4Angular2.setCompLib("ln4MatLoginComponent",ln4MatLoginComponent);
   }
   public getLn4Manager(): ln4Manager {
     return ln4Manager.GetInstance();

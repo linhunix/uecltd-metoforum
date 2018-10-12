@@ -1,0 +1,13 @@
+<ol>
+    <li>
+        <mat-form-field>
+            <input matInput [(ngModel)]="name" placeholder="Login Name">
+        </mat-form-field>
+        <mat-form-field>
+                <input matInput [(ngModel)]="pass" placeholder="Login password">
+            </mat-form-field>
+        </li>
+    <li>
+        <button mat-raised-button (click)="Login()">{{LoginLabel()}}</button>
+    </li>
+</ol>
