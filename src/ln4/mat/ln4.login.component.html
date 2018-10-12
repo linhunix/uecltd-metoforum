@@ -1,13 +1,15 @@
-<ol>
-    <li>
+<div>
+    <div class="row">
         <mat-form-field>
             <input matInput [(ngModel)]="name" placeholder="Login Name">
         </mat-form-field>
+    </div>
+    <div class="row">
         <mat-form-field>
-                <input matInput [(ngModel)]="pass" placeholder="Login password">
-            </mat-form-field>
-        </li>
-    <li>
+            <input matInput [(ngModel)]="pass" placeholder="Login password">
+        </mat-form-field>
+    </div>
+    <div class="row">
         <button mat-raised-button (click)="Login()">{{LoginLabel()}}</button>
-    </li>
-</ol>
+    </div>
+</div>

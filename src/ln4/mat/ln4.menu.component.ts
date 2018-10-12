@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material';
             *ngFor="let bitem of scope.remote.menu" 
             mat-button 
             href="{{bitem.src}}"
-            (click)="calldialog(bitem.act,bitem)"
+            (click)="calldialog(bitem.act,bitem.arg)"
             >
             {{bitem.label}}                
         </a>
@@ -23,13 +23,5 @@ import { MatDialog } from '@angular/material';
 export class ln4MatMenuModelComponent extends ln4A2MatComponent {
     constructor(dialog: MatDialog) { 
         super(true,true,dialog);
-    }
-    calldialog(dlgname:string,dlgvar:any):boolean{
-        if (this.isDialog()){
-            this.closeDialog();
-        }
-        this.setDialogClassName(dlgname);
-        this.myaction=dlgvar;
-        return this.openDialogEasy();
     }
 }

@@ -13,7 +13,7 @@ export class ln4MatLoginComponent {
     onNoClick(): void {
       this.dialogRef.close();
     }
-    loginLabel(){
+    LoginLabel(){
       return ln4Manager.GetInstance().translate("Login");
     }
   }

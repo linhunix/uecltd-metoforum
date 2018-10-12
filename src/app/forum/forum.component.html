@@ -3,7 +3,7 @@
     <tbody>
         <tr>
             <td>
-                <a href="http://www.statusmeteo.com/main_msgnew.asp?FS=S&amp;MP=main.asp">
+                <a href="#" (click)="authdialog('EditForumComponent',{})" >
                     <img src="assets/Blu_NewMsg.gif" title="Inserisce un nuovo messaggio" border="0">
                 </a>
             </td>
@@ -107,7 +107,7 @@
                 </mat-expansion-panel-header>
                 {{itm.dsc}}
                 <mat-action-row>
-                    <button mat-button color="primary" (click)="doaction(1,replay)">Replay</button>
+                    <button mat-button color="primary" (click)="authdialog('EditForumComponent',{Action:replay})" >Replay</button>
                     <button mat-button color="primary" (click)="nextStep()">Share</button>
                     <button mat-button color="primary" (click)="nextStep()">Change</button>
                 </mat-action-row>
@@ -120,7 +120,7 @@
     <tbody>
         <tr>
             <td>
-                <a href="http://www.statusmeteo.com/main_msgnew.asp?FS=S&amp;MP=main.asp">
+                <a href="#" (click)="authdialog('EditForumComponent',{Action:replay})" >
                     <img src="assets/Blu_NewMsg.gif" title="Inserisce un nuovo messaggio" border="0">
                 </a>
             </td>

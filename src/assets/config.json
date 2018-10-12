@@ -5,12 +5,12 @@
   "tags": {
     "menu": {
       "menu": [
-        "menu1",
+        "menu-main",
         "menu2"
       ]
     },
-    "menu1": {
-      "label": "Menu 1",
+    "menu-main": {
+      "label": "Status Meteo",
       "menu": [
         {
           "label": "Login",

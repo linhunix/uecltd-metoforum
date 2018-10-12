@@ -19,7 +19,7 @@ import { ln4MatMenuModelComponent } from '../ln4/mat/ln4.menu.component';
 import { ln4ValuesPipe } from 'src/ln4/ln4.ValuesPipe';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ln4MatLoginComponent } from 'src/ln4/mat/ln4.login.component';
-import { MatFormFieldModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
@@ -44,10 +44,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatTabsModule,
     MatExpansionModule,
     MatDialogModule,
+    MatInputModule,
     MatFormFieldModule
 
   ],
   providers: [
+  ],
+  entryComponents:[
+    ln4MatLoginComponent
   ],
   bootstrap: [
     AppComponent,

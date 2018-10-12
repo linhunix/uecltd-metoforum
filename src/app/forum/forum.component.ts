@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { ln4A2SimpleComp } from '../../ln4/ln4.A2SimpleComp';
-import { ln4Manager_evtConfig, ln4Manager_evtUpdate, ln4Manager } from '../../ln4/ln4.Manager';
+import { ln4Manager } from '../../ln4/ln4.Manager';
 import { ln4Map } from '../../ln4/ln4.Map';
 import { ln4Angular2 } from '../../ln4/ln4.Angular2';
+import { ln4A2MatComponent } from 'src/ln4/mat/ln4.A2Mat.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'forum-ln4',
   templateUrl: './forum.component.html',
   styleUrls: ['./forum.component.css']
 })
-export class ForumComponent extends ln4A2SimpleComp {
+export class ForumComponent extends ln4A2MatComponent {
   private frm: ln4Map;
   public initcfg() {
     this.frm = new ln4Map();
@@ -66,7 +67,7 @@ export class ForumComponent extends ln4A2SimpleComp {
     // use to make config 
     return source.returnOK();
   }
-  constructor() {
-    super();
+  constructor(dialog: MatDialog) { 
+    super(true,true,dialog);
   }
 }
