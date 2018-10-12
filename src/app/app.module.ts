@@ -19,8 +19,11 @@ import { ln4MatMenuModelComponent } from '../ln4/mat/ln4.menu.component';
 import { ln4ValuesPipe } from 'src/ln4/ln4.ValuesPipe';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ln4MatLoginComponent } from 'src/ln4/mat/ln4.login.component';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {CKEditorModule} from 'ng2-ckeditor';
+import { EditorComponent } from './Edit/edit.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +35,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NewsComponent,
     ln4MatMenuModelComponent,
     ln4ValuesPipe,
-    ln4MatLoginComponent
+    ln4MatLoginComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,
@@ -45,13 +49,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatExpansionModule,
     MatDialogModule,
     MatInputModule,
-    MatFormFieldModule
-
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    CKEditorModule    
   ],
   providers: [
   ],
   entryComponents:[
-    ln4MatLoginComponent
+    ln4MatLoginComponent,
+    EditorComponent
   ],
   bootstrap: [
     AppComponent,
@@ -89,6 +96,7 @@ export class AppModule {
     ln4Angular2.callUrl(ln4Manager_evtConfig, "/assets/config.json", null);
     // init component 
     ln4Angular2.setCompLib("ln4MatLoginComponent",ln4MatLoginComponent);
+    ln4Angular2.setCompLib("EditorComponent",EditorComponent);
   }
   public getLn4Manager(): ln4Manager {
     return ln4Manager.GetInstance();

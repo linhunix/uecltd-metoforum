@@ -3,61 +3,43 @@
     <tbody>
         <tr>
             <td>
-                <a href="#" (click)="authdialog('EditForumComponent',{})" >
+                <a href="#" (click)="authdialog('EditForumComponent',{Action:replay})">
                     <img src="assets/Blu_NewMsg.gif" title="Inserisce un nuovo messaggio" border="0">
                 </a>
             </td>
-            <form method="POST" action="main.asp"></form>
-            <td class="Fix" nowrap="nowrap">
-                <b>&nbsp;Pag.N°&nbsp;</b>
-            </td>
-            <td>
-                <input name="Pg" style="width:16px;" maxlength="3" value="1" title="Pagina Corrente" type="text">
-            </td>
-            <td class="Fix" nowrap="nowrap">
-                <b>&nbsp;Nick&nbsp;</b>
-            </td>
-            <td>
-                <input name="FN" style="width:60px;" maxlength="12" title="Ricerca messaggi per Nickname" type="text">
-            </td>
-            <td class="Fix" nowrap="nowrap">
-                <b>&nbsp;Data&nbsp;</b>
-            </td>
-            <td>
-                <input name="FD" style="width:60px;" maxlength="8" title="Ricerca messaggi per data" type="text">
-            </td>
-            <input name="FS" value="S" type="hidden">
-            <input name="FK" value="" type="hidden">
             <td>
                 <input src="assets/Blu_Refresh.gif" title="Aggiorna la pagina e applica i parametri" type="image"
                     (click)="doaction('reload')">
             </td>
-
+            <td class="Fix" nowrap="nowrap">
+                <b>&nbsp;Search&nbsp;</b>
+            </td>
+            <td>
+                <input name="find" style="width:160px;" maxlength="25" title="Ricerca messaggi" type="text">
+            </td>
+            <td class="Fix" nowrap="nowrap">
+                <b>&nbsp;Data&nbsp;</b>
+            </td>
+            <td class="Fix" nowrap="nowrap">
+                <input [matDatepicker]="myDatepickerft" name="FD" style="width:120px;" maxlength="10" title="Ricerca messaggi per data"
+                    type="text">
+                <mat-datepicker-toggle matSuffix [for]="myDatepickerft"></mat-datepicker-toggle>
+                <mat-datepicker #myDatepickerft></mat-datepicker>
+            </td>
             <td width="99%">&nbsp;</td>
-            <form method="POST" action="main.asp"></form>
+            <td class="Fix" nowrap="nowrap">
+                <b>&nbsp;Pag.N°&nbsp;</b>
+            </td>
+            <td>
+                <input name="Pg" style="width:16px;" maxlength="3" value="{{scope.remote.page}}" title="Pagina Corrente"
+                    type="text">
+            </td>
             <td align="left">
-                <input src="assets/Blu_Prev.gif" title="Pagina precedente" type="image">
-
-                <input name="Pg" value="1" type="hidden">
-
-                <input name="FS" value="S" type="hidden">
-                <input name="FN" value="" type="hidden">
-                <input name="FD" value="" type="hidden">
-                <input name="FK" value="" type="hidden">
-                <input name="FT" value="" type="hidden">
+                <img (click)="doaction('prevpage')" src="assets/Blu_Prev.gif" title="Pagina precedente" type="image">
             </td>
-
-            <form method="POST" action="main.asp"></form>
             <td align="right">
-                <input src="assets/Blu_Next.gif" title="Pagina successiva" type="image">
-                <input name="Pg" value="2" type="hidden">
-                <input name="FS" value="S" type="hidden">
-                <input name="FN" value="" type="hidden">
-                <input name="FD" value="" type="hidden">
-                <input name="FK" value="" type="hidden">
-                <input name="FT" value="" type="hidden">
+                <img (click)="doaction('nextpage')" src="assets/Blu_Next.gif" title="Pagina successiva" type="image">
             </td>
-
         </tr>
     </tbody>
 </table>
@@ -75,8 +57,8 @@
 </table>
 <mat-accordion class="forum-headers-align">
     <ng-container *ngFor="let cvar of scope.remote.forumVals|ln4Values">
-        <ng-container  *ngFor="let itm of cvar.topics">
-            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+        <ng-container *ngFor="let itm of cvar.topics">
+            <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',{label:itm.lbl})" hideToggle>
                 <mat-expansion-panel-header>
                     <mat-panel-title class='forum-main-title'>
                         <div class="f-tree-l0">
@@ -107,9 +89,9 @@
                 </mat-expansion-panel-header>
                 {{itm.dsc}}
                 <mat-action-row>
-                    <button mat-button color="primary" (click)="authdialog('EditForumComponent',{Action:replay})" >Replay</button>
-                    <button mat-button color="primary" (click)="nextStep()">Share</button>
-                    <button mat-button color="primary" (click)="nextStep()">Change</button>
+                    <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay})">Replay</button>
+                    <button mat-button color="primary" (click)="calldialog('ShareComponent',{Action:Share})">Share</button>
+                    <button mat-button color="primary" (click)="calldialog('EditorComponent',{Action:Change})">Change</button>
                 </mat-action-row>
             </mat-expansion-panel>
         </ng-container>
@@ -120,61 +102,43 @@
     <tbody>
         <tr>
             <td>
-                <a href="#" (click)="authdialog('EditForumComponent',{Action:replay})" >
+                <a href="#" (click)="authdialog('EditForumComponent',{Action:replay})">
                     <img src="assets/Blu_NewMsg.gif" title="Inserisce un nuovo messaggio" border="0">
                 </a>
             </td>
-            <form method="POST" action="main.asp"></form>
-            <td class="Fix" nowrap="nowrap">
-                <b>&nbsp;Pag.N°&nbsp;</b>
-            </td>
-            <td>
-                <input name="Pg" style="width:16px;" maxlength="3" value="1" title="Pagina Corrente" type="text">
-            </td>
-            <td class="Fix" nowrap="nowrap">
-                <b>&nbsp;Nick&nbsp;</b>
-            </td>
-            <td>
-                <input name="FN" style="width:60px;" maxlength="12" title="Ricerca messaggi per Nickname" type="text">
-            </td>
-            <td class="Fix" nowrap="nowrap">
-                <b>&nbsp;Data&nbsp;</b>
-            </td>
-            <td>
-                <input name="FD" style="width:60px;" maxlength="8" title="Ricerca messaggi per data" type="text">
-            </td>
-            <input name="FS" value="S" type="hidden">
-            <input name="FK" value="" type="hidden">
             <td>
                 <input src="assets/Blu_Refresh.gif" title="Aggiorna la pagina e applica i parametri" type="image"
                     (click)="doaction('reload')">
             </td>
-
+            <td class="Fix" nowrap="nowrap">
+                <b>&nbsp;Search&nbsp;</b>
+            </td>
+            <td>
+                <input name="find" style="width:160px;" maxlength="25" title="Ricerca messaggi" type="text">
+            </td>
+            <td class="Fix" nowrap="nowrap">
+                <b>&nbsp;Data&nbsp;</b>
+            </td>
+            <td class="Fix" nowrap="nowrap">
+                <input [matDatepicker]="myDatepickerfb" name="FD" style="width:120px;" maxlength="10" title="Ricerca messaggi per data"
+                    type="text">
+                <mat-datepicker-toggle matSuffix [for]="myDatepickerfb"></mat-datepicker-toggle>
+                <mat-datepicker #myDatepickerfb></mat-datepicker>
+            </td>
             <td width="99%">&nbsp;</td>
-            <form method="POST" action="main.asp"></form>
+            <td class="Fix" nowrap="nowrap">
+                <b>&nbsp;Pag.N°&nbsp;</b>
+            </td>
+            <td>
+                <input name="Pg" style="width:16px;" maxlength="3" value="{{scope.remote.page}}" title="Pagina Corrente"
+                    type="text">
+            </td>
             <td align="left">
-                <input src="assets/Blu_Prev.gif" title="Pagina precedente" type="image">
-
-                <input name="Pg" value="1" type="hidden">
-
-                <input name="FS" value="S" type="hidden">
-                <input name="FN" value="" type="hidden">
-                <input name="FD" value="" type="hidden">
-                <input name="FK" value="" type="hidden">
-                <input name="FT" value="" type="hidden">
+                <img (click)="doaction('prevpage')" src="assets/Blu_Prev.gif" title="Pagina precedente" type="image">
             </td>
-
-            <form method="POST" action="main.asp"></form>
             <td align="right">
-                <input src="assets/Blu_Next.gif" title="Pagina successiva" type="image">
-                <input name="Pg" value="2" type="hidden">
-                <input name="FS" value="S" type="hidden">
-                <input name="FN" value="" type="hidden">
-                <input name="FD" value="" type="hidden">
-                <input name="FK" value="" type="hidden">
-                <input name="FT" value="" type="hidden">
+                <img (click)="doaction('nextpage')" src="assets/Blu_Next.gif" title="Pagina successiva" type="image">
             </td>
-
         </tr>
     </tbody>
 </table>

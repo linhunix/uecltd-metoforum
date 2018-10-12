@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Editor</h2>
+<div class='row'>
+    <input matInput [(ngModel)]='name' placeholder='topic' style="width:100%;">
+</div>
+<div class='row'>
+    <ckeditor [(ngModel)]='content' debounce='500'></ckeditor>
+    <div [innerHTML]='content'>
+    </div>
+</div>
+<div class='row'>
+    <button mat-button [mat-dialog-close]='true' (click)='Save()'>Enter</button>
+</div>

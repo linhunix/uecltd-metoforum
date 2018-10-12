@@ -46,6 +46,9 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
     public setDialogClassName(dialogclassname: string) {
         let dialogObject: ComponentType<any> | TemplateRef<any>;
         dialogObject = ln4Angular2.getCompLib(dialogclassname);
+        if (dialogObject == null) {
+            ln4Angular2.msgWarning(dialogclassname + " is null!!");
+        }
         this.setDialog(dialogObject);
     }
     /**
@@ -121,15 +124,13 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
     authdialog(dlgname: string, dlgvar: any): boolean {
         let authok: boolean = false;
         if (ln4Manager.GetInstance().cfgGet("loginSession") == null) {
-            authok = this.calldialog("ln4MatLoginComponent", {});
-        } else {
-            authok = true;
+            ln4Angular2.msgDebug("Is Guest!");
+            authok = this.calldialog('ln4MatLoginComponent', {});
+            if (authok==false) {
+                alert(ln4Manager.GetInstance().translate("Not Allow!"));
+            }
+            return authok;
         }
-        if (authok) {
-            authok=this.calldialog(dlgname, dlgvar);
-        }
-        alert(ln4Manager.GetInstance().translate("Not Allow!"));
-        return false;
+        return this.calldialog(dlgname, dlgvar);
     }
-
 }

@@ -1,3 +1,4 @@
+<h2 mat-dialog-title>Login</h2>
 <div>
     <div class="row">
         <mat-form-field>
@@ -10,6 +11,6 @@
         </mat-form-field>
     </div>
     <div class="row">
-        <button mat-raised-button (click)="Login()">{{LoginLabel()}}</button>
+        <button mat-button [mat-dialog-close]="true" (click)="Login()">{{LoginLabel()}}</button>
     </div>
 </div>
