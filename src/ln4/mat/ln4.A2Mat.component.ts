@@ -123,7 +123,7 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
      */
     authdialog(dlgname: string, dlgvar: any): boolean {
         let authok: boolean = false;
-        if (ln4Manager.GetInstance().cfgGet("loginSession") == null) {
+        if (ln4Manager.GetInstance().profileGet("UserSess")== null) {
             ln4Angular2.msgDebug("Is Guest!");
             authok = this.calldialog('ln4MatLoginComponent', {});
             if (authok==false) {

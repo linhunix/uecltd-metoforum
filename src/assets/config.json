@@ -1,6 +1,7 @@
 {
   "app": "V1",
   "title": "STATUS METEO",
+  "serverurl":"https://svil.ln4.it",
   "desc": "Descrizione sito amatoriale",
   "tags": {
     "menu": {
