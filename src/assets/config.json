@@ -1,7 +1,8 @@
 {
   "app": "V1",
   "title": "STATUS METEO",
-  "serverurl":"https://svil.ln4.it",
+  "serverurl":"http://localhost:9090",
+  "serverurl-live":"https://svil.ln4.it",
   "desc": "Descrizione sito amatoriale",
   "tags": {
     "menu": {

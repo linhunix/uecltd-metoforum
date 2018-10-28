@@ -191,13 +191,13 @@ export class ln4Angular2 {
         let ln4: ln4Manager = ln4Manager.GetInstance();
         let httpsrv: any = ln4.serviceGet("http");
         if (httpsrv == null) {
-            ln4Angular2.msgWarning("noHttp");
+            ln4Angular2.msgWarning("NoHttp");
             return false;
         }
         if (httpsrv instanceof Http) {
-            ln4Angular2.msgInfo("HttpLoaded");
+            ln4Angular2.msgInfo("LoadedHttp");
         } else {
-            ln4Angular2.msgWarning("badHttp");
+            ln4Angular2.msgWarning("BadHttp");
             return false;
         }
         let res: Observable<any>;
@@ -242,7 +242,7 @@ export class ln4Angular2 {
                 status = res.status;
             } else {
                 status = 0;
-            }
+            }            
             ln4Angular2.msgDebug("STS=" + status);
             if (ln4Angular2.isDebug()){
                 console.log(mln4);

@@ -99,7 +99,7 @@ export class ln4Map {
         try {
             this.fromJson(JSON.parse(myJson));
         } catch (e) {
-            console.log("ln4Map.fromJsonString:" + e);
+            this.returnKO("ln4Map.fromJsonString:" + e);
         }
     }
     public fromJson(myJson: object): void {
@@ -110,7 +110,7 @@ export class ln4Map {
             let obj = this.toJson();
             return JSON.stringify(obj);
         } catch (e) {
-            console.log("ln4Map.fromJsonString:" + e);
+            this.returnKO("ln4Map.toJsonString:" + e);
         }
     }
     public toJson(): any {
@@ -120,7 +120,7 @@ export class ln4Map {
         try {
             this.prototype = this.MapToObj(myMap);
         } catch (e) {
-            console.log("ln4Map.fromMap:" + e);
+            this.returnKO("ln4Map.fromMap:" + e);
         }
     }
 
@@ -143,7 +143,7 @@ export class ln4Map {
         try {
             return this.ObjToMap(this.prototype);
         } catch (e) {
-            console.log("ln4Map.toMap:" + e);
+            this.returnKO("ln4Map.toMap:" + e);
         }
     }
     public returnOK(message: string = "OK"): this {
