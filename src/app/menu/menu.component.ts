@@ -12,16 +12,16 @@ import { ln4Map } from '../../ln4/ln4.Map';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent extends ln4A2SimpleComp {
-  public initcfg(){
+  public initcfg() {
     this.myId = "menu";
-    let cfgmap:ln4Map=new ln4Map();
+    let cfgmap: ln4Map = new ln4Map();
     cfgmap.set("title", "title");
     this.myPrms.set(ln4Manager_evtConfig, cfgmap);
   }
-  public  preReload(source: ln4Map, type: string): ln4Map {
+  public preReload(source: ln4Map, type: string): ln4Map {
     // use to make config 
     return source.returnOK();
-}
+  }
   constructor() {
     super();
   }

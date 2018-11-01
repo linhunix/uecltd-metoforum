@@ -31,3 +31,9 @@
 }
 xbutton[ng-reflect-menu=it1] {
 }
+a.mat-menu-item {
+    color: white !important;
+    font-style: normal;
+    font-size: small;
+    font-family: sans-serif;
+}

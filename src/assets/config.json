@@ -15,6 +15,16 @@
       "label": "Status Meteo",
       "menu": [
         {
+          "label": "#P#UserName#",
+          "src": "#",
+          "act": "ln4MatProfileUser"
+        },
+        {
+          "label": "#P#GroupName#",
+          "src": "#",
+          "act": "ln4MatProfileGroup"
+        },
+        {
           "label": "Login",
           "src": "#",
           "act": "ln4MatLoginComponent"
