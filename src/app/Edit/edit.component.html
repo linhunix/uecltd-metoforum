@@ -1,7 +1,20 @@
 <h2 mat-dialog-title>Editor</h2>
 <div class='row'>
-    <input matInput [(ngModel)]='name' placeholder='topic' style="width:100%;">
+    <input readonly matInput [(ngModel)]='forum' placeholder='Forum' style="width:100%;">
 </div>
+<HR>
+<div class='row'>
+    <input readonly matInput [(ngModel)]='topic' placeholder='Topic' style="width:100%;">
+</div>
+<HR>
+<div class='row'>
+    <input readonly matInput [(ngModel)]='from' placeholder='From User' style="width:100%;">
+</div>
+<HR>
+<div class='row'>
+    <input matInput [(ngModel)]='Subject' placeholder='Subject' style="width:100%;">
+</div>
+<HR><br>
 <div class='row'>
     <ckeditor [(ngModel)]='content' debounce='500'></ckeditor>
     <div [innerHTML]='content'>
