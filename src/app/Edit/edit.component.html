@@ -1,6 +1,12 @@
 <h2 mat-dialog-title>Editor</h2>
 <div class='row'>
-    <input readonly matInput [(ngModel)]='forum' placeholder='Forum' style="width:100%;">
+    <input readonly matInput [(ngModel)]='from' placeholder='From User' style="width:100%;">
+</div>
+<HR>
+<div class='row'>
+    <Select matInput [(ngModel)]='forum' style="width:100%;">
+        <option *ngFor="let item of forumList.split(',');" value="{{item}}" >{{Translate(item)}}</option>
+    </Select>
 </div>
 <HR>
 <div class='row'>
@@ -8,11 +14,7 @@
 </div>
 <HR>
 <div class='row'>
-    <input readonly matInput [(ngModel)]='from' placeholder='From User' style="width:100%;">
-</div>
-<HR>
-<div class='row'>
-    <input matInput [(ngModel)]='Subject' placeholder='Subject' style="width:100%;">
+    <input matInput [(ngModel)]='subject' placeholder='Subject' style="width:100%;">
 </div>
 <HR><br>
 <div class='row'>
