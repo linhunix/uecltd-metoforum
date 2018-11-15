@@ -162,5 +162,9 @@ export class ln4Map {
     public getMessage(): string {
         return this.message
     }
-
+    public static Load(obj:any):ln4Map{
+        let mymap:ln4Map = new ln4Map();
+        mymap.fromAny(obj);
+        return mymap;
+    }
 }

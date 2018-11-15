@@ -1,0 +1,45 @@
+<table style="min-width:540px; background-color:#215a94; border-color:#EFEFEF;" valign="absmiddle" width="100%" height="20"
+    cellspacing="1" cellpadding="1" border="0">
+    <tbody>
+        <tr>
+            <td>
+                <a href="#" (click)="authdialog('EditorComponent',{Action:replay})">
+                    <img src="assets/Blu_NewMsg.gif" title="Inserisce un nuovo messaggio" border="0">
+                </a>
+            </td>
+            <td>
+                <input src="assets/Blu_Refresh.gif" title="Aggiorna la pagina e applica i parametri" type="image"
+                    (click)="doaction('reload')">
+            </td>
+            <td class="Fix" nowrap="nowrap">
+                <b>&nbsp;Search&nbsp;</b>
+            </td>
+            <td>
+                <input name="find" style="width:160px;" maxlength="25" title="Ricerca messaggi" type="text">
+            </td>
+            <td class="Fix" nowrap="nowrap">
+                <b>&nbsp;Data&nbsp;</b>
+            </td>
+            <td class="Fix" nowrap="nowrap">
+                <input [matDatepicker]="myDatepickerfb" name="FD" style="width:120px;" maxlength="10" title="Ricerca messaggi per data"
+                    type="text">
+                <mat-datepicker-toggle matSuffix [for]="myDatepickerfb"></mat-datepicker-toggle>
+                <mat-datepicker #myDatepickerfb></mat-datepicker>
+            </td>
+            <td width="99%">&nbsp;</td>
+            <td class="Fix" nowrap="nowrap">
+                <b>&nbsp;Pag.N°&nbsp;</b>
+            </td>
+            <td>
+                <input name="Pg" style="width:16px;" maxlength="3" value="{{scope.remote.page}}" title="Pagina Corrente"
+                    type="text">
+            </td>
+            <td align="left">
+                <img (click)="doaction('prevpage')" src="assets/Blu_Prev.gif" title="Pagina precedente" type="image">
+            </td>
+            <td align="right">
+                <img (click)="doaction('nextpage')" src="assets/Blu_Next.gif" title="Pagina successiva" type="image">
+            </td>
+        </tr>
+    </tbody>
+</table>

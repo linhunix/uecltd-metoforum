@@ -23,6 +23,7 @@ import { MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateM
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {CKEditorModule} from 'ng2-ckeditor';
 import { EditorComponent } from './Edit/edit.component';
+import { ForumHeadComponent } from './forum/forumHead.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { EditorComponent } from './Edit/edit.component';
     ln4MatMenuModelComponent,
     ln4ValuesPipe,
     ln4MatLoginComponent,
-    EditorComponent
+    EditorComponent,
+    ForumHeadComponent
   ],
   imports: [
     BrowserModule,

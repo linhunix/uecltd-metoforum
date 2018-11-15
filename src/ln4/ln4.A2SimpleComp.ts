@@ -3,22 +3,16 @@ import { ln4Angular2 } from "./ln4.Angular2";
 import { ln4Manager_evtUpdate, ln4Manager, ln4Manager_evtConfig, ln4Manager_evtProfile, ln4Manager_evtLanguage } from "./ln4.Manager";
 import { ln4Map } from "./ln4.Map";
 import { ln4ValuesPipe } from "./ln4.ValuesPipe";
+import { ln4BaseComponent } from "./ln4.BaseComp";
 
-export class ln4A2SimpleComp {
-    /**
-     * input parametres 
-     * as the calling on the config 
-     */
-    public myPrms: ln4Map = new ln4Map();
+export class ln4A2SimpleComp extends ln4BaseComponent{
+
     @Input("ln4in") set ln4in(ln4in: any) {
         this.myPrms = new ln4Map();
         this.myPrms.fromAny(ln4in)
         this.reload(ln4Manager_evtUpdate);
     }
-    /**
-     *  In on ln4 mode 
-     */
-    public myId: string;
+
     @Input("ln4id") set ln4id(name: string) {
         name = name.trim();
         name = name.replace(/\s/g, "");
@@ -26,15 +20,6 @@ export class ln4A2SimpleComp {
         this.myId = name;
         this.reload(ln4Manager_evtUpdate);
     }
-    /**
-     * this is the standard id of the tag 
-     */
-    @Input("id") public tagId: string = null;
-    /**
-     * this is the standard output 
-     * scope.remote is the data collected from system
-     */
-    @Output("scope") public scope: any = {};
     /**
      * this is the parametres used on method do action 
      */
@@ -47,12 +32,7 @@ export class ln4A2SimpleComp {
      * the current action used on this element
      */
     public currentaction: string = "";
-    //////////////////////////////////////////////////////////////////
-    // Translate
-    //////////////////////////////////////////////////////////////////
-    public Translate(name: string): string {
-        return ln4Manager.GetInstance().translate(name);
-    }
+
     //////////////////////////////////////////////////////////////////
     // Trace is a test suite 
     //////////////////////////////////////////////////////////////////
@@ -84,6 +64,7 @@ export class ln4A2SimpleComp {
         dst.fromAny(src);
         return dst.toJsonString();
     }
+
     //////////////////////////////////////////////////////////////////
     // RELOAD CONFIG
     //////////////////////////////////////////////////////////////////
@@ -296,6 +277,7 @@ export class ln4A2SimpleComp {
      * @param boot_subscribe true if need to add subcribe config 
      */
     constructor(boot_reload: boolean = true, boot_subscribe: boolean = true) {
+        super();
         this.scope = {};
         this.initcfg();
         if (boot_reload) {

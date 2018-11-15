@@ -4,12 +4,12 @@ import { ln4Manager } from '../ln4.Manager';
 import { ln4A2Connect } from '../ln4.A2Connect';
 import { ln4Map } from '../ln4.Map';
 import { ln4Angular2 } from '../ln4.Angular2';
-import { stringify } from '@angular/core/src/util';
+import { ln4BaseComponent } from '../ln4.BaseComp';
 @Component({
   selector: 'login-ln4',
   templateUrl: 'ln4.login.component.html',
 })
-export class ln4MatLoginComponent {
+export class ln4MatLoginComponent  extends ln4BaseComponent {
   private user: string = "";
   private pass: string = "";
   private chkpass: string = "";
@@ -20,7 +20,9 @@ export class ln4MatLoginComponent {
   private lgnstyle: boolean = true;
   constructor(
     public dialogRef: MatDialogRef<ln4MatLoginComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      super();
+     }
   onNoClick(): void {
     this.dialogRef.close();
   }

@@ -5,6 +5,7 @@ import { ComponentType } from "@angular/core/src/render3";
 import { TemplateRef, ComponentFactoryResolver } from "@angular/core";
 import { ln4Angular2 } from "../ln4.Angular2";
 import { ln4Manager } from "../ln4.Manager";
+import { EventEmitter } from "protractor";
 
 
 export class ln4A2MatComponent extends ln4A2SimpleComp {
@@ -90,7 +91,13 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
      * @param data 
      */
     public openDialog(dialogObject: ComponentType<any> | TemplateRef<any>, data: ln4Map) {
+        if (ln4Angular2.isDebug()) {
+            console.log(data);
+            console.log(data.toJson());
+        }
         this.refdialog = this.dialog.open(dialogObject, data.toJson());
+        ln4Manager.GetInstance().dataImport("Dialog",data.toJson());
+        ln4Angular2.eventGet("Dialog",true).emit("load");
         this.refdialog.afterClosed().subscribe(result => {
             this.doaction("onCloseDialog", result);
         });
@@ -123,10 +130,10 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
      */
     authdialog(dlgname: string, dlgvar: any): boolean {
         let authok: boolean = false;
-        if (ln4Manager.GetInstance().profileGet("UserSess")== null) {
+        if (ln4Manager.GetInstance().profileGet("UserSess") == null) {
             ln4Angular2.msgDebug("Is Guest!");
             authok = this.calldialog('ln4MatLoginComponent', {});
-            if (authok==false) {
+            if (authok == false) {
                 alert(ln4Manager.GetInstance().translate("Not Allow!"));
             }
             return authok;

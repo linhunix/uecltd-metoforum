@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material';
 })
 export class ForumComponent extends ln4A2MatComponent {
   private frm: ln4Map;
+  public frmlst : string[] = [];
   public initcfg() {
     this.frm = new ln4Map();
   }
@@ -40,6 +41,7 @@ export class ForumComponent extends ln4A2MatComponent {
         obj.setFromAny(type, vals);
       }
       source.set("forumVals", obj.toJson());
+      this.frmlst = ln4Map.Load(source.get("forumVals")).keys();
     }
     console.log("Check Forum:" + this.myId + "/" + type);
     if (source.has("forums")) {

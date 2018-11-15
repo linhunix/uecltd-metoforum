@@ -1,66 +1,43 @@
-<table style="min-width:540px; background-color:#215a94; border-color:#EFEFEF;" valign="absmiddle" width="100%" height="20"
-    cellspacing="1" cellpadding="1" border="0">
-    <tbody>
-        <tr>
-            <td>
-                <a href="#" (click)="authdialog('EditorComponent',{Action:replay})">
-                    <img src="assets/Blu_NewMsg.gif" title="Inserisce un nuovo messaggio" border="0">
-                </a>
-            </td>
-            <td>
-                <input src="assets/Blu_Refresh.gif" title="Aggiorna la pagina e applica i parametri" type="image"
-                    (click)="doaction('reload')">
-            </td>
-            <td class="Fix" nowrap="nowrap">
-                <b>&nbsp;Search&nbsp;</b>
-            </td>
-            <td>
-                <input name="find" style="width:160px;" maxlength="25" title="Ricerca messaggi" type="text">
-            </td>
-            <td class="Fix" nowrap="nowrap">
-                <b>&nbsp;Data&nbsp;</b>
-            </td>
-            <td class="Fix" nowrap="nowrap">
-                <input [matDatepicker]="myDatepickerft" name="FD" style="width:120px;" maxlength="10" title="Ricerca messaggi per data"
-                    type="text">
-                <mat-datepicker-toggle matSuffix [for]="myDatepickerft"></mat-datepicker-toggle>
-                <mat-datepicker #myDatepickerft></mat-datepicker>
-            </td>
-            <td width="99%">&nbsp;</td>
-            <td class="Fix" nowrap="nowrap">
-                <b>&nbsp;Pag.N°&nbsp;</b>
-            </td>
-            <td>
-                <input name="Pg" style="width:16px;" maxlength="3" value="{{scope.remote.page}}" title="Pagina Corrente"
-                    type="text">
-            </td>
-            <td align="left">
-                <img (click)="doaction('prevpage')" src="assets/Blu_Prev.gif" title="Pagina precedente" type="image">
-            </td>
-            <td align="right">
-                <img (click)="doaction('nextpage')" src="assets/Blu_Next.gif" title="Pagina successiva" type="image">
-            </td>
-        </tr>
-    </tbody>
-</table>
-<table style="min-width:540px; background-color:#EFEFEF;" width="100%" cellspacing="1" cellpadding="0" border="0" align="center">
-    <tbody>
-        <tr height="18" bgcolor="#000080">
-            <th width="55%">Titolo</th>
-            <th width="6%">Risp.</th>
-            <th width="17%">Autore e Località</th>
-            <th width="17%">Ultimo Aggiorn.</th>
-        </tr>
-    </tbody>
-</table>
+<forum-head-ln4></forum-head-ln4>
 <mat-accordion class="forum-headers-align">
-    <ng-container *ngFor="let cvar of scope.remote.forumVals|ln4Values">
-        <ng-container *ngFor="let itm of cvar.topics">
+    <ng-container *ngFor="let cvar of frmlst ">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',{label:itm.lbl})" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title class='forum-main-title'>
+                    <div class="f-tree-l0">
+                        <img src="assets/S_ThrNew.gif">
+                    </div>
+                    <div class="f-tree-l1">
+                    </div>
+                    <div class="f-tree-l2">
+                    </div>
+                    <div class="f-tree-l3">
+                    </div>
+                    <span class="f-title">{{Translate(cvar)}}</span>
+                </mat-panel-title>
+                <mat-panel-description class='forum-main-tab0'>
+                    {{ scope.remote.forumVals[cvar].total}}
+                </mat-panel-description>
+                <mat-panel-description class='forum-main-tab1'>
+                    {{ scope.remote.forumVals[cvar].cat}}<br>
+                    {{ scope.remote.forumVals[cvar].lun}}<br>
+                    {{ scope.remote.forumVals[cvar].lps}}
+                </mat-panel-description>
+                <mat-panel-description class='forum-main-tab2'>
+                    {{ scope.remote.forumVals[cvar].lst}}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            {{ scope.remote.forumVals[cvar].dsc}}
+            <mat-action-row>
+                <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forum:cvar,forumList:[cvar]})">New</button>
+                <button mat-button color="primary" (click)="calldialog('ShareComponent',{Action:Share,forum:cvar})">Share</button>
+            </mat-action-row>
+        </mat-expansion-panel>
+        <ng-container *ngFor="let itm of scope.remote.forumVals[cvar].topics">
             <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',{label:itm.lbl})" hideToggle>
                 <mat-expansion-panel-header>
                     <mat-panel-title class='forum-main-title'>
                         <div class="f-tree-l0">
-                            <img *ngIf="itm.lvl==0" src="assets/S_ThrNew.gif">
                         </div>
                         <div class="f-tree-l1">
                             <img *ngIf="itm.lvl==1" src="assets/S_ThrNew.gif">
@@ -87,7 +64,7 @@
                 </mat-expansion-panel-header>
                 {{itm.dsc}}
                 <mat-action-row>
-                    <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay})">Replay</button>
+                    <button *ngIf="itm.lvl!=1" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay})">Replay</button>
                     <button mat-button color="primary" (click)="calldialog('ShareComponent',{Action:Share})">Share</button>
                     <button mat-button color="primary" (click)="calldialog('EditorComponent',{Action:Change})">Change</button>
                 </mat-action-row>
@@ -95,48 +72,4 @@
         </ng-container>
     </ng-container>
 </mat-accordion>
-<table style="min-width:540px; background-color:#215a94; border-color:#EFEFEF;" valign="absmiddle" width="100%" height="20"
-    cellspacing="1" cellpadding="1" border="0">
-    <tbody>
-        <tr>
-            <td>
-                <a href="#" (click)="authdialog('EditorComponent',{Action:replay})">
-                    <img src="assets/Blu_NewMsg.gif" title="Inserisce un nuovo messaggio" border="0">
-                </a>
-            </td>
-            <td>
-                <input src="assets/Blu_Refresh.gif" title="Aggiorna la pagina e applica i parametri" type="image"
-                    (click)="doaction('reload')">
-            </td>
-            <td class="Fix" nowrap="nowrap">
-                <b>&nbsp;Search&nbsp;</b>
-            </td>
-            <td>
-                <input name="find" style="width:160px;" maxlength="25" title="Ricerca messaggi" type="text">
-            </td>
-            <td class="Fix" nowrap="nowrap">
-                <b>&nbsp;Data&nbsp;</b>
-            </td>
-            <td class="Fix" nowrap="nowrap">
-                <input [matDatepicker]="myDatepickerfb" name="FD" style="width:120px;" maxlength="10" title="Ricerca messaggi per data"
-                    type="text">
-                <mat-datepicker-toggle matSuffix [for]="myDatepickerfb"></mat-datepicker-toggle>
-                <mat-datepicker #myDatepickerfb></mat-datepicker>
-            </td>
-            <td width="99%">&nbsp;</td>
-            <td class="Fix" nowrap="nowrap">
-                <b>&nbsp;Pag.N°&nbsp;</b>
-            </td>
-            <td>
-                <input name="Pg" style="width:16px;" maxlength="3" value="{{scope.remote.page}}" title="Pagina Corrente"
-                    type="text">
-            </td>
-            <td align="left">
-                <img (click)="doaction('prevpage')" src="assets/Blu_Prev.gif" title="Pagina precedente" type="image">
-            </td>
-            <td align="right">
-                <img (click)="doaction('nextpage')" src="assets/Blu_Next.gif" title="Pagina successiva" type="image">
-            </td>
-        </tr>
-    </tbody>
-</table>
+<forum-head-ln4></forum-head-ln4>
