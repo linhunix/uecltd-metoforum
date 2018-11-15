@@ -1,4 +1,4 @@
-<forum-head-ln4></forum-head-ln4>
+<forum-head-ln4 [ListForums]="frmlst"></forum-head-ln4>
 <mat-accordion class="forum-headers-align">
     <ng-container *ngFor="let cvar of frmlst ">
         <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',{label:itm.lbl})" hideToggle>
@@ -48,7 +48,7 @@
                         <div class="f-tree-l3">
                             <img *ngIf="itm.lvl==3" src="assets/S_ThrNew.gif">
                         </div>
-                        <span class="f-title">{{itm.lbl}}</span>
+                        <span class="f-title">{{itm.lbl}}:{{itm.sbj}}</span>
                     </mat-panel-title>
                     <mat-panel-description class='forum-main-tab0'>
                         {{itm.cnt}}
@@ -64,7 +64,9 @@
                 </mat-expansion-panel-header>
                 {{itm.dsc}}
                 <mat-action-row>
-                    <button *ngIf="itm.lvl!=1" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay})">Replay</button>
+                    <button *ngIf="itm.lvl==0" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:cvar})">New</button>
+                    <button *ngIf="itm.lvl==1" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:cvar,topic:itm.lbl,topicId:itm.idx})">Add</button>
+                    <button *ngIf="itm.lvl>1" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:cvar,topic:itm.lbl,topicId:itm.idx,subject:itm.sbj})">Replay</button>
                     <button mat-button color="primary" (click)="calldialog('ShareComponent',{Action:Share})">Share</button>
                     <button mat-button color="primary" (click)="calldialog('EditorComponent',{Action:Change})">Change</button>
                 </mat-action-row>

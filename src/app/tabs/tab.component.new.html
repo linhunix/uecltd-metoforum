@@ -9,7 +9,7 @@
         </tr>
         <tr>
             <td style="vertical-align:baseline; text-align:justify;">
-                <mat-tab-group>
+                <mat-tab-group  (selectedTabChange)="tabChanged($event)" >
                     <mat-tab *ngFor="let item of scope.remote.list" label={{item.label}}>
                             <hr>
                             <forum-ln4  ln4id="{{item.forum}}"  >

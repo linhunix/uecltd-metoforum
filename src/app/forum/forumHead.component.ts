@@ -12,9 +12,9 @@ import { ln4A2MatComponent } from 'src/ln4/mat/ln4.A2Mat.component';
     styleUrls: ['./forumHead.component.css']
   })
   export class ForumHeadComponent extends ln4A2MatComponent {
-  @Output("ListForums") public getForums(): string[] {
-    return ln4Map.Load(this.scope.forumVals).keys();
-  }
+  @Input("ListForums") public frmlist:string[];
+
+
   constructor(dialog: MatDialog) {
     super(true, true, dialog);
   }

@@ -7,7 +7,6 @@ import { ln4Angular2 } from "../ln4.Angular2";
 import { ln4Manager } from "../ln4.Manager";
 import { EventEmitter } from "protractor";
 
-
 export class ln4A2MatComponent extends ln4A2SimpleComp {
     /**
      * define the component used to call this dialog

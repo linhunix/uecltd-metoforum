@@ -4,7 +4,6 @@ import { ln4Map } from '../../ln4/ln4.Map';
 import { ln4Angular2 } from '../../ln4/ln4.Angular2';
 import { ln4A2MatComponent } from 'src/ln4/mat/ln4.A2Mat.component';
 import { MatDialog } from '@angular/material';
-
 @Component({
   selector: 'forum-ln4',
   templateUrl: './forum.component.html',

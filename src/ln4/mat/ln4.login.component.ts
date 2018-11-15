@@ -30,7 +30,7 @@ export class ln4MatLoginComponent  extends ln4BaseComponent {
     return ln4Manager.GetInstance().translate("Login");
   }
   public RegLabel(): string {
-    return ln4Manager.GetInstance().translate("register");
+    return ln4Manager.GetInstance().translate("Register");
   }
   public Login(): void {
     ln4A2Connect.LoginApi(this.user, this.pass);
