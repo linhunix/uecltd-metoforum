@@ -4,6 +4,7 @@ import { ln4Map } from '../../ln4/ln4.Map';
 import { ln4Angular2 } from '../../ln4/ln4.Angular2';
 import { ln4A2MatComponent } from 'src/ln4/mat/ln4.A2Mat.component';
 import { MatDialog } from '@angular/material';
+import { ln4A2Connect } from 'src/ln4/ln4.A2Connect';
 @Component({
   selector: 'forum-ln4',
   templateUrl: './forum.component.html',
@@ -12,6 +13,7 @@ import { MatDialog } from '@angular/material';
 export class ForumComponent extends ln4A2MatComponent {
   private frm: ln4Map;
   public frmlst : string[] = [];
+  public frmpg :number = 0;
   public initcfg() {
     this.frm = new ln4Map();
   }
@@ -46,11 +48,11 @@ export class ForumComponent extends ln4A2MatComponent {
     if (source.has("forums")) {
       source.get("forums").forEach((element: string) => {
         let formn = this.myId + "-" + element;
-        let formu = "/assets/forum." + element + ".json";
+        //let formu = "/assets/forum." + element + ".json";
         if (this.frm.has(formn) == false) {
           if (ln4Angular2.isDebug()) {
             console.log(formn);
-            console.log(formu);
+            //console.log(formu);
           }
           ln4Angular2.msgDebug("subscibe=" + formn);
           ln4Angular2.eventKill(formn);
@@ -60,7 +62,8 @@ export class ForumComponent extends ln4A2MatComponent {
               this.reload(ltype);
             }
           );
-          ln4Angular2.callUrl(formn, formu, null, false);
+          ln4A2Connect.ForumListTypeApi(formn,formn);
+          //ln4Angular2.callUrl(formn, formu, null, false);
           this.frm.set(formn, true);
         }
       });

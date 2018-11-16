@@ -37,6 +37,11 @@ public static ForumListApi(catid:number,forumEvnt:string):boolean {
     Post.set('DocType',"Forum");
     return ln4A2Connect.ApiConnect("RestTList",forumEvnt,Post);
 }
+public static ForumListTypeApi(forumEvnt:string,forumtype:string):boolean {
+    let Post:ln4Map=new ln4Map();
+    Post.set('DocType',forumtype);
+    return ln4A2Connect.ApiConnect("RestNList",forumEvnt,Post);
+}
 public static ForumFindApi(catid:number,findstr:string,forumEvnt:string):boolean {
     let Post:ln4Map=new ln4Map();
     Post.set('DocCatId',catid);

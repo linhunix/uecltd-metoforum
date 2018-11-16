@@ -1,4 +1,4 @@
-<forum-head-ln4 [ListForums]="frmlst"></forum-head-ln4>
+<forum-head-ln4 [ListForums]="frmlst" [pageForums]="frmpg"></forum-head-ln4>
 <mat-accordion class="forum-headers-align">
     <ng-container *ngFor="let cvar of frmlst ">
         <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',{label:itm.lbl})" hideToggle>
@@ -74,4 +74,4 @@
         </ng-container>
     </ng-container>
 </mat-accordion>
-<forum-head-ln4></forum-head-ln4>
+<forum-head-ln4  [ListForums]="frmlst" [pageForums]="frmpg" ></forum-head-ln4>

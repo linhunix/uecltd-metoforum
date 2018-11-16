@@ -31,7 +31,7 @@
                 <b>&nbsp;Pag.N°&nbsp;</b>
             </td>
             <td>
-                <input name="Pg" style="width:16px;" maxlength="3" value="{{scope.remote.page}}" title="Pagina Corrente"
+                <input name="Pg" style="width:16px;" maxlength="3" value="{{frmpage}}" (change)="doaction('changepage')" title="Pagina Corrente"
                     type="text">
             </td>
             <td align="left">
