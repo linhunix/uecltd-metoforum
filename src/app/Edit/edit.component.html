@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Editor</h2>
 <div class='row'>
-    <input readonly matInput value='{{from}}' placeholder='From User' style="width:50%;">
-    <input readonly matInput value='{{fromG}}' placeholder='From Group' style="width:50%;">
+    <input readonly matInput name="from" value='{{from}}' placeholder='From User' style="width:50%;">
+    <input readonly matInput name="fromG" value='{{fromG}}' placeholder='From Group' style="width:50%;">
 </div>
 <HR>
 <div class='row'>
@@ -11,10 +11,10 @@
 </div>
 <HR>
 <div class='row'>
-    <ng-container *ngIf="topicR=='readonly'">
+    <ng-container *ngIf="topicR">
         <input readonly matInput value='{{topic}}' placeholder='Topic' style="width:100%;">
     </ng-container>
-    <ng-container *ngIf="topicR!='readonly'">
+    <ng-container *ngIf="!topicR">
         <input matInput [(ngModel)]='topic' placeholder='Topic' style="width:100%;">
     </ng-container>
 </div>
@@ -22,7 +22,12 @@
 <div class='row'>
     <input matInput [(ngModel)]='subject' placeholder='Subject' style="width:100%;">
 </div>
-<HR><br>
+<HR>
+<div class='row'>
+    <input matInput [(ngModel)]='area' placeholder='Location Area' style="width:100%;">
+</div>
+<HR>
+    <br>
 <div class='row'>
     <ckeditor [(ngModel)]='content' debounce='500'></ckeditor>
     <div [innerHTML]='content'>

@@ -11,20 +11,18 @@
                     </div>
                     <div class="f-tree-l2">
                     </div>
-                    <div class="f-tree-l3">
-                    </div>
                     <span class="f-title">{{Translate(cvar)}}</span>
                 </mat-panel-title>
                 <mat-panel-description class='forum-main-tab0'>
-                    {{ scope.remote.forumVals[cvar].total}}
+                   Msg: {{ scope.remote.forumVals[cvar].total}}
                 </mat-panel-description>
                 <mat-panel-description class='forum-main-tab1'>
-                    {{ scope.remote.forumVals[cvar].cat}}<br>
-                    {{ scope.remote.forumVals[cvar].lun}}<br>
-                    {{ scope.remote.forumVals[cvar].lps}}
+                   Cat: {{ scope.remote.forumVals[cvar].cat}}<br>
+                   Usr: {{ scope.remote.forumVals[cvar].lun}}<br>
+                   Loc: {{ scope.remote.forumVals[cvar].lps}}
                 </mat-panel-description>
                 <mat-panel-description class='forum-main-tab2'>
-                    {{ scope.remote.forumVals[cvar].lst}}
+                   Dat: {{ scope.remote.forumVals[cvar].lst}}
                 </mat-panel-description>
             </mat-expansion-panel-header>
             {{ scope.remote.forumVals[cvar].dsc}}
@@ -46,30 +44,26 @@
                             <div class="f-tree-l2">
                                 <img *ngIf="itm['lvl']==2" src="assets/S_ThrNew.gif">
                             </div>
-                            <div class="f-tree-l3">
-                                <img *ngIf="itm['lvl']==3" src="assets/S_ThrNew.gif">
-                            </div>
                             <span class="f-title">{{itm.lbl}}:{{itm.sbj}}</span>
                         </mat-panel-title>
                         <mat-panel-description class='forum-main-tab0'>
-                            {{itm.cnt}}
+                            Msg: {{itm.cnt}}
                         </mat-panel-description>
                         <mat-panel-description class='forum-main-tab1'>
-                            {{itm.cat}}<br>
-                            {{itm.lun}}<br>
-                            {{itm.lps}}
+                            Cat: {{itm.cat}}<br>
+                            Usr: {{itm.lun}}<br>
+                            Loc: {{itm.lps}}
                         </mat-panel-description>
                         <mat-panel-description class='forum-main-tab2'>
-                            {{itm.lst}}
+                            Dat: {{itm.lst}}
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     {{itm.dsc}}
                     <mat-action-row>
-                        <button *ngIf="itm['lvl']==0" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:cvar})">New</button>
-                        <button *ngIf="itm['lvl']==1" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:cvar,topic:itm.lbl,topicId:itm.idx})">Add</button>
-                        <button *ngIf="itm['lvl'] >1" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:cvar,topic:itm.lbl,topicId:itm.idx,subject:itm.sbj})">Replay</button>
-                        <button mat-button color="primary" (click)="calldialog('ShareComponent',{Action:Share})">Share</button>
-                        <button mat-button color="primary" (click)="calldialog('EditorComponent',{Action:Change})">Change</button>
+                        <button *ngIf="itm['lvl']==1" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:new,forumList:cvar,level:1,topicId:itm.docid,topicR:false})">New</button>
+                        <button *ngIf="itm['lvl']==2" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:add,forumList:cvar,level:2,topic:itm.lbl,topicR:true,topicId:itm.catid})">Add</button>
+                        <button *ngIf="itm['lvl']==2" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:cvar,level:3,topic:itm.lbl,topicR:true,topicId:itm.catid,subject:itm.sbj})">Replay</button>
+                        <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:Change,forumList:cvar,level:itm.lvl,topic:itm.lbl,topicR:true,topicId:itm.catid,subject:itm.sbj})">Change</button>
                     </mat-action-row>
                 </mat-expansion-panel>
             </ng-container>

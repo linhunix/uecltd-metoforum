@@ -78,8 +78,10 @@ export class ForumComponent extends ln4A2MatComponent {
                           }
                         );
                       }
-
                       this.scope.remote.forumVals[ltype].row = key;
+                      this.scope.remote.forumVals[ltype].docid = kval.docid;
+                      this.scope.remote.forumVals[ltype].catid = kval.catid;
+                      this.scope.remote.forumVals[ltype].name = kval.name;
                     } else {
                       cnttpc++;
                       this.scope.remote.forumVals[ltype]["topics"][cnttpc] = kval.value;
@@ -97,7 +99,6 @@ export class ForumComponent extends ln4A2MatComponent {
             }
           );
           ln4A2Connect.ForumListTypeApi(formn, formn);
-          //ln4Angular2.callUrl(formn, formu, null, false);
           this.frm.set(formn, true);
         }
       });
