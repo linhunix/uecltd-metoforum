@@ -47,10 +47,23 @@ export class ln4A2SimpleComp extends ln4BaseComponent{
     }
     public traceToString(src: any): string {
         src = this.trace(src);
+        if (src==null){
+            return "null";
+        }
         if (typeof src.toString == 'function') {
             return src.toString();
         }
         return "" + src
+    }
+    public traceBoolean(src: any,search:string):boolean {
+        let source:string=this.traceToString(src);
+        console.log(source);
+        if (source.search(search)== -1){
+            console.log(search+ " is not found!!");
+            return false
+        }
+        console.log(search+ " is found!!");
+        return true;
     }
     /**
      * Convert a object to a json string value 

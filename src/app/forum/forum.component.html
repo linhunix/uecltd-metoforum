@@ -1,7 +1,7 @@
 <forum-head-ln4 [ListForums]="frmlst" [pageForums]="frmpg"></forum-head-ln4>
 <mat-accordion class="forum-headers-align">
     <ng-container *ngFor="let cvar of frmlst ">
-        <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',{label:itm.lbl})" hideToggle>
+        <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',{label:cvar})" hideToggle>
             <mat-expansion-panel-header>
                 <mat-panel-title class='forum-main-title'>
                     <div class="f-tree-l0">
@@ -33,45 +33,47 @@
                 <button mat-button color="primary" (click)="calldialog('ShareComponent',{Action:Share,forum:cvar})">Share</button>
             </mat-action-row>
         </mat-expansion-panel>
-        <ng-container *ngFor="let itm of scope.remote.forumVals[cvar].topics">
-            <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',{label:itm.lbl})" hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title class='forum-main-title'>
-                        <div class="f-tree-l0">
-                        </div>
-                        <div class="f-tree-l1">
-                            <img *ngIf="itm.lvl==1" src="assets/S_ThrNew.gif">
-                        </div>
-                        <div class="f-tree-l2">
-                            <img *ngIf="itm.lvl==2" src="assets/S_ThrNew.gif">
-                        </div>
-                        <div class="f-tree-l3">
-                            <img *ngIf="itm.lvl==3" src="assets/S_ThrNew.gif">
-                        </div>
-                        <span class="f-title">{{itm.lbl}}:{{itm.sbj}}</span>
-                    </mat-panel-title>
-                    <mat-panel-description class='forum-main-tab0'>
-                        {{itm.cnt}}
-                    </mat-panel-description>
-                    <mat-panel-description class='forum-main-tab1'>
-                        {{itm.cat}}<br>
-                        {{itm.lun}}<br>
-                        {{itm.lps}}
-                    </mat-panel-description>
-                    <mat-panel-description class='forum-main-tab2'>
-                        {{itm.lst}}
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-                {{itm.dsc}}
-                <mat-action-row>
-                    <button *ngIf="itm.lvl==0" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:cvar})">New</button>
-                    <button *ngIf="itm.lvl==1" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:cvar,topic:itm.lbl,topicId:itm.idx})">Add</button>
-                    <button *ngIf="itm.lvl>1" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:cvar,topic:itm.lbl,topicId:itm.idx,subject:itm.sbj})">Replay</button>
-                    <button mat-button color="primary" (click)="calldialog('ShareComponent',{Action:Share})">Share</button>
-                    <button mat-button color="primary" (click)="calldialog('EditorComponent',{Action:Change})">Change</button>
-                </mat-action-row>
-            </mat-expansion-panel>
+        <ng-container *ngFor="let itm of scope.remote.forumVals[cvar]['topics']">
+            <ng-container *ngIf="checkitm(itm)">
+                <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',itm);" hideToggle>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title class='forum-main-title'>
+                            <div class="f-tree-l0">
+                            </div>
+                            <div class="f-tree-l1">
+                                <img *ngIf="itm['lvl']==1" src="assets/S_ThrNew.gif">
+                            </div>
+                            <div class="f-tree-l2">
+                                <img *ngIf="itm['lvl']==2" src="assets/S_ThrNew.gif">
+                            </div>
+                            <div class="f-tree-l3">
+                                <img *ngIf="itm['lvl']==3" src="assets/S_ThrNew.gif">
+                            </div>
+                            <span class="f-title">{{itm.lbl}}:{{itm.sbj}}</span>
+                        </mat-panel-title>
+                        <mat-panel-description class='forum-main-tab0'>
+                            {{itm.cnt}}
+                        </mat-panel-description>
+                        <mat-panel-description class='forum-main-tab1'>
+                            {{itm.cat}}<br>
+                            {{itm.lun}}<br>
+                            {{itm.lps}}
+                        </mat-panel-description>
+                        <mat-panel-description class='forum-main-tab2'>
+                            {{itm.lst}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    {{itm.dsc}}
+                    <mat-action-row>
+                        <button *ngIf="itm['lvl']==0" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:cvar})">New</button>
+                        <button *ngIf="itm['lvl']==1" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:cvar,topic:itm.lbl,topicId:itm.idx})">Add</button>
+                        <button *ngIf="itm['lvl'] >1" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:cvar,topic:itm.lbl,topicId:itm.idx,subject:itm.sbj})">Replay</button>
+                        <button mat-button color="primary" (click)="calldialog('ShareComponent',{Action:Share})">Share</button>
+                        <button mat-button color="primary" (click)="calldialog('EditorComponent',{Action:Change})">Change</button>
+                    </mat-action-row>
+                </mat-expansion-panel>
+            </ng-container>
         </ng-container>
     </ng-container>
 </mat-accordion>
-<forum-head-ln4  [ListForums]="frmlst" [pageForums]="frmpg" ></forum-head-ln4>
+<forum-head-ln4 [ListForums]="frmlst" [pageForums]="frmpg"></forum-head-ln4>

@@ -12,11 +12,14 @@ import { ln4A2Connect } from 'src/ln4/ln4.A2Connect';
 })
 export class ForumComponent extends ln4A2MatComponent {
   private frm: ln4Map;
-  public frmlst : string[] = [];
-  public frmpg :number = 0;
+  public frmlst: string[] = [];
+  public frmpg: number = 0;
   public initcfg() {
     this.frm = new ln4Map();
   }
+  /**
+   * override preload to get info about standard reload 
+   */
   public preReload(source: ln4Map, type: string): ln4Map {
     if ((this.myId != null) && (this.frm.has(this.myId) == false)) {
       ln4Angular2.msgDebug("subscibe=" + this.myId);
@@ -60,18 +63,57 @@ export class ForumComponent extends ln4A2MatComponent {
             (ltype: string) => {
               ln4Angular2.msgDebug("eventGet=" + this.myId + "/" + ltype);
               this.reload(ltype);
+              if (this.scope.remote.forumVals[ltype] != null) {
+                let cnttpc = 0
+                let fval = this.scope.remote.forumVals[ltype];
+                this.scope.remote.forumVals[ltype]["topics"] = [];
+                Object.keys(fval).forEach(
+                  (key: any) => {
+                    let kval = fval[key];
+                    if (kval.docid == kval.catid) {
+                      if (kval.value != null) {
+                        Object.keys(kval.value).forEach(
+                          (subk: string) => {
+                            this.scope.remote.forumVals[ltype][subk] = kval.value[subk];
+                          }
+                        );
+                      }
+
+                      this.scope.remote.forumVals[ltype].row = key;
+                    } else {
+                      cnttpc++;
+                      this.scope.remote.forumVals[ltype]["topics"][cnttpc] = kval.value;
+                      this.scope.remote.forumVals[ltype]["topics"][cnttpc].row = key;
+                      if (this.scope.remote.forumVals[ltype]["topics"][cnttpc].lvl == null) {
+                        this.scope.remote.forumVals[ltype]["topics"][cnttpc].lvl = 0;
+                      }
+                    }
+                  });
+              } else {
+                this.scope.remote.forumVals[ltype] = [];
+                this.scope.remote.forumVals[ltype]["topics"] = [];
+              }
+              console.log(this.scope);
             }
           );
-          ln4A2Connect.ForumListTypeApi(formn,formn);
+          ln4A2Connect.ForumListTypeApi(formn, formn);
           //ln4Angular2.callUrl(formn, formu, null, false);
           this.frm.set(formn, true);
         }
       });
     }
-    // use to make config 
+    // use to check itm.lvl is present  
     return source.returnOK();
   }
-  constructor(dialog: MatDialog) { 
-    super(true,true,dialog);
+  public checkitm(itm: any): boolean {
+    if (itm != null) {
+      if ("lvl" in itm) {
+        return true;
+      }
+    }
+    return false;
+  }
+  constructor(dialog: MatDialog) {
+    super(true, true, dialog);
   }
 }
