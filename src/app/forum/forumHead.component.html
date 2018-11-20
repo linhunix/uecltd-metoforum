@@ -9,7 +9,7 @@
             </td>
             <td>
                 <input src="assets/Blu_Refresh.gif" title="Aggiorna la pagina e applica i parametri" type="image"
-                    (click)="doaction('reload')">
+                    (click)="doactionRemote(IdForum,'reload')">
             </td>
             <td class="Fix" nowrap="nowrap">
                 <b>&nbsp;Search&nbsp;</b>
@@ -31,8 +31,8 @@
                 <b>&nbsp;Pag.N°&nbsp;</b>
             </td>
             <td>
-                <input name="Pg" style="width:16px;" maxlength="3" value="{{frmpage}}" (change)="doaction('changepage')" title="Pagina Corrente"
-                    type="text">
+                <input name="Pg" style="width:16px;" maxlength="3" value="{{frmpage}}" (change)="doaction('changepage')"
+                    title="Pagina Corrente" type="text">
             </td>
             <td align="left">
                 <img (click)="doaction('prevpage')" src="assets/Blu_Prev.gif" title="Pagina precedente" type="image">

@@ -237,6 +237,21 @@ export class ln4A2SimpleComp extends ln4BaseComponent{
         ln4Angular2.eventEmit(this.myId, acttype, true);
     }
     /**
+     * Event based action programmable 
+     * manage an global event with myid as name 
+     * and the the acttype is the definiction of the event 
+     * you can add a parametres and they remain live since 
+     * the new event.
+     * @param acttype type of action defined 
+     * @param parm temporaney parametres used to manage this action 
+     */
+    public doactionRemote(eventname:string,acttype: string, parm: any = null): void {
+        this.myaction = parm;
+        this.lastaction = this.currentaction;
+        this.currentaction = acttype;
+        ln4Angular2.eventEmit(eventname, acttype, true);
+    }
+    /**
      * this function called at end of the action return the value 
      * of this.myaction as a scope.action 
      */

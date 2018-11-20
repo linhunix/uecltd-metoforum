@@ -5,5 +5,14 @@
     "DEBUG-LVL-26":"INF",
     "DEBUG-LVL-1":"DBG",
     "Login":"Accedi",
-    "Register":"Registrati"
+    "forumCasting":"Casting",
+    "forumTalk":"Discussioni",
+    "forumOT":"Varie & Strumentazione",
+    "forumFunghi":"Funghi",
+    "Register":"Registrati",
+    "forumCasting-Casting":"F.Casting",
+    "forumTalk-Talk":"F.Discussioni",
+    "forumOT-OT":"F.Varie",
+    "forumOT-Strumentazione":"F.Strumentazione",
+    "forumFunghi-Funghi":"F.Funghi"
 }

@@ -12,17 +12,19 @@
 }
 .forum-main-tab0 {
     width: 6%;   
+    font-size: 10px;
 }
 .forum-main-tab1 {
-    width: 17%;   
+    width: 18%;   
+    font-size: 10px;
 }
 .forum-main-tab2 {
-    width: 17%;
+    width: 18%;
+    font-size: 10px;
 }
 .f-tree-l0,
 .f-tree-l1,
-.f-tree-l2,
-.f-tree-l3{
+.f-tree-l2{
     width: 10px !important;
     min-width: 10px !important;
 }

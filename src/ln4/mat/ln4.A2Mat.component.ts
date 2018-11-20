@@ -59,6 +59,7 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
             this.refdialog.close();
             this.refdialog = null;
         }
+        this.doaction("reload");
     }
     /**
      * check if dialog is open or not 

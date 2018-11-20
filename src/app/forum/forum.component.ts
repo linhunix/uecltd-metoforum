@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ln4Manager } from '../../ln4/ln4.Manager';
+import { ln4Manager, ln4Manager_evtProfile } from '../../ln4/ln4.Manager';
 import { ln4Map } from '../../ln4/ln4.Map';
 import { ln4Angular2 } from '../../ln4/ln4.Angular2';
 import { ln4A2MatComponent } from 'src/ln4/mat/ln4.A2Mat.component';
@@ -29,10 +29,11 @@ export class ForumComponent extends ln4A2MatComponent {
         });
       this.frm.set(this.myId, true);
     }
-    if (type == "reload") {
+    if (type == "reload" || type== ln4Manager_evtProfile) {
       ln4Angular2.msgInfo("force Reload");
       this.frm = new ln4Map();
       this.frm.set(this.myId, true);
+      source.delete("forumVals");
     }
     return source.returnOK();
   }

@@ -21,7 +21,7 @@ public static LoginApi(user:string,pass:string):boolean {
         (ltype: string) => {
           ln4Angular2.msgDebug("runload=" + ltype);
           ln4Manager.GetInstance().runload(ltype);
-          ln4Angular2.eventGet(ln4Manager_evtUpdate, true).emit(ltype);
+          ln4Angular2.eventGet(ln4Manager_evtUpdate, true).emit(ln4Manager_evtUpdate);
         }
       );
     return ln4A2Connect.ApiConnect("RestLogin",ln4Manager_evtProfile,Post);

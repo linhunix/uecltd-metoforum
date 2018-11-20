@@ -1,71 +1,72 @@
-<forum-head-ln4 [ListForums]="frmlst" [pageForums]="frmpg"></forum-head-ln4>
+<forum-head-ln4 [IdForum]="myId" [ListForums]="frmlst" [pageForums]="frmpg"></forum-head-ln4>
 <mat-accordion class="forum-headers-align">
     <ng-container *ngFor="let cvar of frmlst ">
-        <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',{label:cvar})" hideToggle>
-            <mat-expansion-panel-header>
-                <mat-panel-title class='forum-main-title'>
-                    <div class="f-tree-l0">
-                        <img src="assets/S_ThrNew.gif">
-                    </div>
-                    <div class="f-tree-l1">
-                    </div>
-                    <div class="f-tree-l2">
-                    </div>
-                    <span class="f-title">{{Translate(cvar)}}</span>
-                </mat-panel-title>
-                <mat-panel-description class='forum-main-tab0'>
-                   Msg: {{ scope.remote.forumVals[cvar].total}}
-                </mat-panel-description>
-                <mat-panel-description class='forum-main-tab1'>
-                   Cat: {{ scope.remote.forumVals[cvar].cat}}<br>
-                   Usr: {{ scope.remote.forumVals[cvar].lun}}<br>
-                   Loc: {{ scope.remote.forumVals[cvar].lps}}
-                </mat-panel-description>
-                <mat-panel-description class='forum-main-tab2'>
-                   Dat: {{ scope.remote.forumVals[cvar].lst}}
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            {{ scope.remote.forumVals[cvar].dsc}}
-            <mat-action-row>
-                <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forum:cvar,forumList:[cvar]})">New</button>
-                <button mat-button color="primary" (click)="calldialog('ShareComponent',{Action:Share,forum:cvar})">Share</button>
-            </mat-action-row>
-        </mat-expansion-panel>
-        <ng-container *ngFor="let itm of scope.remote.forumVals[cvar]['topics']">
-            <ng-container *ngIf="checkitm(itm)">
-                <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',itm);" hideToggle>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title class='forum-main-title'>
-                            <div class="f-tree-l0">
-                            </div>
-                            <div class="f-tree-l1">
-                                <img *ngIf="itm['lvl']==1" src="assets/S_ThrNew.gif">
-                            </div>
-                            <div class="f-tree-l2">
-                                <img *ngIf="itm['lvl']==2" src="assets/S_ThrNew.gif">
-                            </div>
-                            <span class="f-title">{{itm.lbl}}:{{itm.sbj}}</span>
-                        </mat-panel-title>
-                        <mat-panel-description class='forum-main-tab0'>
-                            Msg: {{itm.cnt}}
-                        </mat-panel-description>
-                        <mat-panel-description class='forum-main-tab1'>
-                            Cat: {{itm.cat}}<br>
-                            Usr: {{itm.lun}}<br>
-                            Loc: {{itm.lps}}
-                        </mat-panel-description>
-                        <mat-panel-description class='forum-main-tab2'>
-                            Dat: {{itm.lst}}
-                        </mat-panel-description>
-                    </mat-expansion-panel-header>
-                    {{itm.dsc}}
-                    <mat-action-row>
-                        <button *ngIf="itm['lvl']==1" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:new,forumList:cvar,level:1,topicId:itm.docid,topicR:false})">New</button>
-                        <button *ngIf="itm['lvl']==2" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:add,forumList:cvar,level:2,topic:itm.lbl,topicR:true,topicId:itm.catid})">Add</button>
-                        <button *ngIf="itm['lvl']==2" mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:cvar,level:3,topic:itm.lbl,topicR:true,topicId:itm.catid,subject:itm.sbj})">Replay</button>
-                        <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:Change,forumList:cvar,level:itm.lvl,topic:itm.lbl,topicR:true,topicId:itm.catid,subject:itm.sbj})">Change</button>
-                    </mat-action-row>
-                </mat-expansion-panel>
+        <ng-container *ngIf="cvar">
+            <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',{label:cvar})" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class='forum-main-title'>
+                        <div class="f-tree-l0">
+                            <img src="assets/S_ThrNew.gif">
+                        </div>
+                        <div class="f-tree-l1">
+                        </div>
+                        <div class="f-tree-l2">
+                        </div>
+                        <span class="f-title">{{Translate(cvar)}}</span>
+                    </mat-panel-title>
+                    <mat-panel-description class='forum-main-tab0'>
+                        Msg: {{ scope.remote.forumVals[cvar].total}}
+                    </mat-panel-description>
+                    <mat-panel-description class='forum-main-tab1'>
+                        Cat: {{ scope.remote.forumVals[cvar].cat}}<br>
+                        Usr: {{ scope.remote.forumVals[cvar].lun}}<br>
+                        Loc: {{ scope.remote.forumVals[cvar].lps}}
+                    </mat-panel-description>
+                    <mat-panel-description class='forum-main-tab2'>
+                        Dat: {{ scope.remote.forumVals[cvar].lst}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div [innerHTML]='scope.remote.forumVals[cvar].dsc'></div>
+                <mat-action-row>
+                    <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forum:cvar,forumList:[cvar]})">New</button>
+                    <button mat-button color="primary" (click)="calldialog('ShareComponent',{Action:Share,forum:cvar})">Share</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+            <ng-container *ngFor="let itm of scope.remote.forumVals[cvar]['topics']">
+                <ng-container *ngIf="checkitm(itm)">
+                    <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',itm);" hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class='forum-main-title'>
+                                <div class="f-tree-l0">
+                                </div>
+                                <div class="f-tree-l1">
+                                    <img *ngIf="itm['lvl']==1" src="assets/S_ThrNew.gif">
+                                </div>
+                                <div class="f-tree-l2">
+                                    <img *ngIf="itm['lvl']==2" src="assets/S_ThrNew.gif">
+                                </div>
+                                <span class="f-title">{{Translate(itm.lbl)}}:{{itm.sbj}}</span>
+                            </mat-panel-title>
+                            <mat-panel-description class='forum-main-tab0'>
+                                Msg: {{itm.cnt}}
+                            </mat-panel-description>
+                            <mat-panel-description class='forum-main-tab1'>
+                                Cat: {{Translate(itm.cat)}}<br>
+                                Usr: {{itm.lun}}<br>
+                                Loc: {{itm.lps}}
+                            </mat-panel-description>
+                            <mat-panel-description class='forum-main-tab2'>
+                                Dat: {{itm.lst}}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div [innerHTML]='itm.dsc'></div>
+                        <mat-action-row>
+                            <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:add,forumList:[itm.cat],level:2,topic:itm.lbl,topicR:true,topicId:itm.catid})">Add</button>
+                            <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:[itm.cat],level:3,topic:itm.lbl,topicR:true,topicId:itm.catid,subject:itm.sbj})">Replay</button>
+                            <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:Change,forumList:[itm.cat],level:itm.lvl,topic:itm.lbl,topicR:true,topicId:itm.catid,subject:itm.sbj})">Change</button>
+                        </mat-action-row>
+                    </mat-expansion-panel>
+                </ng-container>
             </ng-container>
         </ng-container>
     </ng-container>
