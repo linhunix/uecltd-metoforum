@@ -98,6 +98,13 @@ export class ln4Angular2 {
     //////////////////////////////////////////////////////////////////
     // DEBUGGER
     //////////////////////////////////////////////////////////////////
+    public static resetdbg(){
+        if (ln4Angular2.debug != null) {
+            ln4Angular2.debug.complete();
+            ln4Angular2.debug=null;
+        }
+        ln4Angular2.msgInfo("resetdbg");
+    }
     private static debugPrint(data: string) {
         let ln4 = ln4Manager.GetInstance();
         let cfglbl: any = ln4.cfgGet("title");
@@ -119,7 +126,7 @@ export class ln4Angular2 {
                 ln4Angular2.level = Number.parseInt("" + cfglvl);
             }
             if ((Number.isNaN(ln4Angular2.level) || ln4Angular2.level == null)) {
-                ln4Angular2.level = 0;
+                ln4Angular2.level = 70;
             }
             ln4Angular2.debug.emit(ln4Angular2.level + "|InitDebug");
         }

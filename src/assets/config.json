@@ -4,6 +4,7 @@
   "serverurl":"http://api-sm.ln4.it:80",
   "serverurl-live":"https://svil.ln4.it",
   "desc": "Descrizione sito amatoriale",
+  "level":"60",
   "tags": {
     "menu": {
       "menu": [
