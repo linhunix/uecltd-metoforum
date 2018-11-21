@@ -36,11 +36,12 @@ export class EditorComponent extends ln4BaseComponent {
             console.log(mydata);
         }
         if (mydata != null) {
-            if ("forum" in mydata) {
-                this.forum = mydata.forum;
-            }
             if ("forumList" in mydata) {
                 this.forumList = mydata.forumList;
+                this.forum = mydata.forumList[0];
+            }
+            if ("forum" in mydata) {
+                this.forum = mydata.forum;
             }
             if ("subject" in mydata) {
                 this.subject = mydata.subject;

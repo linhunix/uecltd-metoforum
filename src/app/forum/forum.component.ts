@@ -29,7 +29,7 @@ export class ForumComponent extends ln4A2MatComponent {
         });
       this.frm.set(this.myId, true);
     }
-    if (type == "reload" || type== ln4Manager_evtProfile) {
+    if (type == "reload" || type == ln4Manager_evtProfile) {
       ln4Angular2.msgInfo("force Reload");
       this.frm = new ln4Map();
       this.frm.set(this.myId, true);
@@ -83,6 +83,9 @@ export class ForumComponent extends ln4A2MatComponent {
                       this.scope.remote.forumVals[ltype].docid = kval.docid;
                       this.scope.remote.forumVals[ltype].catid = kval.catid;
                       this.scope.remote.forumVals[ltype].name = kval.name;
+                      if ( this.scope.remote.forumVals[ltype].cat == null) {
+                        this.scope.remote.forumVals[ltype].cat = ltype;
+                      }
                     } else {
                       cnttpc++;
                       this.scope.remote.forumVals[ltype]["topics"][cnttpc] = kval.value;
@@ -90,6 +93,13 @@ export class ForumComponent extends ln4A2MatComponent {
                       if (this.scope.remote.forumVals[ltype]["topics"][cnttpc].lvl == null) {
                         this.scope.remote.forumVals[ltype]["topics"][cnttpc].lvl = 0;
                       }
+                      if (this.scope.remote.forumVals[ltype]["topics"][cnttpc].cat == null) {
+                        this.scope.remote.forumVals[ltype]["topics"][cnttpc].cat = ltype;
+                      }
+                      this.scope.remote.forumVals[ltype].lun=this.scope.remote.forumVals[ltype]["topics"][cnttpc].lun;
+                      this.scope.remote.forumVals[ltype].lps=this.scope.remote.forumVals[ltype]["topics"][cnttpc].lps;
+                      this.scope.remote.forumVals[ltype].lst=this.scope.remote.forumVals[ltype]["topics"][cnttpc].lst;
+                      this.scope.remote.forumVals[ltype].total=cnttpc;
                     }
                   });
               } else {
