@@ -91,8 +91,8 @@ export class AppModule {
       (ltype: string) => {
         ln4Angular2.msgDebug("runload=" + ltype);
         this.getLn4Manager().runload(ltype);
-        console.log(this.getLn4Manager());
         ln4Angular2.eventGet(ln4Manager_evtUpdate, true).emit(ltype);
+        ln4Angular2.resetdbg();
       }
     );
     ln4Angular2.callUrl(ln4Manager_evtConfig, "/assets/config.json", null);
