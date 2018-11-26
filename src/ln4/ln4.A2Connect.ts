@@ -23,20 +23,20 @@ public static LoginApi(user:string,pass:string):boolean {
           let res =ln4Manager.GetInstance().dataExport(ltype);
           console.log(res);
           if (res==null){
-            return ;
-          }
+            return alert(ln4Manager.GetInstance().translate("Server Time out!!"));
+        }
           if (res instanceof ln4Map){
               if (res.has("GroupName")){
                   if (res.get("GroupName")=="Guest"){
-                    return;
+                    return alert(ln4Manager.GetInstance().translate("wrong user!!"));
                   }
               }else{
-                return;
-              }        
+                return alert(ln4Manager.GetInstance().translate("Server Reject!!"));
+            }        
           }
           ln4Manager.GetInstance().runload(ltype);
-          ln4Angular2.eventGet(ln4Manager_evtUpdate, true).emit(ln4Manager_evtUpdate);
-        }
+          ln4Angular2.eventGet(ln4Manager_evtUpdate, true).emit(ltype);
+          }
       );
     return ln4A2Connect.ApiConnect("RestLogin",ln4Manager_evtProfile,Post);
 }
