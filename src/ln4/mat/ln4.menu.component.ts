@@ -17,7 +17,7 @@ import { ln4Manager } from '../ln4.Manager';
         </a>
     </mat-menu>
     <button mat-button title="{{myId}}" [matMenuTriggerFor]="ln4MatMenuModel">
-        {{scope.remote.label}}
+        {{Translate(scope.remote.label)}}
     </button>
     `
 })

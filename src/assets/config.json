@@ -4,43 +4,53 @@
   "serverurl":"http://api-sm.ln4.it:80",
   "serverurl-live":"https://svil.ln4.it",
   "desc": "Descrizione sito amatoriale",
-  "level":"60",
+  "level":"70",
   "tags": {
     "menu": {
       "menu": [
-        "menu-main",
-        "menu2"
+        "SiteMenu",
+        "UserMenu",
+        "GroupMenu"
       ]
     },
-    "menu-main": {
+    "SiteMenu": {
       "label": "Status Meteo",
       "menu": [
         {
-          "label": "#P#UserName#",
+          "label": "Regolamento",
           "src": "#",
-          "act": "ln4MatProfileUser"
+          "act": "xxxxx"
         },
         {
-          "label": "#P#GroupName#",
+          "label": "Pagina2",
           "src": "#",
-          "act": "ln4MatProfileGroup"
-        },
+          "act": "xxxxx"
+        }
+      ]
+    },
+    "UserMenu": {
+      "label": "#P#UserName#",
+      "menu": [
         {
           "label": "Login",
           "src": "#",
           "act": "ln4MatLoginComponent"
         },
         {
-          "label": "menu title 1",
+          "label": "GDPR",
           "src": "#"
         }
       ]
     },
-    "menu2": {
-      "label": "menu 2",
+    "GroupMenu": {
+      "label": "#P#GroupName#",
       "menu": [
         {
-          "label": "menu title 2",
+          "label": "Moderate",
+          "src": "#"
+        },
+        {
+          "label": "Approve",
           "src": "#"
         }
       ]

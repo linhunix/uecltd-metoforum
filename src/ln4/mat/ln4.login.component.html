@@ -32,11 +32,11 @@
             </span>
         </div>
     </div>
-    <div class="row">
-        <div class="col" *ngIf="lgnstyle">
-            <button mat-button [mat-dialog-close]="true" (click)="Login()">{{LoginLabel()}}</button>
+    <div class="row" style="align-content: center;">
+        <div class="col s6" *ngIf="lgnstyle" style="margin:2%;display:inline;width: 45%; max-width: 45%;">
+            <button class="#69f0ae green accent-2 z-depth-4" mat-button [mat-dialog-close]="true" (click)="Login()">{{LoginLabel()}}</button>
         </div>
-        <div class="col">
-            <button mat-button (click)="Register()">{{RegLabel()}}</button>
+        <div class="col s6"  style="margin:2%;display:inline;width: 45%; max-width: 45%;" >
+            <button class="#9e9d24 lime darken-3 z-depth-4" mat-button (click)="Register()">{{RegLabel()}}</button>
         </div>
     </div>

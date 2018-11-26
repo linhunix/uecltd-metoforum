@@ -20,6 +20,20 @@ public static LoginApi(user:string,pass:string):boolean {
     ln4Angular2.eventGet(ln4Manager_evtProfile, true).subscribe(
         (ltype: string) => {
           ln4Angular2.msgDebug("runload=" + ltype);
+          let res =ln4Manager.GetInstance().dataExport(ltype);
+          console.log(res);
+          if (res==null){
+            return ;
+          }
+          if (res instanceof ln4Map){
+              if (res.has("GroupName")){
+                  if (res.get("GroupName")=="Guest"){
+                    return;
+                  }
+              }else{
+                return;
+              }        
+          }
           ln4Manager.GetInstance().runload(ltype);
           ln4Angular2.eventGet(ln4Manager_evtUpdate, true).emit(ln4Manager_evtUpdate);
         }
