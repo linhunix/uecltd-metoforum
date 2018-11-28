@@ -23,8 +23,8 @@ import { MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateM
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {CKEditorModule} from 'ng2-ckeditor';
 import { EditorComponent } from './Edit/edit.component';
-import { ForumHeadComponent } from './forum/forumHead.component';
-import { ForumRowComponent } from './forum/forumRow.component';
+import { ForumHeadComponent } from './forum/Head/forumHead.component';
+import { ForumRowComponent } from './forum/Row/forumRow.component';
 
 @NgModule({
   declarations: [
