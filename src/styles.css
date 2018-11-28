@@ -37,3 +37,8 @@ a.mat-menu-item {
     font-size: small;
     font-family: sans-serif;
 }
+button {
+    border:1px solid #339966;
+    background-color: #EFEFEF;
+    COLOR: #0000A0;
+}

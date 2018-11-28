@@ -24,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {CKEditorModule} from 'ng2-ckeditor';
 import { EditorComponent } from './Edit/edit.component';
 import { ForumHeadComponent } from './forum/forumHead.component';
+import { ForumRowComponent } from './forum/forumRow.Component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ForumHeadComponent } from './forum/forumHead.component';
     ln4ValuesPipe,
     ln4MatLoginComponent,
     EditorComponent,
-    ForumHeadComponent
+    ForumHeadComponent,
+    ForumRowComponent
   ],
   imports: [
     BrowserModule,

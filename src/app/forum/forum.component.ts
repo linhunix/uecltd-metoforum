@@ -66,47 +66,70 @@ export class ForumComponent extends ln4A2MatComponent {
               this.reload(ltype);
               if (this.scope.remote.forumVals[ltype] != null) {
                 let cnttpc = 0
+                let cntsub = 0
+                let lsttpc = {};
+                let lstcnt = {};
                 let fval = this.scope.remote.forumVals[ltype];
+                this.scope.remote.forumVals[ltype]={};
                 this.scope.remote.forumVals[ltype]["topics"] = [];
                 Object.keys(fval).forEach(
                   (key: any) => {
                     let kval = fval[key];
-                    if (kval.docid == kval.catid) {
-                      if (kval.value != null) {
-                        Object.keys(kval.value).forEach(
-                          (subk: string) => {
-                            this.scope.remote.forumVals[ltype][subk] = kval.value[subk];
-                          }
-                        );
+                    if (kval.docid != null) {
+                      if (kval.docid == kval.catid) {
+                        if (kval.value != null) {
+                          Object.keys(kval.value).forEach(
+                            (subk: string) => {
+                              this.scope.remote.forumVals[ltype][subk] = kval.value[subk];
+                            }
+                          );
+                        }
+                        this.scope.remote.forumVals[ltype].row = key;
+                        this.scope.remote.forumVals[ltype].docid = kval.docid;
+                        this.scope.remote.forumVals[ltype].catid = kval.catid;
+                        this.scope.remote.forumVals[ltype].name = kval.name;
+                        if (this.scope.remote.forumVals[ltype].cat == null) {
+                          this.scope.remote.forumVals[ltype].cat = ltype;
+                        }
+                      } else {
+                        let topic = kval.value;
+                        topic.idx = key;
+                        topic.doc = kval;
+                        topic.did = kval.docid;
+                        topic.cid = kval.catid;
+                        topic.def = kval.name;
+                        if (topic.lvl == null) {
+                          topic.lvl = 1;
+                        }
+                        if (topic.cat == null) {
+                          topic.cat = ltype;
+                        }
+                        topic.topics = [];
+                        cntsub++;
+                        if (topic.lvl == 1) {
+                          cnttpc++;
+                          lsttpc[kval.lbl] = cnttpc;
+                          lstcnt[kval.lbl] = 0;
+                          this.scope.remote.forumVals[ltype]["topics"][cnttpc] = topic;
+                        } else {
+                          lstcnt[kval.lbl]++;
+                          let subid: number = 0 + lstcnt[kval.lbl];
+                          let priid: number = 0 + lsttpc[kval.lbl];
+                          this.scope.remote.forumVals[ltype]["topics"][priid]["topics"][subid] = topic;
+                        }
+                        this.scope.remote.forumVals[ltype].lun = this.scope.remote.forumVals[ltype]["topics"][cnttpc].lun;
+                        this.scope.remote.forumVals[ltype].lps = this.scope.remote.forumVals[ltype]["topics"][cnttpc].lps;
+                        this.scope.remote.forumVals[ltype].lst = this.scope.remote.forumVals[ltype]["topics"][cnttpc].lst;
+                        this.scope.remote.forumVals[ltype].total = cntsub;
+                        this.scope.remote.forumVals[ltype].tottpc = cnttpc;
                       }
-                      this.scope.remote.forumVals[ltype].row = key;
-                      this.scope.remote.forumVals[ltype].docid = kval.docid;
-                      this.scope.remote.forumVals[ltype].catid = kval.catid;
-                      this.scope.remote.forumVals[ltype].name = kval.name;
-                      if ( this.scope.remote.forumVals[ltype].cat == null) {
-                        this.scope.remote.forumVals[ltype].cat = ltype;
-                      }
-                    } else {
-                      cnttpc++;
-                      this.scope.remote.forumVals[ltype]["topics"][cnttpc] = kval.value;
-                      this.scope.remote.forumVals[ltype]["topics"][cnttpc].row = key;
-                      if (this.scope.remote.forumVals[ltype]["topics"][cnttpc].lvl == null) {
-                        this.scope.remote.forumVals[ltype]["topics"][cnttpc].lvl = 0;
-                      }
-                      if (this.scope.remote.forumVals[ltype]["topics"][cnttpc].cat == null) {
-                        this.scope.remote.forumVals[ltype]["topics"][cnttpc].cat = ltype;
-                      }
-                      this.scope.remote.forumVals[ltype].lun=this.scope.remote.forumVals[ltype]["topics"][cnttpc].lun;
-                      this.scope.remote.forumVals[ltype].lps=this.scope.remote.forumVals[ltype]["topics"][cnttpc].lps;
-                      this.scope.remote.forumVals[ltype].lst=this.scope.remote.forumVals[ltype]["topics"][cnttpc].lst;
-                      this.scope.remote.forumVals[ltype].total=cnttpc;
                     }
+
                   });
               } else {
                 this.scope.remote.forumVals[ltype] = [];
                 this.scope.remote.forumVals[ltype]["topics"] = [];
               }
-              console.log(this.scope);
             }
           );
           ln4A2Connect.ForumListTypeApi(formn, formn);

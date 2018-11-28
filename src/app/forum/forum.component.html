@@ -2,7 +2,7 @@
 <mat-accordion class="forum-headers-align">
     <ng-container *ngFor="let cvar of frmlst ">
         <ng-container *ngIf="cvar">
-            <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',{label:cvar})" hideToggle>
+            <mat-expansion-panel [expanded]="step === 1" (opened)="doaction('selforum',{label:cvar})" showToggle>
                 <mat-expansion-panel-header>
                     <mat-panel-title class='forum-main-title'>
                         <div class="f-tree-l0">
@@ -27,47 +27,17 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <div [innerHTML]='scope.remote.forumVals[cvar].dsc'></div>
+
+                <ng-container *ngFor="let itm of scope.remote.forumVals[cvar]['topics']">
+                    <ng-container *ngIf="checkitm(itm)">
+                        <forumRow-ln4 [RowItem]="itm"></forumRow-ln4>
+                    </ng-container>
+                </ng-container>
                 <mat-action-row>
                     <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forum:cvar,forumList:[cvar]})">New</button>
                     <button mat-button color="primary" (click)="calldialog('ShareComponent',{Action:Share,forum:cvar})">Share</button>
                 </mat-action-row>
             </mat-expansion-panel>
-            <ng-container *ngFor="let itm of scope.remote.forumVals[cvar]['topics']">
-                <ng-container *ngIf="checkitm(itm)">
-                    <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',itm);" hideToggle>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title class='forum-main-title'>
-                                <div class="f-tree-l0">
-                                </div>
-                                <div class="f-tree-l1">
-                                    <img *ngIf="itm['lvl']==1" src="assets/N_thrnew.gif">
-                                </div>
-                                <div class="f-tree-l2">
-                                    <img *ngIf="itm['lvl']!=1" src="assets/N_ThrAns.gif">
-                                </div>
-                                <span class="f-title">{{Translate(itm.lbl)}}:{{itm.sbj}}</span>
-                            </mat-panel-title>
-                            <mat-panel-description class='forum-main-tab0'>
-                                Msg: {{itm.cnt}}
-                            </mat-panel-description>
-                            <mat-panel-description class='forum-main-tab1'>
-                                Cat: {{Translate(itm.cat)}}<br>
-                                Usr: {{itm.lun}}<br>
-                                Loc: {{itm.lps}}
-                            </mat-panel-description>
-                            <mat-panel-description class='forum-main-tab2'>
-                                Dat: {{itm.lst}}
-                            </mat-panel-description>
-                        </mat-expansion-panel-header>
-                        <div [innerHTML]='itm.dsc'></div>
-                        <mat-action-row>
-                            <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:add,forumList:[itm.cat],level:2,topic:itm.lbl,topicR:true,topicId:itm.catid})">Add</button>
-                            <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:[itm.cat],level:3,topic:itm.lbl,topicR:true,topicId:itm.catid,subject:itm.sbj})">Replay</button>
-                            <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:Change,forumList:[itm.cat],level:itm.lvl,topic:itm.lbl,topicR:true,topicId:itm.catid,subject:itm.sbj})">Change</button>
-                        </mat-action-row>
-                    </mat-expansion-panel>
-                </ng-container>
-            </ng-container>
         </ng-container>
     </ng-container>
 </mat-accordion>
