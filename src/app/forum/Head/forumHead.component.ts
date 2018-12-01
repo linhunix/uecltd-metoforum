@@ -1,9 +1,5 @@
-import { Component, Output, Input } from '@angular/core';
-import { ln4Manager } from '../../../ln4/ln4.Manager';
-import { ln4Map } from '../../../ln4/ln4.Map';
-import { ln4Angular2 } from '../../../ln4/ln4.Angular2';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ln4BaseComponent } from 'src/ln4/ln4.BaseComp';
 import { ln4A2MatComponent } from 'src/ln4/mat/ln4.A2Mat.component';
 
 @Component({

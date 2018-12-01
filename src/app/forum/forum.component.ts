@@ -48,15 +48,12 @@ export class ForumComponent extends ln4A2MatComponent {
       source.set("forumVals", obj.toJson());
       this.frmlst = ln4Map.Load(source.get("forumVals")).keys();
     }
-    console.log("Check Forum:" + this.myId + "/" + type);
     if (source.has("forums")) {
       source.get("forums").forEach((element: string) => {
         let formn = this.myId + "-" + element;
-        //let formu = "/assets/forum." + element + ".json";
         if (this.frm.has(formn) == false) {
           if (ln4Angular2.isDebug()) {
             console.log(formn);
-            //console.log(formu);
           }
           ln4Angular2.msgDebug("subscibe=" + formn);
           ln4Angular2.eventKill(formn);
