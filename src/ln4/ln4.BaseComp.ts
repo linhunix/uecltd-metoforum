@@ -7,11 +7,10 @@ export class ln4BaseComponent {
      * this is the standard id of the tag 
      */
     @Input("id") public tagId: string = null;
-
     /**
      * this is the standard input   
      */
-    @Input("ctrl") public controlCfg: any = {};
+    @Input("ctrl") public scopeCtl: ln4Map = new ln4Map();
 
     /**
      * this is the standard output 
@@ -23,13 +22,15 @@ export class ln4BaseComponent {
      * input parametres 
      * as the calling on the config 
      */
-    public myPrms: ln4Map = new ln4Map();
+    @Input("in") public scopeIn: ln4Map = new ln4Map();
 
     /**
      *  In on ln4 mode 
      */
     public myId: string;
-
+    /**
+     *  Ln4Manager
+     */
     private ln4Mng: ln4Manager;
     //////////////////////////////////////////////////////////////////
     // Translate
@@ -48,6 +49,9 @@ export class ln4BaseComponent {
     }
     public delData(name: string): any {
         return this.ln4Mng.dataClean(name);
+    }
+    public getProfile(name){
+        return this.ln4Mng.profileGet(name);
     }
     //////////////////////////////////////////////////////////////////
     // constructor

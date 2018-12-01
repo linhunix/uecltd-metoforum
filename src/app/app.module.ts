@@ -25,6 +25,8 @@ import {CKEditorModule} from 'ng2-ckeditor';
 import { EditorComponent } from './Edit/edit.component';
 import { ForumHeadComponent } from './forum/Head/forumHead.component';
 import { ForumRowComponent } from './forum/Row/forumRow.component';
+import { ForumEditorComponent } from './forum/Edit/forumEdit.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { ForumRowComponent } from './forum/Row/forumRow.component';
     ln4MatMenuModelComponent,
     ln4ValuesPipe,
     ln4MatLoginComponent,
+    ForumEditorComponent,
     EditorComponent,
     ForumHeadComponent,
     ForumRowComponent
@@ -56,12 +59,14 @@ import { ForumRowComponent } from './forum/Row/forumRow.component';
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    AngularEditorModule,
     CKEditorModule    
   ],
   providers: [
   ],
   entryComponents:[
     ln4MatLoginComponent,
+    ForumEditorComponent,
     EditorComponent
   ],
   bootstrap: [
@@ -100,7 +105,9 @@ export class AppModule {
     ln4Angular2.callUrl(ln4Manager_evtConfig, "/assets/config.json", null);
     // init component 
     ln4Angular2.setCompLib("ln4MatLoginComponent",ln4MatLoginComponent);
+    ln4Angular2.setCompLib("ForumEditorComponent",ForumEditorComponent);
     ln4Angular2.setCompLib("EditorComponent",EditorComponent);
+
   }
   public getLn4Manager(): ln4Manager {
     return ln4Manager.GetInstance();

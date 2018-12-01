@@ -37,8 +37,8 @@
         </ng-container>
     </ng-container>
     <mat-action-row>
-        <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:add,forumList:[itm.cat],level:2,topic:itm.lbl,topicR:true,topicId:itm.catid})">Add</button>
-        <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forumList:[itm.cat],level:3,topic:itm.lbl,topicR:true,topicId:itm.catid,subject:itm.sbj})">Replay</button>
-        <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:Change,forumList:[itm.cat],level:itm.lvl,topic:itm.lbl,topicR:true,topicId:itm.catid,subject:itm.sbj})">Change</button>
+        <button mat-button color="primary" (click)="Add()">Add</button>
+        <button mat-button color="primary" (click)="Reply()">Reply</button>
+        <button mat-button color="primary" (click)="Change()">Change</button>
     </mat-action-row>
 </mat-expansion-panel>

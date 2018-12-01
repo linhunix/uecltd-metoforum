@@ -181,4 +181,12 @@ export class ln4Manager {
                 return false;
         }
     }
+    //////////////////////////////////////////////////////////////////
+    // Tools
+    //////////////////////////////////////////////////////////////////
+    public dateToday(): string {
+        let todayDate = new Date();
+        return todayDate.getFullYear() + '-' + ((todayDate.getMonth() + 1)) + '-' + todayDate.getDate() + ' ' + todayDate.getHours() + ':' + todayDate.getMinutes() + ':' + todayDate.getSeconds();
+    }
+
 }

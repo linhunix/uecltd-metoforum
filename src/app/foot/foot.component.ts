@@ -15,7 +15,7 @@ export class FootComponent extends ln4A2SimpleComp{
     let cfgmap:ln4Map=new ln4Map();
     cfgmap.set("copyright","copyright");
     cfgmap.set("privacyurl","privacyurl");
-    this.myPrms.set(ln4Manager_evtConfig,cfgmap);
+    this.scopeIn.set(ln4Manager_evtConfig,cfgmap);
   }
   constructor(){
     super();

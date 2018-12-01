@@ -12,11 +12,13 @@ import { ln4A2Connect } from 'src/ln4/ln4.A2Connect';
     templateUrl: "edit.component.html",
 })
 export class EditorComponent extends ln4BaseComponent {
+    public action:string = "Add";
     public forum: string = "";
     public forumList: string[] = [];
     public topic: string = "";
     public todayDate = new Date();
     public catid: number = 4401;
+    public docid: number = ln4A2Connect.newDocid();
     public topicR: boolean = false;
     public topicLevel: number = 1;
     public from: string = "";
@@ -25,6 +27,7 @@ export class EditorComponent extends ln4BaseComponent {
     public content: string = "";
     public area: string = "";
     public message: string = "";
+
     public loaddata(mydata: any): void {
         this.from = ln4Manager.GetInstance().profileGet("UserName");
         this.fromG = ln4Manager.GetInstance().profileGet("GroupName");
@@ -51,11 +54,12 @@ export class EditorComponent extends ln4BaseComponent {
             }
             if ("topicR" in mydata) {
                 this.topicR = mydata.topicR;
-                console.log("R>topicR:"+mydata.topicR);
-                console.log("L>topicR:"+this.topicR);
             }
             if ("catid" in mydata) {
                 this.catid = mydata.catid;
+            }
+            if ("docid" in mydata) {
+                this.docid = mydata.docid;
             }
             if ("content" in mydata) {
                 this.content = mydata.content;
@@ -128,9 +132,8 @@ export class EditorComponent extends ln4BaseComponent {
                     }
                 }
             });
-        let docid: number = Math.trunc(new Date().getTime() / 1000);
-        docid = docid - 943920000;
-        newmsg.set("docid", docid);
-        ln4A2Connect.ForumSaveApi(this.catid, docid, "ForumMessage", newmsg, "forum-message");
+        
+        newmsg.set("docid", this.docid);
+        ln4A2Connect.ForumSaveApi(this.catid, this.docid, "ForumMessage", newmsg, "forum-message");
     }
 }

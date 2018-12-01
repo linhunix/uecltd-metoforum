@@ -8,8 +8,8 @@ import { ln4BaseComponent } from "./ln4.BaseComp";
 export class ln4A2SimpleComp extends ln4BaseComponent{
 
     @Input("ln4in") set ln4in(ln4in: any) {
-        this.myPrms = new ln4Map();
-        this.myPrms.fromAny(ln4in)
+        this.scopeIn = new ln4Map();
+        this.scopeIn.fromAny(ln4in)
         this.reload(ln4Manager_evtUpdate);
     }
 
@@ -114,10 +114,10 @@ export class ln4A2SimpleComp extends ln4BaseComponent{
      * @param mysrc 
      */
 
-    private reloadCfgByPrms(mysrc: ln4Map): ln4Map {
-        if (this.myPrms.has(ln4Manager_evtConfig)) {
+    private reloadCfgByScopeIn(mysrc: ln4Map): ln4Map {
+        if (this.scopeIn.has(ln4Manager_evtConfig)) {
             let res: ln4Map = new ln4Map();
-            res.fromAny(this.myPrms.get(ln4Manager_evtConfig));
+            res.fromAny(this.scopeIn.get(ln4Manager_evtConfig));
             res.forEach(function (key: string, value: string) {
                 mysrc.set(key, ln4Manager.GetInstance().cfgGet(value));
             });
@@ -128,10 +128,10 @@ export class ln4A2SimpleComp extends ln4BaseComponent{
      * get form manager user info about Params
      * @param mysrc 
      */
-    private reloadUsrByPrms(mysrc: ln4Map): ln4Map {
-        if (this.myPrms.has(ln4Manager_evtProfile)) {
+    private reloadUsrByScopeIn(mysrc: ln4Map): ln4Map {
+        if (this.scopeIn.has(ln4Manager_evtProfile)) {
             let res: ln4Map = new ln4Map();
-            res.fromAny(this.myPrms.get(ln4Manager_evtConfig));
+            res.fromAny(this.scopeIn.get(ln4Manager_evtConfig));
             res.forEach(function (key: string, value: string) {
                 mysrc.set(key, ln4Manager.GetInstance().profileGet(value));
             });
@@ -148,7 +148,7 @@ export class ln4A2SimpleComp extends ln4BaseComponent{
         try {
             if (ln4Angular2.isDebug()) {
                 console.log("ReloadRun:Start>>" + this.myId + ">>" + type);
-                console.log(this.myPrms);
+                console.log(this.scopeIn);
             }
             let source: ln4Map = new ln4Map();
             if (this.scope['remote'] != null) {
@@ -175,17 +175,17 @@ export class ln4A2SimpleComp extends ln4BaseComponent{
                             break;
                     }
                 }
-                if (this.myPrms != null) {
+                if (this.scopeIn != null) {
                     switch (type) {
                         case ln4Manager_evtConfig:
-                            source = this.reloadCfgByPrms(source);
+                            source = this.reloadCfgByScopeIn(source);
                             break;
                         case ln4Manager_evtProfile:
-                            source = this.reloadUsrByPrms(source);
+                            source = this.reloadUsrByScopeIn(source);
                             break;
                         case ln4Manager_evtUpdate:
-                            source = this.reloadCfgByPrms(source);
-                            source = this.reloadUsrByPrms(source);
+                            source = this.reloadCfgByScopeIn(source);
+                            source = this.reloadUsrByScopeIn(source);
                             break;
                     }
                 }

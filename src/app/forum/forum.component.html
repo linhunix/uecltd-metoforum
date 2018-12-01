@@ -27,14 +27,13 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <div [innerHTML]='scope.remote.forumVals[cvar].dsc'></div>
-
                 <ng-container *ngFor="let itm of scope.remote.forumVals[cvar]['topics']">
                     <ng-container *ngIf="checkitm(itm)">
                         <forumRow-ln4 [RowItem]="itm"></forumRow-ln4>
                     </ng-container>
                 </ng-container>
                 <mat-action-row>
-                    <button mat-button color="primary" (click)="authdialog('EditorComponent',{Action:replay,forum:cvar,forumList:[cvar]})">New</button>
+                    <button mat-button color="primary" (click)="authdialog('ForumEditorComponent',{Action:replay,forum:cvar,forumList:[cvar]})">New</button>
                     <button mat-button color="primary" (click)="calldialog('ShareComponent',{Action:Share,forum:cvar})">Share</button>
                 </mat-action-row>
             </mat-expansion-panel>

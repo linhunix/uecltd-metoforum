@@ -17,7 +17,7 @@ export class HeadComponent extends ln4A2SimpleComp {
     this.myId = "Head"
     let cfgmap: ln4Map = new ln4Map();
     cfgmap.set("title", "title");
-    this.myPrms.set(ln4Manager_evtConfig, cfgmap);
+    this.scopeIn.set(ln4Manager_evtConfig, cfgmap);
   }
   constructor() {
     super();
