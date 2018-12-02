@@ -51,7 +51,12 @@ export class ForumEditorComponent extends ln4BaseComponent {
         let newdata: any = {
             lst: ln4Manager.GetInstance().dateToday(),
             lun: this.getProfile("UserName"),
-            lgr: this.getProfile("GroupName")
+            lgr: this.getProfile("GroupName"),
+            dsc:"",
+            lvl:0,
+            lbl:"",
+            sbj:"",
+            lps:"net"
         };
         switch (this.action) {
             case "new":
