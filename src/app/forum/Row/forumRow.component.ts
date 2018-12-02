@@ -25,33 +25,21 @@ export class ForumRowComponent extends ln4A2MatComponent {
         this.authdialog('EditorComponent',{
             Action:'replay',
             forumList:[this.itm.cat],
-            level:3,
-            topic:this.itm.lbl,
-            topicR:true,
-            topicId:this.itm.catid,
-            subject:this.itm.sbj
+            forumData:this.itm
         });
     }
     public Add(){
         this.authdialog('ForumEditorComponent',{
             Action:'add',
             forumList:[this.itm.cat],
-            level:2,
-            topic:this.itm.lbl,
-            topicR:true,
-            topicId:this.itm.catid
+            forumData:this.itm
         });
     }
     public Change(){
         this.authdialog('ForumEditorComponent',{
-            Action:'Change',
+            Action:'edit',
             forumList:[this.itm.cat],
-            level:this.itm.lvl,
-            topic:this.itm.lbl,
-            topicR:true,
-            topicId:this.itm.Docid,
-            topicCat:this.itm.catid,
-            subject:this.itm.sbj
+            forumData:this.itm
         })
     }
     public Del(){

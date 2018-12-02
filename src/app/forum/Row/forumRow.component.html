@@ -2,14 +2,15 @@
     <mat-expansion-panel-header class='forum-row-{{itm.lvl}}'>
         <mat-panel-title class='forum-main-title'>
             <div class="f-tree-l0">
+                <img *ngIf="itm['lvl']==0" src="assets/S_ThrNew.gif">
                 <img *ngIf="itm['lvl']==1" src="assets/N_thrnew.gif">
-                <img *ngIf="itm['lvl']!=1" src="assets/N_ThrAns.gif">
+                <img *ngIf="itm['lvl']>1" src="assets/N_ThrAns.gif">
             </div>
-            <span *ngIf="itm['lvl']==1" class="f-title">
+            <span *ngIf="itm['lvl'] == 1" class="f-title">
                 <b>{{itm.sbj}}</b><br>
                 {{itm.lbl}}
             </span>
-            <span *ngIf="itm['lvl']!=1" class="f-title">
+            <span *ngIf="itm['lvl'] != 1" class="f-title">
                 <b>{{itm.lbl}}</b><br>
                 {{itm.sbj}}
             </span>

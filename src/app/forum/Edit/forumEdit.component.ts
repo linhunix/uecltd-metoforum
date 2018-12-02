@@ -10,31 +10,99 @@ import { ln4A2Connect } from 'src/ln4/ln4.A2Connect';
     styleUrls: ['forumEdit.component.css']
 })
 export class ForumEditorComponent extends ln4BaseComponent {
-    private message: string = "";
+    public message: string = "";
+    public action: string = "add";
+    public forumList: string[] = [];
+
     constructor(
         public dialogRef: MatDialogRef<ForumEditorComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
         super();
-        this.loaddata(data);
         ln4Angular2.eventGet("Dialog", true).subscribe(
             (info: string) => {
-                this.data = ln4Manager.GetInstance().dataExport("Dialog");
-                this.loaddata(this.data);
+                let rdata:any = ln4Manager.GetInstance().dataExport("Dialog");
+                this.loaddata(rdata);
             }
         )
     }
+    /**
+     * Load data
+     * @param mydata 
+     */
     public loaddata(mydata: any): void {
         if (ln4Angular2.isDebug()) {
             console.log("editor Component");
             console.log(mydata);
         }
+        if (mydata==null){
+            ln4Angular2.msgWarning("No Data for editor!!!");
+            this.onNoClick();
+            return;
+        }
+        if ("forumList" in mydata) {
+            this.forumList = mydata.forumList;
+        }
+        if ("forumData" in mydata) {
+            this.data = mydata.forumData;
+        }
+        let newdata: any = {
+            lst: ln4Manager.GetInstance().dateToday(),
+            lun: this.getProfile("UserName"),
+            lgr: this.getProfile("GroupName")
+        };
+        switch (this.action) {
+            case "new":
+                newdata.cat = this.data.cat;
+                newdata.lvl = 1;
+                newdata.catid = 4401;
+                newdata.docid = ln4A2Connect.newDocid();
+                break;
+            case "add":
+                newdata.cat = this.data.cat;
+                newdata.lbl = this.data.lbl;
+                newdata.lvl = 2;
+                newdata.catid = this.data.catid;
+                newdata.docid = ln4A2Connect.newDocid();
+                break;
+            case "reply":
+                newdata.lvl = 3;
+                newdata.cat = this.data.cat;
+                newdata.lbl = this.data.lbl;
+                newdata.sbj = this.data.sbj;
+                newdata.catid = this.data.docid;
+                newdata.docid = ln4A2Connect.newDocid();
+                break;
+            case "edit":
+                if (newdata.lgr == "G.4400") {
+                    if (newdata.lun != this.data.lun) {
+                        this.onNoClick();
+                    }
+                }
+                newdata.cat = this.data.cat;
+                newdata.lbl = this.data.lbl;
+                newdata.sbj = this.data.sbj;
+                newdata.lps = this.data.lps;
+                newdata.dsc = this.data.dsc;
+                newdata.lvl = this.data.lvl;
+                newdata.docid = this.data.docid;
+                newdata.catid = this.data.catid;
+                break;
+        }
+        this.data=newdata;
+
     }
 
-    onNoClick(): void {
-        this.dialogRef.close();
+    public isro():boolean{
+        if (this.data.lvl<2){
+            return false;
+        }
+        return true;
     }
-    LoginLabel(): string {
-        return this.Translate("Login");
+    /**
+     * Closse on click 
+     */
+    public onNoClick(): void {
+        this.dialogRef.close();
     }
     /*
     newmsg.set("cat", this.forum);
@@ -50,11 +118,14 @@ export class ForumEditorComponent extends ln4BaseComponent {
     newmsg.set("lps", this.area);
     newmsg.set("lst", this.dateToday());
     */
-    Check() {
+    public Check(): boolean {
         this.scopeIn.fromAny(this.data);
         return true;
     }
-    Save(): boolean {
+    /**
+     * 
+     */
+    public Save(): boolean {
         this.message = "wait server response..";
         if (!this.Check()) {
             return false;

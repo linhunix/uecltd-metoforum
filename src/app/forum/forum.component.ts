@@ -67,8 +67,11 @@ export class ForumComponent extends ln4A2MatComponent {
                 let lsttpc = {};
                 let lstcnt = {};
                 let fval = this.scope.remote.forumVals[ltype];
-                this.scope.remote.forumVals[ltype]={};
+                this.scope.remote.forumVals[ltype] = {};
                 this.scope.remote.forumVals[ltype]["topics"] = [];
+                this.scope.remote.forumVals[ltype].lbl =this.Translate(ltype);
+                this.scope.remote.forumVals[ltype].lvl = 0;
+                this.scope.remote.forumVals[ltype].cnt = 0;
                 Object.keys(fval).forEach(
                   (key: any) => {
                     let kval = fval[key];
@@ -81,12 +84,21 @@ export class ForumComponent extends ln4A2MatComponent {
                             }
                           );
                         }
-                        this.scope.remote.forumVals[ltype].row = key;
+                        this.scope.remote.forumVals[ltype].idx = key;
+                        this.scope.remote.forumVals[ltype].doc = kval;
+                        this.scope.remote.forumVals[ltype].lvl = 0;
+                        this.scope.remote.forumVals[ltype].cnt = 0;
                         this.scope.remote.forumVals[ltype].docid = kval.docid;
                         this.scope.remote.forumVals[ltype].catid = kval.catid;
                         this.scope.remote.forumVals[ltype].name = kval.name;
                         if (this.scope.remote.forumVals[ltype].cat == null) {
                           this.scope.remote.forumVals[ltype].cat = ltype;
+                        }
+                        if (this.scope.remote.forumVals[ltype].sbj == null) {
+                          this.scope.remote.forumVals[ltype].sbj = "";
+                        }
+                        if (this.scope.remote.forumVals[ltype].dsc == null) {
+                          this.scope.remote.forumVals[ltype].dsc = "";
                         }
                       } else {
                         let topic = kval.value;
@@ -101,6 +113,7 @@ export class ForumComponent extends ln4A2MatComponent {
                         if (topic.cat == null) {
                           topic.cat = ltype;
                         }
+                        topic.cnt = 0;
                         topic.topics = [];
                         cntsub++;
                         if (topic.lvl == 1) {
@@ -113,12 +126,14 @@ export class ForumComponent extends ln4A2MatComponent {
                           let subid: number = 0 + lstcnt[kval.lbl];
                           let priid: number = 0 + lsttpc[kval.lbl];
                           this.scope.remote.forumVals[ltype]["topics"][priid]["topics"][subid] = topic;
+                          this.scope.remote.forumVals[ltype]["topics"][priid].cnt = priid;
                         }
                         this.scope.remote.forumVals[ltype].lun = this.scope.remote.forumVals[ltype]["topics"][cnttpc].lun;
+                        this.scope.remote.forumVals[ltype].lgr = this.scope.remote.forumVals[ltype]["topics"][cnttpc].lgr;
                         this.scope.remote.forumVals[ltype].lps = this.scope.remote.forumVals[ltype]["topics"][cnttpc].lps;
                         this.scope.remote.forumVals[ltype].lst = this.scope.remote.forumVals[ltype]["topics"][cnttpc].lst;
-                        this.scope.remote.forumVals[ltype].total = cntsub;
-                        this.scope.remote.forumVals[ltype].tottpc = cnttpc;
+                        this.scope.remote.forumVals[ltype].cnt = cntsub;
+                        this.scope.remote.forumVals[ltype].cnttpc = cnttpc;
                       }
                     }
 
@@ -145,6 +160,7 @@ export class ForumComponent extends ln4A2MatComponent {
     }
     return false;
   }
+
   constructor(dialog: MatDialog) {
     super(true, true, dialog);
   }

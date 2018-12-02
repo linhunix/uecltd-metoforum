@@ -27,6 +27,7 @@ import { ForumHeadComponent } from './forum/Head/forumHead.component';
 import { ForumRowComponent } from './forum/Row/forumRow.component';
 import { ForumEditorComponent } from './forum/Edit/forumEdit.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

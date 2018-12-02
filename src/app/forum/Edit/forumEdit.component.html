@@ -1,39 +1,39 @@
-<h2 mat-dialog-title>Editor</h2>
+<h2 mat-dialog-title>Editor: {{action}}</h2>
 <div class='row'>
-    <input readonly matInput name="from" value='{{from}}' placeholder='From User' style="width:45%;">
-    <input readonly matInput name="fromG" value='{{fromG}}' placeholder='From Group' style="width:45%;">
+    <input readonly matInput name="data.lun" value='{{data.lun}}' placeholder='From User' style="width:45%;">
+    <input readonly matInput name="data.lgr" value='{{data.lgr}}' placeholder='From Group' style="width:45%;">
     <button mat-button [mat-dialog-close]='true' (click)='Save()'  style="width:10%;" >Enter</button>
 
 </div>
 <HR>
 <div class='row'>
-    <Select matInput [ngModel]='forum' style="width:100%;">
+    <Select matInput [ngModel]='data.cat' style="width:100%;">
         <option *ngFor="let item of forumList " value="{{item}}">{{Translate(item)}}</option>
     </Select>
 </div>
 <HR>
 <div class='row'>
-    <ng-container *ngIf="topicR==true">
-        <input readonly matInput value='{{topic}}' placeholder='Topic' style="width:100%;">
+    <ng-container *ngIf="isro()==false">
+        <input readonly matInput value='{{data.lbl}}' placeholder='Topic' style="width:100%;">
     </ng-container>
-    <ng-container *ngIf="topicR==false">
-        <input matInput [(ngModel)]='topic' placeholder='Topic' style="width:100%;">
+    <ng-container *ngIf="isro()==true">
+        <input matInput [(ngModel)]='daa.lbl' placeholder='Topic' style="width:100%;">
     </ng-container>
 </div>
 <HR>
 <div class='row'>
-    <input matInput [(ngModel)]='subject' placeholder='Subject' style="width:100%;">
+    <input matInput [(ngModel)]='data.sbj' placeholder='Subject' style="width:100%;">
 </div>
 <HR>
 <div class='row'>
-    <input matInput [(ngModel)]='area' placeholder='Location Area' style="width:100%;">
+    <input matInput [(ngModel)]='data.lps' placeholder='Location Area' style="width:100%;">
 </div>
 <HR>
     <br>
 <div class='row'>
-    <angular-editor [(ngModel)]='content' debounce='500'></angular-editor>
+    <angular-editor [(ngModel)]='data.dsc' debounce='500'></angular-editor>
     <hr>
-    <div [innerHTML]='content'>
+    <div [innerHTML]='data.dsc'>
     </div>
 </div>
 <div class='row'>
