@@ -15,4 +15,11 @@ import { ln4A2MatComponent } from 'src/ln4/mat/ln4.A2Mat.component';
   constructor(dialog: MatDialog) {
     super(true, true, dialog);
   }
+  public new(){
+    this.authdialog('ForumEditorComponent',{
+      Action:"new",
+      forumList:this.frmlist,
+      forumData:{}
+    });
+  }
 }

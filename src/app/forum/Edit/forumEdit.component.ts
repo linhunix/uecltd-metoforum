@@ -20,7 +20,7 @@ export class ForumEditorComponent extends ln4BaseComponent {
         super();
         ln4Angular2.eventGet("Dialog", true).subscribe(
             (info: string) => {
-                let rdata:any = ln4Manager.GetInstance().dataExport("Dialog");
+                let rdata: any = ln4Manager.GetInstance().dataExport("Dialog");
                 this.loaddata(rdata);
             }
         )
@@ -30,14 +30,17 @@ export class ForumEditorComponent extends ln4BaseComponent {
      * @param mydata 
      */
     public loaddata(mydata: any): void {
-        if (ln4Angular2.isDebug()) {
+        //if (ln4Angular2.isDebug()) {
             console.log("editor Component");
             console.log(mydata);
-        }
-        if (mydata==null){
+        //}
+        if (mydata == null) {
             ln4Angular2.msgWarning("No Data for editor!!!");
             this.onNoClick();
             return;
+        }
+        if ("Action" in mydata) {
+            this.action = mydata.Action;
         }
         if ("forumList" in mydata) {
             this.forumList = mydata.forumList;
@@ -62,6 +65,7 @@ export class ForumEditorComponent extends ln4BaseComponent {
                 newdata.lbl = this.data.lbl;
                 newdata.lvl = 2;
                 newdata.catid = this.data.catid;
+                newdata.name = this.data.name;
                 newdata.docid = ln4A2Connect.newDocid();
                 break;
             case "reply":
@@ -71,6 +75,7 @@ export class ForumEditorComponent extends ln4BaseComponent {
                 newdata.sbj = this.data.sbj;
                 newdata.catid = this.data.docid;
                 newdata.docid = ln4A2Connect.newDocid();
+                newdata.name = this.data.name;
                 break;
             case "edit":
                 if (newdata.lgr == "G.4400") {
@@ -86,14 +91,15 @@ export class ForumEditorComponent extends ln4BaseComponent {
                 newdata.lvl = this.data.lvl;
                 newdata.docid = this.data.docid;
                 newdata.catid = this.data.catid;
+                newdata.name = this.data.name;
                 break;
         }
-        this.data=newdata;
+        this.data = newdata;
 
     }
 
-    public isro():boolean{
-        if (this.data.lvl<2){
+    public isro(): boolean {
+        if (this.data.lvl < 2) {
             return false;
         }
         return true;
@@ -121,6 +127,15 @@ export class ForumEditorComponent extends ln4BaseComponent {
     public Check(): boolean {
         this.scopeIn.fromAny(this.data);
         return true;
+    }
+    public isEdit(): boolean {
+        console.log(this.data);
+        if (this.data != null) {
+            if ("lun" in this.data) {
+                return true;
+            }
+        }
+        return false;
     }
     /**
      * 

@@ -1,41 +1,45 @@
 <h2 mat-dialog-title>Editor: {{action}}</h2>
-<div class='row'>
-    <input readonly matInput name="data.lun" value='{{data.lun}}' placeholder='From User' style="width:45%;">
-    <input readonly matInput name="data.lgr" value='{{data.lgr}}' placeholder='From Group' style="width:45%;">
-    <button mat-button [mat-dialog-close]='true' (click)='Save()'  style="width:10%;" >Enter</button>
+<ng-container *ngIf="isEdit()">
+    <span style='font-size: 8px;'>{{data.name}}/{{data.catid}}/{{data.docid}}</span>
+    <div class='row'>
+        <input readonly matInput name="data.lun" value='{{data.lun}}' placeholder='From User' style="width:25%;">
+        <input readonly matInput name="data.lgr" value='{{data.lgr}}' placeholder='From Group' style="width:25%;">
+        <input readonly matInput name="data.lst" value='{{data.lst}}' placeholder='From Date' style="width:25%;">
+        <button mat-button ngDefaultControl [mat-dialog-close]='false' (click)='Save()' style="width:25%;">Enter</button>
 
-</div>
-<HR>
-<div class='row'>
-    <Select matInput [ngModel]='data.cat' style="width:100%;">
-        <option *ngFor="let item of forumList " value="{{item}}">{{Translate(item)}}</option>
-    </Select>
-</div>
-<HR>
-<div class='row'>
-    <ng-container *ngIf="isro()==false">
-        <input readonly matInput value='{{data.lbl}}' placeholder='Topic' style="width:100%;">
-    </ng-container>
-    <ng-container *ngIf="isro()==true">
-        <input matInput [(ngModel)]='daa.lbl' placeholder='Topic' style="width:100%;">
-    </ng-container>
-</div>
-<HR>
-<div class='row'>
-    <input matInput [(ngModel)]='data.sbj' placeholder='Subject' style="width:100%;">
-</div>
-<HR>
-<div class='row'>
-    <input matInput [(ngModel)]='data.lps' placeholder='Location Area' style="width:100%;">
-</div>
-<HR>
-    <br>
-<div class='row'>
-    <angular-editor [(ngModel)]='data.dsc' debounce='500'></angular-editor>
-    <hr>
-    <div [innerHTML]='data.dsc'>
     </div>
-</div>
-<div class='row'>
-    <button mat-button [mat-dialog-close]='true' (click)='Save()'  style="width:100%;">Enter</button>
-</div>
+    <HR>
+    <div class='row'>
+        <Select matInput [ngModel]='data.cat' style="width:100%;">
+            <option *ngFor="let item of forumList " value="{{item}}">{{Translate(item)}}</option>
+        </Select>
+    </div>
+    <HR>
+    <div class='row'>
+        <ng-container *ngIf="isro()==false">
+            <input readonly matInput value='{{data.lbl}}' placeholder='Topic' style="width:100%;">
+        </ng-container>
+        <ng-container *ngIf="isro()==true">
+            <input matInput [(ngModel)]='data.lbl' placeholder='Topic' style="width:100%;">
+        </ng-container>
+    </div>
+    <HR>
+    <div class='row'>
+        <input matInput [(ngModel)]='data.sbj' placeholder='Subject' style="width:100%;">
+    </div>
+    <HR>
+    <div class='row'>
+        <input matInput [(ngModel)]='data.lps' placeholder='Location Area' style="width:100%;">
+    </div>
+    <HR>
+    <br>
+    <div class='row'>
+        <angular-editor [(ngModel)]='data.dsc' debounce='500'></angular-editor>
+        <hr>
+        <div [innerHTML]='data.dsc'>
+        </div>
+    </div>
+    <div class='row'>
+        <button mat-button [mat-dialog-close]='false' (click)='Save()' style="width:100%;">Enter</button>
+    </div>
+</ng-container>

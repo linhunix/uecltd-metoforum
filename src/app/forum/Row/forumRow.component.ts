@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material';
 })
 export class ForumRowComponent extends ln4A2MatComponent {
     @Input("RowItem")public itm: any;
+    @Input("LstItem")public lst: any;
     constructor(dialog: MatDialog) {
         super(true, true, dialog);
     }
@@ -22,23 +23,30 @@ export class ForumRowComponent extends ln4A2MatComponent {
     }
 
     public Reply(){
-        this.authdialog('EditorComponent',{
+        this.authdialog('ForumEditorComponent',{
             Action:'replay',
-            forumList:[this.itm.cat],
+            forumList:this.lst,
             forumData:this.itm
         });
     }
+    public New(){
+        this.authdialog('ForumEditorComponent',{
+            Action:'new',
+            forumList:this.lst,
+            forumData:this.itm
+        });
+    }    
     public Add(){
         this.authdialog('ForumEditorComponent',{
             Action:'add',
-            forumList:[this.itm.cat],
+            forumList:this.lst,
             forumData:this.itm
         });
     }
     public Change(){
         this.authdialog('ForumEditorComponent',{
             Action:'edit',
-            forumList:[this.itm.cat],
+            forumList:this.lst,
             forumData:this.itm
         })
     }

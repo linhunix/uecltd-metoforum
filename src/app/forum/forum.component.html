@@ -2,7 +2,7 @@
 <mat-accordion class="forum-headers-align">
     <ng-container *ngFor="let cvar of frmlst ">
         <ng-container *ngIf="cvar">
-                <forumRow-ln4 [RowItem]="scope.remote.forumVals[cvar]"></forumRow-ln4>
+                <forumRow-ln4 [LstItem]="getLst(cvar)" [RowItem]="getItm(cvar)"></forumRow-ln4>
         </ng-container>
     </ng-container>
 </mat-accordion>

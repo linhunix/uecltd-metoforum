@@ -34,10 +34,11 @@
     </div>
     <ng-container *ngFor="let subitm of itm['topics']">
         <ng-container *ngIf="checkitm(subitm)">
-            <forumRow-ln4 [RowItem]="subitm"></forumRow-ln4>
+            <forumRow-ln4 [LstItem]="lst" [RowItem]="subitm"></forumRow-ln4>
         </ng-container>
     </ng-container>
     <mat-action-row>
+        <button mat-button color="primary" (click)="New()">New</button>
         <button mat-button color="primary" (click)="Add()">Add</button>
         <button mat-button color="primary" (click)="Reply()">Reply</button>
         <button mat-button color="primary" (click)="Change()">Change</button>

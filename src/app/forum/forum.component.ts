@@ -69,7 +69,7 @@ export class ForumComponent extends ln4A2MatComponent {
                 let fval = this.scope.remote.forumVals[ltype];
                 this.scope.remote.forumVals[ltype] = {};
                 this.scope.remote.forumVals[ltype]["topics"] = [];
-                this.scope.remote.forumVals[ltype].lbl =this.Translate(ltype);
+                this.scope.remote.forumVals[ltype].lbl = this.Translate(ltype);
                 this.scope.remote.forumVals[ltype].lvl = 0;
                 this.scope.remote.forumVals[ltype].cnt = 0;
                 Object.keys(fval).forEach(
@@ -104,9 +104,9 @@ export class ForumComponent extends ln4A2MatComponent {
                         let topic = kval.value;
                         topic.idx = key;
                         topic.doc = kval;
-                        topic.did = kval.docid;
-                        topic.cid = kval.catid;
-                        topic.def = kval.name;
+                        topic.docid = kval.docid;
+                        topic.catid = kval.catid;
+                        topic.name = kval.name;
                         if (topic.lvl == null) {
                           topic.lvl = 1;
                         }
@@ -160,7 +160,17 @@ export class ForumComponent extends ln4A2MatComponent {
     }
     return false;
   }
-
+  public getItm(fid: string): any {
+    if (this.scope.remote.forumVals != null) {
+      if (fid in this.scope.remote.forumVals) {
+        return this.scope.remote.forumVals[fid];
+      }
+    }
+    return {};
+  }
+  public getLst(fid:string):any{
+    return [fid];
+  }
   constructor(dialog: MatDialog) {
     super(true, true, dialog);
   }
