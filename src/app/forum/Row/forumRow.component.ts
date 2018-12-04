@@ -50,8 +50,12 @@ export class ForumRowComponent extends ln4A2MatComponent {
             forumData:this.itm
         })
     }
-    public Del(){
-        
+    public Delete(){
+        this.authdialog('ForumEditorComponent',{
+            Action:'canc',
+            forumList:this.lst,
+            forumData:this.itm
+        })
     }
     public Share(){
         

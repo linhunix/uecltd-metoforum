@@ -28,7 +28,7 @@ import { ForumRowComponent } from './forum/Row/forumRow.component';
 import { ForumEditorComponent } from './forum/Edit/forumEdit.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule} from '@angular/common/http';
-
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +62,7 @@ import { HttpClientModule} from '@angular/common/http';
     MatDatepickerModule,
     MatNativeDateModule,
     AngularEditorModule,
+    MatSelectModule,
     CKEditorModule    
   ],
   providers: [

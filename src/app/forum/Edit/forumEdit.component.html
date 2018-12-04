@@ -10,9 +10,9 @@
     </div>
     <HR>
     <div class='row'>
-        <Select matInput [ngModel]='data.cat' style="width:100%;">
-            <option *ngFor="let item of forumList " value="{{item}}">{{Translate(item)}}</option>
-        </Select>
+        <mat-select matInput name='data.cat' [(ngModel)]='data.cat' style="width:100%;">
+            <mat-option *ngFor="let item of forumList " [value]="item">{{Translate(item)}}</mat-option>
+        </mat-select>
     </div>
     <HR>
     <div class='row'>
@@ -34,12 +34,12 @@
     <HR>
     <br>
     <div class='row'>
-        <angular-editor [(ngModel)]='data.dsc' debounce='500'></angular-editor>
+        <angular-editor  [config]="editcfg()" [(ngModel)]='data.dsc' debounce='500'></angular-editor>
         <hr>
         <div [innerHTML]='data.dsc'>
         </div>
     </div>
     <div class='row'>
-        <button mat-button [mat-dialog-close]='false' (click)='Save()' style="width:100%;">Enter</button>
+        <button mat-button name='ok' [mat-dialog-close]='false' (click)='Save()' style="width:100%;">Enter</button>
     </div>
 </ng-container>

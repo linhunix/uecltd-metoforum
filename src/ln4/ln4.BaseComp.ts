@@ -53,6 +53,9 @@ export class ln4BaseComponent {
     public getProfile(name){
         return this.ln4Mng.profileGet(name);
     }
+    public getCfg(name){
+        return this.ln4Mng.cfgGet(name);
+    }
     //////////////////////////////////////////////////////////////////
     // constructor
     //////////////////////////////////////////////////////////////////

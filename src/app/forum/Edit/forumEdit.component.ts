@@ -4,6 +4,7 @@ import { ln4Manager } from 'src/ln4/ln4.Manager';
 import { ln4BaseComponent } from 'src/ln4/ln4.BaseComp';
 import { ln4Angular2 } from 'src/ln4/ln4.Angular2';
 import { ln4A2Connect } from 'src/ln4/ln4.A2Connect';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 @Component({
     selector: 'forumEdit-ln4',
     templateUrl: "forumEdit.component.html",
@@ -13,6 +14,7 @@ export class ForumEditorComponent extends ln4BaseComponent {
     public message: string = "";
     public action: string = "add";
     public forumList: string[] = [];
+    public isreadonly: boolean = true;
 
     constructor(
         public dialogRef: MatDialogRef<ForumEditorComponent>,
@@ -31,8 +33,8 @@ export class ForumEditorComponent extends ln4BaseComponent {
      */
     public loaddata(mydata: any): void {
         //if (ln4Angular2.isDebug()) {
-            console.log("editor Component");
-            console.log(mydata);
+        console.log("editor Component");
+        console.log(mydata);
         //}
         if (mydata == null) {
             ln4Angular2.msgWarning("No Data for editor!!!");
@@ -52,12 +54,21 @@ export class ForumEditorComponent extends ln4BaseComponent {
             lst: ln4Manager.GetInstance().dateToday(),
             lun: this.getProfile("UserName"),
             lgr: this.getProfile("GroupName"),
-            dsc:"",
-            lvl:0,
-            lbl:"",
-            sbj:"",
-            lps:"net"
+            dsc: "",
+            lvl: 0,
+            lbl: "",
+            sbj: "",
+            lps: "net",
+            cat: ""
         };
+        if (this.data == null) {
+            this.action = 'new';
+            this.data = newdata;
+        }
+        if (this.data.cat == null) {
+            this.action = 'new';
+            this.data = newdata;
+        }
         switch (this.action) {
             case "new":
                 newdata.cat = this.data.cat;
@@ -74,6 +85,8 @@ export class ForumEditorComponent extends ln4BaseComponent {
                 newdata.docid = ln4A2Connect.newDocid();
                 break;
             case "reply":
+            case "replay":
+                this.isreadonly = false;
                 newdata.lvl = 3;
                 newdata.cat = this.data.cat;
                 newdata.lbl = this.data.lbl;
@@ -83,9 +96,10 @@ export class ForumEditorComponent extends ln4BaseComponent {
                 newdata.name = this.data.name;
                 break;
             case "edit":
-                if (newdata.lgr == "G.4400") {
+                if (newdata.lgr == "G.4000") {
                     if (newdata.lun != this.data.lun) {
                         this.onNoClick();
+                        break;
                     }
                 }
                 newdata.cat = this.data.cat;
@@ -98,16 +112,62 @@ export class ForumEditorComponent extends ln4BaseComponent {
                 newdata.catid = this.data.catid;
                 newdata.name = this.data.name;
                 break;
+            case "canc":
+                if (newdata.lgr == "G.4000") {
+                    if (newdata.lun != this.data.lun) {
+                        this.onNoClick();
+                        break;
+                    }
+                }
+                newdata.cat = this.data.cat;
+                newdata.lbl = this.data.lbl;
+                newdata.sbj = this.data.sbj;
+                newdata.lps = this.data.lps;
+                newdata.dsc = this.data.dsc;
+                newdata.lvl = this.data.lvl;
+                newdata.docid = this.data.docid;
+                newdata.catid = this.data.catid;
+                newdata.name = this.data.name;
+                if (confirm(this.Translate("Are you sure to delete?"))) {
+                    ln4A2Connect.ForumCancApi(this.data.catid, this.data.docid, this.data.name, "forum-message");
+                    this.onNoClick();
+                    break;
+                }
+                break;
         }
         this.data = newdata;
 
     }
-
+    public editcfg(): AngularEditorConfig {
+        let updurl: string = this.getCfg("serverurl") + "/" + this.getProfile("UserSess") + "/upload/"
+        let edtcfg: AngularEditorConfig = {
+            editable: true,
+            spellcheck: true,
+            height: '10rem',
+            minHeight: '5rem',
+            placeholder: 'Enter text here...',
+            translate: 'no',
+            uploadUrl: updurl,
+            customClasses: [
+                {
+                    name: "quote",
+                    class: "quote",
+                },
+                {
+                    name: 'redText',
+                    class: 'redText'
+                },
+                {
+                    name: "titleText",
+                    class: "titleText",
+                    tag: "h1",
+                },
+            ]
+        };
+        return edtcfg;
+    }
     public isro(): boolean {
-        if (this.data.lvl < 2) {
-            return false;
-        }
-        return true;
+        return this.isreadonly;
     }
     /**
      * Closse on click 
@@ -172,6 +232,7 @@ export class ForumEditorComponent extends ln4BaseComponent {
                     }
                 }
             });
+        console.log(this.data);
         ln4A2Connect.ForumSaveApi(this.data.catid, this.data.docid, "ForumMessage", this.scopeIn, "forum-message");
         return true;
     }
