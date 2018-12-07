@@ -139,7 +139,7 @@ export class ForumEditorComponent extends ln4BaseComponent {
 
     }
     public editcfg(): AngularEditorConfig {
-        let updurl: string = this.getCfg("serverurl") + "/" + this.getProfile("UserSess") + "/upload/"
+        let updurl: string = this.getCfg("serverurl") + "/" + this.getProfile("UserSess") + "/a2upload/"
         let edtcfg: AngularEditorConfig = {
             editable: true,
             spellcheck: true,
