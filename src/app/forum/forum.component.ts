@@ -125,9 +125,19 @@ export class ForumComponent extends ln4A2MatComponent {
                           lstcnt[kval.lbl]++;
                           let subid: number = 0 + lstcnt[kval.lbl];
                           let priid: number = 0 + lsttpc[kval.lbl];
+                          if (!(priid in this.scope.remote.forumVals[ltype]["topics"])){
+                            this.scope.remote.forumVals[ltype]["topics"][priid]={
+                              "topics":[]
+                            };
+                          }
                           this.scope.remote.forumVals[ltype]["topics"][priid]["topics"][subid] = topic;
                           this.scope.remote.forumVals[ltype]["topics"][priid].cnt = priid;
                         }
+                        if (!(cnttpc in this.scope.remote.forumVals[ltype]["topics"])){
+                          this.scope.remote.forumVals[ltype]["topics"][cnttpc]={
+                            "topics":[]
+                          };
+                        }                        
                         this.scope.remote.forumVals[ltype].lun = this.scope.remote.forumVals[ltype]["topics"][cnttpc].lun;
                         this.scope.remote.forumVals[ltype].lgr = this.scope.remote.forumVals[ltype]["topics"][cnttpc].lgr;
                         this.scope.remote.forumVals[ltype].lps = this.scope.remote.forumVals[ltype]["topics"][cnttpc].lps;
