@@ -10,14 +10,14 @@ import { ln4BaseComponent } from '../ln4.BaseComp';
   templateUrl: 'ln4.login.component.html',
 })
 export class ln4MatLoginComponent  extends ln4BaseComponent {
-  private user: string = "";
-  private pass: string = "";
-  private chkpass: string = "";
-  private email: string = "";
-  private realname: string = "";
-  private message: string = "";
-  private regstyle: boolean = false;
-  private lgnstyle: boolean = true;
+  public user: string = "";
+  public pass: string = "";
+  public chkpass: string = "";
+  public email: string = "";
+  public realname: string = "";
+  public message: string = "";
+  public regstyle: boolean = false;
+  public lgnstyle: boolean = true;
   constructor(
     public dialogRef: MatDialogRef<ln4MatLoginComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {

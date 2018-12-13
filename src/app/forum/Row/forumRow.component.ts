@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material';
 
 })
 export class ForumRowComponent extends ln4A2MatComponent {
+    public step:number = 0;
     @Input("RowItem")public itm: any;
     @Input("LstItem")public lst: any;
     constructor(dialog: MatDialog) {
