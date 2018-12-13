@@ -25,7 +25,7 @@ export class HeadComponent extends ln4A2SimpleComp {
     this.image=null;
     ln4Angular2.eventGet("CurrentForum", true).subscribe(
       (forum: string) => {
-        this.sezione = forum;
+        //this.sezione = forum;
         this.scope.forum = ln4Manager.GetInstance().dataExport("CurrentForum");
         if ('image' in this.scope.forum) {
           this.image = this.scope.forum.image;

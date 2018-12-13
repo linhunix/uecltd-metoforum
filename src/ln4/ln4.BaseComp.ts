@@ -16,7 +16,7 @@ export class ln4BaseComponent {
      * this is the standard output 
      * scope.remote is the data collected from system
      */
-    @Output("scope") public scope: any = {};
+    @Output("out") public scope: any = {};
 
     /**
      * input parametres 

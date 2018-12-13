@@ -6,13 +6,17 @@ import { ln4ValuesPipe } from "./ln4.ValuesPipe";
 import { ln4BaseComponent } from "./ln4.BaseComp";
 
 export class ln4A2SimpleComp extends ln4BaseComponent{
-
+    /**
+     * 
+     */
     @Input("ln4in") set ln4in(ln4in: any) {
         this.scopeIn = new ln4Map();
         this.scopeIn.fromAny(ln4in)
         this.reload(ln4Manager_evtUpdate);
     }
-
+    /**
+     * 
+     */
     @Input("ln4id") set ln4id(name: string) {
         name = name.trim();
         name = name.replace(/\s/g, "");
@@ -36,6 +40,10 @@ export class ln4A2SimpleComp extends ln4BaseComponent{
     //////////////////////////////////////////////////////////////////
     // Trace is a test suite 
     //////////////////////////////////////////////////////////////////
+    /**
+     * 
+     * @param src 
+     */
     public trace(src: any): any {
         if (ln4Angular2.isDebug()) {
             console.log("trace:" + this.myId);
@@ -45,6 +53,10 @@ export class ln4A2SimpleComp extends ln4BaseComponent{
         }
         return src;
     }
+    /**
+     * 
+     * @param src 
+     */
     public traceToString(src: any): string {
         src = this.trace(src);
         if (src==null){
@@ -142,6 +154,10 @@ export class ln4A2SimpleComp extends ln4BaseComponent{
     //////////////////////////////////////////////////////////////////
     // RELOAD 
     //////////////////////////////////////////////////////////////////
+    /**
+     * 
+     * @param type 
+     */
     public reload(type: string) {
         this.lastaction = this.lastaction;
         this.currentaction = "reload:" + type;

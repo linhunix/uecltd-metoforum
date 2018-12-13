@@ -17,7 +17,7 @@ export class ln4A2Connect {
 
 
     /**
-     * 
+     * base api connector 
      * @param Action 
      * @param apiEvent 
      * @param Post 
@@ -33,7 +33,7 @@ export class ln4A2Connect {
         return ln4Angular2.callUrl(apiEvent, url, Post);
     }
     /**
-     * 
+     * login functionality
      * @param user 
      * @param pass 
      */
@@ -64,6 +64,11 @@ export class ln4A2Connect {
         );
         return ln4A2Connect.ApiConnect("RestLogin", ln4Manager_evtProfile, Post);
     }
+    /**
+     * 
+     * @param catid 
+     * @param forumEvnt 
+     */
     public static ForumCatListApi(catid: number, forumEvnt: string): boolean {
         let Post: ln4Map = new ln4Map();
         Post.set('DocCatId', catid);
