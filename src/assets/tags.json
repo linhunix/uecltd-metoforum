@@ -1,12 +1,4 @@
-{
-  "app": "V1",
-  "title": "STATUS METEO",
-  "serverurl":"https://api-sm.ln4.it:443",
-  "serverurl-old":"https://svil.ln4.it",
-  "serverurl-local":"http://localhost:9090",
-  "desc": "Descrizione sito amatoriale",
-  "level":"70",
-  "tags": {
+{ "tags": {
     "menu": {
       "menu": [
         "SiteMenu",
@@ -62,25 +54,25 @@
         {
           "label": "Now Casting",
           "desc": "filtro Now casting",
-          "class":"casting",
+          "color":"",
           "forum": "forumCasting"
         },
         {
           "label": "Discussioni",
           "desc": "filtro_discussioni",
-          "class":"talk",
+          "color":"",
           "forum": "forumTalk"
         },
         {
           "label": "Varie & Strumentazione",
           "desc": "filtro_Strumentazione",
-          "class":"ot",
+          "color":"",
           "forum": "forumOT"
         },
         {
           "label": "Funghi",
           "desc": "filtro_Mix",
-          "class":"funghi",
+          "color":"",
           "forum": "forumFunghi"
         }
       ]

@@ -3,17 +3,20 @@
         <tr>
             <td style="vertical-align:baseline; text-align:justify;">
                 <font class="TxtLs">
-                {{scope.remote.desc}}
+                    {{scope.remote.desc}}
                 </font>
             </td>
         </tr>
         <tr>
             <td style="vertical-align:baseline; text-align:justify;">
-                <mat-tab-group  (selectedTabChange)="tabChanged($event)" >
-                    <mat-tab *ngFor="let item of scope.remote.list" label={{item.label}}>
-                            <hr>
-                            <forum-ln4  ln4id="{{item.forum}}"  >
-                            </forum-ln4>
+                <mat-tab-group (selectedTabChange)="tabChanged($event)" class='sm-tab'>
+                    <mat-tab *ngFor="let item of scope.remote.list" label="{{item.label}}">
+                        <ng-template mat-tab-label>
+                            <span class="sm-tab {{item.class}}">{{item.label}}</span>
+                        </ng-template>
+                        <hr>
+                        <forum-ln4 ln4id="{{item.forum}}">
+                        </forum-ln4>
                     </mat-tab>
                 </mat-tab-group>
             </td>
