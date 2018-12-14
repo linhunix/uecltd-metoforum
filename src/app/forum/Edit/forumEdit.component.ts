@@ -205,6 +205,12 @@ export class ForumEditorComponent extends ln4BaseComponent {
     /**
      * 
      */
+    public Close():boolean{
+        return true;
+    }
+    /**
+     * 
+     */
     public Save(): boolean {
         this.message = "wait server response..";
         if (!this.Check()) {
@@ -221,6 +227,7 @@ export class ForumEditorComponent extends ln4BaseComponent {
                     if ("message" in sts) {
                         if (sts.message == "Done") {
                             this.message = this.Translate("Registred!!");
+                            ln4Angular2.eventEmit(this.data.cat,'reload', true);
                             this.dialogRef.close();
                         } else if (("" + sts.message).indexOf("Error") >= 0) {
                             this.message = this.Translate("Server Reject!!");
@@ -232,7 +239,6 @@ export class ForumEditorComponent extends ln4BaseComponent {
                     }
                 }
             });
-        console.log(this.data);
         ln4A2Connect.ForumSaveApi(this.data.catid, this.data.docid, "ForumMessage", this.scopeIn, "forum-message");
         return true;
     }
