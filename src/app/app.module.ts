@@ -29,6 +29,7 @@ import { ForumEditorComponent } from './forum/Edit/forumEdit.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule} from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
+import { ForumRowLineComponent } from './forum/RowLine/forumRowLine.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,7 @@ import {MatSelectModule} from '@angular/material/select';
     ForumEditorComponent,
     EditorComponent,
     ForumHeadComponent,
+    ForumRowLineComponent,
     ForumRowComponent
   ],
   imports: [

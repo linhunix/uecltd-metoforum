@@ -7,12 +7,15 @@ import { MatDialog } from '@angular/material';
 import { ln4A2Connect } from 'src/ln4/ln4.A2Connect';
 @Component({
   selector: 'forum-ln4',
-  templateUrl: './forum.component.html',
-  styleUrls: ['./forum.component.css']
+//  templateUrl: './forum.component.div.html',
+//  styleUrls: ['./forum.component.div.css']
+  templateUrl: './forum.component.line.html',
+  styleUrls: ['./forum.component.line.css']
 })
 export class ForumComponent extends ln4A2MatComponent {
   private frm: ln4Map;
   public frmlst: string[] = [];
+  public lbl:any={};
   public frmpg: number = 0;
   public initcfg() {
     this.frm = new ln4Map();
@@ -183,5 +186,11 @@ export class ForumComponent extends ln4A2MatComponent {
   }
   constructor(dialog: MatDialog) {
     super(true, true, dialog);
+    this.lbl={
+      desc:"Titolo",
+      rows:"Risposte",
+      date:"Ultimo Agg.",
+      auth:"Autore e Localita'"
+    };
   }
 }

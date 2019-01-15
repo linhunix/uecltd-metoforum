@@ -13,7 +13,7 @@
     vertical-align: middle;
     font-weight: bold;
     font-size: 13px;
-    FONT-FAMILY: Verdana;
+    font-family: Verdana,Geneva,sans-serif; 
 }
 #menuforum button {
     border:0px;
@@ -22,7 +22,7 @@
     vertical-align: middle;
     font-weight: bold;
     font-size: 13px;
-    FONT-FAMILY: Verdana;
+    font-family: Verdana,Geneva,sans-serif; 
 }
 .mat-menu-panel{
     background-color: #339966;
@@ -35,7 +35,7 @@ a.mat-menu-item {
     color: white !important;
     font-style: normal;
     font-size: small;
-    font-family: sans-serif;
+    font-family: Verdana,Geneva,sans-serif; 
 }
 button {
     border:1px solid #339966;

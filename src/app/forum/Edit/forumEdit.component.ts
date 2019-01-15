@@ -175,20 +175,7 @@ export class ForumEditorComponent extends ln4BaseComponent {
     public onNoClick(): void {
         this.dialogRef.close();
     }
-    /*
-    newmsg.set("cat", this.forum);
-    newmsg.set("lbl", this.topic);
-    newmsg.set("sbj", this.subject);
-    newmsg.set("catid", this.catid);
-    newmsg.set("docid", this.docid);
-    newmsg.set("lvl", this.topicLevel);
-    newmsg.set("dsc", this.content);
-    newmsg.set("lps", this.content);
-    newmsg.set("lun", this.from);
-    newmsg.set("lgr", this.fromG);
-    newmsg.set("lps", this.area);
-    newmsg.set("lst", this.dateToday());
-    */
+
     public Check(): boolean {
         this.scopeIn.fromAny(this.data);
         return true;

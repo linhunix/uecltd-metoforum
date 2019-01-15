@@ -15,16 +15,16 @@
                 {{itm.sbj}}
             </span>
         </mat-panel-title>
-        <mat-panel-description class='forum-main-tab0'>
+        <mat-panel-description class='forum-main-rows'>
             Msg: {{itm.cnt}}
         </mat-panel-description>
-        <mat-panel-description class='forum-main-tab1'>
+        <mat-panel-description class='forum-main-auth'>
             Cat: {{Translate(itm.cat)}}<br>
             Usr: {{itm.lun}}<br>
             Loc: {{itm.lps}}
         </mat-panel-description>
-        <mat-panel-description class='forum-main-tab2'>
-            Date: <br>
+        <mat-panel-description class='forum-main-date'>
+            Date:<br>
             {{itm.lst}}
         </mat-panel-description>
     </mat-expansion-panel-header>
@@ -33,11 +33,6 @@
     </mat-expansion-panel-header>
     <div class='row' *ngIf="itm['lvl']==1" [innerHTML]='itm.dsc'>
     </div>
-    <ng-container *ngFor="let subitm of itm['topics']">
-        <ng-container *ngIf="checkitm(subitm)">
-            <forumRow-ln4 [LstItem]="lst" [RowItem]="subitm"></forumRow-ln4>
-        </ng-container>
-    </ng-container>
     <mat-action-row>
         <button mat-button color="primary" (click)="New()">New</button>
         <button mat-button color="primary" (click)="Add()">Add</button>
@@ -46,3 +41,8 @@
         <button mat-button color="primary" (click)="Delete()">Delete</button>
     </mat-action-row>
 </mat-expansion-panel>
+<ng-container *ngFor="let subitm of itm['topics']">
+    <ng-container *ngIf="checkitm(subitm)">
+        <forumRowLine-ln4 [LstItem]="lst" [RowItem]="subitm"></forumRowLine-ln4>
+    </ng-container>
+</ng-container>

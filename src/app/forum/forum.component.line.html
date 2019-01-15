@@ -1,0 +1,15 @@
+<forum-head-ln4 [IdForum]="myId" [ListForums]="frmlst" [pageForums]="frmpg"></forum-head-ln4>
+<div id="forum-headers-label">
+        <div id="forum-headers-lbl-init"> &nbsp; </div>
+        <div id="forum-headers-lbl-desc"> {{Translate(lbl.desc)}}</div>
+        <div id="forum-headers-lbl-rows"> {{Translate(lbl.rows)}}</div>
+        <div id="forum-headers-lbl-auth"> {{Translate(lbl.auth)}}</div>
+        <div id="forum-headers-lbl-date"> {{Translate(lbl.date)}}</div>
+        <div id="forum-headers-lbl-ends">&nbsp; </div>
+</div>
+<ng-container *ngFor="let cvar of frmlst ">
+        <ng-container *ngIf="cvar">
+            <forumRowLine-ln4 [LstItem]="getLst(cvar)" [RowItem]="getItm(cvar)"></forumRowLine-ln4>
+        </ng-container>
+    </ng-container>
+<forum-head-ln4 [ListForums]="frmlst" [pageForums]="frmpg"></forum-head-ln4>

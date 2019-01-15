@@ -1,0 +1,31 @@
+.forum-main-title {
+    width: 70%;
+    vertical-align: middle;
+    align-content: left;
+}
+.forum-main-tab0 img,
+.forum-main-title span,
+.forum-main-title img{
+    margin:5px;
+    vertical-align: middle;
+    align-content: left;
+
+}
+.forum-main-auth,
+.forum-main-rows,
+.forum-main-date {
+    min-width:120px !important;
+    max-width:120px !important;
+    border: 0;
+    float: right;
+    font-size: 10px;
+}
+.f-tree-l0,
+.f-tree-l1,
+.f-tree-l2{
+    width: 10px !important;
+    min-width: 10px !important;
+}
+.f-title{
+    padding-left: 15px;
+}
