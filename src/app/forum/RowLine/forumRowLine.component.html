@@ -28,10 +28,10 @@
             {{itm.lst}}
         </mat-panel-description>
     </mat-expansion-panel-header>
-    <mat-expansion-panel-header *ngIf="itm['lvl']!=1" class="row" class='forum-subrow-{{itm.lvl}}'>
+    <mat-expansion-panel-header *ngIf="itm['lvl']==1" class="row" class='forum-subrow-{{itm.lvl}}'>
         <span [innerHTML]='itm.dsc'></span>
     </mat-expansion-panel-header>
-    <div class='row' *ngIf="itm['lvl']==1" [innerHTML]='itm.dsc'>
+    <div class='row' *ngIf="itm['lvl']!=1" [innerHTML]='itm.dsc'>
     </div>
     <mat-action-row>
         <button mat-button color="primary" (click)="New()">New</button>
