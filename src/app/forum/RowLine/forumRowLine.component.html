@@ -41,7 +41,7 @@
         <button mat-button color="primary" (click)="Delete()">Delete</button>
     </mat-action-row>
 </mat-expansion-panel>
-<ng-container *ngFor="let subitm of itm['topics']">
+<ng-container *ngFor="let subitm of topics">
     <ng-container *ngIf="checkitm(subitm)">
         <forumRowLine-ln4 [LstItem]="lst" [RowItem]="subitm"></forumRowLine-ln4>
     </ng-container>

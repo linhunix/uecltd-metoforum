@@ -41,7 +41,7 @@ export class ln4Map {
         return this;
     }
     public setFromAny(key: string, value: any): this {
-        let src:ln4Map= new ln4Map();
+        let src: ln4Map = new ln4Map();
         src.fromAny(value)
         this.prototype[key] = src.toJson();
         return this;
@@ -58,12 +58,40 @@ export class ln4Map {
             callback(k, v);
         }
     }
-
+    public sort(field: string = null): Array<any> {
+        let res: Array<any> = [];
+        let cnt = 0;
+        if (field == null) {
+            let key: string[] = this.keys();
+            key.sort().forEach((v: string) => {
+                res[cnt] = this.prototype[v];
+                cnt++;
+            });
+        }else{
+            let obj: any[] = this.values();
+            obj.sort((va,vb)=>{
+                let ka:any="";
+                if (field in va){
+                    ka=va.field;
+                }
+                let kb:any="";
+                if (field in vb){
+                    kb=vb.field;
+                }
+                let res:number= ka > kb ? -1 : 1;
+                return res;
+            }).forEach((v: any) => {
+                res[cnt] = v;
+                cnt++;
+            });
+        }
+        return res;
+    }
     private MapToObj(strMap: Map<string, any>) {
         let obj = new Array();
         //for (let k of Array.from(strMap.keys())) {
         strMap.forEach((v: any, k: string) => {
-            if ((k != '__proto__')&&(k != "prototype")) {
+            if ((k != '__proto__') && (k != "prototype")) {
                 let v = strMap.get(k);
                 if (typeof obj[k].toJson == "function") {
                     strMap.set(k, obj[k].toJson());
@@ -79,7 +107,7 @@ export class ln4Map {
     private ObjToMap(obj) {
         let strMap = new Map();
         for (let k of Object.keys(obj)) {
-            if ((k != '__proto__')&&(k != "prototype")) {
+            if ((k != '__proto__') && (k != "prototype")) {
                 if (obj[k] instanceof Object) {
                     if (typeof obj[k].toJson == "function") {
                         strMap.set(k, obj[k].toJson());
@@ -88,7 +116,7 @@ export class ln4Map {
                     } else {
                         strMap.set(k, this.ObjToMap(obj[k]));
                     }
-                }else {
+                } else {
                     strMap.set(k, obj[k]);
                 }
             }
@@ -125,7 +153,7 @@ export class ln4Map {
     }
 
     public fromAny(src: any): void {
-        if (src==null){
+        if (src == null) {
             this.clear();
             return;
         }
@@ -162,8 +190,8 @@ export class ln4Map {
     public getMessage(): string {
         return this.message
     }
-    public static Load(obj:any):ln4Map{
-        let mymap:ln4Map = new ln4Map();
+    public static Load(obj: any): ln4Map {
+        let mymap: ln4Map = new ln4Map();
         mymap.fromAny(obj);
         return mymap;
     }

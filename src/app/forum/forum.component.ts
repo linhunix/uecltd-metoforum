@@ -52,6 +52,8 @@ export class ForumComponent extends ln4A2MatComponent {
       this.frmlst = ln4Map.Load(source.get("forumVals")).keys();
     }
     if (source.has("forums")) {
+      let priids=[];
+      let secids=[];
       source.get("forums").forEach((element: string) => {
         let formn = this.myId + "-" + element;
         if (this.frm.has(formn) == false) {
@@ -71,7 +73,7 @@ export class ForumComponent extends ln4A2MatComponent {
                 let lstcnt = {};
                 let fval = this.scope.remote.forumVals[ltype];
                 this.scope.remote.forumVals[ltype] = {};
-                this.scope.remote.forumVals[ltype]["topics"] = [];
+                this.scope.remote.forumVals[ltype]["topics"] = {};
                 this.scope.remote.forumVals[ltype].lbl = this.Translate(ltype);
                 this.scope.remote.forumVals[ltype].lvl = 0;
                 this.scope.remote.forumVals[ltype].cnt = 0;
@@ -79,6 +81,8 @@ export class ForumComponent extends ln4A2MatComponent {
                   (key: any) => {
                     let kval = fval[key];
                     if (kval.docid != null) {
+                      let docid: number =0 + kval.docid;
+                      console.log("time of "+docid);
                       if (kval.docid == kval.catid) {
                         if (kval.value != null) {
                           Object.keys(kval.value).forEach(
@@ -123,34 +127,34 @@ export class ForumComponent extends ln4A2MatComponent {
                           cnttpc++;
                           lsttpc[kval.lbl] = cnttpc;
                           lstcnt[kval.lbl] = 0;
-                          this.scope.remote.forumVals[ltype]["topics"][cnttpc] = topic;
+                          priids[kval.lbl] = docid;
+                          this.scope.remote.forumVals[ltype]["topics"][docid] = topic;
                         } else {
-                          lstcnt[kval.lbl]++;
-                          let subid: number = 0 + lstcnt[kval.lbl];
+                          lstcnt[kval.lbl]++;                  
+                          let secid: number = 0 + lstcnt[kval.lbl];
+                          secids[secid]= docid;
                           let priid: number = 0 + lsttpc[kval.lbl];
-                          if (!(priid in this.scope.remote.forumVals[ltype]["topics"])){
-                            this.scope.remote.forumVals[ltype]["topics"][priid]={
+                          let subid: number = 0 + secids[kval.lbl];
+                          docid = 0 + priids[kval.lbl];
+                          if (!(docid in this.scope.remote.forumVals[ltype]["topics"])){
+                            this.scope.remote.forumVals[ltype]["topics"][docid]={
                               "topics":[]
                             };
                           }
-                          this.scope.remote.forumVals[ltype]["topics"][priid]["topics"][subid] = topic;
-                          this.scope.remote.forumVals[ltype]["topics"][priid].cnt = priid;
-                        }
-                        if (!(cnttpc in this.scope.remote.forumVals[ltype]["topics"])){
-                          this.scope.remote.forumVals[ltype]["topics"][cnttpc]={
-                            "topics":[]
-                          };
-                        }                        
-                        this.scope.remote.forumVals[ltype].lun = this.scope.remote.forumVals[ltype]["topics"][cnttpc].lun;
-                        this.scope.remote.forumVals[ltype].lgr = this.scope.remote.forumVals[ltype]["topics"][cnttpc].lgr;
-                        this.scope.remote.forumVals[ltype].lps = this.scope.remote.forumVals[ltype]["topics"][cnttpc].lps;
-                        this.scope.remote.forumVals[ltype].lst = this.scope.remote.forumVals[ltype]["topics"][cnttpc].lst;
+                          this.scope.remote.forumVals[ltype]["topics"][docid]["topics"][subid] = topic;
+                          this.scope.remote.forumVals[ltype]["topics"][docid].cnt = priid;
+                        }                    
+                        this.scope.remote.forumVals[ltype].lun = this.scope.remote.forumVals[ltype]["topics"][docid].lun;
+                        this.scope.remote.forumVals[ltype].lgr = this.scope.remote.forumVals[ltype]["topics"][docid].lgr;
+                        this.scope.remote.forumVals[ltype].lps = this.scope.remote.forumVals[ltype]["topics"][docid].lps;
+                        this.scope.remote.forumVals[ltype].lst = this.scope.remote.forumVals[ltype]["topics"][docid].lst;
                         this.scope.remote.forumVals[ltype].cnt = cntsub;
                         this.scope.remote.forumVals[ltype].cnttpc = cnttpc;
+
                       }
                     }
 
-                  });
+                });
               } else {
                 this.scope.remote.forumVals[ltype] = [];
                 this.scope.remote.forumVals[ltype]["topics"] = [];
