@@ -107,6 +107,7 @@ export class ForumComponent extends ln4A2MatComponent {
                         if (this.scope.remote.forumVals[ltype].dsc == null) {
                           this.scope.remote.forumVals[ltype].dsc = "";
                         }
+                        console.log("top is "+docid+' with level 0');
                       } else {
                         let topic = kval.value;
                         topic.idx = key;
@@ -123,6 +124,7 @@ export class ForumComponent extends ln4A2MatComponent {
                         topic.cnt = 0;
                         topic.topics = [];
                         cntsub++;
+                        console.log(cntsub+" is "+docid+' with level '+topic.lvl);
                         if (topic.lvl == 1) {
                           cnttpc++;
                           lsttpc[kval.lbl] = cnttpc;
@@ -134,11 +136,11 @@ export class ForumComponent extends ln4A2MatComponent {
                           let secid: number = 0 + lstcnt[kval.lbl];
                           secids[secid]= docid;
                           let priid: number = 0 + lsttpc[kval.lbl];
-                          let subid: number = 0 + secids[kval.lbl];
+                          let subid: number = 0 + secids[secid];
                           docid = 0 + priids[kval.lbl];
                           if (!(docid in this.scope.remote.forumVals[ltype]["topics"])){
                             this.scope.remote.forumVals[ltype]["topics"][docid]={
-                              "topics":[]
+                              "topics":{}
                             };
                           }
                           this.scope.remote.forumVals[ltype]["topics"][docid]["topics"][subid] = topic;
@@ -153,12 +155,12 @@ export class ForumComponent extends ln4A2MatComponent {
 
                       }
                     }
-
                 });
               } else {
-                this.scope.remote.forumVals[ltype] = [];
-                this.scope.remote.forumVals[ltype]["topics"] = [];
+                this.scope.remote.forumVals[ltype] = {};
+                this.scope.remote.forumVals[ltype]["topics"] = {};
               }
+              console.log(this.scope.remote.forumVals);
             }
           );
           ln4A2Connect.ForumListTypeApi(formn, formn);
