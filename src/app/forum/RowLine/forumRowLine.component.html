@@ -6,11 +6,11 @@
                 <img  class='forum-img-{{itm.lvl}}' *ngIf="itm['lvl']==1" src="assets/N_thrnew.gif">
                 <img  class='forum-img-{{itm.lvl}}' *ngIf="itm['lvl']>1" src="assets/N_ThrAns.gif">
             </div>
-            <span *ngIf="itm['lvl'] == 1" class="f-title">
+            <span *ngIf="itm['lvl'] != 1" class="f-title">
                 <b>{{itm.sbj}}</b><br>
                 <span class="f-sub-title-{{itm.lvl}}">{{itm.lbl}}</span>
             </span>
-            <span *ngIf="itm['lvl'] != 1" class="f-title">
+            <span *ngIf="itm['lvl'] == 1" class="f-title">
                 <b>{{itm.lbl}}</b><br>
                 <span class="f-sub-title-{{itm.lvl}}">{{itm.sbj}}</span>
             </span>
