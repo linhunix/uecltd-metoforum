@@ -60,7 +60,7 @@
       "desc": "Descrizione sito amatoriale durante l utilizzo, consigli di acquisto e racconto delle proprie esperienze. Come per l area Discussioni, i thread verranno riportati in evidenza dagli aggiornamenti",
       "list": [
         {
-          "label": "Now Casting",
+          "label": "NowCasting",
           "desc": "filtro Now casting",
           "class":"casting",
           "forum": "forumCasting"

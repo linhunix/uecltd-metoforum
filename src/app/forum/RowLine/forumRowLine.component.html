@@ -8,20 +8,28 @@
             </div>
             <span *ngIf="itm['lvl'] == 1" class="f-title">
                 <b>{{itm.sbj}}</b><br>
-                {{itm.lbl}}
+                <span class="f-sub-title-{{itm.lvl}}">{{itm.lbl}}</span>
             </span>
             <span *ngIf="itm['lvl'] != 1" class="f-title">
                 <b>{{itm.lbl}}</b><br>
-                {{itm.sbj}}
+                <span class="f-sub-title-{{itm.lvl}}">{{itm.sbj}}</span>
             </span>
         </mat-panel-title>
         <mat-panel-description class='forum-main-rows'>
+            <!--
             Msg: {{itm.cnt}}
+            !-->
+            {{itm.cnt}}
         </mat-panel-description>
         <mat-panel-description class='forum-main-auth'>
+            <!--
             Cat: {{Translate(itm.cat)}}<br>
             Usr: {{itm.lun}}<br>
             Loc: {{itm.lps}}
+            !-->
+            {{Translate(itm.cat)}}<br>
+            {{itm.lun}}<br>
+            {{itm.lps}}
         </mat-panel-description>
         <mat-panel-description class='forum-main-date'>
             Date:<br>
