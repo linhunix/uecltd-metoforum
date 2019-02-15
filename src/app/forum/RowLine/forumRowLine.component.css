@@ -11,8 +11,14 @@
     align-content: left;
 
 }
+.forum-main-rows{
+    min-width:60px !important;
+    max-width:60px !important;
+    border: 0;
+    float: right;
+    font-size: 10px;
+}
 .forum-main-auth,
-.forum-main-rows,
 .forum-main-date {
     min-width:120px !important;
     max-width:120px !important;

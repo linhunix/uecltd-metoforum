@@ -12,7 +12,7 @@
                 <mat-tab-group (selectedTabChange)="tabChanged($event)" class='sm-tab'>
                     <mat-tab *ngFor="let item of scope.remote.list" label="{{item.label}}">
                         <ng-template mat-tab-label>
-                            <span class="sm-tab {{item.class}}">{{item.label}}</span>
+                            <span class="sm-tab {{item.class}} {{tabextra(item.class)}}" >{{item.label}}</span>
                         </ng-template>
                         <hr>
                         <forum-ln4 ln4id="{{item.forum}}">

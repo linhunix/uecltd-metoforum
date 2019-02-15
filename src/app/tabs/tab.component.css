@@ -1,3 +1,6 @@
+.mat-tab-active-span {
+    font-size: 30px  !important;
+}
 .mat-tab-label-content,
 .mat-tab-label,
 .sm-tab {
