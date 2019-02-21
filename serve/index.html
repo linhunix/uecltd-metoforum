@@ -1,0 +1,22 @@
+<html ng-app="serve">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to serve</title>
+  <link ref="stylesheet" type="text/css" href="build/build.css">
+</head>
+<body>
+  <ng-view></ng-view>
+  <script src="build/build.js"></script>
+  <script>
+  angular = require('angular');
+  require('angular-route');
+  
+  // Add other requires here
+  // require('yourModule');
+
+  angular.module("serve", [
+    // 'yourModule'
+    ]);
+  </script>
+</body>
+</html>
