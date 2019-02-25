@@ -109,7 +109,7 @@ export class ForumComponent extends ln4A2MatComponent {
                         if (this.scope.remote.forumVals[ltype].dsc == null) {
                           this.scope.remote.forumVals[ltype].dsc = "";
                         }
-                        console.log("top is " + docid + ' with level 0');
+                        //console.log("top is " + docid + ' with level 0');
                       } else {
                         let topic = kval.value;
                         topic.idx = key;
@@ -127,15 +127,15 @@ export class ForumComponent extends ln4A2MatComponent {
                         topic.topics = [];
                         cntsub++;
                         // tslint:disable-next-line:max-line-length
-                        console.log(ltype + "/" + cntsub + " is " + docid + '[' + topic.docid + '/' + kval.catid + '] with level ' + topic.lvl);
-                        console.log(kval);
+                        //console.log(ltype + "/" + cntsub + " is " + docid + '[' + topic.docid + '/' + kval.catid + '] with level ' + topic.lvl);
+                        //console.log(kval);
                 if (topic.lvl == 1) {
                   cnttpc++;
                   lsttpc[topic.lbl] = cnttpc;
                   lstcnt[topic.lbl] = 0;
                   priids[topic.lbl] = docid;
                   this.scope.remote.forumVals[ltype]["topics"][docid] = topic;
-                  console.log(ltype + "/" + topic.lbl + " is " + docid + " is mode pri");
+                 // console.log(ltype + "/" + topic.lbl + " is " + docid + " is mode pri");
                 } else {
                   lstcnt[topic.lbl]++;
                   let secid: number = 0 + lstcnt[topic.lbl];
@@ -150,7 +150,7 @@ export class ForumComponent extends ln4A2MatComponent {
                   }
                   this.scope.remote.forumVals[ltype]["topics"][docid]["topics"][subid] = topic;
                   this.scope.remote.forumVals[ltype]["topics"][docid].cnt = priid;
-                  console.log(ltype + "/" + kval.lbl + " is " + docid + " is mode sub");
+                  //console.log(ltype + "/" + kval.lbl + " is " + docid + " is mode sub");
                 }
                 this.scope.remote.forumVals[ltype].lun = this.scope.remote.forumVals[ltype]["topics"][docid].lun;
                 this.scope.remote.forumVals[ltype].lgr = this.scope.remote.forumVals[ltype]["topics"][docid].lgr;
