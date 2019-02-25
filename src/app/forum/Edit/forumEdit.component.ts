@@ -29,7 +29,7 @@ export class ForumEditorComponent extends ln4BaseComponent {
     }
     /**
      * Load data
-     * @param mydata 
+     * @param mydata
      */
     public loaddata(mydata: any): void {
         //if (ln4Angular2.isDebug()) {
@@ -80,7 +80,7 @@ export class ForumEditorComponent extends ln4BaseComponent {
                 newdata.cat = this.data.cat;
                 newdata.lbl = this.data.lbl;
                 newdata.lvl = 2;
-                newdata.catid = this.data.catid;
+                newdata.catid = this.data.docid;
                 newdata.name = this.data.name;
                 newdata.docid = ln4A2Connect.newDocid();
                 break;
@@ -170,7 +170,7 @@ export class ForumEditorComponent extends ln4BaseComponent {
         return this.isreadonly;
     }
     /**
-     * Closse on click 
+     * Closse on click
      */
     public onNoClick(): void {
         this.dialogRef.close();
@@ -190,13 +190,13 @@ export class ForumEditorComponent extends ln4BaseComponent {
         return false;
     }
     /**
-     * 
+     *
      */
     public Close():boolean{
         return true;
     }
     /**
-     * 
+     *
      */
     public Save(): boolean {
         this.message = "wait server response..";
