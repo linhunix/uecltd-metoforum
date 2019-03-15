@@ -3,7 +3,7 @@ import { ln4Map } from "./ln4.Map";
 /**
  * @author Andrea Morello - <andrea.morello@linhunix.com>
  * @description Configuration manager Class
- * 
+ *
 */
 /**
  * gestione eventi interni
@@ -11,7 +11,7 @@ import { ln4Map } from "./ln4.Map";
 export const ln4Manager_IsWrite: string = "CanWrite";
 export const ln4Manager_IsChange: string = "Change";
 /**
- * boolean conversion 
+ * boolean conversion
  */
 export const ln4Manager_BooleanTrue: string = "YES";
 export const ln4Manager_BooleanFalse: string = "NO";
@@ -42,7 +42,7 @@ export class ln4Manager {
         this.data = new ln4Map();
     }
     /**
-     * 
+     *
      */
     public static GetInstance(): ln4Manager {
         if (this.instance == null) {
@@ -131,7 +131,7 @@ export class ln4Manager {
     }
     //////////////////////////////////////////////////////////////////
     // SERVICE
-    //////////////////////////////////////////////////////////////////   
+    //////////////////////////////////////////////////////////////////
     public serviceSet(name: string, serviceclass: any) {
         this.service.set(name, serviceclass);
     }
@@ -181,12 +181,19 @@ export class ln4Manager {
                 return false;
         }
     }
-    //////////////////////////////////////////////////////////////////
-    // Tools
-    //////////////////////////////////////////////////////////////////
-    public dateToday(): string {
-        let todayDate = new Date();
-        return todayDate.getFullYear() + '-' + ((todayDate.getMonth() + 1)) + '-' + todayDate.getDate() + ' ' + todayDate.getHours() + ':' + todayDate.getMinutes() + ':' + todayDate.getSeconds();
-    }
+
+  //////////////////////////////////////////////////////////////////
+  // Tools
+  //////////////////////////////////////////////////////////////////
+
+  /**
+   * Dates today
+   * @returns today
+   */
+  public dateToday(): string {
+      let now = new Date();
+      let todayDate =  new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+      return todayDate.getFullYear() + '-' + ((todayDate.getMonth() + 1)) + '-' + todayDate.getDate() + ' ' + todayDate.getHours() + ':' + todayDate.getMinutes() + ':' + todayDate.getSeconds();
+  }
 
 }

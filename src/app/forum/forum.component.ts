@@ -135,6 +135,7 @@ export class ForumComponent extends ln4A2MatComponent {
                   lstcnt[topic.lbl] = 0;
                   priids[topic.lbl] = docid;
                   this.scope.remote.forumVals[ltype]["topics"][docid] = topic;
+                  this.scope.remote.forumVals[ltype]["topics"][docid].lid = docid;
                  // console.log(ltype + "/" + topic.lbl + " is " + docid + " is mode pri");
                 } else {
                   lstcnt[topic.lbl]++;
@@ -145,17 +146,23 @@ export class ForumComponent extends ln4A2MatComponent {
                   docid = 0 + priids[topic.lbl];
                   if (!(docid in this.scope.remote.forumVals[ltype]["topics"])) {
                     this.scope.remote.forumVals[ltype]["topics"][docid] = {
-                      "topics": {}
+                      "topics": {
+                        "lid":docid
+                      }
                     };
                   }
                   this.scope.remote.forumVals[ltype]["topics"][docid]["topics"][subid] = topic;
                   this.scope.remote.forumVals[ltype]["topics"][docid].cnt = priid;
+                  if (this.scope.remote.forumVals[ltype]["topics"][docid].lid < subid){
+                    this.scope.remote.forumVals[ltype]["topics"][docid].lid = subid;
+                  }
                   //console.log(ltype + "/" + kval.lbl + " is " + docid + " is mode sub");
                 }
                 this.scope.remote.forumVals[ltype].lun = this.scope.remote.forumVals[ltype]["topics"][docid].lun;
                 this.scope.remote.forumVals[ltype].lgr = this.scope.remote.forumVals[ltype]["topics"][docid].lgr;
                 this.scope.remote.forumVals[ltype].lps = this.scope.remote.forumVals[ltype]["topics"][docid].lps;
                 this.scope.remote.forumVals[ltype].lst = this.scope.remote.forumVals[ltype]["topics"][docid].lst;
+                this.scope.remote.forumVals[ltype].lid = docid;
                 this.scope.remote.forumVals[ltype].cnt = cntsub;
                 this.scope.remote.forumVals[ltype].cnttpc = cnttpc;
               }
@@ -165,10 +172,15 @@ export class ForumComponent extends ln4A2MatComponent {
       this.scope.remote.forumVals[ltype] = {};
       this.scope.remote.forumVals[ltype]["topics"] = {};
     }
+    let svar= this.scope.remote.forumVals[ltype]["topics"].sort(
+        (t1,t2){
+            return t1.lid-t2.lid;
+        }
+    );
     console.log(this.scope.remote.forumVals);
   }
           );
-  ln4A2Connect.ForumListTypeApi(formn, formn);
+          ln4A2Connect.ForumListTypeApi(formn, formn);
           this.frm.set(formn, true);
         }
       });

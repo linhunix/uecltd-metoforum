@@ -8,10 +8,10 @@
             </div>
             <span *ngIf="itm['lvl'] != 1" class="f-title">
                 <b>{{itm.sbj}}</b><br>
-                <span class="f-sub-title-{{itm.lvl}}">{{itm.lbl}}</span>
+                <span class="f-sub-title-{{itm.lvl}}">{{Translate(itm.cat)}} - {{itm.lbl}}</span>
             </span>
             <span *ngIf="itm['lvl'] == 1" class="f-title">
-                <b>{{itm.lbl}}</b><br>
+                <b>{{Translate(itm.cat)}} - {{itm.lbl}}</b><br>
                 <span class="f-sub-title-{{itm.lvl}}">{{itm.sbj}}</span>
             </span>
         </mat-panel-title>
@@ -27,13 +27,11 @@
             Usr: {{itm.lun}}<br>
             Loc: {{itm.lps}}
             !-->
-            {{Translate(itm.cat)}}<br>
-            {{itm.lun}}<br>
+            {{removetag(itm.lun)}}<br>
             {{itm.lps}}
         </mat-panel-description>
         <mat-panel-description class='forum-main-date'>
-            Date:<br>
-            {{itm.lst}}
+            {{removesec(itm.lst)}}
         </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-expansion-panel-header *ngIf="itm['lvl']==0" class="row" class='forum-subrow-{{itm.lvl}}'>
