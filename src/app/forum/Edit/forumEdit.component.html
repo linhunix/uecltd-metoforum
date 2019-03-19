@@ -1,5 +1,6 @@
 <h2 mat-dialog-title>Editor: {{action}}</h2>
-<ng-container *ngIf="isEdit()">
+<ng-container *ngIf="isEdit()" >
+  <div class="forumEdit" >
     <span style='font-size: 8px;'>{{data.name}}/{{data.catid}}/{{data.docid}}</span>
     <div class='row'>
         <input readonly matInput name="data.lun" value='{{data.lun}}' placeholder='From User' style="width:25%;">
@@ -42,4 +43,5 @@
     <div class='row'>
         <button mat-button name='ok' [mat-dialog-close]='false' (click)='Save()' style="width:100%;">Enter</button>
     </div>
+  </div>
 </ng-container>

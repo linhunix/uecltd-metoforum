@@ -24,7 +24,8 @@
     max-width:120px !important;
     border: 0;
     float: right;
-    font-size: 10px;
+    font-weight: bold;
+    font-size: 13px;
 }
 .f-tree-l0,
 .f-tree-l1,

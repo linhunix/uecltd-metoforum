@@ -4,8 +4,8 @@
     width:100%;
     min-width:540px;
     position:absolute;
-    top:0px; left:0px; 
-    padding:5px; 
+    top:0px; left:0px;
+    padding:5px;
     text-align:left;
     height: 30px;
     background-color: #339966;
@@ -13,7 +13,7 @@
     vertical-align: middle;
     font-weight: bold;
     font-size: 13px;
-    font-family: Verdana,Geneva,sans-serif; 
+    font-family: Verdana,Geneva,sans-serif;
 }
 #menuforum button {
     border:0px;
@@ -22,7 +22,7 @@
     vertical-align: middle;
     font-weight: bold;
     font-size: 13px;
-    font-family: Verdana,Geneva,sans-serif; 
+    font-family: Verdana,Geneva,sans-serif;
 }
 .mat-menu-panel{
     background-color: #339966;
@@ -35,10 +35,15 @@ a.mat-menu-item {
     color: white !important;
     font-style: normal;
     font-size: small;
-    font-family: Verdana,Geneva,sans-serif; 
+    font-family: Verdana,Geneva,sans-serif;
 }
 button {
     border:1px solid #339966;
     background-color: #EFEFEF;
     COLOR: #0000A0;
+}
+.cdk-overlay-pane{
+  unicode-bidi:bidi-override;
+  overflow-y: scroll !important;
+  overflow-x: hidden!important;
 }

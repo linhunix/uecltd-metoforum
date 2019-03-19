@@ -11,11 +11,11 @@
     align-content: left;
 }
 .forum-main-tab0 {
-    width: 6%;   
+    width: 6%;
     font-size: 10px;
 }
 .forum-main-tab1 {
-    width: 18%;   
+    width: 18%;
     font-size: 10px;
 }
 .forum-main-tab2 {
@@ -30,4 +30,9 @@
 }
 .f-title{
     padding-left: 15px;
+}
+.cdk-overlay-pane{
+  unicode-bidi:bidi-override;
+  overflow-y: scroll !important;
+  overflow-x: hidden!important;
 }
