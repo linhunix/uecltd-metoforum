@@ -13,11 +13,7 @@ export class ForumRowLineComponent extends ln4A2MatComponent {
   @Input("RowItem") public itm: any;
   @Input("LstItem") public lst: any;
   public get topics(): any[] {
-    return ln4Map.Load(this.itm.topics).sort(
-      (t1, t2 )=>{
-        return t1.lid + t2.lid;
-      }
-    );
+    return ln4Map.Load(this.itm.topics).sort("docid");
   }
   constructor(dialog: MatDialog) {
     super(true, true, dialog);
