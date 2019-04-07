@@ -8,10 +8,10 @@
             </div>
             <span *ngIf="itm['lvl'] != 1" class="f-title">
                 <b>{{itm.sbj}}</b><br>
-                <span class="f-sub-title-{{itm.lvl}}">{{Translate(itm.cat)}} - {{itm.lbl}}</span>
+                <span class="f-sub-title-{{itm.lvl}}">{{itm.lbl}}</span>
             </span>
             <span *ngIf="itm['lvl'] == 1" class="f-title">
-                <b>{{Translate(itm.cat)}} - {{itm.lbl}}</b><br>
+                <b>{{itm.lbl}}</b><br>
                 <span class="f-sub-title-{{itm.lvl}}">{{itm.sbj}}</span>
             </span>
         </mat-panel-title>
@@ -47,7 +47,7 @@
         <button mat-button color="primary" (click)="Delete()">Delete</button>
     </mat-action-row>
 </mat-expansion-panel>
-<ng-container *ngFor="let subitm of topics">
+<ng-container *ngFor="let subitm of topics ">
     <ng-container *ngIf="checkitm(subitm)">
         <forumRowLine-ln4 [LstItem]="lst" [RowItem]="subitm"></forumRowLine-ln4>
     </ng-container>

@@ -174,9 +174,10 @@ export class ForumComponent extends ln4A2MatComponent {
     }
     let svar= this.scope.remote.forumVals[ltype]["topics"].sort(
         (t1,t2)=>{
-            return t1.lid-t2.lid;
+            return t1.lid+t2.lid;
         }
     );
+    console.log(svar);
     console.log(this.scope.remote.forumVals);
   }
           );
