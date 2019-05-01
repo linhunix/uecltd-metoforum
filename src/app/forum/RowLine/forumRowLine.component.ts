@@ -58,15 +58,6 @@ export class ForumRowLineComponent extends ln4A2MatComponent {
     }
     return valres;
   }
-
-  public removedate(value?: string): string {
-    let valres="";
-    if (value != null) {
-      let valin=""+value;
-      valres=valin.split(' ')[1];
-    }
-    return valres;
-  }
   /**
    * Removedate forum row line component
    * @param [value]

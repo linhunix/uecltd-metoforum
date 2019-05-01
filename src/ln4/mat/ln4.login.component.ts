@@ -100,7 +100,6 @@ export class ln4MatLoginComponent  extends ln4BaseComponent {
           let ln4m = ln4Manager.GetInstance();
           let sts = ln4m.dataExport(type);
           ln4Angular2.msgInfo("newuser//START"+type);
-          console.log(sts);
           ln4Angular2.msgInfo("newuser//END"+type);
           if (sts == null) {
             this.message = ln4Manager.GetInstance().translate("Server Reject!");

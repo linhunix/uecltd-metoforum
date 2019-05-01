@@ -32,10 +32,6 @@ export class ForumEditorComponent extends ln4BaseComponent {
      * @param mydata
      */
     public loaddata(mydata: any): void {
-        //if (ln4Angular2.isDebug()) {
-        console.log("editor Component");
-        console.log(mydata);
-        //}
         if (mydata == null) {
             ln4Angular2.msgWarning("No Data for editor!!!");
             this.onNoClick();
@@ -181,7 +177,6 @@ export class ForumEditorComponent extends ln4BaseComponent {
         return true;
     }
     public isEdit(): boolean {
-        console.log(this.data);
         if (this.data != null) {
             if ("lun" in this.data) {
                 return true;

@@ -106,11 +106,8 @@ export class ln4Manager {
     return null;
   }
   public profileXOGet(name: string): any {
-    console.log(this.profileX);
     if (this.profileX.has("Output")) {
-
       let out = ln4Map.Load(this.profileX.get("Output"));
-      console.log(out);
       if (out.has(name)) {
         return out.get(name);
       }

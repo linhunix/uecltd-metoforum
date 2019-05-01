@@ -84,7 +84,6 @@ export class ForumComponent extends ln4A2MatComponent {
                     let kval = fval[key];
                     if (kval.docid != null) {
                       let docid: number = 0 + kval.docid;
-                      console.log("time of " + docid);
                       if (kval.docid == kval.catid) {
                         if (kval.value != null) {
                           Object.keys(kval.value).forEach(
@@ -177,8 +176,6 @@ export class ForumComponent extends ln4A2MatComponent {
             return t1.lid+t2.lid;
         }
     );
-    console.log(svar);
-    console.log(this.scope.remote.forumVals);
   }
           );
           ln4A2Connect.ForumListTypeApi(formn, formn);

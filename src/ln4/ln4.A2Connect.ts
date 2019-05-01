@@ -68,7 +68,6 @@ export class ln4A2Connect {
         ln4Angular2.msgDebug("runload=" + ltype);
         let ln4m = ln4Manager.GetInstance();
         let res = ln4m.dataExport(ltype);
-        console.log(res);
         if (res == null) {
           return alert(ln4Manager.GetInstance().translate("Server Time out!!"));
         }
