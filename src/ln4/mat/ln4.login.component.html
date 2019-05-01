@@ -27,6 +27,11 @@
             </mat-form-field>
         </div>
         <div class="row">
+          <mat-form-field>
+              <input matInput [(ngModel)]="this.locality" placeholder="Locality">
+          </mat-form-field>
+       </div>
+       <div class="row">
             <span style="color:red;">
                 {{show_message()}}
             </span>

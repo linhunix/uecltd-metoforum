@@ -18,6 +18,7 @@ export class ln4MatLoginComponent  extends ln4BaseComponent {
   public message: string = "";
   public regstyle: boolean = false;
   public lgnstyle: boolean = true;
+  public locality: string ="net";
   constructor(
     public dialogRef: MatDialogRef<ln4MatLoginComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -93,9 +94,11 @@ export class ln4MatLoginComponent  extends ln4BaseComponent {
       newuser.set("UserCode", this.pass);
       newuser.set("RealName", this.realname);
       newuser.set("email", this.email);
+      newuser.set("Locality", this.locality);
       ln4Angular2.eventGet("newuser", true).subscribe(
         (type) => {
-          let sts = ln4Manager.GetInstance().dataExport(type);
+          let ln4m = ln4Manager.GetInstance();
+          let sts = ln4m.dataExport(type);
           ln4Angular2.msgInfo("newuser//START"+type);
           console.log(sts);
           ln4Angular2.msgInfo("newuser//END"+type);

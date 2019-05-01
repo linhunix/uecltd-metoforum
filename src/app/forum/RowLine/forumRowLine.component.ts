@@ -35,7 +35,6 @@ export class ForumRowLineComponent extends ln4A2MatComponent {
     let valres="";
     if (value != null) {
       let valin=""+value;
-      console.log("removetag:"+valin);
       let i=0;
       for (let v of valin.split('')) {
         if (i > 1){
@@ -56,6 +55,15 @@ export class ForumRowLineComponent extends ln4A2MatComponent {
     if (value != null) {
       let valin=""+value;
       valres=valin.split(' ')[0];
+    }
+    return valres;
+  }
+
+  public removedate(value?: string): string {
+    let valres="";
+    if (value != null) {
+      let valin=""+value;
+      valres=valin.split(' ')[1];
     }
     return valres;
   }

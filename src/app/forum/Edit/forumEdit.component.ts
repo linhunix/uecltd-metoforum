@@ -58,7 +58,7 @@ export class ForumEditorComponent extends ln4BaseComponent {
             lvl: 0,
             lbl: "",
             sbj: "",
-            lps: "net",
+            lps: ln4Manager.GetInstance().profileXOGet("Locality"),
             cat: ""
         };
         if (this.data == null) {

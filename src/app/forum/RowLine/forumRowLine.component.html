@@ -31,7 +31,8 @@
             {{itm.lps}}
         </mat-panel-description>
         <mat-panel-description class='forum-main-date'>
-            {{removesec(itm.lst)}}
+            {{removesec(itm.lst)}}<br>
+            {{removedate(itm.lst)}} (GMT)
         </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-expansion-panel-header *ngIf="itm['lvl']==0" class="row" class='forum-subrow-{{itm.lvl}}'>

@@ -36,7 +36,7 @@ export class ForumRowComponent extends ln4A2MatComponent {
             forumList:this.lst,
             forumData:this.itm
         });
-    }    
+    }
     public Add(){
         this.authdialog('ForumEditorComponent',{
             Action:'add',
@@ -59,7 +59,7 @@ export class ForumRowComponent extends ln4A2MatComponent {
         })
     }
     public Share(){
-        
+
     }
 
 }
