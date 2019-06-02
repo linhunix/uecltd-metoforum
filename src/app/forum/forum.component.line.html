@@ -8,8 +8,9 @@
         <div id="forum-headers-lbl-ends">&nbsp; </div>
 </div>
 <ng-container *ngFor="let cvar of frmlst ">
-        <ng-container *ngIf="cvar">
-            <forumRowLine-ln4 [LstItem]="getLst(cvar)" [RowItem]="getItm(cvar)"></forumRowLine-ln4>
-        </ng-container>
-    </ng-container>
+  cvar: {{cvar}}
+  <ng-container *ngIf="cvar">
+      <forumRowLine-ln4 [LstItem]="getLst(cvar)" [RowItem]="getItm(cvar)"></forumRowLine-ln4>
+  </ng-container>
+</ng-container>
 <forum-head-ln4 [ListForums]="frmlst" [pageForums]="frmpg"></forum-head-ln4>

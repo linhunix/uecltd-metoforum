@@ -8,57 +8,58 @@ import { MatDialog } from '@angular/material';
 
 })
 export class ForumRowComponent extends ln4A2MatComponent {
-    public step:number = 1;
+    public step: number = 1;
     @Input("RowItem")public itm: any;
     @Input("LstItem")public lst: any;
+
     constructor(dialog: MatDialog) {
         super(true, true, dialog);
     }
     public checkitm(itm: any): boolean {
         if (itm != null) {
-          if ("lvl" in itm) {
+          if ('lvl' in itm) {
             return true;
           }
         }
         return false;
     }
 
-    public Reply(){
+    public Reply() {
         this.authdialog('ForumEditorComponent',{
-            Action:'replay',
-            forumList:this.lst,
-            forumData:this.itm
+            Action: 'replay',
+            forumList: this.lst,
+            forumData: this.itm
         });
     }
-    public New(){
+    public New() {
         this.authdialog('ForumEditorComponent',{
-            Action:'new',
-            forumList:this.lst,
-            forumData:this.itm
+            Action: 'new',
+            forumList: this.lst,
+            forumData: this.itm
         });
     }
-    public Add(){
+    public Add() {
         this.authdialog('ForumEditorComponent',{
-            Action:'add',
-            forumList:this.lst,
-            forumData:this.itm
+            Action: 'add',
+            forumList: this.lst,
+            forumData: this.itm
         });
     }
-    public Change(){
+    public Change() {
         this.authdialog('ForumEditorComponent',{
-            Action:'edit',
-            forumList:this.lst,
-            forumData:this.itm
-        })
+            Action: 'edit',
+            forumList: this.lst,
+            forumData: this.itm
+        });
     }
-    public Delete(){
+    public Delete() {
         this.authdialog('ForumEditorComponent',{
-            Action:'canc',
-            forumList:this.lst,
-            forumData:this.itm
-        })
+            Action: 'canc',
+            forumList: this.lst,
+            forumData: this.itm
+        });
     }
-    public Share(){
+    public Share() {
 
     }
 

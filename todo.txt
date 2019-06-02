@@ -1,0 +1,23 @@
+Prendere spunto da meteoforum.com
+
+Menu In Alto a Sx -> Profilo, Logout quando loggato
+
+Thread a destra tipo meteoforum.com
+
+Profilo:
+
+Funzionalità di moderazione (pubread true/false)
+
+	if pubread == true
+		everybody can read
+	else
+		i can only see
+	
+Mettere dati/form editing profilo
+
+PROBLEMI:
+
+al reload della pagina fa il logout, no bene
+refresh vicino a nuovo non funziona
+
+deve fare ogni tanto poll del server per non buttarti fuori / poll ogni tot secondi per vedere  se ci sono cambiamenti

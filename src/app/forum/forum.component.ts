@@ -44,14 +44,16 @@ export class ForumComponent extends ln4A2MatComponent {
   }
   public postReload(source: ln4Map, type: string): ln4Map {
     if (this.frm.has(type)) {
-      let obj: ln4Map = new ln4Map();
+      const obj: ln4Map = new ln4Map();
       obj.fromAny(source.get("forumVals"));
-      let vals = ln4Manager.GetInstance().dataExport(type);
+      const vals = ln4Manager.GetInstance().dataExport(type);
       if (vals != null) {
         obj.setFromAny(type, vals);
       }
       source.set("forumVals", obj.toJson());
       this.frmlst = ln4Map.Load(source.get("forumVals")).keys();
+
+      console.log("this.frmlst: ", this.frmlst);
     }
     if (source.has("forums")) {
       let priids = [];
@@ -155,7 +157,7 @@ export class ForumComponent extends ln4A2MatComponent {
                   if (this.scope.remote.forumVals[ltype]["topics"][docid].lid < subid){
                     this.scope.remote.forumVals[ltype]["topics"][docid].lid = subid;
                   }
-                  //console.log(ltype + "/" + kval.lbl + " is " + docid + " is mode sub");
+                  // console.log(ltype + "/" + kval.lbl + " is " + docid + " is mode sub");
                 }
                 this.scope.remote.forumVals[ltype].lun = this.scope.remote.forumVals[ltype]["topics"][docid].lun;
                 this.scope.remote.forumVals[ltype].lgr = this.scope.remote.forumVals[ltype]["topics"][docid].lgr;
@@ -171,11 +173,17 @@ export class ForumComponent extends ln4A2MatComponent {
       this.scope.remote.forumVals[ltype] = {};
       this.scope.remote.forumVals[ltype]["topics"] = {};
     }
-    let svar= this.scope.remote.forumVals[ltype]["topics"].sort(
-        (t1,t2)=>{
-            return t1.lid+t2.lid;
-        }
-    );
+
+    console.log("this.scope.remote.forumVals[ltype]: ", this.scope.remote.forumVals[ltype]);
+
+    /*let svar = null;
+    if (this.scope.remote.forumVals[ltype]["topics"]) {
+      svar = this.scope.remote.forumVals[ltype]["topics"].sort(
+          (t1, t2) => {
+              return t1.lid + t2.lid;
+          }
+      );
+    }*/
   }
           );
           ln4A2Connect.ForumListTypeApi(formn, formn);
@@ -188,7 +196,7 @@ return source.returnOK();
   }
   public checkitm(itm: any): boolean {
   if (itm != null) {
-    if ("lvl" in itm) {
+    if ('lvl' in itm) {
       return true;
     }
   }
@@ -196,7 +204,12 @@ return source.returnOK();
 }
   public getItm(fid: string): any {
   if (this.scope.remote.forumVals != null) {
+
+    console.log('this.scope.remote.forumVals: ', this.scope.remote.forumVals);
+
     if (fid in this.scope.remote.forumVals) {
+      console.log('this.scope.remote.forumVals[' + fid + ']:', this.scope.remote.forumVals[fid]);
+
       return this.scope.remote.forumVals[fid];
     }
   }

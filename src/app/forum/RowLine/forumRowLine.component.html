@@ -1,17 +1,19 @@
 <mat-expansion-panel [expanded]="step === 0" (opened)="doaction('selforum',itm);" hideToggle>
     <mat-expansion-panel-header class='forum-row-{{itm.lvl}}' *ngIf="itm['lvl'] != 0" >
-        <mat-panel-title class='forum-main-title'>
+        <mat-panel-title class='forum-main-title mylvl-{{itm.lvl}}'>
             <div class="f-tree-l0">
                 <img  class='forum-img-{{itm.lvl}}' *ngIf="itm['lvl']==0" src="assets/S_ThrNew.gif">
                 <img  class='forum-img-{{itm.lvl}}' *ngIf="itm['lvl']==1" src="assets/N_thrnew.gif">
                 <img  class='forum-img-{{itm.lvl}}' *ngIf="itm['lvl']>1" src="assets/N_ThrAns.gif">
             </div>
+            <!-- Lvl!=1 -->
             <span *ngIf="itm['lvl'] != 1" class="f-title">
-                <b>{{itm.sbj}}</b><br>
+                <b>{{itm.sbj}} - Level {{itm.lvl}} - DocID: {{itm.docid}}</b><br>
                 <span class="f-sub-title-{{itm.lvl}}">{{itm.lbl}}</span>
             </span>
+            <!-- Lvl==1 -->
             <span *ngIf="itm['lvl'] == 1" class="f-title">
-                <b>{{itm.lbl}}</b><br>
+                <b>{{itm.lbl}} - Level 1 - DocID: {{itm.docid}}</b><br>
                 <span class="f-sub-title-{{itm.lvl}}">{{itm.sbj}}</span>
             </span>
         </mat-panel-title>
@@ -48,8 +50,9 @@
         <button mat-button color="primary" (click)="Delete()">Delete</button>
     </mat-action-row>
 </mat-expansion-panel>
-<ng-container *ngFor="let subitm of topics ">
-    <ng-container *ngIf="checkitm(subitm)">
+<ng-container *ngFor="let subitm of topics">
+    <ng-container *ngIf="itemHasLevel(subitm)">
         <forumRowLine-ln4 [LstItem]="lst" [RowItem]="subitm"></forumRowLine-ln4>
+        {{compareDates(itm, subitm)}}
     </ng-container>
 </ng-container>

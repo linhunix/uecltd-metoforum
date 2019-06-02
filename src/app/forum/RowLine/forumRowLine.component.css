@@ -61,3 +61,34 @@
     font-weight: normal;
 
 }
+
+.mylvl-1 {
+  margin-left: inherit !important;
+}
+.mylvl-2 {
+  margin-left: 1rem !important;
+}
+.mylvl-3 {
+  margin-left: 2rem !important;
+}
+.mylvl-4 {
+  margin-left: 3rem !important;
+}
+.mylvl-5 {
+  margin-left: 4rem !important;
+}
+.mylvl-6 {
+  margin-left: 5rem !important;
+}
+.mylvl-7 {
+  margin-left: 6rem !important;
+}
+.mylvl-8 {
+  margin-left: 7rem !important;
+}
+.mylvl-9 {
+  margin-left: 8rem !important;
+}
+.mylvl-10 {
+  margin-left: 9rem !important;
+}

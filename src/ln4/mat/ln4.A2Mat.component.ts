@@ -13,20 +13,20 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
      */
     private mydialog: ComponentType<any> | TemplateRef<any>;
     /**
-     *  Dialog reference 
+     *  Dialog reference
      */
     private refdialog: MatDialogRef<any>;
     /**
-     * auto iniectable 
-     * @param boot_reload 
-     * @param boot_subscribe 
-     * @param dialog 
+     * auto iniectable
+     * @param boot_reload
+     * @param boot_subscribe
+     * @param dialog
      */
     constructor(boot_reload: boolean = true, boot_subscribe: boolean = true, public dialog: MatDialog) {
         super(boot_reload, boot_subscribe);
         this.onaction().subscribe(
             typeaction => {
-                if (typeaction == "OpenDialog") {
+                if (typeaction === 'OpenDialog') {
                     this.openDialogEasy();
                 }
             }
@@ -34,14 +34,14 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
     }
     /**
      * add the dialog object to be open when is request
-     * @param dialogObject 
+     * @param dialogObject
      */
     public setDialog(dialogObject: ComponentType<any> | TemplateRef<any>) {
         this.mydialog = dialogObject;
     }
     /**
     * add the dialog object to be open when is request
-    * @param dialogObject 
+    * @param dialogObject
     */
     public setDialogClassName(dialogclassname: string) {
         let dialogObject: ComponentType<any> | TemplateRef<any>;
@@ -62,9 +62,9 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
         this.doaction("reload");
     }
     /**
-     * check if dialog is open or not 
-     * @returns boolean is true has dialog 
-     * 
+     * check if dialog is open or not
+     * @returns boolean is true has dialog
+     *
      */
     public isDialog(): boolean {
         if (this.refdialog != null) {
@@ -73,12 +73,12 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
         return false;
     }
     /**
-     * Fast open dialog 
+     * Fast open dialog
      * @returns booean if the dialog open true else false
      */
     public openDialogEasy(): boolean {
         if (this.mydialog != null) {
-            let data: ln4Map = new ln4Map();
+            const data: ln4Map = new ln4Map();
             data.fromAny(this.myaction);
             this.openDialog(this.mydialog, data);
             return true;
@@ -86,9 +86,9 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
         return false;
     }
     /**
-     * Open the dlialog 
-     * @param dialogObject 
-     * @param data 
+     * Open the dlialog
+     * @param dialogObject
+     * @param data
      */
     public openDialog(dialogObject: ComponentType<any> | TemplateRef<any>, data: ln4Map) {
         if (ln4Angular2.isDebug()) {
@@ -96,23 +96,23 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
             console.log(data.toJson());
         }
         this.refdialog = this.dialog.open(dialogObject, data.toJson());
-        ln4Manager.GetInstance().dataImport("Dialog",data.toJson());
-        ln4Angular2.eventGet("Dialog",true).emit("load");
+        ln4Manager.GetInstance().dataImport('Dialog', data.toJson());
+        ln4Angular2.eventGet('Dialog', true).emit('load');
         this.refdialog.afterClosed().subscribe(result => {
-            this.doaction("onCloseDialog", result);
+            this.doaction('onCloseDialog', result);
         });
         this.onaction().subscribe(
             typeaction => {
-                if ((typeaction == "CloseDialog") && (this.refdialog != null)) {
+                if ((typeaction === 'CloseDialog') && (this.refdialog != null)) {
                     this.closeDialog();
                 }
             }
         );
     }
     /**
-     * Close prevous dialog and open new one 
-     * @param dlgname 
-     * @param dlgvar 
+     * Close prevous dialog and open new one
+     * @param dlgname
+     * @param dlgvar
      * @returns boolean is work or not
      */
     calldialog(dlgname: string, dlgvar: any): boolean {
@@ -124,17 +124,17 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
         return this.openDialogEasy();
     }
     /**
-     * Autorized first and only if is auth allow the form 
-     * @param dlgname 
-     * @param dlgvar 
+     * Autorized first and only if is auth allow the form
+     * @param dlgname
+     * @param dlgvar
      */
     authdialog(dlgname: string, dlgvar: any): boolean {
-        let authok: boolean = false;
-        if (ln4Manager.GetInstance().profileGet("UserSess") == null) {
-            ln4Angular2.msgDebug("Is Guest!");
+        let authok = false;
+        if (ln4Manager.GetInstance().profileGet('UserSess') == null) {
+            ln4Angular2.msgDebug('Is Guest!');
             authok = this.calldialog('ln4MatLoginComponent', {});
-            if (authok == false) {
-                alert(ln4Manager.GetInstance().translate("Not Allow!"));
+            if (authok === false) {
+                alert(ln4Manager.GetInstance().translate('Not Allow!'));
             }
             return authok;
         }

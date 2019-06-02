@@ -6,9 +6,9 @@ export class ln4Map {
     constructor(source: any = {}) {
         this.prototype = source;
         this.status = true;
-        this.message = "Done";
+        this.message = 'Done';
     }
-    public [Symbol.toStringTag]: "Map";
+    public [Symbol.toStringTag]: 'Map';
     public [Symbol.iterator](): IterableIterator<[string, any]> {
         return this.prototype[Symbol.iterator]();
     }
@@ -42,7 +42,7 @@ export class ln4Map {
     }
     public setFromAny(key: string, value: any): this {
         let src: ln4Map = new ln4Map();
-        src.fromAny(value)
+        src.fromAny(value);
         this.prototype[key] = src.toJson();
         return this;
     }
@@ -70,11 +70,11 @@ export class ln4Map {
         }else{
             let obj: any[] = this.values();
             obj.sort((va,vb)=>{
-                let ka:any="";
+                let ka:any='';
                 if (field in va){
                     ka=va.field;
                 }
-                let kb:any="";
+                let kb:any='';
                 if (field in vb){
                     kb=vb.field;
                 }
@@ -89,7 +89,7 @@ export class ln4Map {
     }
     private MapToObj(strMap: Map<string, any>) {
         let obj = new Array();
-        //for (let k of Array.from(strMap.keys())) {
+        // for (let k of Array.from(strMap.keys())) {
         strMap.forEach((v: any, k: string) => {
             if ((k != '__proto__') && (k != "prototype")) {
                 let v = strMap.get(k);
@@ -127,7 +127,7 @@ export class ln4Map {
         try {
             this.fromJson(JSON.parse(myJson));
         } catch (e) {
-            this.returnKO("ln4Map.fromJsonString:" + e);
+            this.returnKO('ln4Map.fromJsonString:' + e);
         }
     }
     public fromJson(myJson: object): void {
@@ -138,7 +138,7 @@ export class ln4Map {
             let obj = this.toJson();
             return JSON.stringify(obj);
         } catch (e) {
-            this.returnKO("ln4Map.toJsonString:" + e);
+            this.returnKO('ln4Map.toJsonString:' + e);
         }
     }
     public toJson(): any {
@@ -148,7 +148,7 @@ export class ln4Map {
         try {
             this.prototype = this.MapToObj(myMap);
         } catch (e) {
-            this.returnKO("ln4Map.fromMap:" + e);
+            this.returnKO('ln4Map.fromMap:' + e);
         }
     }
 
@@ -162,7 +162,7 @@ export class ln4Map {
         } else if (src instanceof Map) {
             this.fromMap(src);
         } else if (src instanceof String) {
-            this.fromJsonString("" + src);
+            this.fromJsonString('' + src);
         } else {
             this.fromJson(src);
         }
@@ -171,15 +171,15 @@ export class ln4Map {
         try {
             return this.ObjToMap(this.prototype);
         } catch (e) {
-            this.returnKO("ln4Map.toMap:" + e);
+            this.returnKO('ln4Map.toMap:' + e);
         }
     }
-    public returnOK(message: string = "OK"): this {
+    public returnOK(message: string = 'OK'): this {
         this.message = message;
         this.status = true;
         return this;
     }
-    public returnKO(message: string = "KO"): this {
+    public returnKO(message: string = 'KO'): this {
         this.message = message;
         this.status = false;
         return this;
@@ -188,7 +188,7 @@ export class ln4Map {
         return this.status;
     }
     public getMessage(): string {
-        return this.message
+        return this.message;
     }
     public static Load(obj: any): ln4Map {
         let mymap: ln4Map = new ln4Map();

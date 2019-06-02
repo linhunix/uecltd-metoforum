@@ -18,7 +18,7 @@ export class ln4MatLoginComponent  extends ln4BaseComponent {
   public message: string = "";
   public regstyle: boolean = false;
   public lgnstyle: boolean = true;
-  public locality: string ="net";
+  public locality: string = "net";
   constructor(
     public dialogRef: MatDialogRef<ln4MatLoginComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -28,48 +28,49 @@ export class ln4MatLoginComponent  extends ln4BaseComponent {
     this.dialogRef.close();
   }
   public LoginLabel(): string {
-    return ln4Manager.GetInstance().translate("Login");
+    return ln4Manager.GetInstance().translate('Login');
   }
   public RegLabel(): string {
-    return ln4Manager.GetInstance().translate("Register");
+    return ln4Manager.GetInstance().translate('Register');
   }
   public Login(): void {
     ln4A2Connect.LoginApi(this.user, this.pass);
   }
   public RegFlag(): boolean {
-    let chk: boolean = false;
-    if (this.pass == "") {
-      this.message = "Need check password";
+    let chk = false;
+
+    if (this.pass === '') {
+      this.message = 'Need check password';
     } else {
       chk = true;
     }
-    if ((chk == true) && (this.user == "")) {
+    if ((chk === true) && (this.user === '')) {
       chk = false;
-      this.message = "Need user";
+      this.message = 'Need user';
     }
-    if ((chk == true) && (this.user.length < 4)) {
+    if ((chk === true) && (this.user.length < 4)) {
       chk = false;
-      this.message = "User need to have min 4 chars";
+      this.message = 'User need to have min 4 chars';
     }
-    if ((chk == true) && (this.pass.length < 6)) {
+    if ((chk === true) && (this.pass.length < 6)) {
       chk = false;
-      this.message = "Pass need to have min 6 chars";
+      this.message = 'Pass need to have min 6 chars';
     }
-    if ((chk == true) && (this.chkpass != this.pass)) {
+    if ((chk === true) && (this.chkpass !== this.pass)) {
       chk = false;
-      this.message = "Password don't match";
+      this.message = 'Password don\'t match';
     }
-    if ((chk == true) && (this.email == "")) {
+    if ((chk === true) && (this.email === '')) {
       chk = false;
-      this.message = "Need Email";
+      this.message = 'Need Email';
     }
-    if ((chk == true) && (this.email.length < 6)) {
+    if ((chk === true) && (this.email.length < 6)) {
       chk = false;
-      this.message = "Need Vail Email";
+      this.message = 'Need Vail Email';
     }
-    if ((chk == true) && (this.realname == "")) {
+    if ((chk === true) && (this.realname === '')) {
       chk = false;
-      this.message = "Need RealName";
+      this.message = 'Need RealName';
     }
 
     return chk;
@@ -88,39 +89,39 @@ export class ln4MatLoginComponent  extends ln4BaseComponent {
       this.regstyle = true;
       this.lgnstyle = false;
     } else {
-      this.message = "wait server response..";
+      this.message = 'wait server response..';
       let newuser: ln4Map = new ln4Map();
-      newuser.set("UserAlias", this.user);
-      newuser.set("UserCode", this.pass);
-      newuser.set("RealName", this.realname);
-      newuser.set("email", this.email);
-      newuser.set("Locality", this.locality);
-      ln4Angular2.eventGet("newuser", true).subscribe(
+      newuser.set('UserAlias', this.user);
+      newuser.set('UserCode', this.pass);
+      newuser.set('RealName', this.realname);
+      newuser.set('email', this.email);
+      newuser.set('Locality', this.locality);
+      ln4Angular2.eventGet('newuser', true).subscribe(
         (type) => {
           let ln4m = ln4Manager.GetInstance();
           let sts = ln4m.dataExport(type);
-          ln4Angular2.msgInfo("newuser//START"+type);
-          ln4Angular2.msgInfo("newuser//END"+type);
+          ln4Angular2.msgInfo('newuser//START' + type);
+          ln4Angular2.msgInfo('newuser//END' + type);
           if (sts == null) {
-            this.message = ln4Manager.GetInstance().translate("Server Reject!");
+            this.message = ln4Manager.GetInstance().translate('Server Reject!');
           } else {
-            if ("message" in sts) {
-              if (sts.message == "Done") {
-                this.message = ln4Manager.GetInstance().translate("Registred!!");
+            if ('message' in sts) {
+              if (sts.message === 'Done') {
+                this.message = ln4Manager.GetInstance().translate('Registred!!');
                 this.dialogRef.close();
-              }else if ((""+sts.message).indexOf("Error")>=0){
-                this.message = ln4Manager.GetInstance().translate("Server Reject!!");
-              }else{
+              } else if (('' + sts.message).indexOf('Error') >= 0){
+                this.message = ln4Manager.GetInstance().translate('Server Reject!!');
+              } else {
                 this.message = ln4Manager.GetInstance().translate(sts.message);
               }
             } else {
-              this.message = ln4Manager.GetInstance().translate("Server Reject!!");
+              this.message = ln4Manager.GetInstance().translate('Server Reject!!');
             }
           }
         });
       let docid: number = Math.trunc(new Date().getTime() / 1000);
       docid = docid - 943920000;
-      ln4A2Connect.ForumSaveApi(4000, docid, "ForumAlias", newuser, "newuser");
+      ln4A2Connect.ForumSaveApi(4000, docid, 'ForumAlias', newuser, 'newuser');
     }
   }
 }
