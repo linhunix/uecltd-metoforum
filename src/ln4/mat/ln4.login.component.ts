@@ -10,15 +10,15 @@ import { ln4BaseComponent } from '../ln4.BaseComp';
   templateUrl: 'ln4.login.component.html',
 })
 export class ln4MatLoginComponent  extends ln4BaseComponent {
-  public user: string = "";
-  public pass: string = "";
-  public chkpass: string = "";
-  public email: string = "";
-  public realname: string = "";
-  public message: string = "";
-  public regstyle: boolean = false;
-  public lgnstyle: boolean = true;
-  public locality: string = "net";
+  public user = '';
+  public pass = '';
+  public chkpass = '';
+  public email = '';
+  public realname = '';
+  public message = '';
+  public regstyle = false;
+  public lgnstyle = true;
+  public locality = 'net';
   constructor(
     public dialogRef: MatDialogRef<ln4MatLoginComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -85,12 +85,12 @@ export class ln4MatLoginComponent  extends ln4BaseComponent {
     return this.lgnstyle;
   }
   public Register(): void {
-    if (this.RegFlag() == false) {
+    if (this.RegFlag() === false) {
       this.regstyle = true;
       this.lgnstyle = false;
     } else {
       this.message = 'wait server response..';
-      let newuser: ln4Map = new ln4Map();
+      const newuser: ln4Map = new ln4Map();
       newuser.set('UserAlias', this.user);
       newuser.set('UserCode', this.pass);
       newuser.set('RealName', this.realname);
@@ -98,8 +98,8 @@ export class ln4MatLoginComponent  extends ln4BaseComponent {
       newuser.set('Locality', this.locality);
       ln4Angular2.eventGet('newuser', true).subscribe(
         (type) => {
-          let ln4m = ln4Manager.GetInstance();
-          let sts = ln4m.dataExport(type);
+          const ln4m = ln4Manager.GetInstance();
+          const sts = ln4m.dataExport(type);
           ln4Angular2.msgInfo('newuser//START' + type);
           ln4Angular2.msgInfo('newuser//END' + type);
           if (sts == null) {
@@ -109,7 +109,7 @@ export class ln4MatLoginComponent  extends ln4BaseComponent {
               if (sts.message === 'Done') {
                 this.message = ln4Manager.GetInstance().translate('Registred!!');
                 this.dialogRef.close();
-              } else if (('' + sts.message).indexOf('Error') >= 0){
+              } else if (('' + sts.message).indexOf('Error') >= 0) {
                 this.message = ln4Manager.GetInstance().translate('Server Reject!!');
               } else {
                 this.message = ln4Manager.GetInstance().translate(sts.message);

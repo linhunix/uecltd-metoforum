@@ -8,12 +8,12 @@
             </div>
             <!-- Lvl!=1 -->
             <span *ngIf="itm['lvl'] != 1" class="f-title">
-                <b>{{itm.sbj}} - Level {{itm.lvl}} - DocID: {{itm.docid}}</b><br>
+                <b>{{itm.sbj}} - Level {{itm.lvl}} - DocID: {{itm.docid}} - CatID: {{itm.catid}}</b><br>
                 <span class="f-sub-title-{{itm.lvl}}">{{itm.lbl}}</span>
             </span>
             <!-- Lvl==1 -->
             <span *ngIf="itm['lvl'] == 1" class="f-title">
-                <b>{{itm.lbl}} - Level 1 - DocID: {{itm.docid}}</b><br>
+                <b>{{itm.lbl}} - Level 1 - DocID: {{itm.docid}} - CatID: {{itm.catid}}</b><br>
                 <span class="f-sub-title-{{itm.lvl}}">{{itm.sbj}}</span>
             </span>
         </mat-panel-title>

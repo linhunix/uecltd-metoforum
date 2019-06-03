@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
 import { ln4A2MatComponent } from './ln4.A2Mat.component';
 import { MatDialog } from '@angular/material';
 import { ln4Manager } from '../ln4.Manager';
@@ -7,13 +7,13 @@ import { ln4Manager } from '../ln4.Manager';
     selector: 'ln4-mat-menu-model',
     template: `
     <mat-menu #ln4MatMenuModel="matMenu">
-        <a  mat-menu-item 
-            *ngFor="let bitem of scope.remote.menu" 
-            mat-button 
+        <a  mat-menu-item
+            *ngFor="let bitem of scope.remote.menu"
+            mat-button
             href="{{bitem.src}}"
             (click)="calldialog(bitem.act,bitem.arg)"
             >
-            {{Translate(bitem.label)}}                
+            {{Translate(bitem.label)}}
         </a>
     </mat-menu>
     <button mat-button title="{{myId}}" [matMenuTriggerFor]="ln4MatMenuModel">
@@ -27,16 +27,16 @@ export class ln4MatMenuModelComponent extends ln4A2MatComponent {
     }
     public Translate(mylabel: string): string {
         switch (mylabel) {
-            case "#P#UserName#":
-                let refu: string = ln4Manager.GetInstance().profileGet("UserName");
+            case '#P#UserName#':
+                let refu: string = ln4Manager.GetInstance().profileGet('UserName');
                 if (refu == null) {
-                    refu = "Guest!!";
+                    refu = 'Guest!!';
                 }
                 return refu;
-            case "#P#GroupName#":
-                let refg: string = ln4Manager.GetInstance().profileGet("GroupName");
+            case '#P#GroupName#':
+                let refg: string = ln4Manager.GetInstance().profileGet('GroupName');
                 if (refg == null) {
-                    refg = "Guest!";
+                    refg = 'Guest!';
                 }
                 return refg;
             default:

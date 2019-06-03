@@ -6,6 +6,8 @@ import {
 } from './ln4.Manager';
 import { ln4Angular2 } from './ln4.Angular2';
 import { ln4Map } from './ln4.Map';
+import { ln4CookieManager } from './ln4.CookieManager';
+
 /**
  *
  */
@@ -43,6 +45,8 @@ export class ln4A2Connect {
   }
   /**
    * login functionality
+   *
+   * Do Login
    * @param user
    * @param pass
    */
@@ -51,28 +55,42 @@ export class ln4A2Connect {
 
     Post.set('UserAlias', user);
     Post.set('UserCode', pass);
+
     ln4Angular2
       .eventGet(ln4Manager_evtProfileX, true)
       .subscribe((ltype: string) => {
         ln4Angular2.msgDebug('runload=' + ltype);
-        let ln4m = ln4Manager.GetInstance();
-        let res = ln4m.dataExport(ltype);
+
+        const ln4m = ln4Manager.GetInstance();
+        const res = ln4m.dataExport(ltype);
+
         if (res == null) {
           return alert(ln4Manager.GetInstance().translate('Server Time out!!'));
         }
+
+        console.log('ln4m 1: ', ln4m);
+        console.log('res 1: ', res);
+
         if (res instanceof ln4Map) {
           ln4Manager.GetInstance().runload(ltype);
         }
       });
+
     ln4Angular2
       .eventGet(ln4Manager_evtProfile, true)
       .subscribe((ltype: string) => {
         ln4Angular2.msgDebug('runload=' + ltype);
-        let ln4m = ln4Manager.GetInstance();
-        let res = ln4m.dataExport(ltype);
+
+        const ln4m = ln4Manager.GetInstance();
+        const res = ln4m.dataExport(ltype);
+
         if (res == null) {
           return alert(ln4Manager.GetInstance().translate('Server Time out!!'));
         }
+
+        console.log('ln4m 2: ', ln4m);
+        console.log('res 2: ', res);
+
         if (res instanceof ln4Map) {
           if (res.has('GroupName')) {
             if (res.get('GroupName') === 'Guest') {
@@ -82,10 +100,39 @@ export class ln4A2Connect {
             return alert(ln4Manager.GetInstance().translate('Server Reject!!'));
           }
         }
+
+        const cookieManager = new ln4CookieManager();
+
+        const userData = {
+          UserId: res.get('UserId'),
+          UserName: res.get('UserName'),
+          GroupName: res.get('GroupName'),
+          GroupId: res.get('GroupId'),
+          UserSess: res.get('UserSess')
+        };
+
+        console.log('UserId: ', userData.UserId);
+        console.log('UserName: ', userData.UserName);
+        console.log('GroupName: ', userData.GroupName);
+        console.log('GroupId: ', userData.GroupId);
+
+        if (res.get('UserId') === 0) {
+          console.log('>>>>>> NOT LOGGED !!!!');
+        } else {
+          console.log('>>>>>> LOGGED !!!!');
+
+          const sessionStr = btoa(JSON.stringify(userData));
+
+          cookieManager.setCookie('userData', sessionStr, 30);
+        }
+
         ln4Manager.GetInstance().runload(ltype);
-        let uid = res.get('UserId');
-        let uname = res.get('UserName');
+
+        const uid = res.get('UserId');
+        const uname = res.get('UserName');
+
         this.UserLoadApi(4000, uid, uname, ln4Manager_evtProfileX);
+
         ln4Angular2.eventGet(ln4Manager_evtUpdate, true).emit(ltype);
       });
     return ln4A2Connect.ApiConnect('RestLogin', ln4Manager_evtProfile, Post);
@@ -111,12 +158,12 @@ export class ln4A2Connect {
    * @param forumEvnt
    */
   public static ForumCatListApi(catid: number, forumEvnt: string): boolean {
-    let Post: ln4Map = new ln4Map();
+    const Post: ln4Map = new ln4Map();
     Post.set('DocCatId', catid);
     return ln4A2Connect.ApiConnect('RestCList', forumEvnt, Post);
   }
   public static ForumListApi(catid: number, forumEvnt: string): boolean {
-    let Post: ln4Map = new ln4Map();
+    const Post: ln4Map = new ln4Map();
     Post.set('DocCatId', catid);
     Post.set('DocType', 'Forum');
     return ln4A2Connect.ApiConnect('RestTList', forumEvnt, Post);
@@ -125,7 +172,7 @@ export class ln4A2Connect {
     forumEvnt: string,
     forumtype: string
   ): boolean {
-    let Post: ln4Map = new ln4Map();
+    const Post: ln4Map = new ln4Map();
     Post.set('DocType', forumtype);
     return ln4A2Connect.ApiConnect('RestNList', forumEvnt, Post);
   }
@@ -134,7 +181,7 @@ export class ln4A2Connect {
     findstr: string,
     forumEvnt: string
   ): boolean {
-    let Post: ln4Map = new ln4Map();
+    const Post: ln4Map = new ln4Map();
     Post.set('DocCatId', catid);
     Post.set('DocType', 'Forum');
     Post.set('Find', findstr);
@@ -146,7 +193,7 @@ export class ln4A2Connect {
     topic: string,
     forumEvnt: string
   ): boolean {
-    let Post: ln4Map = new ln4Map();
+    const Post: ln4Map = new ln4Map();
     Post.set('DocCatId', catid);
     Post.set('DocType', 'Forum');
     Post.set('DocId', docid);
@@ -160,7 +207,7 @@ export class ln4A2Connect {
     content: ln4Map,
     forumEvnt: string
   ): boolean {
-    let Post: ln4Map = new ln4Map();
+    const Post: ln4Map = new ln4Map();
     Post.set('DocCatId', catid);
     Post.set('DocType', 'Forum');
     Post.set('DocId', docid);
@@ -174,7 +221,7 @@ export class ln4A2Connect {
     topic: string,
     forumEvnt: string
   ): boolean {
-    let Post: ln4Map = new ln4Map();
+    const Post: ln4Map = new ln4Map();
     Post.set('DocCatId', catid);
     Post.set('DocType', 'Forum');
     Post.set('DocId', docid);

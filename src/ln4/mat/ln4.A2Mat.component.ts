@@ -125,6 +125,7 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
     }
     /**
      * Autorized first and only if is auth allow the form
+     * Check if logged
      * @param dlgname
      * @param dlgvar
      */
@@ -133,9 +134,11 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
         if (ln4Manager.GetInstance().profileGet('UserSess') == null) {
             ln4Angular2.msgDebug('Is Guest!');
             authok = this.calldialog('ln4MatLoginComponent', {});
+
             if (authok === false) {
                 alert(ln4Manager.GetInstance().translate('Not Allow!'));
             }
+
             return authok;
         }
         return this.calldialog(dlgname, dlgvar);

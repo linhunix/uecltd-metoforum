@@ -1,4 +1,4 @@
-import { ln4Map } from "./ln4.Map";
+import { ln4Map } from './ln4.Map';
 
 /**
  * @author Andrea Morello - <andrea.morello@linhunix.com>
@@ -8,21 +8,22 @@ import { ln4Map } from "./ln4.Map";
 /**
  * gestione eventi interni
  */
-export const ln4Manager_IsWrite: string = "CanWrite";
-export const ln4Manager_IsChange: string = "Change";
+export const ln4Manager_IsWrite = 'CanWrite';
+export const ln4Manager_IsChange = 'Change';
 /**
  * boolean conversion
  */
-export const ln4Manager_BooleanTrue: string = "YES";
-export const ln4Manager_BooleanFalse: string = "NO";
+export const ln4Manager_BooleanTrue = 'YES';
+export const ln4Manager_BooleanFalse = 'NO';
 /**
  * eventi esterni correlati
  */
-export const ln4Manager_evtConfig: string = "Config";
-export const ln4Manager_evtLanguage: string = "Language";
-export const ln4Manager_evtProfile: string = "Profile";
-export const ln4Manager_evtProfileX: string = "ProfileX";
-export const ln4Manager_evtUpdate: string = "Update";
+export const ln4Manager_evtConfig = 'Config';
+export const ln4Manager_evtLanguage = 'Language';
+export const ln4Manager_evtProfile = 'Profile';
+export const ln4Manager_evtProfileX = 'ProfileX';
+export const ln4Manager_evtUpdate = 'Update';
+
 export class ln4Manager {
   private static instance: ln4Manager;
   private config: ln4Map;
@@ -43,6 +44,9 @@ export class ln4Manager {
     this.language = new ln4Map();
     this.service = new ln4Map();
     this.data = new ln4Map();
+
+    console.log('ln4Manager this.profile: ', this.profile);
+    console.log('ln4Manager this.profileX: ', this.profileX);
   }
   /**
    *
@@ -77,7 +81,7 @@ export class ln4Manager {
       this.config.set(ln4Manager_IsWrite, ln4Manager_BooleanTrue);
       enable = ln4Manager_BooleanTrue;
     }
-    if (ln4Manager_BooleanTrue == enable) {
+    if (ln4Manager_BooleanTrue === enable) {
       return true;
     }
     return false;
@@ -106,8 +110,8 @@ export class ln4Manager {
     return null;
   }
   public profileXOGet(name: string): any {
-    if (this.profileX.has("Output")) {
-      let out = ln4Map.Load(this.profileX.get("Output"));
+    if (this.profileX.has('Output')) {
+      const out = ln4Map.Load(this.profileX.get('Output'));
       if (out.has(name)) {
         return out.get(name);
       }
@@ -115,12 +119,12 @@ export class ln4Manager {
     return null;
   }
   private profileIsWrite(): boolean {
-    var enable = this.profileGet(ln4Manager_IsWrite);
+    let enable = this.profileGet(ln4Manager_IsWrite);
     if (enable == null) {
       this.profile.set(ln4Manager_IsWrite, ln4Manager_BooleanTrue);
       enable = ln4Manager_BooleanTrue;
     }
-    if (enable == ln4Manager_BooleanTrue) {
+    if (enable === ln4Manager_BooleanTrue) {
       return true;
     }
     return false;
@@ -180,7 +184,7 @@ export class ln4Manager {
       case ln4Manager_evtConfig:
         if (this.cfgIsWrite()) {
           this.config.fromAny(this.dataExport(type));
-          this.tag.fromAny(this.config.get("tags"));
+          this.tag.fromAny(this.config.get('tags'));
           return true;
         }
         break;
@@ -213,19 +217,19 @@ export class ln4Manager {
    * @returns today
    */
   public dateToday(): string {
-    let now = new Date();
-    let todayDate = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+    const now = new Date();
+    const todayDate = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
     return (
       todayDate.getFullYear() +
-      "-" +
+      '-' +
       (todayDate.getMonth() + 1) +
-      "-" +
+      '-' +
       todayDate.getDate() +
-      " " +
+      ' ' +
       todayDate.getHours() +
-      ":" +
+      ':' +
       todayDate.getMinutes() +
-      ":" +
+      ':' +
       todayDate.getSeconds()
     );
   }

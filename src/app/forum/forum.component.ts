@@ -18,7 +18,7 @@ export class ForumComponent extends ln4A2MatComponent {
   private frm: ln4Map;
   public frmlst: string[] = [];
   public lbl: any = {};
-  public frmpg: number = 0;
+  public frmpg = 0;
   public initcfg() {
     this.frm = new ln4Map();
   }
@@ -56,11 +56,11 @@ export class ForumComponent extends ln4A2MatComponent {
       console.log("this.frmlst: ", this.frmlst);
     }
     if (source.has("forums")) {
-      let priids = [];
-      let secids = [];
+      const priids = [];
+      const secids = [];
       source.get("forums").forEach((element: string) => {
-        let formn = this.myId + "-" + element;
-        if (this.frm.has(formn) == false) {
+        const formn = this.myId + "-" + element;
+        if (this.frm.has(formn) === false) {
           if (ln4Angular2.isDebug()) {
             console.log(formn);
           }
@@ -69,13 +69,15 @@ export class ForumComponent extends ln4A2MatComponent {
           ln4Angular2.eventGet(formn, true).subscribe(
             (ltype: string) => {
               ln4Angular2.msgDebug("eventGet=" + this.myId + "/" + ltype);
+
               this.reload(ltype);
+
               if (this.scope.remote.forumVals[ltype] != null) {
                 let cnttpc = 0;
                 let cntsub = 0;
-                let lsttpc = {};
-                let lstcnt = {};
-                let fval = this.scope.remote.forumVals[ltype];
+                const lsttpc = {};
+                const lstcnt = {};
+                const fval = this.scope.remote.forumVals[ltype];
                 this.scope.remote.forumVals[ltype] = {};
                 this.scope.remote.forumVals[ltype]["topics"] = {};
                 this.scope.remote.forumVals[ltype].lbl = this.Translate(ltype);
@@ -83,10 +85,10 @@ export class ForumComponent extends ln4A2MatComponent {
                 this.scope.remote.forumVals[ltype].cnt = 0;
                 Object.keys(fval).forEach(
                   (key: any) => {
-                    let kval = fval[key];
+                    const kval = fval[key];
                     if (kval.docid != null) {
                       let docid: number = 0 + kval.docid;
-                      if (kval.docid == kval.catid) {
+                      if (kval.docid === kval.catid) {
                         if (kval.value != null) {
                           Object.keys(kval.value).forEach(
                             (subk: string) => {
@@ -110,9 +112,9 @@ export class ForumComponent extends ln4A2MatComponent {
                         if (this.scope.remote.forumVals[ltype].dsc == null) {
                           this.scope.remote.forumVals[ltype].dsc = "";
                         }
-                        //console.log("top is " + docid + ' with level 0');
+                        // console.log("top is " + docid + ' with level 0');
                       } else {
-                        let topic = kval.value;
+                        const topic = kval.value;
                         topic.idx = key;
                         topic.doc = kval;
                         topic.docid = kval.docid;
@@ -128,9 +130,9 @@ export class ForumComponent extends ln4A2MatComponent {
                         topic.topics = [];
                         cntsub++;
                         // tslint:disable-next-line:max-line-length
-                        //console.log(ltype + "/" + cntsub + " is " + docid + '[' + topic.docid + '/' + kval.catid + '] with level ' + topic.lvl);
-                        //console.log(kval);
-                if (topic.lvl == 1) {
+                        // console.log(ltype + "/" + cntsub + " is " + docid + '[' + topic.docid + '/' + kval.catid + '] with level ' + topic.lvl);
+                        // console.log(kval);
+                if (topic.lvl === 1) {
                   cnttpc++;
                   lsttpc[topic.lbl] = cnttpc;
                   lstcnt[topic.lbl] = 0;
@@ -140,21 +142,21 @@ export class ForumComponent extends ln4A2MatComponent {
                  // console.log(ltype + "/" + topic.lbl + " is " + docid + " is mode pri");
                 } else {
                   lstcnt[topic.lbl]++;
-                  let secid: number = 0 + lstcnt[topic.lbl];
+                  const secid: number = 0 + lstcnt[topic.lbl];
                   secids[secid] = docid;
-                  let priid: number = 0 + lsttpc[topic.lbl];
-                  let subid: number = 0 + secids[secid];
+                  const priid: number = 0 + lsttpc[topic.lbl];
+                  const subid: number = 0 + secids[secid];
                   docid = 0 + priids[topic.lbl];
                   if (!(docid in this.scope.remote.forumVals[ltype]["topics"])) {
                     this.scope.remote.forumVals[ltype]["topics"][docid] = {
                       "topics": {
-                        "lid":docid
+                        "lid": docid
                       }
                     };
                   }
                   this.scope.remote.forumVals[ltype]["topics"][docid]["topics"][subid] = topic;
                   this.scope.remote.forumVals[ltype]["topics"][docid].cnt = priid;
-                  if (this.scope.remote.forumVals[ltype]["topics"][docid].lid < subid){
+                  if (this.scope.remote.forumVals[ltype]["topics"][docid].lid < subid) {
                     this.scope.remote.forumVals[ltype]["topics"][docid].lid = subid;
                   }
                   // console.log(ltype + "/" + kval.lbl + " is " + docid + " is mode sub");
@@ -174,7 +176,7 @@ export class ForumComponent extends ln4A2MatComponent {
       this.scope.remote.forumVals[ltype]["topics"] = {};
     }
 
-    console.log("this.scope.remote.forumVals[ltype]: ", this.scope.remote.forumVals[ltype]);
+    // console.log("this.scope.remote.forumVals[ltype]: ", this.scope.remote.forumVals[ltype]);
 
     /*let svar = null;
     if (this.scope.remote.forumVals[ltype]["topics"]) {
@@ -205,10 +207,10 @@ return source.returnOK();
   public getItm(fid: string): any {
   if (this.scope.remote.forumVals != null) {
 
-    console.log('this.scope.remote.forumVals: ', this.scope.remote.forumVals);
+    // console.log('this.scope.remote.forumVals: ', this.scope.remote.forumVals);
 
     if (fid in this.scope.remote.forumVals) {
-      console.log('this.scope.remote.forumVals[' + fid + ']:', this.scope.remote.forumVals[fid]);
+      // console.log('this.scope.remote.forumVals[' + fid + ']:', this.scope.remote.forumVals[fid]);
 
       return this.scope.remote.forumVals[fid];
     }

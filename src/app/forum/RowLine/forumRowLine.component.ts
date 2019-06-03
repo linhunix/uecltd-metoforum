@@ -41,10 +41,12 @@ export class ForumRowLineComponent extends ln4A2MatComponent {
 
   public compareDates(itm: any, subitm: any) {
 
+    /*
     console.log('itm.lst: ', itm.lst);
     console.log('subitm.lst: ', subitm.lst);
 
     console.log('subitm.lst > itm.lst: ', subitm.lst > itm.lst);
+    */
 
     /*
     if ( subitm.lst > itm.lst ) {
@@ -142,5 +144,7 @@ export class ForumRowLineComponent extends ln4A2MatComponent {
       forumData: this.itm
     });
   }
-  public Share() {}
+  public Share() {
+    console.log('Share not implemented');
+  }
 }

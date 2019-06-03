@@ -13,13 +13,13 @@ import { ln4Map } from '../../ln4/ln4.Map';
 })
 export class MenuComponent extends ln4A2SimpleComp {
   public initcfg() {
-    this.myId = "menu";
-    let cfgmap: ln4Map = new ln4Map();
-    cfgmap.set("title", "title");
+    this.myId = 'menu';
+    const cfgmap: ln4Map = new ln4Map();
+    cfgmap.set('title', 'title');
     this.scopeIn.set(ln4Manager_evtConfig, cfgmap);
   }
   public preReload(source: ln4Map, type: string): ln4Map {
-    // use to make config 
+    // use to make config
     return source.returnOK();
   }
   constructor() {
