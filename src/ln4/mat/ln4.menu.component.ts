@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ln4A2MatComponent } from './ln4.A2Mat.component';
 import { MatDialog } from '@angular/material';
 import { ln4Manager } from '../ln4.Manager';
+import { ln4CookieManager } from '../ln4.CookieManager';
 
 @Component({
     selector: 'ln4-mat-menu-model',
@@ -20,6 +21,12 @@ export class ln4MatMenuModelComponent extends ln4A2MatComponent {
 
     public isNotLogged(): boolean {
       return ln4Manager.GetInstance().profileGet('UserName') == null;
+    }
+
+    public Logout() {
+      console.log('>>>>>>>>> LOGGING OUT <<<<<<<<<');
+
+      ln4CookieManager.GetInstance().Logout();
     }
 
     public Translate(mylabel: string): string {

@@ -49,23 +49,27 @@ export class ln4Manager {
     this.service = new ln4Map();
     this.data = new ln4Map();
 
-    this.cookieManager = new ln4CookieManager();
+    this.cookieManager = ln4CookieManager.GetInstance();
 
     this.userData = this.cookieManager.getUserData();
 
-    console.log('ln4Manager userData: ', this.userData);
+    if (this.userData !== null) {
 
-    const self = this;
+      console.log('ln4Manager userData: ', this.userData);
 
-    Object.entries(this.userData).forEach(function(entry) {
-      console.log('this: ', self);
+      const self = this;
 
-      console.log('key: ', entry[0]);
-      console.log('value: ', entry[1]);
+      Object.entries(this.userData).forEach(function(entry) {
+        console.log('this: ', self);
 
-      self.profile.set(ln4Manager_IsChange, ln4Manager_BooleanTrue);
-      self.profile.set(entry[0], entry[1]);
-    });
+        console.log('key: ', entry[0]);
+        console.log('value: ', entry[1]);
+
+        self.profile.set(ln4Manager_IsChange, ln4Manager_BooleanTrue);
+        self.profile.set(entry[0], entry[1]);
+      });
+
+    }
 
     console.log('ln4Manager this.profile: ', this.profile);
     console.log('ln4Manager this.profileX: ', this.profileX);

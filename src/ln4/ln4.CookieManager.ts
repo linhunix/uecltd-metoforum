@@ -1,5 +1,18 @@
 export class ln4CookieManager {
+  private static instance: ln4CookieManager;
+
   constructor() {}
+
+  /**
+   * Singleton
+   */
+  public static GetInstance(): ln4CookieManager {
+    if (this.instance == null) {
+      this.instance = new ln4CookieManager();
+    }
+    return this.instance;
+  }
+
 
   setCookie(name, value, days) {
     let expires = '';
@@ -23,7 +36,24 @@ export class ln4CookieManager {
   }
 
   getUserData() {
-    return JSON.parse(atob(this.getCookie('userData')));
+    const rawUserData = this.getCookie('userData');
+
+    console.log('rawUserData: ', rawUserData);
+
+    if (rawUserData == null) {
+      return null;
+    }
+
+    return JSON.parse(atob(rawUserData));
+  }
+
+  saveUserData(userData: object) {
+    this.setCookie('userData', btoa(JSON.stringify(userData)), 30);
+  }
+
+  // Remove User Cookie
+  Logout() {
+    this.eraseCookie('userData');
   }
 
   eraseCookie(name) {

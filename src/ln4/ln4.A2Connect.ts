@@ -101,7 +101,7 @@ export class ln4A2Connect {
           }
         }
 
-        const cookieManager = new ln4CookieManager();
+        const cookieManager = ln4CookieManager.GetInstance();
 
         const userData = {
           UserId: res.get('UserId'),
