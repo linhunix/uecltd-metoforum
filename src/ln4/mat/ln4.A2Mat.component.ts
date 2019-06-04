@@ -1,11 +1,11 @@
-import { ln4A2SimpleComp } from "../ln4.A2SimpleComp";
-import { MatDialog, MatDialogRef } from "@angular/material";
-import { ln4Map } from "../ln4.Map";
-import { ComponentType } from "@angular/core/src/render3";
-import { TemplateRef, ComponentFactoryResolver } from "@angular/core";
-import { ln4Angular2 } from "../ln4.Angular2";
-import { ln4Manager } from "../ln4.Manager";
-import { EventEmitter } from "protractor";
+import { ln4A2SimpleComp } from '../ln4.A2SimpleComp';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { ln4Map } from '../ln4.Map';
+import { ComponentType } from '@angular/core/src/render3';
+import { TemplateRef, ComponentFactoryResolver } from '@angular/core';
+import { ln4Angular2 } from '../ln4.Angular2';
+import { ln4Manager } from '../ln4.Manager';
+// import { EventEmitter } from 'protractor';
 
 export class ln4A2MatComponent extends ln4A2SimpleComp {
     /**
@@ -47,7 +47,7 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
         let dialogObject: ComponentType<any> | TemplateRef<any>;
         dialogObject = ln4Angular2.getCompLib(dialogclassname);
         if (dialogObject == null) {
-            ln4Angular2.msgWarning(dialogclassname + " is null!!");
+            ln4Angular2.msgWarning(dialogclassname + ' is null!!');
         }
         this.setDialog(dialogObject);
     }
@@ -59,7 +59,7 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
             this.refdialog.close();
             this.refdialog = null;
         }
-        this.doaction("reload");
+        this.doaction('reload');
     }
     /**
      * check if dialog is open or not

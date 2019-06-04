@@ -5,26 +5,23 @@ import { ln4Manager } from '../ln4.Manager';
 
 @Component({
     selector: 'ln4-mat-menu-model',
-    template: `
-    <mat-menu #ln4MatMenuModel="matMenu">
-        <a  mat-menu-item
-            *ngFor="let bitem of scope.remote.menu"
-            mat-button
-            href="{{bitem.src}}"
-            (click)="calldialog(bitem.act,bitem.arg)"
-            >
-            {{Translate(bitem.label)}}
-        </a>
-    </mat-menu>
-    <button mat-button title="{{myId}}" [matMenuTriggerFor]="ln4MatMenuModel">
-        {{Translate(scope.remote.label)}}
-    </button>
-    `
+    templateUrl: 'ln4.menu.component.html'
 })
 export class ln4MatMenuModelComponent extends ln4A2MatComponent {
     constructor(dialog: MatDialog) {
         super(true, true, dialog);
+
+        console.log('this.scope.remote.menu: ', this.scope.remote);
     }
+
+    public isLogged(): boolean {
+      return !(ln4Manager.GetInstance().profileGet('UserName') == null);
+    }
+
+    public isNotLogged(): boolean {
+      return ln4Manager.GetInstance().profileGet('UserName') == null;
+    }
+
     public Translate(mylabel: string): string {
         switch (mylabel) {
             case '#P#UserName#':

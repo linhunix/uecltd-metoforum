@@ -1,0 +1,30 @@
+<ng-container *ngIf="isNotLogged()">
+  <mat-menu #ln4MatMenuModel="matMenu">
+    <a  mat-menu-item
+        *ngFor="let bitem of scope.remote.menu"
+        mat-button
+        href="{{bitem.src}}"
+        (click)="calldialog(bitem.act,bitem.arg)"
+    >
+      {{Translate(bitem.label)}} <!-- - {{bitem.src}} - {{bitem.act}} - {{bitem.arg}} -->
+    </a>
+  </mat-menu>
+  <button mat-button title="{{myId}}" [matMenuTriggerFor]="ln4MatMenuModel">
+    {{Translate(scope.remote.label)}}
+  </button>
+</ng-container>
+
+<ng-container *ngIf="isLogged()">
+  <mat-menu #ln4MatMenuModel="matMenu">
+    <a  mat-menu-item
+        mat-button
+        href="logout"
+        (click)="calldialog('logout','')"
+        >
+        {{Translate('Logout')}}
+    </a>
+  </mat-menu>
+  <button mat-button title="{{myId}}" [matMenuTriggerFor]="ln4MatMenuModel">
+    {{Translate(scope.remote.label)}}
+  </button>
+</ng-container>
