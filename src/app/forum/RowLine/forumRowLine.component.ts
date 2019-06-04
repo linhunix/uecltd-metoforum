@@ -22,14 +22,7 @@ export class ForumRowLineComponent extends ln4A2MatComponent {
   constructor(dialog: MatDialog) {
     super(true, true, dialog);
   }
-  /* public checkitm(itm: any): boolean {
-    if (itm != null) {
-      if ('lvl' in itm) {
-        return true;
-      }
-    }
-    return false;
-  } */
+
   public itemHasLevel(itm: any): boolean {
     if (itm != null) {
       if ('lvl' in itm) {

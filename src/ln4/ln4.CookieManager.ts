@@ -22,6 +22,10 @@ export class ln4CookieManager {
       return null;
   }
 
+  getUserData() {
+    return JSON.parse(atob(this.getCookie('userData')));
+  }
+
   eraseCookie(name) {
       document.cookie = name + '=; Max-Age=-99999999;';
   }
