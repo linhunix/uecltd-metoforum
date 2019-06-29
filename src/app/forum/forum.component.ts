@@ -53,7 +53,7 @@ export class ForumComponent extends ln4A2MatComponent {
       source.set("forumVals", obj.toJson());
       this.frmlst = ln4Map.Load(source.get("forumVals")).keys();
 
-      console.log("this.frmlst: ", this.frmlst);
+      console.log('this.frmlst: ', this.frmlst);
     }
     if (source.has("forums")) {
       const priids = [];
@@ -71,6 +71,8 @@ export class ForumComponent extends ln4A2MatComponent {
               ln4Angular2.msgDebug("eventGet=" + this.myId + "/" + ltype);
 
               this.reload(ltype);
+
+              console.log('this.scope.remote.forumVals: ', this.scope.remote.forumVals);
 
               if (this.scope.remote.forumVals[ltype] != null) {
                 let cnttpc = 0;

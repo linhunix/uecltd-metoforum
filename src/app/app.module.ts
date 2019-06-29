@@ -30,6 +30,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule} from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import { ForumRowLineComponent } from './forum/RowLine/forumRowLine.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +48,8 @@ import { ForumRowLineComponent } from './forum/RowLine/forumRowLine.component';
     EditorComponent,
     ForumHeadComponent,
     ForumRowLineComponent,
-    ForumRowComponent
+    ForumRowComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -65,14 +68,15 @@ import { ForumRowLineComponent } from './forum/RowLine/forumRowLine.component';
     MatNativeDateModule,
     AngularEditorModule,
     MatSelectModule,
-    CKEditorModule    
+    CKEditorModule
   ],
   providers: [
   ],
-  entryComponents:[
+  entryComponents: [
     ln4MatLoginComponent,
     ForumEditorComponent,
-    EditorComponent
+    EditorComponent,
+    EditProfileComponent
   ],
   bootstrap: [
     AppComponent,
@@ -86,32 +90,33 @@ import { ForumRowLineComponent } from './forum/RowLine/forumRowLine.component';
 export class AppModule {
   public constructor(private http: Http) {
     // INIT HTTP
-    ln4Angular2.msgDebug("loadingHttpServ");
-    this.getLn4Manager().serviceSet("http", http);    
+    ln4Angular2.msgDebug('loadingHttpServ');
+    this.getLn4Manager().serviceSet('http', http);
     // LANGUAGE
-    ln4Angular2.msgDebug("loadingLang");
+    ln4Angular2.msgDebug('loadingLang');
     ln4Angular2.eventGet(ln4Manager_evtLanguage, true).subscribe(
       (ltype: string) => {
-        ln4Angular2.msgDebug("runload=" + ltype);
+        ln4Angular2.msgDebug('runload=' + ltype);
         this.getLn4Manager().runload(ltype);
       }
     );
-    ln4Angular2.callUrl(ln4Manager_evtLanguage, "/assets/language.json", null)
+    ln4Angular2.callUrl(ln4Manager_evtLanguage, '/assets/language.json', null)
     /// CONFIG
-    ln4Angular2.msgDebug("loadingConfig");
+    ln4Angular2.msgDebug('loadingConfig');
     ln4Angular2.eventGet(ln4Manager_evtConfig, true).subscribe(
       (ltype: string) => {
-        ln4Angular2.msgDebug("runload=" + ltype);
+        ln4Angular2.msgDebug('runload=' + ltype);
         this.getLn4Manager().runload(ltype);
         ln4Angular2.eventGet(ln4Manager_evtUpdate, true).emit(ltype);
         ln4Angular2.resetdbg();
       }
     );
-    ln4Angular2.callUrl(ln4Manager_evtConfig, "/assets/config.json", null);
-    // init component 
-    ln4Angular2.setCompLib("ln4MatLoginComponent",ln4MatLoginComponent);
-    ln4Angular2.setCompLib("ForumEditorComponent",ForumEditorComponent);
-    ln4Angular2.setCompLib("EditorComponent",EditorComponent);
+    ln4Angular2.callUrl(ln4Manager_evtConfig, '/assets/config.json', null);
+    // init component
+    ln4Angular2.setCompLib('ln4MatLoginComponent', ln4MatLoginComponent);
+    ln4Angular2.setCompLib('ForumEditorComponent', ForumEditorComponent);
+    ln4Angular2.setCompLib('EditorComponent', EditorComponent);
+    ln4Angular2.setCompLib('EditProfileComponent', EditProfileComponent);
 
   }
   public getLn4Manager(): ln4Manager {

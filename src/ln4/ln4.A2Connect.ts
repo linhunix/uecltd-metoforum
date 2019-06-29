@@ -121,9 +121,7 @@ export class ln4A2Connect {
         } else {
           console.log('>>>>>> LOGGED !!!!');
 
-          const sessionStr = btoa(JSON.stringify(userData));
-
-          cookieManager.setCookie('userData', sessionStr, 30);
+          cookieManager.saveUserData(userData);
         }
 
         ln4Manager.GetInstance().runload(ltype);
@@ -222,10 +220,14 @@ export class ln4A2Connect {
     forumEvnt: string
   ): boolean {
     const Post: ln4Map = new ln4Map();
+
     Post.set('DocCatId', catid);
     Post.set('DocType', 'Forum');
     Post.set('DocId', docid);
     Post.set('DocName', topic);
+
+    console.log('Deleting Post: ', Post);
+
     return ln4A2Connect.ApiConnect('RestTCanc', forumEvnt, Post);
   }
 }

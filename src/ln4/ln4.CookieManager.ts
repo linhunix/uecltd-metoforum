@@ -13,7 +13,6 @@ export class ln4CookieManager {
     return this.instance;
   }
 
-
   setCookie(name, value, days) {
     let expires = '';
     if (days) {

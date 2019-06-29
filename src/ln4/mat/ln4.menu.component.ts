@@ -29,19 +29,25 @@ export class ln4MatMenuModelComponent extends ln4A2MatComponent {
       ln4CookieManager.GetInstance().Logout();
     }
 
+    public EditProfile() {
+
+      console.log('Edit Profile Not Implemented');
+
+    }
+
     public Translate(mylabel: string): string {
         switch (mylabel) {
             case '#P#UserName#':
                 let refu: string = ln4Manager.GetInstance().profileGet('UserName');
                 if (refu == null) {
-                    refu = 'Guest!!';
+                    refu = 'Login';
                 }
                 return refu;
             case '#P#GroupName#':
-                let refg: string = ln4Manager.GetInstance().profileGet('GroupName');
-                if (refg == null) {
+                const refg: string = ln4Manager.GetInstance().profileGet('GroupName');
+                /*if (refg == null) {
                     refg = 'Guest!';
-                }
+                }*/
                 return refg;
             default:
                 return ln4Manager.GetInstance().translate(mylabel);

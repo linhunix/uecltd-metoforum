@@ -37,19 +37,28 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
      * @param dialogObject
      */
     public setDialog(dialogObject: ComponentType<any> | TemplateRef<any>) {
-        this.mydialog = dialogObject;
+      console.log('setDialog, dialogObject: ', dialogObject);
+
+      this.mydialog = dialogObject;
     }
     /**
     * add the dialog object to be open when is request
     * @param dialogObject
     */
     public setDialogClassName(dialogclassname: string) {
-        let dialogObject: ComponentType<any> | TemplateRef<any>;
-        dialogObject = ln4Angular2.getCompLib(dialogclassname);
-        if (dialogObject == null) {
-            ln4Angular2.msgWarning(dialogclassname + ' is null!!');
-        }
-        this.setDialog(dialogObject);
+
+      console.log('a2MatComponent::setDialogClassName dialogclassname: ', dialogclassname);
+
+      let dialogObject: ComponentType<any> | TemplateRef<any>;
+      dialogObject = ln4Angular2.getCompLib(dialogclassname);
+
+      if (dialogObject == null) {
+        console.log('a2MatComponent::setDialogClassName , dialogObject is null');
+
+        ln4Angular2.msgWarning(dialogclassname + ' is null!!');
+      }
+
+      this.setDialog(dialogObject);
     }
     /**
      * Close the dialog
@@ -112,16 +121,22 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
     /**
      * Close prevous dialog and open new one
      * @param dlgname
-     * @param dlgvar
+     * @param dlgvar // dialog data ???
      * @returns boolean is work or not
      */
     calldialog(dlgname: string, dlgvar: any): boolean {
-        if (this.isDialog()) {
-            this.closeDialog();
-        }
-        this.setDialogClassName(dlgname);
-        this.myaction = dlgvar;
-        return this.openDialogEasy();
+      console.log('a2MatComponent::calldialog dlgname: ', dlgname);
+      console.log('a2MatComponent::calldialog dlgvar: ', dlgvar);
+
+      if (this.isDialog()) {
+        console.log('a2MatComponent::calldialog isDialog, closing');
+        this.closeDialog();
+      }
+
+      this.setDialogClassName(dlgname);
+      this.myaction = dlgvar;
+
+      return this.openDialogEasy();
     }
     /**
      * Autorized first and only if is auth allow the form
@@ -130,17 +145,22 @@ export class ln4A2MatComponent extends ln4A2SimpleComp {
      * @param dlgvar
      */
     authdialog(dlgname: string, dlgvar: any): boolean {
-        let authok = false;
-        if (ln4Manager.GetInstance().profileGet('UserSess') == null) {
-            ln4Angular2.msgDebug('Is Guest!');
-            authok = this.calldialog('ln4MatLoginComponent', {});
+      console.log('a2MatComponent::authdialog dlgname: ', dlgname);
+      console.log('a2MatComponent::authdialog dlgvar: ', dlgvar);
 
-            if (authok === false) {
-                alert(ln4Manager.GetInstance().translate('Not Allow!'));
-            }
+      let isLogged = false;
 
-            return authok;
-        }
-        return this.calldialog(dlgname, dlgvar);
-    }
+      if (ln4Manager.GetInstance().profileGet('UserSess') == null) {
+          ln4Angular2.msgDebug('Is Guest!');
+          isLogged = this.calldialog('ln4MatLoginComponent', {});
+
+          if (isLogged === false) {
+              alert(ln4Manager.GetInstance().translate('Not Allow!'));
+          }
+
+          return isLogged;
+      }
+
+      return this.calldialog(dlgname, dlgvar);
+  }
 }

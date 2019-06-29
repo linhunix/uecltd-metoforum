@@ -17,7 +17,11 @@ export class ForumRowLineComponent extends ln4A2MatComponent {
 
   public get topics(): any[] {
     // return ln4Map.Load(this.itm.topics).sort('docid');
-    return ln4Map.Load(this.itm.topics).sort('lst').reverse();
+    const topics = ln4Map.Load(this.itm.topics).sort('lst').reverse();
+
+    // console.log('Topics: ', topics);
+
+    return topics;
   }
   constructor(dialog: MatDialog) {
     super(true, true, dialog);
@@ -32,22 +36,19 @@ export class ForumRowLineComponent extends ln4A2MatComponent {
     return false;
   }
 
+  /*
   public compareDates(itm: any, subitm: any) {
-
-    /*
     console.log('itm.lst: ', itm.lst);
     console.log('subitm.lst: ', subitm.lst);
 
     console.log('subitm.lst > itm.lst: ', subitm.lst > itm.lst);
-    */
 
-    /*
     if ( subitm.lst > itm.lst ) {
       itm.lst = subitm.lst;
     }
-    */
-
   }
+  */
+
   /**
    * Removetags forum row line component
    * @param [value]
@@ -135,6 +136,14 @@ export class ForumRowLineComponent extends ln4A2MatComponent {
       Action: 'canc',
       forumList: this.lst,
       forumData: this.itm
+    });
+  }
+  public EditProfile() {
+    this.authdialog('EditProfileComponent', {
+      Action: 'edit',
+      User: 'supermario',
+      Name: 'Mario',
+      Surname: 'calogero'
     });
   }
   public Share() {

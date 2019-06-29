@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Edit Profile: {{userData.UserName}}</h2>
+<ng-container>
+  <div class="forumEdit" >
+    <span style='font-size: 8px;'>{{userData.UserName}}/{{userData.UserAlias}}/{{userData.UserSess}}</span>
+    <div class='row'>
+        <input readonly matInput name="userData.UserName" value='{{userData.UserName}}' placeholder='Username' style="width:25%;">
+        <input readonly matInput name="userData.UserAlias" value='{{userData.UserAlias}}' placeholder='User Alias' style="width:25%;">
+        <input readonly matInput name="userData.UserSess" value='{{userData.UserSess}}' placeholder='User Session' style="width:25%;">
+        <button mat-button ngDefaultControl [mat-dialog-close]='false' (click)='Save()' style="width:12%;Color:green;">Save</button>
+        <button mat-button ngDefaultControl [mat-dialog-close]='true' style="width:12%;Color:red;">Close</button>
+    </div>
+    <HR>
+    <br>
+    <div class='row'>
+        <angular-editor  [config]="editcfg()" [(ngModel)]='userData.dsc' debounce='500'></angular-editor>
+        <hr>
+        <div [innerHTML]='userData.dsc'>
+        </div>
+    </div>
+    <div class='row'>
+        <button mat-button name='ok' [mat-dialog-close]='false' (click)='Save()' style="width:100%;">Enter</button>
+    </div>
+  </div>
+</ng-container>

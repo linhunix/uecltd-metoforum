@@ -4,7 +4,7 @@
         *ngFor="let bitem of scope.remote.menu"
         mat-button
         href="{{bitem.src}}"
-        (click)="calldialog(bitem.act,bitem.arg)"
+        (click)="calldialog(bitem.act, bitem.arg)"
     >
       {{Translate(bitem.label)}} <!-- - {{bitem.src}} - {{bitem.act}} - {{bitem.arg}} -->
     </a>
@@ -22,6 +22,13 @@
         (click)="Logout()"
         >
         {{Translate('Logout')}}
+    </a>
+    <a  mat-menu-item
+        mat-button
+        href="#editprofile"
+        (click)="EditProfile()"
+        >
+        {{Translate('Edit Profile')}}
     </a>
   </mat-menu>
   <button mat-button title="{{myId}}" [matMenuTriggerFor]="ln4MatMenuModel">

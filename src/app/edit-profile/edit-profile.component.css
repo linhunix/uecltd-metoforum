@@ -1,0 +1,6 @@
+
+.cdk-overlay-pane{
+  unicode-bidi:bidi-override;
+  overflow-y: scroll !important;
+  overflow-x: hidden!important;
+}

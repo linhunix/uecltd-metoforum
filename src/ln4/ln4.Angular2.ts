@@ -10,10 +10,10 @@ export class ln4Angular2 {
     public static ComponentLib:ln4Map
     public static level: number;
     /**
-     * verifica che sia inizializzata come classe statica 
+     * verifica che sia inizializzata come classe statica
      */
     //////////////////////////////////////////////////////////////////
-    // GESTORE DEGLI EVENTI 
+    // GESTORE DEGLI EVENTI
     //////////////////////////////////////////////////////////////////
     private static check() {
         if (ln4Angular2.event == null) {
@@ -21,9 +21,9 @@ export class ln4Angular2 {
         }
     }
     /**
-     * passa l'evento 
+     * passa l'evento
      * @param name nome evento
-     * @param make true se in caso non ci sia debba crearlo 
+     * @param make true se in caso non ci sia debba crearlo
      * @returns evento
      */
     public static eventGet(name: string, make: boolean = false): EventEmitter<String> {
@@ -51,9 +51,9 @@ export class ln4Angular2 {
         return null;
     }
     /**
- * passa l'evento 
+ * passa l'evento
  * @param name nome evento
- * @param make true se in caso non ci sia debba crearlo 
+ * @param make true se in caso non ci sia debba crearlo
  * @returns evento
  */
     public static eventSubscribe(name: string, mycall: any, make: boolean = false): boolean {
@@ -81,7 +81,7 @@ export class ln4Angular2 {
         return false;
     }
     /**
-     * killa un evento assicurandosi che completi il ciclo vita 
+     * killa un evento assicurandosi che completi il ciclo vita
      * @param name nome del evento da killare
      */
     public static eventKill(name: string): void {
@@ -185,9 +185,9 @@ export class ln4Angular2 {
     private static callHeaders(): any {
         let headers = new Headers();
         headers.append('Accept', 'application/json');
-        //headers.append('Access-Control-Allow-Origin' , '*');
-        //headers.append('Access-Control-Allow-Methods' , 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
-        //headers.append('Access-Control-Allow-Headers' , 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+        // headers.append('Access-Control-Allow-Origin' , '*');
+        // headers.append('Access-Control-Allow-Methods' , 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+        // headers.append('Access-Control-Allow-Headers' , 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
         return new RequestOptions({ headers: headers });
     }
     public static callUrl(ApiEvent: string, ApiUrl: string, Data: any, rebuild: boolean = false): boolean {
@@ -249,7 +249,7 @@ export class ln4Angular2 {
                 status = res.status;
             } else {
                 status = 0;
-            }            
+            }
             ln4Angular2.msgDebug("STS=" + status);
             if (ln4Angular2.isDebug()){
                 console.log(mln4);

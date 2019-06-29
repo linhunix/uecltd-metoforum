@@ -48,11 +48,11 @@
         <button mat-button color="primary" (click)="Reply()">Reply</button>
         <button mat-button color="primary" (click)="Change()">Change</button>
         <button mat-button color="primary" (click)="Delete()">Delete</button>
+        <button mat-button color="primary" (click)="EditProfile()">Edit Profile</button>
     </mat-action-row>
 </mat-expansion-panel>
 <ng-container *ngFor="let subitm of topics">
     <ng-container *ngIf="itemHasLevel(subitm)">
         <forumRowLine-ln4 [LstItem]="lst" [RowItem]="subitm"></forumRowLine-ln4>
-        {{compareDates(itm, subitm)}}
     </ng-container>
 </ng-container>

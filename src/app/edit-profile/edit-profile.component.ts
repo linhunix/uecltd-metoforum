@@ -1,15 +1,95 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ln4Manager } from 'src/ln4/ln4.Manager';
 import { ln4BaseComponent } from 'src/ln4/ln4.BaseComp';
 import { ln4Angular2 } from 'src/ln4/ln4.Angular2';
 import { ln4A2Connect } from 'src/ln4/ln4.A2Connect';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+
 @Component({
-    selector: 'forumEdit-ln4',
-    templateUrl: 'forumEdit.component.html',
-    styleUrls: ['forumEdit.component.css']
+  selector: 'app-edit-profile',
+  templateUrl: './edit-profile.component.html',
+  styleUrls: ['./edit-profile.component.css']
 })
+export class EditProfileComponent extends ln4BaseComponent {
+
+  protected userData: any;
+
+  constructor(
+    public dialogRef: MatDialogRef<EditProfileComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    super();
+    ln4Angular2.eventGet('Dialog', true).subscribe(
+        (info: string) => {
+            const rdata: any = ln4Manager.GetInstance().dataExport('Dialog');
+            this.loaddata(rdata);
+        }
+    );
+
+    console.log('Called EditProfileComponent');
+
+    const res = ln4Manager.GetInstance();
+
+    this.userData = {
+      UserId: res.profileGet('UserId'),
+      UserName: res.profileGet('UserName'),
+      UserAlias: res.profileGet('UserAlias'),
+      GroupName: res.profileGet('GroupName'),
+      GroupId: res.profileGet('GroupId'),
+      UserSess: res.profileGet('UserSess')
+    };
+  }
+
+  public loaddata(mydata: any): void {
+    if (mydata == null) {
+        ln4Angular2.msgWarning('No Data for editor!!!');
+        this.onNoClick();
+        return;
+    }
+  }
+
+  public onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  public editcfg(): AngularEditorConfig {
+    const updurl: string = this.getCfg('serverurl') + '/' + this.getProfile('UserSess') + '/a2upload/';
+    const edtcfg: AngularEditorConfig = {
+        editable: true,
+        spellcheck: true,
+        height: '10rem',
+        minHeight: '5rem',
+        placeholder: 'Enter text here...',
+        translate: 'no',
+        uploadUrl: updurl,
+        customClasses: [
+            {
+                name: 'quote',
+                class: 'quote',
+            },
+            {
+                name: 'redText',
+                class: 'redText'
+            },
+            {
+                name: 'titleText',
+                class: 'titleText',
+                tag: 'h1',
+            },
+        ]
+    };
+    return edtcfg;
+  }
+
+  public Save(): boolean {
+    console.log('Saving not implemented');
+
+    return true;
+  }
+
+}
+
+/*
 export class ForumEditorComponent extends ln4BaseComponent {
     public message = '';
     public action = 'add';
@@ -27,10 +107,7 @@ export class ForumEditorComponent extends ln4BaseComponent {
             }
         );
     }
-    /**
-     * Load data
-     * @param mydata
-     */
+
     public loaddata(mydata: any): void {
         if (mydata == null) {
             ln4Angular2.msgWarning('No Data for editor!!!');
@@ -75,8 +152,8 @@ export class ForumEditorComponent extends ln4BaseComponent {
             case 'add':
                 newdata.cat = this.data.cat;
                 newdata.lbl = this.data.lbl;
-                newdata.lvl = this.data.lvl;
-                newdata.catid = this.data.catid;
+                newdata.lvl = 2;
+                newdata.catid = this.data.docid;
                 newdata.name = this.data.name;
                 newdata.docid = ln4A2Connect.newDocid();
                 break;
@@ -99,7 +176,7 @@ export class ForumEditorComponent extends ln4BaseComponent {
                 newdata.docid = ln4A2Connect.newDocid();
                 newdata.name = this.data.name;
 
-                console.log('ForumEditorComponent reply, newdata: ', newdata);
+                console.log('New Doc: ', this.data);
 
                 break;
             case 'edit':
@@ -181,9 +258,7 @@ export class ForumEditorComponent extends ln4BaseComponent {
     public isro(): boolean {
         return this.isreadonly;
     }
-    /**
-     * Closse on click
-     */
+
     public onNoClick(): void {
         this.dialogRef.close();
     }
@@ -200,15 +275,11 @@ export class ForumEditorComponent extends ln4BaseComponent {
         }
         return false;
     }
-    /**
-     *
-     */
+
     public Close(): boolean {
         return true;
     }
-    /**
-     *
-     */
+
     public Save(): boolean {
         this.message = 'wait server response..';
         if (!this.Check()) {
@@ -241,3 +312,4 @@ export class ForumEditorComponent extends ln4BaseComponent {
         return true;
     }
 }
+*/
