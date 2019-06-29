@@ -150,6 +150,22 @@ export class ln4A2Connect {
 
     return ln4A2Connect.ApiConnect('RestTLoad', userEvent, Post);
   }
+  public static UserSaveApi(
+    grpid: number,
+    usrid: number,
+    usrname: string,
+    content: any,
+    userEvent: string
+  ): boolean {
+    const Post: ln4Map = new ln4Map();
+
+    Post.set('DocCatId', grpid);
+    Post.set('DocType', 'ln4public');
+    Post.set('DocId', usrid);
+    Post.set('DocName', usrname);
+    Post.set('DocValue', content.toJson());
+    return ln4A2Connect.ApiConnect('RestTSave', userEvent, Post);
+  }
   /**
    *
    * @param catid
