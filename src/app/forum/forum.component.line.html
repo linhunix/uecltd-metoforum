@@ -1,4 +1,5 @@
 <forum-head-ln4 [IdForum]="myId" [ListForums]="frmlst" [pageForums]="frmpg"></forum-head-ln4>
+
 <div id="forum-headers-label">
         <div id="forum-headers-lbl-init"> &nbsp; </div>
         <div id="forum-headers-lbl-desc"> {{Translate(lbl.desc)}}</div>
@@ -7,10 +8,17 @@
         <div id="forum-headers-lbl-date"> {{Translate(lbl.date)}}</div>
         <div id="forum-headers-lbl-ends">&nbsp; </div>
 </div>
+
 <ng-container *ngFor="let cvar of frmlst ">
-  cvar: {{cvar}}
+  Here -> cvar: frmlst: {{frmlst}} / cvar: {{cvar}}
+
   <ng-container *ngIf="cvar">
-      <forumRowLine-ln4 [LstItem]="getLst(cvar)" [RowItem]="getItm(cvar)"></forumRowLine-ln4>
-  </ng-container>
+
+      <!-- <forumRowLine-ln4 [LstItem]="getLst(cvar)" [RowItem]="getItm(cvar)"></forumRowLine-ln4> -->
+      <app-forum-thread [lst]="getLst(cvar)" [itm]="getItm(cvar)"></app-forum-thread>
+
+    </ng-container>
+
 </ng-container>
+
 <forum-head-ln4 [ListForums]="frmlst" [pageForums]="frmpg"></forum-head-ln4>

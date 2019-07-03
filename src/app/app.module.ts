@@ -17,20 +17,24 @@ import { FootComponent } from './foot/foot.component';
 import { AppComponent } from './app.componet';
 import { ln4MatMenuModelComponent } from '../ln4/mat/ln4.menu.component';
 import { ln4ValuesPipe } from 'src/ln4/ln4.ValuesPipe';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ln4MatLoginComponent } from 'src/ln4/mat/ln4.login.component';
 import { MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {CKEditorModule} from 'ng2-ckeditor';
+import { CKEditorModule } from 'ng2-ckeditor';
 import { EditorComponent } from './Edit/edit.component';
 import { ForumHeadComponent } from './forum/Head/forumHead.component';
 import { ForumRowComponent } from './forum/Row/forumRow.component';
 import { ForumEditorComponent } from './forum/Edit/forumEdit.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule} from '@angular/common/http';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { ForumRowLineComponent } from './forum/RowLine/forumRowLine.component';
+import { ForumSingleRowLineComponent } from './forum/SingleRowLine/forumSingleRowLine.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { ForumThreadComponent } from './forum/forum-thread/forum-thread.component';
+import { TreeRenderComponent } from './tree-render/tree-render.component';
+// import { TreeModel } from 'tree-model';
 
 @NgModule({
   declarations: [
@@ -48,8 +52,11 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     EditorComponent,
     ForumHeadComponent,
     ForumRowLineComponent,
+    ForumSingleRowLineComponent,
     ForumRowComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    ForumThreadComponent,
+    TreeRenderComponent
   ],
   imports: [
     BrowserModule,

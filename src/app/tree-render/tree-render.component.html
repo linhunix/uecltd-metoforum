@@ -1,0 +1,5 @@
+<app-single-row-line-ln4 [lst]="getLst" [itm]="getItm"></app-single-row-line-ln4>
+
+<ng-container *ngFor="let child of children">
+  <app-tree-render [mtree]="child" [lst]="getLst"></app-tree-render>
+</ng-container>

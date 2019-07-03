@@ -1,0 +1,7 @@
+<app-single-row-line-ln4 [lst]="lst" [itm]="itm"></app-single-row-line-ln4>
+
+<ng-container *ngFor="let subitm of topics">
+    <ng-container *ngIf="itemHasLevel(subitm)">
+        <app-forum-thread [lst]="lst" [itm]="subitm"></app-forum-thread>
+    </ng-container>
+</ng-container>

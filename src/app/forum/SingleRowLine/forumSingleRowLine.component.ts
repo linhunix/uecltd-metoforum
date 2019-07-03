@@ -1,55 +1,48 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ln4A2MatComponent } from 'src/ln4/mat/ln4.A2Mat.component';
 import { ln4Manager } from 'src/ln4/ln4.Manager';
 import { ln4Map } from 'src/ln4/ln4.Map';
 import { MatDialog } from '@angular/material';
-
-// import { ln4TreeNode } from 'src/ln4/ln4.TreeNode';
+import { MTreeNode } from 'src/tree/tree';
 
 @Component({
-  selector: 'forumRowLine-ln4',
-  templateUrl: './forumRowLine.component.html',
-  styleUrls: ['./forumRowLine.component.css']
+  selector: 'app-single-row-line-ln4',
+  templateUrl: './forumSingleRowLine.component.html',
+  styleUrls: ['./forumSingleRowLine.component.css']
 })
-export class ForumRowLineComponent extends ln4A2MatComponent {
+export class ForumSingleRowLineComponent extends ln4A2MatComponent implements OnInit {
   public step = 1;
 
-  @Input('RowItem') public itm: any;
-  @Input('LstItem') public lst: any;
+  @Input('itm') public itm: any;
+  @Input('lst') public lst: any;
+  // @Input('mtree') public mtree: MTreeNode<Object>;
 
-  public get topics(): any[] {
-    // return ln4Map.Load(this.itm.topics).sort('docid');
-    const topics = ln4Map.Load(this.itm.topics).sort('lst').reverse();
-
-    // console.log('Topics: ', topics);
-
-    return topics;
-  }
   constructor(dialog: MatDialog) {
     super(true, true, dialog);
   }
 
-  public itemHasLevel(itm: any): boolean {
-    if (itm != null) {
-      if ('lvl' in itm) {
+  ngOnInit() {
+    console.log('ForumSingleRowLineComponent itm: ', this.itm);
+  }
+
+  protected toTimestamp(strDate: string): number {
+    const datum = Date.parse(strDate);
+
+    return datum / 1000;
+  }
+
+  public itemHasLevel(): boolean {
+    if (this.itm != null) {
+      if ('lvl' in this.itm) {
+        // console.log('this.itm HasLevel');
+
         return true;
       }
     }
+
+    // console.log('this.itm Has NOT Level');
     return false;
   }
-
-  /*
-  public compareDates(itm: any, subitm: any) {
-    console.log('itm.lst: ', itm.lst);
-    console.log('subitm.lst: ', subitm.lst);
-
-    console.log('subitm.lst > itm.lst: ', subitm.lst > itm.lst);
-
-    if ( subitm.lst > itm.lst ) {
-      itm.lst = subitm.lst;
-    }
-  }
-  */
 
   /**
    * Removetags forum row line component

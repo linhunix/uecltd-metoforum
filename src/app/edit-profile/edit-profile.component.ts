@@ -81,6 +81,11 @@ export class EditProfileComponent extends ln4BaseComponent {
     return edtcfg;
   }
 
+  public Check(): boolean {
+    this.scopeIn.fromAny(this.data);
+    return true;
+  }
+
   public Save(): boolean {
     console.log('Saving not implemented');
 

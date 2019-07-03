@@ -103,18 +103,34 @@ export class ln4A2Connect {
 
         const cookieManager = ln4CookieManager.GetInstance();
 
+        /*
+        newuser.set('UserAlias', this.user);
+        newuser.set('UserCode', this.pass);
+        newuser.set('RealName', this.realname);
+        newuser.set('email', this.email);
+        newuser.set('Locality', this.locality);
+        */
+
         const userData = {
           UserId: res.get('UserId'),
+          UserAlias: res.get('UserAlias'),
           UserName: res.get('UserName'),
           GroupName: res.get('GroupName'),
           GroupId: res.get('GroupId'),
-          UserSess: res.get('UserSess')
+          UserSess: res.get('UserSess'),
+          email: res.get('email'),
+          RealName: res.get('RealName'),
+          Locality: res.get('Locality')
         };
 
-        console.log('UserId: ', userData.UserId);
-        console.log('UserName: ', userData.UserName);
-        console.log('GroupName: ', userData.GroupName);
-        console.log('GroupId: ', userData.GroupId);
+        // Log user data
+        for (const key in userData) {
+
+          if (userData.hasOwnProperty(key)) {
+            console.log(key + ': ', userData[key]);
+          }
+
+        }
 
         if (res.get('UserId') === 0) {
           console.log('>>>>>> NOT LOGGED !!!!');

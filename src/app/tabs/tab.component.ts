@@ -10,23 +10,27 @@ import { ln4Manager } from 'src/ln4/ln4.Manager';
   styleUrls: ['./tab.component.css']
 })
 export class TabComponent extends ln4A2SimpleComp {
-  private tabindex:number = 0;
+  private tabindex = 0;
   public initcfg() {
-    this.myId = "tabs";
+    this.myId = 'tabs';
   }
   constructor() {
     super();
   }
   public tabChanged(tabChangeEvent: MatTabChangeEvent): void {
     this.tabindex = tabChangeEvent.index;
-    ln4Manager.GetInstance().dataImport("CurrentForum", this.scope.remote.list[this.tabindex]);
-    ln4Angular2.eventEmit("CurrentForum", this.scope.remote.list[this.tabindex].forum, true);
+
+    console.log('this.scope.remote.list[' + this.tabindex + ']: ', this.scope.remote.list[this.tabindex]);
+
+    ln4Manager.GetInstance().dataImport('CurrentForum', this.scope.remote.list[this.tabindex]);
+    ln4Angular2.eventEmit('CurrentForum', this.scope.remote.list[this.tabindex].forum, true);
   }
-  public tabextra(classitem:string):string{
-    if (classitem ==  this.scope.remote.list[this.tabindex].class){
-      return " mat-tab-active-span ";
+  public tabextra(classitem: string): string {
+    if (classitem ===  this.scope.remote.list[this.tabindex].class) {
+      return ' mat-tab-active-span ';
     }
-    return "";
+
+    return '';
   }
 
 }

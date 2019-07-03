@@ -1,0 +1,50 @@
+<mat-expansion-panel *ngIf="itemHasLevel()" [expanded]="step === 0" hideToggle>
+    <mat-expansion-panel-header class='forum-row-{{itm.lvl}}' *ngIf="itm['lvl'] != 0" >
+        <mat-panel-title class='forum-main-title mylvl-{{itm.lvl}}'>
+            <div class="f-tree-l0">
+                <img  class='forum-img-{{itm.lvl}}' *ngIf="itm['lvl']==0" src="assets/S_ThrNew.gif">
+                <img  class='forum-img-{{itm.lvl}}' *ngIf="itm['lvl']==1" src="assets/N_thrnew.gif">
+                <img  class='forum-img-{{itm.lvl}}' *ngIf="itm['lvl']>1" src="assets/N_ThrAns.gif">
+            </div>
+            <!-- Lvl!=1 -->
+            <span class="f-title">
+                <b>{{lst}} - {{itm.sbj}} - L:{{itm.lvl}} - D:{{itm.docid}} - C:{{itm.catid}} - T:{{toTimestamp(itm.lst)}}</b>
+                <br>
+                <span class="f-sub-title-{{itm.lvl}}" *ngIf="itm['lvl'] != 1">{{itm.lbl}}</span>
+                <span class="f-sub-title-{{itm.lvl}}" *ngIf="itm['lvl'] == 1">{{itm.sbj}}</span>
+            </span>
+        </mat-panel-title>
+        <mat-panel-description class='forum-main-rows'>
+            <!--
+            Msg: {{itm.cnt}}
+            !-->
+            {{itm.cnt}}
+        </mat-panel-description>
+        <mat-panel-description class='forum-main-auth'>
+            <!--
+            Cat: {{Translate(itm.cat)}}<br>
+            Usr: {{itm.lun}}<br>
+            Loc: {{itm.lps}}
+            !-->
+            {{removetag(itm.lun)}}<br>
+            {{itm.lps}}
+        </mat-panel-description>
+        <mat-panel-description class='forum-main-date'>
+            {{removesec(itm.lst)}}<br>
+            {{removedate(itm.lst)}} (GMT)
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-expansion-panel-header *ngIf="itm['lvl']==0" class="row" class='forum-subrow-{{itm.lvl}}'>
+        <span [innerHTML]='itm.dsc'></span>
+    </mat-expansion-panel-header>
+    <div class='row' *ngIf="itm['lvl']!=0" [innerHTML]='itm.dsc'>
+    </div>
+    <mat-action-row>
+        <button mat-button color="primary" (click)="New()">New</button>
+        <button mat-button color="primary" (click)="Add()">Add</button>
+        <button mat-button color="primary" (click)="Reply()">Reply</button>
+        <button mat-button color="primary" (click)="Change()">Change</button>
+        <button mat-button color="primary" (click)="Delete()">Delete</button>
+        <button mat-button color="primary" (click)="EditProfile()">Edit Profile</button>
+    </mat-action-row>
+</mat-expansion-panel>

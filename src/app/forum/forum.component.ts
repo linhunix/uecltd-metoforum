@@ -22,6 +22,7 @@ export class ForumComponent extends ln4A2MatComponent {
   public initcfg() {
     this.frm = new ln4Map();
   }
+
   /**
    * override preload to get info about standard reload
    */
@@ -71,8 +72,9 @@ export class ForumComponent extends ln4A2MatComponent {
               ln4Angular2.msgDebug("eventGet=" + this.myId + "/" + ltype);
 
               this.reload(ltype);
+              // this.doaction('reload');
 
-              console.log('this.scope.remote.forumVals: ', this.scope.remote.forumVals);
+              // console.log('this.scope.remote.forumVals: ', this.scope.remote.forumVals);
 
               if (this.scope.remote.forumVals[ltype] != null) {
                 let cnttpc = 0;
@@ -208,15 +210,18 @@ return source.returnOK();
 }
   public getItm(fid: string): any {
   if (this.scope.remote.forumVals != null) {
-
     // console.log('this.scope.remote.forumVals: ', this.scope.remote.forumVals);
 
+    // This is the root of the discussion thread for each forum
     if (fid in this.scope.remote.forumVals) {
-      // console.log('this.scope.remote.forumVals[' + fid + ']:', this.scope.remote.forumVals[fid]);
+      // console.log('this.scope.remote.forumVals[' + fid + ']: ', this.scope.remote.forumVals[fid]);
+
+      // console.log('this.scope.remote.forumVals[' + fid + ']->length: ', this.scope.remote.forumVals[fid].length);
 
       return this.scope.remote.forumVals[fid];
     }
   }
+
   return {};
 }
   public getLst(fid: string): any {
