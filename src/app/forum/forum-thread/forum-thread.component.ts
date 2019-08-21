@@ -96,22 +96,11 @@ export class ForumThreadComponent implements OnInit {
 
           childTreeNode.setGravity(this.toTimestamp(topics[key].lst));
 
+          childTreeNode.setId(topics[key].docid);
+          childTreeNode.setParentId(topics[key].catid);
+
           console.log('Adding childTreeNode to _tree');
           _tree.addChildNode(childTreeNode);
-          // childTreeNode.setParent(_tree);
-
-          /*
-          const childTopicsLenght = topics[key].length;
-
-          if (childTopicsLenght <= 0) {
-            console.log('There Are NO Child Topics');
-            console.log('Tree is: ', _tree);
-            console.log('Topics Are: ', _topics);
-            console.log('topics[' + key + '] is: ', topics[key]);
-
-            return _tree;
-          }
-          */
 
           this.addTopicsToTree(childTreeNode, topics[key].topics);
         } else {
